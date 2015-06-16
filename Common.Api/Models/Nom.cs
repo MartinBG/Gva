@@ -35,11 +35,11 @@ namespace Common.Api.Models
 
             this.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(55);
 
             this.Property(t => t.Alias)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(55);
 
             // Table & Column Mappings
             this.ToTable("Noms");

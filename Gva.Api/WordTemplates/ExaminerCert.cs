@@ -55,12 +55,15 @@ namespace Gva.Api.WordTemplates
             string code = null;
             foreach(string authCode in ratingsPerExaminerAndAuthCodes.Item2)
             {
-                var authorizationCode = InstructorExaminerUtils.authCodeRegexExpToCertificatePrivilegeCode
-                    .Where(a => Regex.Matches(authCode, a.Item1).Count > 0)
+                var authorizationGroup = nomRepository.GetNomValues("instructorExaminerCertificateAttachmentAuthorizations").Where(i =>
+                    Regex.Matches(authCode, "(^" + i.Code + Regex.Escape("(") + ")").Count > 0 ||
+                    Regex.Matches(authCode, "(^" + i.Code + "\\s\\w+)").Count > 0 ||
+                    i.Code == authCode)
                     .FirstOrDefault();
-                if (authorizationCode != null)
+
+                if (authorizationGroup != null)
                 {
-                    code = authorizationCode.Item2;
+                    code = authorizationGroup.Code;
                     break;
                 }
             }
@@ -79,7 +82,7 @@ namespace Gva.Api.WordTemplates
             string personNames = string.Format("{0} {1} {2}",personData.FirstName, personData.MiddleName, personData.LastName);
             string personNamesAlt = string.Format("{0} {1} {2}",personData.FirstNameAlt, personData.MiddleNameAlt, personData.LastNameAlt);
 
-            var privileges = InstructorExaminerUtils.GetPrivileges(ratingsPerExaminerAndAuthCodes.Item2);
+            var privileges = InstructorExaminerUtils.GetPrivileges(ratingsPerExaminerAndAuthCodes.Item2, this.nomRepository);
 
             var json = new
             {

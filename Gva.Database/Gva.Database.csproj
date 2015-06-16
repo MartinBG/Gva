@@ -166,6 +166,8 @@
     <Content Include="Insert\GvaExcelConfig\ConfigFinalize.sql" />
     <Content Include="Insert\GvaExcelConfig\ExcelConfig.xml" />
     <Content Include="Insert\Noms\Organizations\aircarrierServices.sql" />
+    <Content Include="Insert\Noms\Persons\instructorExaminerCertificateAttachmentAuthorizations.sql" />
+    <Content Include="Insert\Noms\Persons\instructorExaminerCertificateAttachmentPrivileges.sql" />
     <Content Include="Insert\Noms\Persons\ratingNotes.sql" />
     <Content Include="Insert\Noms\Persons\linTypes.sql" />
     <Content Include="Insert\Noms\Persons\asExamQuestionTypes.sql" />
@@ -184,6 +186,7 @@
     <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\Roles.sql" />
     <Content Include="Insert\Users\UserRoles.sql" />
+    <Content Include="Update\upd20150616.sql" />
     <Content Include="Update\upd20150615.sql" />
     <Content Include="Update\upd20150612.sql" />
     <Content Include="Update\upd20150611.sql" />

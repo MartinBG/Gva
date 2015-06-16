@@ -217,7 +217,9 @@
               makePropeller: 'Витла',
               makeEngine: 'Двигатели',
               graduations: 'Степени на образование',
-              isPilotTraining: 'Обучение за пилот'
+              isPilotTraining: 'Обучение за пилот',
+              instructorExaminerCertificateAttachmentAuthorization: 
+                'Разрешение за приложение към сертификат за Проверяващ/Инструктор'
             }
           }
         },

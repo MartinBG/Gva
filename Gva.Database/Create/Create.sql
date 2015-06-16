@@ -169,6 +169,8 @@ GO
 :r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\ratingNotes.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\instructorExaminerCertificateAttachmentAuthorizations.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\instructorExaminerCertificateAttachmentPrivileges.sql"
 :r $(rootPath)\"..\Insert\asExams.sql"
 
 ---------------------------------------------------------------

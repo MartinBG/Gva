@@ -4,7 +4,7 @@ GO
 CREATE TABLE [dbo].[Noms] (
     [NomId]    INT            NOT NULL IDENTITY,
     [Name]     NVARCHAR (500) NOT NULL,
-    [Alias]    NVARCHAR (50)  NOT NULL UNIQUE,
+    [Alias]    NVARCHAR (55)  NOT NULL UNIQUE,
     [Category] NVARCHAR (50) NULL,
  CONSTRAINT [PK_Noms] PRIMARY KEY ([NomId])
 )
