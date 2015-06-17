@@ -41,9 +41,13 @@
         authorizationCode + ' ' +
         licenceCode;
     });
-    $scope.flyingExperiences = [].concat.apply([], _.map(groupedFlyingExp, function (value, key) {
-      return _.sortBy(groupedFlyingExp[key], 'part.documentDate').reverse();
-    }));
+
+    $scope.flyingExperiences = [].concat.apply([],
+      _.map(groupedFlyingExp, function (value, key) {
+        return _.sortBy(groupedFlyingExp[key], function(value) {
+          return new Date(value.part.documentDate);
+        }).reverse();
+      }));
   }
 
   FlyingExperiencesSearchCtrl.$inject = [
