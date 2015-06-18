@@ -2,14 +2,37 @@
   <div class="panel-heading">
     <strong l10n-text="common.linkAppModal.title"></strong>
     <div class="pull-right">
-      <sc-button ng-if="currentTab === 'choosePortalApp'" name="choosePortalAppBtn" btn-click="choosePortalApp()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseCaseType'" name="chooseCaseTypeBtn" btn-click="chooseCaseType()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseGvaApp' && isFromPortal" name="backToAppBtn" btn-click="backToPortalApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseGvaApp' && !isFromPortal" name="backToAppBtn" btn-click="backToCaseType()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToGvaApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
-      <sc-button ng-if="currentTab === 'newLot'" name="backToChooseLotBtn" btn-click="backToChooseLot()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
-      <sc-button ng-if="currentTab === 'newLot' && !showWizzard" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-button ng-if="currentTab === 'newLot' && showWizzard" name="showWizzardBtn" btn-click="setAircraftWizzardData()" text="common.linkAppModal.setAircraftWizzardData" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right"></sc-button>
+      <!-- choosePortalApp -->
+      <sc-button ng-if="currentTab === 'choosePortalApp'" btn-click="choosePortalApp.forward()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+
+      <!-- chooseSet -->
+      <sc-button ng-if="currentTab === 'chooseSet'" btn-click="chooseSet.forward()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+
+      <!-- chooseGvaAppType -->
+      <sc-button ng-if="currentTab === 'chooseGvaAppType'" btn-click="chooseGvaAppType.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+
+      <!-- chooseLotPerson -->
+      <sc-button ng-if="currentTab === 'chooseLotPerson'" btn-click="chooseLotPerson.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+
+      <!-- chooseLotAircraft -->
+      <sc-button ng-if="currentTab === 'chooseLotAircraft'" btn-click="chooseLotAircraft.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+
+      <!-- chooseLotOrganization -->
+      <sc-button ng-if="currentTab === 'chooseLotOrganization'" btn-click="chooseLotOrganization.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+
+      <!-- createLotPerson -->
+      <sc-button ng-if="currentTab === 'createLotPerson'" btn-click="createLotPerson.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'createLotPerson'" btn-click="createLotPerson.save()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+
+      <!-- createLotAircraft -->
+      <sc-button ng-if="currentTab === 'createLotAircraft'" btn-click="createLotAircraft.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'createLotAircraft'" btn-click="createLotAircraft.save()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+
+      <!-- createLotOrganization -->
+      <sc-button ng-if="currentTab === 'createLotOrganization'" btn-click="createLotOrganization.back()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'createLotOrganization'" btn-click="createLotOrganization.save()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+
+      <!-- common -->
       <sc-button name="canceltn" btn-click="cancel()" text="common.linkAppModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
@@ -19,54 +42,82 @@
       <li ng-class="{active: currentTab === 'choosePortalApp', disabled: currentTab !== 'choosePortalApp' }" ng-if="isFromPortal">
         <a><span l10n-text="common.linkAppModal.choosePortalApp"></span></a>
       </li>
-      <li ng-class="{active: currentTab === 'chooseCaseType', disabled: currentTab !== 'chooseCaseType' }" ng-if="!isFromPortal">
-        <a><span l10n-text="common.linkAppModal.chooseCaseType"></span></a>
+
+      <li ng-class="{active: currentTab === 'chooseSet', disabled: currentTab !== 'chooseSet' }" ng-if="!isFromPortal">
+        <a><span l10n-text="common.linkAppModal.chooseSet"></span></a>
       </li>
-      <li ng-class="{active: currentTab === 'chooseGvaApp', disabled: currentTab !== 'chooseGvaApp' }">
+
+      <li ng-class="{active: currentTab === 'chooseGvaAppType', disabled: currentTab !== 'chooseGvaApp' }"  ng-if="!selection.hasNoApp">
         <a><span l10n-text="common.linkAppModal.chooseGvaApp"></span></a>
       </li>
-      <li ng-class="{active: currentTab === 'chooseLot', disabled: currentTab !== 'chooseLot' }">
-        <a><span l10n-text="common.linkAppModal.chooseLot"></span></a>
+
+      <li ng-class="{active: currentTab === 'chooseLotPerson', disabled: currentTab !== 'chooseLotPerson' }" ng-if="selection.set === 'Person'">
+        <a><span l10n-text="common.linkAppModal.chooseLotPerson"></span></a>
       </li>
-      <li class="active" ng-if="currentTab === 'newLot'">
-        <a><span l10n-text="common.linkAppModal.newLot"></span></a>
+      <li class="active" ng-if="currentTab === 'createLotPerson'">
+        <a><span l10n-text="common.linkAppModal.createLotPerson"></span></a>
+      </li>
+
+      <li ng-class="{active: currentTab === 'chooseLotAircraft', disabled: currentTab !== 'chooseLotAircraft' }" ng-if="selection.set === 'Aircraft'">
+        <a><span l10n-text="common.linkAppModal.chooseLotAircraft"></span></a>
+      </li>
+      <li class="active" ng-if="currentTab === 'createLotAircraft'">
+        <a><span l10n-text="common.linkAppModal.createLotAircraft"></span></a>
+      </li>
+
+      <li ng-class="{active: currentTab === 'chooseLotOrganization', disabled: currentTab !== 'chooseLotOrganization' }" ng-if="selection.set === 'Organization'">
+        <a><span l10n-text="common.linkAppModal.chooseLotOrganization"></span></a>
+      </li>
+      <li class="active" ng-if="currentTab === 'createLotOrganization'">
+        <a><span l10n-text="common.linkAppModal.createLotOrganization"></span></a>
       </li>
     </ul>
 
+    <!-- choosePortalApp -->
     <div ng-if="currentTab === 'choosePortalApp'">
-      <ng-form class="form-inline" name="form.choosePortalAppForm" sc-validate="{}">
+      <ng-form class="form-inline" name="choosePortalApp.form" sc-validate="{}">
         <div class="row">
           <div class="form-group col-md-10"  sc-has-error="app">
             <label class="control-label" l10n-text="common.linkAppModal.app"></label>
             <sc-validation-error field-name="app" validations="{required: 'default'}"></sc-validation-error>
-            <sc-select name="app" sc-select="selectOptions" ng-model="wrapper.selectedAppKey" ng-required="true"></sc-select>
+            <sc-select name="app" sc-select="choosePortalApp.appSelectOptions" ng-model="choosePortalApp.selectedApp" ng-required="true" ng-change="choosePortalApp.selectedAppChanged()"></sc-select>
           </div>
         </div>
       </ng-form>
     </div>
 
-    <div ng-if="currentTab === 'chooseCaseType'">
-      <ng-form class="form-inline" name="form.chooseCaseTypeForm" sc-validate="{}">
+    <!-- chooseSet -->
+    <div ng-if="currentTab === 'chooseSet'">
+      <ng-form class="form-inline" name="chooseSet.form" sc-validate="{}">
         <div class="row">
-          <sc-field type="nomenclature" ng-model="model.caseType" alias="'caseTypes'" l10n-text="common.linkAppModal.caseType" name="caseType" ng-required="true" class="col-sm-6 col-md-6"></sc-field>
+          <div class="form-group col-md-10"  sc-has-error="set">
+            <label class="control-label" l10n-text="common.linkAppModal.set"></label>
+            <sc-validation-error field-name="set" validations="{required: 'default'}"></sc-validation-error>
+            <sc-select name="set" sc-select="chooseSet.setSelectOptions" ng-model="chooseSet.selectedSet" ng-required="true" ng-change="chooseSet.selectedSetChanged()"></sc-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-10">
+            <label class="control-label" l10n-text="common.linkAppModal.hasNoApp"></label>
+            <input type="checkbox" ng-model="chooseSet.hasNoApp" ng-change="chooseSet.hasNoAppChanged()">
+          </div>
         </div>
       </ng-form>
     </div>
-    
-    <div ng-if="currentTab === 'chooseGvaApp'">
-      <sc-search selected-filters="searchParams" btn-classes="col-sm-4 col-md-3" default-action="searchAppTypes()">
-      <sc-filter type="select" name="caseType" class="col-md-3 col-sm-4" removable="false" label="common.linkAppModal.caseType"
-          options="{ data: [selectedCaseType], allowClear: false, placeholder: ' ' }"></sc-filter>
+
+    <!-- chooseGvaAppType -->
+    <div ng-if="currentTab === 'chooseGvaAppType'">
+      <sc-search selected-filters="chooseGvaAppType.searchParams" btn-classes="col-sm-4 col-md-3" default-action="chooseGvaAppType.search()">
+        <sc-filter type="nomenclature" name="caseTypeId" removable="false" class="col-sm-2" alias="caseTypes" mode="id" params="{set: selection.set}" label="common.linkAppModal.caseType"></sc-filter>
         <sc-filter type="text" name="code" removable="false" classes="col-sm-2" label="common.linkAppModal.code"></sc-filter>
         <sc-filter type="text" name="name" removable="false" label="common.linkAppModal.name"></sc-filter>
-        <sc-search-button action="searchAppTypes()" classes="pull-left" text="common.linkAppModal.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
-        <sc-search-button action="clear"></sc-search-button>
+        <sc-search-button action="chooseGvaAppType.search()" classes="pull-left" text="common.linkAppModal.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
       </sc-search>
 
-      <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="false" default-sort="code"
+      <sc-datatable items="chooseGvaAppType.appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="false" default-sort="code"
          default-sorting-type="asc" page-size="25">
         <sc-column sortable="false" class="buttons-cell" has-content="true">
-          <sc-button btn-click="chooseAppType(item)" text="common.linkAppModal.select" class="btn btn-xs btn-primary"></sc-button>
+          <sc-button btn-click="chooseGvaAppType.choose(item)" text="common.linkAppModal.select" class="btn btn-xs btn-primary"></sc-button>
         </sc-column>
         <sc-column data="code" title="common.linkAppModal.code" has-content="true">
           <strong>{{item.code}}<strong>
@@ -76,141 +127,149 @@
       </sc-datatable>
     </div>
 
-    <div ng-if="currentTab === 'chooseLot'">
-      <div ng-if="set === 'person'">
-        <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="searchPersons()">
-          <sc-filter type="int" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
-          <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
-          <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="persons.search.names"></sc-filter>
-          <sc-filter type="nomenclature" name="caseType" class="col-sm-2" removable="false" alias="personCaseTypes" mode="id" label="persons.search.caseType"></sc-filter>
-          <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
-          <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
-          <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
-          <sc-search-button action="searchPersons()" text="persons.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
-          <sc-search-button action="createLot()" text="persons.search.new" icon="glyphicon-plus"></sc-search-button>
-          <sc-search-button action="clear"></sc-search-button>
-          <sc-search-button action="add"></sc-search-button>
-        </sc-search>
 
-        <sc-datatable items="items" filterable="false" pageable="true" sortable="true" dynamic-columns="true">
-          <sc-column sortable="false" class="buttons-cell" has-content="true">
-            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
-            </sc-button>
-            <a name="viewBtn" sc-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
-              <span class="glyphicon glyphicon-eye-open"></span>
-            </a>
-          </sc-column>
-          <sc-column data="lin" title="persons.search.lin">
-          </sc-column>
-          <sc-column data="names" title="persons.search.names">
-          </sc-column>
-          <sc-column data="uin" title="persons.search.uin">
-          </sc-column>
-          <sc-column data="age" title="persons.search.age">
-          </sc-column>
-          <sc-column data="licences" title="persons.search.licences" class="wrap">
-          </sc-column>
-          <sc-column data="ratings" title="persons.search.ratings" class="wrap">
-          </sc-column>
-          <sc-column data="organization" title="persons.search.organization">
-          </sc-column>
-        </sc-datatable>
-      </div>
-      <div ng-if="set === 'aircraft'">
-        <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="searchAircrafts()">
-          <sc-filter type="text" name="mark" class="col-sm-3" removable="false" label="aircrafts.search.mark"></sc-filter>
-          <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="aircrafts.search.manSN"></sc-filter>
-          <sc-filter type="text" name="modelAlt" class="col-sm-3" removable="false" label="aircrafts.search.modelAlt"></sc-filter>
-          <sc-filter type="text" name="airCategory" class="col-sm-3" removable="true" label="aircrafts.search.airCategory"></sc-filter>
-          <sc-filter type="text" name="aircraftProducer" class="col-sm-3" removable="true" label="aircrafts.search.aircraftProducer"></sc-filter>
-          <sc-search-button action="searchAircraft()" text="aircrafts.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
-          <sc-search-button action="createLot()" text="aircrafts.search.new" icon="glyphicon-plane"></sc-search-button>
-          <sc-search-button action="clear"></sc-search-button>
-          <sc-search-button action="add"></sc-search-button>
-        </sc-search>
+    <!-- chooseLotPerson -->
+    <div ng-if="currentTab === 'chooseLotPerson'">
+      <sc-search selected-filters="chooseLotPerson.filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="chooseLotPerson.search()">
+        <sc-filter type="int" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
+        <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
+        <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="persons.search.names"></sc-filter>
+        <sc-filter type="nomenclature" name="caseType" class="col-sm-2" removable="false" alias="personCaseTypes" mode="id" label="persons.search.caseType"></sc-filter>
+        <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
+        <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
+        <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
+        <sc-search-button action="chooseLotPerson.search()" text="persons.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+        <sc-search-button action="chooseLotPerson.create()" text="persons.search.new" icon="glyphicon-plus"></sc-search-button>
+        <sc-search-button action="clear"></sc-search-button>
+        <sc-search-button action="add"></sc-search-button>
+      </sc-search>
 
-        <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-          <sc-column sortable="false" class="buttons-cell" has-content="true">
-            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
-            </sc-button>
-            <a name="viewBtn" sc-sref="{state: 'root.aircrafts.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
-              <span class="glyphicon glyphicon-eye-open"></span>
-            </a>
-          </sc-column>
-          <sc-column data="mark" title="aircrafts.search.mark">
-          </sc-column>
-          <sc-column data="manSN" title="aircrafts.search.manSN">
-          </sc-column>
-          <sc-column data="modelAlt" title="aircrafts.search.modelAlt" class="wrap">
-          </sc-column>
-          <sc-column data="aircraftProducer" title="aircrafts.search.aircraftProducer" class="wrap">
-          </sc-column>
-          <sc-column data="airCategory" title="aircrafts.search.airCategory" class="wrap">
-          </sc-column>
-          <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date">
-          </sc-column>
-          <sc-column data="icao" title="aircrafts.search.icao">
-          </sc-column>
-          <sc-column data="engineAlt" title="aircrafts.search.engineAlt" class="wrap">
-          </sc-column>
-          <sc-column data="propellerAlt" title="aircrafts.search.propellerAlt" class="wrap">
-          </sc-column>
-        </sc-datatable>
-      </div>
-      <div ng-if="set === 'organization'">
-        <sc-search selected-filters="filters" btn-classes="col-sm-7 col-md-5 col-lg-4" default-action="searchOrganizations()">
-          <sc-filter type="text" name="organizationName" class="col-sm-2" removable="false" label="organizations.search.name"></sc-filter>
-          <sc-filter type="nomenclature" name="caseTypeId" class="col-sm-2" removable="false" alias="organizationCaseTypes" mode="id" label="organizations.search.caseType"></sc-filter>
-          <sc-filter type="text" name="cao" class="col-sm-2" removable="true" label="organizations.search.cao"></sc-filter>
-          <sc-filter type="text" name="uin" class="col-sm-2" removable="true" label="organizations.search.uin"></sc-filter>
-          <sc-filter type="date" name="dateValidTo" class="col-sm-2" removable="true" label="organizations.search.dateValidTo"></sc-filter>
-          <sc-filter type="date" name="dateCaoValidTo" class="col-sm-2" removable="true" label="organizations.search.dateCaoValidTo"></sc-filter>
-          <sc-search-button action="searchOrganizations()" text="organizations.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
-          <sc-search-button action="createLot()" text="organizations.search.newOrganization" icon="glyphicon-plus"></sc-search-button>
-          <sc-search-button action="clear"></sc-search-button>
-           <sc-search-button action="add"></sc-search-button>
-        </sc-search>
-
-        <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-          <sc-column sortable="false" class="buttons-cell" has-content="true">
-            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
-            </sc-button>
-            <a name="viewBtn" sc-sref="{state: 'root.organizations.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
-              <span class="glyphicon glyphicon-eye-open"></span>
-            </a>
-          </sc-column>
-            <sc-column data="name" title="organizations.search.name">
-          </sc-column>
-          <sc-column data="cao" title="organizations.search.cao">
-          </sc-column>
-          <sc-column data="uin" title="organizations.search.uin">
-          </sc-column>
-          <sc-column data="valid" title="organizations.search.valid" type="boolean">
-          </sc-column>
-          <sc-column data="organizationType" title="organizations.search.organizationType">
-          </sc-column>
-          <sc-column data="dateValidTo" title="organizations.search.dateValidTo" type="date">
-          </sc-column>
-          <sc-column data="dateCaoValidTo" title="organizations.search.dateCaoValidTo" type="date">
-          </sc-column>
-        </sc-datatable>
-      </div>
+      <sc-datatable items="chooseLotPerson.items" filterable="false" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button name="chooseBtn"  btn-click="chooseLot(item.id)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+          </sc-button>
+          <a name="viewBtn" sc-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </a>
+        </sc-column>
+        <sc-column data="lin" title="persons.search.lin">
+        </sc-column>
+        <sc-column data="names" title="persons.search.names">
+        </sc-column>
+        <sc-column data="uin" title="persons.search.uin">
+        </sc-column>
+        <sc-column data="age" title="persons.search.age">
+        </sc-column>
+        <sc-column data="licences" title="persons.search.licences" class="wrap">
+        </sc-column>
+        <sc-column data="ratings" title="persons.search.ratings" class="wrap">
+        </sc-column>
+        <sc-column data="organization" title="persons.search.organization">
+        </sc-column>
+      </sc-datatable>
     </div>
 
-    <div ng-if="currentTab === 'newLot'">
-      <ng-form class="form-inline" name="form.newLotForm" sc-validate="{}">
-        <div ng-if="set === 'person'">
-          <gva-person-data name="form.newLotForm.personData" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
-        </div>
-        <div ng-if="set === 'aircraft' && showWizzard">
-          <gva-aircraft-new-wizzard name="form.newLotForm.wizzardModel" ng-model="aircraftWizzardModel"></gva-aircraft-new-wizzard> 
-        </div>
-        <div ng-if="set === 'aircraft' && !showWizzard">
-          <gva-aircraft-data name="form.newLotForm.aircraftData" ng-model="newLot.aircraftData"></gva-aircraft-data>
-        </div>
-        <div ng-if="set === 'organization'">
-          <gva-organization-data name="form.newLotForm.organizationDataForm" ng-model="newLot"></gva-organization-data>
-        </div>
+    <!-- chooseLotAircraft -->
+    <div ng-if="currentTab === 'chooseLotAircraft'">
+      <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="chooseLotAircraft.search()">
+        <sc-filter type="text" name="mark" class="col-sm-3" removable="false" label="aircrafts.search.mark"></sc-filter>
+        <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="aircrafts.search.manSN"></sc-filter>
+        <sc-filter type="text" name="modelAlt" class="col-sm-3" removable="false" label="aircrafts.search.modelAlt"></sc-filter>
+        <sc-filter type="text" name="aircraftProducer" class="col-sm-3" removable="false" label="aircrafts.search.aircraftProducer"></sc-filter>
+        <sc-filter type="text" name="airCategory" class="col-sm-3" removable="true" label="aircrafts.search.airCategory"></sc-filter>
+        <sc-search-button action="chooseLotAircraft.search()" text="aircrafts.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+        <sc-search-button action="chooseLotAircraft.create()" text="aircrafts.search.new" icon="glyphicon-plane"></sc-search-button>
+        <sc-search-button action="clear"></sc-search-button>
+        <sc-search-button action="add"></sc-search-button>
+      </sc-search>
+
+      <sc-datatable items="chooseLotAircraft.items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button name="chooseBtn"  btn-click="chooseLot(item.id)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+          </sc-button>
+          <a name="viewBtn" sc-sref="{state: 'root.aircrafts.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </a>
+        </sc-column>
+        <sc-column data="mark" title="aircrafts.search.mark">
+        </sc-column>
+        <sc-column data="manSN" title="aircrafts.search.manSN">
+        </sc-column>
+        <sc-column data="modelAlt" title="aircrafts.search.modelAlt" class="wrap">
+        </sc-column>
+        <sc-column data="aircraftProducer" title="aircrafts.search.aircraftProducer" class="wrap">
+        </sc-column>
+        <sc-column data="airCategory" title="aircrafts.search.airCategory" class="wrap">
+        </sc-column>
+        <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date">
+        </sc-column>
+        <sc-column data="icao" title="aircrafts.search.icao">
+        </sc-column>
+        <sc-column data="engineAlt" title="aircrafts.search.engineAlt" class="wrap">
+        </sc-column>
+        <sc-column data="propellerAlt" title="aircrafts.search.propellerAlt" class="wrap">
+        </sc-column>
+      </sc-datatable>
+    </div>
+
+    <!-- chooseLotOrganization -->
+    <div ng-if="currentTab === 'chooseLotOrganization'">
+      <sc-search selected-filters="filters" btn-classes="col-sm-7 col-md-5 col-lg-4" default-action="chooseLotOrganization.search()">
+        <sc-filter type="text" name="organizationName" class="col-sm-2" removable="false" label="organizations.search.name"></sc-filter>
+        <sc-filter type="nomenclature" name="caseTypeId" class="col-sm-2" removable="false" alias="organizationCaseTypes" mode="id" label="organizations.search.caseType"></sc-filter>
+        <sc-filter type="text" name="uin" class="col-sm-2" removable="false" label="organizations.search.uin"></sc-filter>
+        <sc-filter type="text" name="cao" class="col-sm-2" removable="true" label="organizations.search.cao"></sc-filter>
+        <sc-filter type="date" name="dateValidTo" class="col-sm-2" removable="true" label="organizations.search.dateValidTo"></sc-filter>
+        <sc-filter type="date" name="dateCaoValidTo" class="col-sm-2" removable="true" label="organizations.search.dateCaoValidTo"></sc-filter>
+        <sc-search-button action="chooseLotOrganization.search()" text="organizations.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+        <sc-search-button action="chooseLotOrganization.create()" text="organizations.search.newOrganization" icon="glyphicon-plus"></sc-search-button>
+        <sc-search-button action="clear"></sc-search-button>
+        <sc-search-button action="add"></sc-search-button>
+      </sc-search>
+
+      <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button name="chooseBtn"  btn-click="chooseLot(item.id)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+          </sc-button>
+          <a name="viewBtn" sc-sref="{state: 'root.organizations.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </a>
+        </sc-column>
+          <sc-column data="name" title="organizations.search.name">
+        </sc-column>
+        <sc-column data="cao" title="organizations.search.cao">
+        </sc-column>
+        <sc-column data="uin" title="organizations.search.uin">
+        </sc-column>
+        <sc-column data="valid" title="organizations.search.valid" type="boolean">
+        </sc-column>
+        <sc-column data="organizationType" title="organizations.search.organizationType">
+        </sc-column>
+        <sc-column data="dateValidTo" title="organizations.search.dateValidTo" type="date">
+        </sc-column>
+        <sc-column data="dateCaoValidTo" title="organizations.search.dateCaoValidTo" type="date">
+        </sc-column>
+      </sc-datatable>
+    </div>
+
+    <!-- createLotPerson -->
+    <div ng-if="currentTab === 'createLotPerson'">
+      <ng-form class="form-inline" name="createLotPerson.form" sc-validate="{}">
+        <gva-person-data name="personData" ng-model="createLotPerson.newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
+      </ng-form>
+    </div>
+
+    <!-- createLotAircraft -->
+    <div ng-if="currentTab === 'createLotAircraft'">
+      <ng-form class="form-inline" name="createLotAircraft.form" sc-validate="{}">
+        <gva-aircraft-data name="aircraftData" ng-model="createLotAircraft.newLot.aircraftData"></gva-aircraft-data>
+      </ng-form>
+    </div>
+
+    <!-- createLotOrganization -->
+    <div ng-if="currentTab === 'createLotOrganization'">
+      <ng-form class="form-inline" name="createLotOrganization.form" sc-validate="{}">
+        <gva-organization-data name="organizationData" ng-model="createLotOrganization.newLot.organizationData"></gva-organization-data>
       </ng-form>
     </div>
   </div>

@@ -23,7 +23,7 @@
           },
           'applications.tabs.stages': 'root.applications.edit.stages'
         };
-    } else {
+    } else if ($scope.application.partIndex) {
       $scope.tabs = {
         'applications.tabs.data': {
           state: 'root.applications.edit.data',
@@ -36,21 +36,25 @@
         'applications.tabs.case': 'root.applications.edit.case',
         'applications.tabs.stages': 'root.applications.edit.stages'
       };
-    }
 
-    if($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
-      $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
-      var examSystState = {
-        'applications.tabs.examSyst': {
-          state: 'root.applications.edit.examSyst',
-          stateParams: {
-            lotId: $scope.application.lotId,
-            ind: $scope.application.partIndex,
-            set: $scope.set
+      if ($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
+        $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
+        var examSystState = {
+          'applications.tabs.examSyst': {
+            state: 'root.applications.edit.examSyst',
+            stateParams: {
+              lotId: $scope.application.lotId,
+              ind: $scope.application.partIndex,
+              set: $scope.set
+            }
           }
-        }
+        };
+        $scope.tabs = _.assign($scope.tabs, examSystState);
+      }
+    } else {
+      $scope.tabs = {
+        'applications.tabs.case': 'root.applications.edit.case'
       };
-      $scope.tabs = _.assign($scope.tabs, examSystState);
     }
 
     $scope.viewPerson = function (id) {

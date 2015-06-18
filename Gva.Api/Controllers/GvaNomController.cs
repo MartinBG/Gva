@@ -939,15 +939,29 @@ namespace Gva.Api.Controllers
         }
 
         [Route("applicationTypes")]
-        public IHttpActionResult GetApplicationTypes(string caseTypeAlias = null, string code = null, string name = null, int? lotId = null, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetApplicationTypes(string set = null, string caseTypeAlias = null, int? caseTypeId = null, string code = null, string name = null, int? lotId = null, string term = null, int offset = 0, int? limit = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "applicationTypes",
                 term: term);
 
+            if (!string.IsNullOrEmpty(set))
+            {
+                var caseTypeAliases = this.caseTypeRepository.GetCaseTypesForSet(set)
+                    .Select(ct => ct.Alias);
+
+                nomValues = nomValues.Where(nv => nv.TextContent.GetItems<string>("caseTypes").Any(ct => caseTypeAliases.Contains(ct)));
+            }
+
             if (!string.IsNullOrWhiteSpace(caseTypeAlias))
             {
                 nomValues = nomValues.Where(nv => nv.TextContent.GetItems<string>("caseTypes").Contains(caseTypeAlias));
+            }
+            else if (caseTypeId.HasValue)
+            {
+                string alias = this.caseTypeRepository.GetCaseType(caseTypeId.Value).Alias;
+
+                nomValues = nomValues.Where(nv => nv.TextContent.GetItems<string>("caseTypes").Contains(alias));
             }
 
             if (!string.IsNullOrWhiteSpace(code))

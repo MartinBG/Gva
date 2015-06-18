@@ -13,324 +13,409 @@
     Persons,
     Aircrafts,
     Organizations,
-    caseApplications,
-    scDatatableConfig
+    caseApplications
   ) {
-    $scope.filters = {};
-    $scope.wrapper = {};
-    $scope.form = {};
-    $scope.newLot = {};
-    $scope.model = {};
 
+    // common
+    $scope.currentTab = scModalParams.isFromPortal ? 'choosePortalApp' : 'chooseSet';
+    $scope.selection = {};
     $scope.isFromPortal = scModalParams.isFromPortal;
-    $scope.currentTab = $scope.isFromPortal ? 'choosePortalApp' : 'chooseCaseType';
-    $scope.docId = scModalParams.docId;
-    $scope.docRegUri = scModalParams.docRegUri;
-
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
-
-    var queryPersons = function (offset, limit) {
-      var params = {
-        lin: $scope.filters.lin,
-        uin: $scope.filters.uin,
-        names: $scope.filters.names,
-        licences: $scope.filters.licences,
-        ratings: $scope.filters.ratings,
-        organization: $scope.filters.organization,
-        caseType: $scope.filters.caseType,
-        offset: offset,
-        limit: limit
-      };
-
-      return Persons.query(params).$promise;
-    };
-
-    var queryAircrafts = function (offset, limit) {
-      var params = {
-        manSN: $scope.filters.manSN,
-        modelAlt: $scope.filters.modelAlt,
-        mark: $scope.filters.mark,
-        airCategory: $scope.filters.airCategory,
-        aircraftProducer: $scope.filters.aircraftProducer,
-        offset: offset,
-        limit: limit
-      };
-
-      return Aircrafts.query(params).$promise;
-    };
-
-    var queryOrganizations = function (offset, limit) {
-      var params = {
-        cao: $scope.filters.cao,
-        uin: $scope.filters.uin,
-        dateValidTo: $scope.filters.dateValidTo,
-        dateCaoValidTo: $scope.filters.dateCaoValidTo,
-        organizationName: $scope.filters.organizationName,
-        caseTypeId: $scope.filters.caseTypeId,
-        offset: offset,
-        limit: limit
-      };
-
-      return Organizations.query(params).$promise;
-    };
-
-    $scope.selectOptions = {
-      allowClear: true,
-      placeholder: ' ',
-      data: _.map(caseApplications, function (doc) {
-        return {
-          id: doc.docId,
-          text: doc.docRegUri + ' ' + doc.docDocTypeName
-        };
-      })
-    };
-
-    $scope.$watch('wrapper.selectedAppKey', function () {
-      if ($scope.wrapper.selectedAppKey) {
-        $scope.wrapper.selectedApp = _.find(caseApplications, {
-          docId: $scope.wrapper.selectedAppKey.id
-        });
-
-        $scope.selectedCaseType = { 
-          id: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId,
-          text: $scope.wrapper.selectedApp.caseType.name
-        };
-
-        $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
-      } else {
-        $scope.wrapper.selectedApp = null;
-      }
-    });
 
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.chooseCaseType = function () {
-      return $scope.form.chooseCaseTypeForm.$validate().then(function () {
-        if ($scope.form.chooseCaseTypeForm.$valid) {
-          Integration.getEmptyIntegrationDocRelation({
-            caseTypeId: $scope.model.caseType.nomValueId,
-            docId: $scope.docId,
-            docRegUri: $scope.docRegUri
-          }).$promise
-          .then(function (result) {
-            $scope.wrapper.selectedApp = result;
-            $scope.set = result.set.toLowerCase();
-
-            $scope.searchParams = {
-              code: null,
-              alias: 'applicationTypes',
-              caseType: { id: result.caseType.gvaCaseTypeId, text: result.caseType.name }
-            };
-
-            $scope.currentTab = 'chooseGvaApp';
-            return $scope.searchAppTypes();
-          });
-        }
-      });
-    };
-
-    $scope.choosePortalApp = function () {
-      return $scope.form.choosePortalAppForm.$validate().then(function () {
-        if ($scope.form.choosePortalAppForm.$valid) {
-          Nomenclatures.query({
-            alias: 'applicationTypes',
-            caseTypeAlias: $scope.wrapper.selectedApp.caseType.alias
-          }).$promise
-          .then(function (appTypes) {
-            $scope.appTypes = appTypes;
-            $scope.currentTab = 'chooseGvaApp';
-            
-            $scope.searchParams = {
-              code: null,
-              alias: 'applicationTypes',
-              caseType: $scope.selectedCaseType,
-              name: null
-            };
-
-            return $scope.searchAppTypes();
-          });
-
-        }
-      });
-    };
-
-    $scope.chooseAppType = function (appType) {
-      $scope.wrapper.selectedApp.gvaApplicationType = appType;
-
-      $scope.currentTab = 'chooseLot';
-
-      if ($scope.set === 'person') {
-        var firstName = $scope.wrapper.selectedApp.personData.firstName ?
-          $scope.wrapper.selectedApp.personData.firstName : '';
-        var lastName = $scope.wrapper.selectedApp.personData.lastName ?
-          $scope.wrapper.selectedApp.personData.lastName : '';
-        $scope.filters = {
-          lin: $scope.wrapper.selectedApp.personData.lin,
-          uin: $scope.wrapper.selectedApp.personData.uin,
-          names: firstName + ' ' + lastName,
-          caseType: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId
-        };
-
-        return $scope.searchPersons();
-      } else if ($scope.set === 'aircraft') {
-        var producer = $scope.wrapper.selectedApp.aircraftData.aircraftProducer;
-        $scope.filters = {
-          manSN: null,
-          mark: null,
-          modelAlt:null,
-          aircraftProducer: producer && producer.name ? producer.name  : ''
-        };
-
-        return $scope.searchAircrafts();
-      } else if ($scope.set === 'organization') {
-        var name = $scope.wrapper.selectedApp.organizationData.name?
-          $scope.wrapper.selectedApp.organizationData.name : '';
-
-        $scope.filters = {
-          caseTypeId: null,
-          uin: $scope.wrapper.selectedApp.organizationData.uin,
-          organizationName: name
-        };
-
-        return $scope.searchOrganizations();
-      }
-    };
-
-    $scope.searchAppTypes = function () {
-     var params = {
-       code: $scope.searchParams.code,
-        alias: 'applicationTypes',
-        caseTypeAlias: $scope.wrapper.selectedApp.caseType.alias,
-        name: $scope.searchParams.name
-      };
-      return Nomenclatures.query(params)
-        .$promise.then(function (appTypes) {
-          $scope.appTypes = appTypes;
-        });
-    };
-
-    $scope.searchPersons = function () {
-      return queryPersons(0, scDatatableConfig.defaultPageSize)
-        .then(function (persons) {
-          $scope.items = persons;
-        });
-    };
-
-    $scope.searchAircrafts = function () {
-      return queryAircrafts(0, scDatatableConfig.defaultPageSize)
-        .then(function (aircrafts) {
-          $scope.items = aircrafts;
-        });
-    };
-
-    $scope.searchOrganizations = function () {
-      return queryOrganizations(0, scDatatableConfig.defaultPageSize)
-        .then(function (organizations) {
-          $scope.items = organizations;
-        });
-    };
-
-    $scope.backToGvaApp = function () {
-      $scope.currentTab = 'chooseGvaApp';
-    };
-
-    $scope.backToPortalApp = function () {
-      $scope.currentTab = 'choosePortalApp';
-    };
-
-    $scope.backToCaseType = function () {
-      $scope.currentTab = 'chooseCaseType';
-    };
-
-    $scope.backToChooseLot = function () {
-      $scope.currentTab = 'chooseLot';
-    };
-
-    $scope.createLot = function () {
-      $scope.currentTab = 'newLot';
-      if ($scope.set === 'person') {
-        Persons.newPerson({
-          firstName: $scope.wrapper.selectedApp.personData.firstName,
-          lastName: $scope.wrapper.selectedApp.personData.lastName,
-          uin: $scope.wrapper.selectedApp.personData.uin,
-          extendedVersion: false
-        }).$promise
-        .then(function (newPerson) {
-          $scope.newLot = newPerson;
-          $scope.newLot.personData = $scope.wrapper.selectedApp.personData;
-        });
-      } else if ($scope.set === 'aircraft') {
-        $scope.showWizzard = true;
-        $scope.aircraftWizzardModel = {};
-        Aircrafts.newAircraft()
-          .$promise
-          .then(function (newAircraft) {
-            $scope.newLot = newAircraft;
-            $scope.newLot.aircraftData = $scope.wrapper.selectedApp.aircraftData;
-          });
-      } else if ($scope.set === 'organization') {
-        $scope.newLot = $scope.wrapper.selectedApp.organizationData;
-      }
-    };
-
-    $scope.chooseLot = function (lot) {
+    $scope.chooseLot = function (lotId) {
       return Integration.createApplication({}, {
-        docId: $scope.wrapper.selectedApp.docId,
-        lotId: lot.id,
-        applicationType: $scope.wrapper.selectedApp.gvaApplicationType,
-        caseType: $scope.wrapper.selectedApp.caseType,
-        correspondentData: $scope.wrapper.selectedApp.correspondentData
+        lotId: lotId,
+        docId: $scope.selection.docId,
+        applicationType: $scope.selection.gvaApplicationType
       }).$promise.then(function (res) {
         $modalInstance.close(res);
       });
     };
 
-    $scope.setAircraftWizzardData = function () {
-      return $scope.form.newLotForm.$validate().then(function () {
-        if ($scope.form.newLotForm.$valid) {
-          $scope.showWizzard = false;
-          if ($scope.aircraftWizzardModel.aircraftModel) {
-            $scope.newLot.aircraftData.aircraftProducer =
-              $scope.aircraftWizzardModel.aircraftModel.textContent.aircraftProducer;
-            $scope.newLot.aircraftData.airCategory =
-              $scope.aircraftWizzardModel.aircraftModel.textContent.airCategory;
-            $scope.newLot.aircraftData.model =
-              $scope.aircraftWizzardModel.aircraftModel.name;
-            $scope.newLot.aircraftData.modelAlt = 
-              $scope.aircraftWizzardModel.aircraftModel.nameAlt;
-          } else {
-            $scope.newLot.aircraftData.aircraftProducer =
-              $scope.aircraftWizzardModel.aircraftProducer;
-            $scope.newLot.aircraftData.airCategory =
-              $scope.aircraftWizzardModel.airCategory;
+    // choosePortalApp
+    $scope.choosePortalApp = {};
+
+    $scope.choosePortalApp.appSelectOptions = {
+      allowClear: true,
+      placeholder: ' ',
+      data: _.map(caseApplications, function (app) {
+        app.id = app.docId;
+        app.text = app.docRegUri + ' ' + app.docDocTypeName;
+
+        return app;
+      })
+    };
+
+    $scope.choosePortalApp.selectedAppChanged = function () {
+      if ($scope.choosePortalApp.selectedApp) {
+        $scope.selection.set = $scope.choosePortalApp.selectedApp.set;
+      }
+      else {
+        $scope.selection.set = null;
+      }
+    };
+
+    $scope.choosePortalApp.forward = function () {
+      return $scope.choosePortalApp.form.$validate().then(function () {
+        if ($scope.choosePortalApp.form.$valid) {
+
+          $scope.selection = {
+            docId: $scope.choosePortalApp.selectedApp.docId,
+            set: $scope.choosePortalApp.selectedApp.set,
+            caseTypeId: $scope.choosePortalApp.selectedApp.caseTypeId
+          };
+
+          switch ($scope.choosePortalApp.selectedApp.set) {
+            case 'Person':
+              $scope.selection.personData = $scope.choosePortalApp.selectedApp.personData;
+              break;
+
+            case 'Aircraft':
+              $scope.selection.aircraftData = $scope.choosePortalApp.selectedApp.aircraftData;
+              break;
+
+            case 'Organization':
+              $scope.selection.organizationData =
+                $scope.choosePortalApp.selectedApp.organizationData;
+              break;
+
+            default:
+              throw new Error('Unsupported set.');
+          }
+
+          return $scope.chooseGvaAppType.init();
+        }
+      });
+    };
+
+    // chooseSet
+    $scope.chooseSet = {};
+
+    $scope.chooseSet.setSelectOptions = {
+      allowClear: true,
+      placeholder: ' ',
+      data: [
+        { id: 'Person', text: 'Физическо лице' },
+        { id: 'Aircraft', text: 'ВС' },
+        { id: 'Organization', text: 'Организация' }
+      ]
+    };
+
+    $scope.chooseSet.selectedSetChanged = function () {
+      if ($scope.chooseSet.selectedSet) {
+        $scope.selection.set = $scope.chooseSet.selectedSet.id;
+      }
+      else {
+        $scope.selection.set = null;
+      }
+    };
+
+    $scope.chooseSet.hasNoAppChanged = function () {
+      $scope.selection.hasNoApp = $scope.chooseSet.hasNoApp;
+    };
+
+    $scope.chooseSet.forward = function () {
+      return $scope.chooseSet.form.$validate().then(function () {
+        if ($scope.chooseSet.form.$valid) {
+
+          $scope.selection = {
+            docId: scModalParams.docId,
+            set: $scope.chooseSet.selectedSet.id,
+            hasNoApp: $scope.chooseSet.hasNoApp
+          };
+
+          if ($scope.selection.hasNoApp) {
+            if ($scope.selection.set === 'Person') {
+              return $scope.chooseLotPerson.init();
+            }
+            else if ($scope.selection.set === 'Aircraft') {
+              return $scope.chooseLotAircraft.init();
+            }
+            else if ($scope.selection.set === 'Organization') {
+              return $scope.chooseLotOrganization.init();
+            }
+          }
+          else {
+            return $scope.chooseGvaAppType.init();
           }
         }
       });
     };
 
-    $scope.saveLot = function () {
-      return $scope.form.newLotForm.$validate().then(function () {
-        if ($scope.form.newLotForm.$valid) {
-          var promise;
-          if ($scope.set === 'person') {
-            promise = Persons.save($scope.newLot).$promise;
-          } else if ($scope.set === 'aircraft') {
-            promise = Aircrafts.save($scope.newLot).$promise;
-          } else if ($scope.set === 'organization') {
-            promise = Organizations.save($scope.newLot).$promise;
-          }
+    // chooseGvaAppType
+    $scope.chooseGvaAppType = {};
 
-          return promise.then(function (result) {
-            return $scope.chooseLot(result);
+    $scope.chooseGvaAppType.init = function () {
+      if (scModalParams.isFromPortal) {
+        // caseType is fixed, so no choice of caseType
+        $scope.chooseGvaAppType.searchParams = {
+          code: null,
+          name: null
+        };
+      }
+      else {
+        $scope.chooseGvaAppType.searchParams = {
+          caseTypeId: null,
+          code: null,
+          name: null
+        };
+      }
+
+      return $scope.chooseGvaAppType.search().then(function () {
+        $scope.currentTab = 'chooseGvaAppType';
+      });
+    };
+
+    $scope.chooseGvaAppType.back = function () {
+      $scope.currentTab = scModalParams.isFromPortal ? 'choosePortalApp' : 'chooseSet';
+    };
+
+    $scope.chooseGvaAppType.search = function () {
+      var params = {
+        alias: 'applicationTypes',
+        set: $scope.selection.set,
+        caseTypeId: scModalParams.isFromPortal ?
+          $scope.selection.caseTypeId :
+          $scope.chooseGvaAppType.searchParams.caseTypeId,
+        code: $scope.chooseGvaAppType.searchParams.code,
+        name: $scope.chooseGvaAppType.searchParams.name
+      };
+
+      return Nomenclatures.query(params).$promise.then(function (appTypes) {
+        $scope.chooseGvaAppType.appTypes = appTypes;
+      });
+    };
+
+    $scope.chooseGvaAppType.choose = function (appType) {
+      $scope.selection.gvaApplicationType = appType;
+
+      if (!$scope.selection.caseTypeId) {
+        $scope.selection.caseTypeId = $scope.chooseGvaAppType.searchParams.caseTypeId;
+      }
+
+      if ($scope.selection.set === 'Person') {
+        return $scope.chooseLotPerson.init();
+      }
+      else if ($scope.selection.set === 'Aircraft') {
+        return $scope.chooseLotAircraft.init();
+      }
+      else if ($scope.selection.set === 'Organization') {
+        return $scope.chooseLotOrganization.init();
+      }
+    };
+
+    // chooseLotPerson
+    $scope.chooseLotPerson = {};
+
+    $scope.chooseLotPerson.init = function () {
+      $scope.chooseLotPerson.filters = {
+        lin: null,
+        uin: null,
+        names: null,
+        caseType: null
+      };
+
+      if ($scope.selection.personData) {
+        _.assign($scope.chooseLotPerson.filters, {
+          lin: $scope.selection.personData.lin,
+          uin: $scope.selection.personData.uin,
+          names: ($scope.selection.personData.firstName || '') +
+                 ' ' +
+                 ($scope.selection.personData.lastName || '')
+        });
+      }
+
+      if ($scope.selection.caseTypeId) {
+        _.assign($scope.chooseLotPerson.filters, {
+          caseType: $scope.selection.caseTypeId
+        });
+      }
+
+      return $scope.chooseLotPerson.search().then(function () {
+        $scope.currentTab = 'chooseLotPerson';
+      });
+    };
+
+    $scope.chooseLotPerson.search = function () {
+      return Persons.query($scope.chooseLotPerson.filters).$promise.then(function (persons) {
+        $scope.chooseLotPerson.items = persons;
+      });
+    };
+
+    $scope.chooseLotPerson.back = function () {
+      $scope.currentTab = $scope.selection.hasNoApp ? 'chooseSet' : 'chooseGvaAppType';
+    };
+
+    $scope.chooseLotPerson.create = function () {
+      return $scope.createLotPerson.init();
+    };
+
+    // chooseLotAircraft
+    $scope.chooseLotAircraft = {};
+
+    $scope.chooseLotAircraft.init = function () {
+      $scope.chooseLotAircraft.filters = {
+        mark: null,
+        manSN: null,
+        modelAlt: null,
+        aircraftProducer: null
+      };
+
+      if ($scope.selection.aircraftData) {
+        var producer = $scope.selection.aircraftData.aircraftProducer;
+
+        _.assign($scope.chooseLotAircraft.filters, {
+          mark: null,
+          manSN: null,
+          modelAlt: null,
+          aircraftProducer: producer && producer.name || ''
+        });
+      }
+
+      return $scope.chooseLotAircraft.search().then(function () {
+        $scope.currentTab = 'chooseLotAircraft';
+      });
+    };
+
+    $scope.chooseLotAircraft.search = function () {
+      return Aircrafts.query($scope.chooseLotAircraft.filters).$promise.then(function (aircrafts) {
+        $scope.chooseLotAircraft.items = aircrafts;
+      });
+    };
+
+    $scope.chooseLotAircraft.back = function () {
+      $scope.currentTab = $scope.selection.hasNoApp ? 'chooseSet' : 'chooseGvaAppType';
+    };
+
+    $scope.chooseLotAircraft.create = function () {
+      return $scope.createLotAircraft.init();
+    };
+
+    // chooseLotOrganization
+    $scope.chooseLotOrganization = {};
+
+    $scope.chooseLotOrganization.init = function () {
+      $scope.chooseLotOrganization.filters = {
+        organizationName: null,
+        caseTypeId: null,
+        uin: null
+      };
+
+      if ($scope.selection.organizationData) {
+        _.assign($scope.chooseLotOrganization.filters, {
+          organizationName: $scope.selection.organizationData.name || '',
+          caseTypeId: null,
+          uin: $scope.selection.organizationData.uin
+        });
+      }
+
+      return $scope.chooseLotOrganization.search().then(function () {
+        $scope.currentTab = 'chooseLotOrganization';
+      });
+    };
+
+    $scope.chooseLotOrganization.search = function () {
+      return Organizations.query($scope.chooseLotAircraft.filters).$promise
+        .then(function (organizations) {
+          $scope.chooseLotOrganization.items = organizations;
+        });
+    };
+
+    $scope.chooseLotOrganization.back = function () {
+      $scope.currentTab = $scope.selection.hasNoApp ? 'chooseSet' : 'chooseGvaAppType';
+    };
+
+    $scope.chooseLotOrganization.create = function () {
+      return $scope.createLotOrganization.init();
+    };
+
+    // createLotPerson
+    $scope.createLotPerson = {};
+
+    $scope.createLotPerson.init = function () {
+      return Persons.newPerson({ extendedVersion: false }).$promise.then(function (newPerson) {
+        $scope.currentTab = 'createLotPerson';
+        $scope.createLotPerson.newLot = newPerson;
+        if ($scope.selection.personData) {
+          _.assign($scope.createLotPerson.newLot.personData, $scope.selection.personData);
+        }
+      });
+    };
+
+    $scope.createLotPerson.save = function () {
+      return $scope.createLotPerson.form.$validate().then(function () {
+        if ($scope.createLotPerson.form.$valid) {
+          return Persons.save($scope.createLotPerson.newLot).$promise.then(function (result) {
+            return $scope.chooseLot(result.lotId);
           });
         }
       });
+    };
+
+    $scope.createLotPerson.back = function () {
+      $scope.currentTab = 'chooseLotPerson';
+    };
+
+    // createLotAircraft
+    $scope.createLotAircraft = {};
+
+    $scope.createLotAircraft.init = function () {
+      return Aircrafts.newAircraft().$promise
+        .then(function (newAircraft) {
+          $scope.currentTab = 'createLotAircraft';
+          $scope.createLotAircraft.newLot = newAircraft;
+          if ($scope.selection.aircraftData) {
+            _.assign($scope.createLotAircraft.newLot.personData, $scope.selection.aircraftData);
+          }
+        });
+    };
+
+    $scope.createLotAircraft.save = function () {
+      return $scope.createLotAircraft.form.$validate().then(function () {
+        if ($scope.createLotAircraft.form.$valid) {
+          return Aircrafts.save($scope.createLotAircraft.newLot).$promise.then(function (result) {
+            return $scope.chooseLot(result.lotId);
+          });
+        }
+      });
+    };
+
+    $scope.createLotAircraft.back = function () {
+      $scope.currentTab = 'chooseLotAircraft';
+    };
+
+    // createLotOrganization
+    $scope.createLotOrganization = {};
+
+    $scope.createLotOrganization.init = function () {
+      return Organizations.newOrganization().$promise
+        .then(function (newOrganization) {
+          $scope.currentTab = 'createLotOrganization';
+          $scope.createLotOrganization.newLot = newOrganization;
+          if ($scope.selection.aircraftData) {
+            _.assign(
+              $scope.createLotOrganization.newLot.organizationData,
+              $scope.selection.organizationData);
+          }
+        });
+    };
+
+    $scope.createLotOrganization.save = function () {
+      return $scope.createLotOrganization.form.$validate().then(function () {
+        if ($scope.createLotOrganization.form.$valid) {
+          return Organizations.save($scope.createLotOrganization.newLot).$promise
+            .then(function (result) {
+              return $scope.chooseLot(result.lotId);
+            });
+        }
+      });
+    };
+
+    $scope.createLotOrganization.back = function () {
+      $scope.currentTab = 'chooseLotOrganization';
     };
   }
 
@@ -345,8 +430,7 @@
     'Persons',
     'Aircrafts',
     'Organizations',
-    'caseApplications',
-    'scDatatableConfig'
+    'caseApplications'
   ];
 
   LinkAppModalCtrl.$resolve = {

@@ -16,12 +16,6 @@ namespace Gva.Api.Repositories.IntegrationRepository
     {
         void UpdateLotCaseTypes(string set, GvaCaseType caseType, Lot lot, UserContext userContext);
 
-        int CreateCorrespondentPerPersonLot(PersonDataDO personData, int lotId, UserContext userContext);
-
-        int CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext);
-
-        CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
-
         PersonDataDO ConvertAppWithFlightCrewDataToPersonData(FlightCrewPersonalData flightCrewlData, GvaCaseType caseType);
 
         PersonDataDO ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(

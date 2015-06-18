@@ -116,6 +116,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId);
 
-        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, string docRegUri = null);
+        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, int? docId = null);
     }
 }

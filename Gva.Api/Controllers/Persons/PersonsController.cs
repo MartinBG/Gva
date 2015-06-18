@@ -108,6 +108,7 @@ namespace Gva.Api.Controllers.Persons
             string linType = null,
             string uin = null,
             int? caseType = null,
+            string caseTypeAlias = null,
             string names = null,
             string licences = null,
             string ratings = null,
@@ -116,6 +117,11 @@ namespace Gva.Api.Controllers.Persons
             bool isExaminer = false,
             bool exact = false)
         {
+            if (caseType == null && !string.IsNullOrEmpty(caseTypeAlias))
+            {
+                caseType = this.caseTypeRepository.GetCaseType(caseTypeAlias).GvaCaseTypeId;
+            }
+
             var persons = this.personRepository.GetPersons(lin, linType, uin, caseType, names, licences, ratings, organization, isInspector, isExaminer, exact, 0, null);
 
             return Ok(persons.Select(p => new PersonViewDO(p)));

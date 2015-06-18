@@ -24,12 +24,12 @@ namespace Gva.Api.ModelsDO.Applications
                 this.ApplicationId = gvaApp.GvaApplicationId;
                 this.DocId = gvaApp.DocId;
                 this.LotId = gvaApp.LotId;
-                this.PartIndex = gvaApp.GvaAppLotPart.Index;
+                this.PartIndex = gvaApp.GvaAppLotPart != null ? (int?)gvaApp.GvaAppLotPart.Index : null;
                 this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
                 this.LotSetAlias = lotSetAlias;
                 this.LotSetId = lotSetId;
-                this.OldDocumentNumber = nom.OldDocumentNumber;
-                this.ApplicationTypeCode = nom.ApplicationCode;
+                this.OldDocumentNumber = nom != null ? nom.OldDocumentNumber : null;
+                this.ApplicationTypeCode = nom != null ? nom.ApplicationCode : null;
             }
         }
 
@@ -39,7 +39,7 @@ namespace Gva.Api.ModelsDO.Applications
 
         public int LotId { get; set; }
 
-        public int PartIndex { get; set; }
+        public int? PartIndex { get; set; }
 
         public int? GvaAppLotPartId { get; set; }
 
