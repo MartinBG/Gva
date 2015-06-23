@@ -50,29 +50,11 @@
     };
 
     $scope.viewPart = function (value) {
-      var state,
-        set;
+      var state;
 
       if(value.setPartAlias.indexOf('Application') > 0) {
-        state = 'root.applications.edit.data';
-        if (value.setPartAlias === 'personApplication') {
-          set = 'person';
-        }
-        else if (value.setPartAlias === 'aircraftApplication') {
-          set = 'aircraft';
-        }
-        else if (value.setPartAlias === 'organizationApplication') {
-          set = 'organization';
-        }
-        else if (value.setPartAlias === 'airportApplication') {
-          set = 'airport';
-        }
-
-        return $state.go(state, {
-          id: application.applicationId,
-          ind: value.partIndex,
-          lotId: application.lotId,
-          set: set
+        return $state.go('root.applications.edit.data', {
+          id: application.applicationId
         });
       }
 

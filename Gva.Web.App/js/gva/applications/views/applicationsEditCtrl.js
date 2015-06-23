@@ -9,47 +9,25 @@
     application
     ) {
     $scope.application = application;
-    $scope.set = $stateParams.set;
+    $scope.set = application.lotSetAlias;
 
     if ($scope.application.oldDocumentNumber) {
       $scope.tabs = {
-        'applications.tabs.data': {
-            state: 'root.applications.edit.data',
-            stateParams: {
-              lotId: application.lotId,
-              ind: application.partIndex,
-              set: $scope.set
-            }
-          },
-          'applications.tabs.stages': 'root.applications.edit.stages'
-        };
+        'applications.tabs.data': 'root.applications.edit.data',
+        'applications.tabs.stages': 'root.applications.edit.stages'
+      };
     } else if ($scope.application.partIndex) {
       $scope.tabs = {
-        'applications.tabs.data': {
-          state: 'root.applications.edit.data',
-          stateParams: {
-            lotId: $scope.application.lotId,
-            ind: $scope.application.partIndex,
-            set: $scope.set
-          }
-        },
+        'applications.tabs.data': 'root.applications.edit.data',
         'applications.tabs.case': 'root.applications.edit.case',
         'applications.tabs.stages': 'root.applications.edit.stages'
       };
 
       if ($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
-        $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
-        var examSystState = {
-          'applications.tabs.examSyst': {
-            state: 'root.applications.edit.examSyst',
-            stateParams: {
-              lotId: $scope.application.lotId,
-              ind: $scope.application.partIndex,
-              set: $scope.set
-            }
-          }
-        };
-        $scope.tabs = _.assign($scope.tabs, examSystState);
+          $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
+        $scope.tabs = _.assign($scope.tabs, {
+          'applications.tabs.examSyst': 'root.applications.edit.examSyst'
+        });
       }
     } else {
       $scope.tabs = {

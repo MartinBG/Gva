@@ -26,15 +26,6 @@
       return moment(new Date()).isAfter(item.dateValidTo);
     };
 
-    $scope.viewApplication = function (appId, lotId, partIndex) {
-      return $state.go('root.applications.edit.data', {
-        id: appId,
-        set: 'person',
-        lotId: lotId,
-        ind: partIndex
-      });
-    };
-
     $scope.print = function (doc) {
       var params = {
         lotId: doc.lotId,

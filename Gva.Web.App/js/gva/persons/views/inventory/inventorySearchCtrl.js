@@ -43,12 +43,7 @@
       if(item.setPartAlias === 'personLicence') {
         params = { ind: item.parentPartIndex, index: item.partIndex };
       } else if (item.setPartAlias === 'personApplication') {
-        params = { 
-          ind: item.partIndex,
-          id: item.applicationId,
-          set: 'person',
-          lotId: parseInt($stateParams.id, 10)
-        };
+        params = { id: item.applicationId };
       } else {
         params = { ind: item.partIndex };
       }

@@ -76,14 +76,7 @@
         });
 
         modalInstance.result.then(function () {
-          var stateName = 'root.applications.edit.data',
-            params = {
-              set: setPart,
-              id: applicationId,
-              lotId: lotId,
-              ind: partIndex
-            };
-          $state.go(stateName, params);
+          $state.go('root.applications.edit.data', { id: applicationId });
         });
 
         return modalInstance.opened;

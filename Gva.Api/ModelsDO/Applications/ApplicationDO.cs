@@ -26,7 +26,7 @@ namespace Gva.Api.ModelsDO.Applications
                 this.LotId = gvaApp.LotId;
                 this.PartIndex = gvaApp.GvaAppLotPart != null ? (int?)gvaApp.GvaAppLotPart.Index : null;
                 this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
-                this.LotSetAlias = lotSetAlias;
+                this.LotSetAlias = lotSetAlias.ToLowerInvariant();
                 this.LotSetId = lotSetId;
                 this.OldDocumentNumber = nom != null ? nom.OldDocumentNumber : null;
                 this.ApplicationTypeCode = nom != null ? nom.ApplicationCode : null;

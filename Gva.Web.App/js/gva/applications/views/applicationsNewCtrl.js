@@ -159,12 +159,7 @@
           newApplication.setPartPath = $scope.set + 'DocumentApplications';
 
           return Applications.create(newApplication).$promise.then(function (gvaApp) {
-            return $state.go('root.applications.edit.data', {
-              set: $scope.set,
-              ind: gvaApp.partIndex,
-              lotId: gvaApp.lotId,
-              id: gvaApp.gvaApplicationId
-            });
+            return $state.go('root.applications.edit.data', { id: gvaApp.gvaApplicationId });
           });
         }
       });

@@ -118,20 +118,6 @@ namespace Gva.Api.Controllers.Applications
             return Ok(applications);
         }
 
-        [Route("{id:int}/setAlias")]
-        public IHttpActionResult GetSetAliasPerApplication(int id)
-        {
-            var set = this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.Lot.Set)
-                .Where(a => a.GvaApplicationId == id)
-                .First().Lot.Set;
-
-            return Ok(
-                new {
-                    setAlias = set.Alias.ToLower()
-                });
-        }
-
         [Route("exams")]
         public IHttpActionResult GetApplicationExams(int offset = 0,  int? limit = null)
         {

@@ -8,15 +8,13 @@
     $stateParams,
     Applications,
     application,
-    setAlias) {
-    var originalApplication = _.cloneDeep(application);
+    applicationPart) {
+    var originalApplicationPart = _.cloneDeep(applicationPart);
 
-    $scope.application = application;
+    $scope.applicationPart = applicationPart;
     $scope.editMode = null;
-    $scope.lotId = $stateParams.lotId;
-    $scope.set = $stateParams.set;
-    $scope.appId = $stateParams.id;
-    $scope.setAlias = setAlias;
+    $scope.lotId = application.lotId;
+    $scope.set = application.lotSetAlias;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -24,17 +22,17 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.application = _.cloneDeep(originalApplication);
+      $scope.applicationPart = _.cloneDeep(originalApplicationPart);
     };
 
     $scope.save = function () {
       return $scope.editDocumentApplicationForm.$validate().then(function () {
         if ($scope.editDocumentApplicationForm.$valid) {
           return Applications.editAppPart({
-            lotId: $scope.lotId,
-            ind: $stateParams.ind
+            lotId: application.lotId,
+            ind: application.partIndex
           },
-          $scope.application).$promise.then(function () {
+          $scope.applicationPart).$promise.then(function () {
             $scope.editMode = null;
           });
         }
@@ -48,31 +46,18 @@
     '$stateParams',
     'Applications',
     'application',
-    'setAlias'
+    'applicationPart'
   ];
 
   AppEditPartCtrl.$resolve = {
-    application: [
-      '$stateParams',
+    applicationPart: [
       'Applications',
-      function ($stateParams, Applications) {
+      'application',
+      function (Applications, application) {
         return Applications.getAppPart({
-          lotId: $stateParams.lotId,
-          ind: $stateParams.ind,
-          id: $stateParams.id
+          lotId: application.lotId,
+          ind: application.partIndex
         }).$promise;
-      }
-    ],
-    setAlias: [
-      '$stateParams',
-      'Applications',
-      function ($stateParams, Applications) {
-        return Applications.getAppSetAlias({
-          id: $stateParams.id
-        }).$promise
-        .then(function (result) {
-          return result.setAlias;
-        });
       }
     ]
   };

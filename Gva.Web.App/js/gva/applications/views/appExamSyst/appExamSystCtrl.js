@@ -8,12 +8,13 @@
     $stateParams,
     Applications,
     application,
+    applicationPart,
     qualifications) {
-    var originalApplication = _.cloneDeep(application);
-    $scope.application = application;
+    var originalApplicationPart = _.cloneDeep(applicationPart);
+    $scope.applicationPart = applicationPart;
     $scope.qualifications = qualifications;
-    $scope.lotId = $stateParams.lotId;
-    $scope.ind = $stateParams.ind;
+    $scope.lotId = application.lotId;
+    $scope.ind = application.partIndex;
     $scope.editMode = null;
 
     $scope.edit = function () {
@@ -27,7 +28,7 @@
             lotId: $scope.lotId,
             ind: $scope.ind
           },
-          $scope.application).$promise
+          $scope.applicationPart).$promise
             .then(function () {
               $scope.editMode = null;
               $state.transitionTo('root.applications.edit.data', $stateParams);
@@ -38,7 +39,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.application = _.cloneDeep(originalApplication);
+      $scope.applicationPart = _.cloneDeep(originalApplicationPart);
     };
   }
 
@@ -48,17 +49,19 @@
     '$stateParams',
     'Applications',
     'application',
+    'applicationPart',
     'qualifications'
   ];
 
   AppExamSystCtrl.$resolve = {
-    application: [
+    applicationPart: [
       '$stateParams',
       'Applications',
-      function ($stateParams, Applications) {
+      'application',
+      function ($stateParams, Applications, application) {
         return Applications.getAppPart({
-          lotId: $stateParams.lotId,
-          ind: $stateParams.ind,
+          lotId: application.lotId,
+          ind: application.partIndex,
           id: $stateParams.id
         }).$promise;
       }
@@ -66,10 +69,11 @@
     qualifications: [
       '$stateParams',
       'Applications',
-      function ($stateParams, Applications) {
+      'application',
+      function ($stateParams, Applications, application) {
         return Applications.getAppQualifications({
-          lotId: $stateParams.lotId,
-          ind: $stateParams.ind,
+          lotId: application.lotId,
+          ind: application.partIndex,
           id: $stateParams.id
         }).$promise;
       }

@@ -1,7 +1,7 @@
 ﻿<div class="well well-sm">
   <div class="row card">
 
-    <div ng-if="application.lotSetAlias == 'Person'">
+    <div ng-if="application.lotSetAlias == 'person'">
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.personName"></span>
@@ -18,7 +18,7 @@
         <sc-button name="editBtn" btn-click="viewPerson(application.lotId)" text="applications.edit.viewPerson" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
-    <div ng-if="application.lotSetAlias == 'Organization'">
+    <div ng-if="application.lotSetAlias == 'organization'">
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.organizationName"></span>
@@ -41,7 +41,7 @@
         <sc-button name="editBtn" btn-click="viewOrganization(application.lotId)" text="applications.edit.viewOrganization" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
-    <div ng-if="application.lotSetAlias == 'Aircraft'">
+    <div ng-if="application.lotSetAlias == 'aircraft'">
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.aircraftProducer"></span>
@@ -64,7 +64,7 @@
         <sc-button name="editBtn" btn-click="viewAircraft(application.lotId)" text="applications.edit.viewAircraft" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
-    <div ng-if="application.lotSetAlias == 'Airport'">
+    <div ng-if="application.lotSetAlias == 'airport'">
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.airportName"></span>
@@ -81,7 +81,7 @@
         <sc-button name="editBtn" btn-click="viewAirport(application.lotId)" text="applications.edit.viewAirport" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
-    <div ng-if="application.lotSetAlias == 'Equipment'">
+    <div ng-if="application.lotSetAlias == 'equipment'">
       <div class="col-sm-3">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.equipmentName"></span>

@@ -53,10 +53,7 @@
     $scope.viewApplication = function (application) {
       return $state.go('root.applications.edit.data', 
         {
-          id: application.applicationId,
-          set: $stateParams.set,
-          lotId: application.lotId,
-          ind: application.appPartIndex
+          id: application.applicationId
         });
     };
 
