@@ -15,5 +15,7 @@ namespace Gva.Api.ModelsDO.Equipments
         public NomValue Inspector { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
+
+        public int? ApplicationId { get; set; }
     }
 }

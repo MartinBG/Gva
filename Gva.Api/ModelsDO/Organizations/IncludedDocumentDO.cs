@@ -15,5 +15,7 @@ namespace Gva.Api.ModelsDO.Organizations
         public int? PartIndex { get; set; }
 
         public string SetPartAlias { get; set; }
+
+        public int? ApplicationId { get; set; }
     }
 }

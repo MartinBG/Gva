@@ -25,7 +25,8 @@
       _.each($scope.selectedDocs, function (doc) {
         documents.push({
           partIndex: doc.partIndex,
-          setPartAlias: doc.setPartAlias
+          setPartAlias: doc.setPartAlias,
+          applicationId: doc.applicationId
         });
       });
 

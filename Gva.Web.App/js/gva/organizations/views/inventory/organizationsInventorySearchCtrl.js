@@ -36,7 +36,7 @@
           stateName = 'root.organizations.view.documentOthers.edit';
           break;
         case 'organizationApplication':
-          stateName = 'root.organizations.view.documentApplications.edit';
+          stateName = 'root.applications.edit.data';
           break;
       }
 

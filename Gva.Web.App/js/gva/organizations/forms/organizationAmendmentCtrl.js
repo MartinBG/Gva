@@ -52,15 +52,22 @@
 
     $scope.viewDocument = function (document) {
       var state;
-
+      var params = {};
       if (document.setPartAlias === 'organizationOther') {
         state = 'root.organizations.view.documentOthers.edit';
+        params = { ind: document.partIndex };
       }
       else if (document.setPartAlias === 'organizationApplication') {
-        state = 'root.organizations.view.documentApplications.edit';
+        state = 'root.applications.edit.data';
+        params = { 
+          ind: document.partIndex,
+          id: document.applicationId,
+          set: 'organization',
+          lotId: scFormParams.lotId
+        };
       }
 
-      return $state.go(state, { ind: document.partIndex });
+      return $state.go(state, params);
     };
 
     $scope.$watch('model.part.lims147.length', function () {

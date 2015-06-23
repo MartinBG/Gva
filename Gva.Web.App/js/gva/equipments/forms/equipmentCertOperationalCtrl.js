@@ -7,6 +7,8 @@
     scModal,
     scFormParams
   ) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
       $scope.model.includedDocuments.splice(index, 1);
@@ -15,7 +17,7 @@
     $scope.chooseDocuments = function () {
       var modalInstance = scModal.open('chooseEquipmentsDocs', {
         includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
-        lotId: scFormParams.lotId
+        lotId: $scope.lotId
       });
 
       modalInstance.result.then(function (selectedDocs) {
@@ -27,18 +29,26 @@
 
     $scope.viewDocument = function (document) {
       var state;
-
+      var params = {};
       if (document.setPartAlias === 'equipmentOther') {
         state = 'root.equipments.view.others.edit';
+        params = { ind: document.partIndex };
       }
       else if (document.setPartAlias === 'equipmentOwner') {
         state = 'root.equipments.view.owners.edit';
+        params = { ind: document.partIndex };
       }
       else if (document.setPartAlias === 'equipmentApplication') {
-        state = 'root.equipments.view.applications.edit';
+        state = 'root.applications.edit.data';
+        params = { 
+          ind: document.partIndex,
+          id: document.applicationId,
+          set: 'equipment',
+          lotId: $scope.lotId
+        };
       }
 
-      return $state.go(state, { ind: document.partIndex });
+      return $state.go(state, params);
     };
   }
 
