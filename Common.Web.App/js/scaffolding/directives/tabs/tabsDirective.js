@@ -169,7 +169,6 @@
               return;
             }
           }
-          closeTabs();
         }
 
         function activateTab(tabName) {
@@ -203,14 +202,6 @@
               }
             }
           }
-          closeTabs();
-        }
-
-        function closeTabs() {
-          $scope.secondTabList = [];
-          angular.forEach($scope.tabList, function (tab) {
-            tab.isActive = false;
-          });
         }
 
         function selectTab(tabList, tab, loading) {
