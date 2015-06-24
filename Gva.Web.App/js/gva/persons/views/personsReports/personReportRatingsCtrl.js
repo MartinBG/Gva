@@ -72,7 +72,8 @@
         lin: $scope.filters.lin,
         limitationId: $scope.filters.limitationId,
         limit: $scope.filters.limit || 10,
-        sortBy: $scope.filters.sortBy ? $scope.filters.sortBy.id : null
+        sortBy: $scope.filters.sortBy ? $scope.filters.sortBy.id : null,
+        ratingTypeId: $scope.filters.ratingTypeId
       });
     };
   }

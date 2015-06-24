@@ -53,6 +53,7 @@ namespace Gva.Api.Repositories.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            int? ratingTypeId = null,
             string sortBy = null,
             int offset = 0,
             int limit = 10);

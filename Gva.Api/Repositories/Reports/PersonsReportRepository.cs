@@ -214,11 +214,14 @@ namespace Gva.Api.Repositories.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            int? ratingTypeId = null,
             string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
             string limCode = limitationId.HasValue? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
+            string ratingTypeCode = ratingTypeId.HasValue ? this.nomRepository.GetNomValue(ratingTypeId.Value).Code : null;
+
             Dictionary<string, string> sortByToTableColumn = new Dictionary<string, string>()
             {
                 {"lin", "p.Lin"},
@@ -278,9 +281,9 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues atg ON atg.NomValueId = r.AircraftTypeGroupId
                         LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
                         LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
-                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8}
+                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
                         ORDER BY " + orderBy + @" DESC
-                        OFFSET {9} ROWS FETCH NEXT {10} ROWS ONLY",
+                        OFFSET {10} ROWS FETCH NEXT {11} ROWS ONLY",
                         new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
                         new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),
                         new DbClause("and re.DocDateValidTo >= {0}", toDatePeriodFrom),
@@ -289,7 +292,8 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and r.RatingClassId = {0}", ratingClassId),
                         new DbClause("and r.AuthorizationId = {0}", authorizationId),
                         new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
-                        new DbClause("and (re.Limitations like {0} + '$$%' re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$%' or re.Limitations like {0})", limCode),
+                        new DbClause("and (re.Limitations like {0} + '$$%' or re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$%' or re.Limitations like {0})", limCode),
+                        new DbClause("and (r.RatingTypes like {0} + ', %' or r.RatingTypes like '%, ' + {0} or r.RatingTypes like '%, ' + {0} + ',%' or r.RatingTypes like {0})", ratingTypeCode),
                         new DbClause("{0}", offset),
                         new DbClause("{0}", limit))
                         .Materialize(r => new Tuple<int, PersonReportRatingDO>

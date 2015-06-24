@@ -112,6 +112,7 @@ namespace Gva.Api.Controllers.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            int? ratingTypeId = null,
             string sortBy = null,
             int offset = 0,
             int limit = 10)
@@ -129,6 +130,7 @@ namespace Gva.Api.Controllers.Reports
                     aircraftTypeCategoryId: aircraftTypeCategoryId,
                     lin: lin,
                     limitationId: limitationId,
+                    ratingTypeId: ratingTypeId,
                     sortBy: sortBy,
                     offset: offset,
                     limit: limit);

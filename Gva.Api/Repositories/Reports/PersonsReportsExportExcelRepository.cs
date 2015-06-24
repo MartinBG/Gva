@@ -177,6 +177,7 @@ namespace Gva.Api.Repositories.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            int? ratingTypeId = null,
             string sortBy = null,
             int offset = 0,
             int limit = 10)
@@ -191,6 +192,7 @@ namespace Gva.Api.Repositories.Reports
                         authorizationId: authorizationId,
                         lin: lin,
                         limitationId: limitationId,
+                        ratingTypeId: ratingTypeId,
                         sortBy: sortBy,
                         limit: limit,
                         offset: offset);
@@ -225,7 +227,7 @@ namespace Gva.Api.Repositories.Reports
                 ws.Cell(rowIndex, "B").Value = rating.DateValidFrom.HasValue ? rating.DateValidFrom.Value.ToString("dd.MM.yyyy") : null;
                 ws.Cell(rowIndex, "C").Value = rating.DateValidTo.HasValue ? rating.DateValidTo.Value.ToString("dd.MM.yyyy") : null;
                 ws.Cell(rowIndex, "D").Value = rating.FirstIssueDate.HasValue ? rating.FirstIssueDate.Value.ToString("dd.MM.yyyy") : null;
-                ws.Cell(rowIndex, "E").Value = rating.AircraftTypeCategory;
+                ws.Cell(rowIndex, "E").Value = rating.RatingTypes;
                 ws.Cell(rowIndex, "F").Value = string.Format("{0} {1}", rating.LocationIndicator, rating.Sector);
                 ws.Cell(rowIndex, "G").Value = rating.RatingClass;
                 ws.Cell(rowIndex, "H").Value = rating.RatingSubClasses;
