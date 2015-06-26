@@ -5,7 +5,16 @@
         <th style="width: 250px;"><span l10n-text="applications.edit.case.regNumber"></span></th>
         <th><span l10n-text="applications.edit.case.description"></span></th>
         <th style="width: 150px;"><span l10n-text="applications.edit.case.act"></span></th>
-        <th style="width: 200px;"></th>
+        <th style="width: 200px;">
+          <div class="dropdown pull-right" ng-if="!application.partIndex">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><sc-button btn-click="unlink()" text="applications.edit.case.unlink"></sc-button></li>
+            </ul>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody>

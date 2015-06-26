@@ -249,6 +249,43 @@ namespace Gva.Api.Controllers.Applications
             }
         }
 
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IHttpActionResult UnlinkApplication(int id)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var application = this.unitOfWork.DbContext.Set<GvaApplication>()
+                    .Include(a => a.Stages)
+                    .Include(a => a.GvaAppLotFiles)
+                    .Include(a => a.GvaAppLotPart)
+                    .SingleOrDefault(a => a.GvaApplicationId == id);
+
+                if (application.GvaAppLotPart != null)
+                {
+                    var lot = this.lotRepository.GetLotIndex(application.LotId);
+
+                    var partVersion = lot.DeletePart<DocumentApplicationDO>(application.GvaAppLotPart.Path, this.userContext);
+
+                    this.fileRepository.DeleteFileReferences(partVersion.Part);
+
+                    lot.Commit(this.userContext, lotEventDispatcher);
+                }
+
+                this.unitOfWork.DbContext.Set<GvaAppLotFile>().RemoveRange(application.GvaAppLotFiles);
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().RemoveRange(application.Stages);
+
+                this.unitOfWork.DbContext.Set<GvaApplication>().Remove(application);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
         [Route(@"appPart/{lotId}/{partIndex}")]
         public IHttpActionResult GetApplicationPart(int lotId, int partIndex)
         {

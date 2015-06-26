@@ -2907,7 +2907,8 @@
             newFile: 'Нов файл и страница',
             newDocFile: 'Нов файл',
             viewPart: 'Преглед',
-            linkApplication: 'Свържи заявление'
+            linkApplication: 'Свържи заявление',
+            unlink: 'Изтрий връзката'
           },
           stages: {
             docStages: 'Деловодни етапи',
@@ -2998,7 +2999,8 @@
           title: 'Преглед на заявление',
           edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteApp: 'Изтрий'
         },
         equipmentSelect: {
           equipment: 'Съоръжение',
