@@ -53,8 +53,7 @@ namespace Gva.Api.Controllers.Airports
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO.Applications.Add(this.applicationRepository.GetNomApplication(appId.Value));
             }
 
             AirportOwnerDO newOwner = new AirportOwnerDO();

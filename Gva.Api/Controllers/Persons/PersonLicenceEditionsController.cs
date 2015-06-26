@@ -76,10 +76,9 @@ namespace Gva.Api.Controllers.Persons
             };
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-
-                cases.First().Applications.Add(this.applicationRepository.GetInitApplication(appId));
-                cases.Last().Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                var app = this.applicationRepository.GetNomApplication(appId.Value);
+                cases.First().Applications.Add(app);
+                cases.Last().Applications.Add(app);
             }
 
             PersonLicenceEditionDO newLicenceEdition = new PersonLicenceEditionDO()

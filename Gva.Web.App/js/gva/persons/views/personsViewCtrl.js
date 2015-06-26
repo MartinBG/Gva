@@ -12,8 +12,6 @@
     $scope.person = person;
     $scope.application = application;
     $scope.caseType = parseInt($stateParams.caseTypeId, 10);
-    $scope.set = $stateParams.set;
-    $scope.lotId = $stateParams.id;
 
     $scope.tabs = {
       'persons.tabs.licences': 'root.persons.view.licences',
@@ -81,17 +79,12 @@
     ],
     application: [
       '$stateParams',
-      'PersonApplications',
-      function ResolveApplication($stateParams, PersonApplications) {
-        if (!!$stateParams.appId) {
-          return PersonApplications.get($stateParams).$promise
-            .then(function (result) {
-              if (result.applicationId) {
-                return result;
-              }
-
-              return null;
-            });
+      'ApplicationNoms',
+      function ResolveApplication($stateParams, ApplicationNoms) {
+        if ($stateParams.appId) {
+          return ApplicationNoms
+            .get({ lotId: $stateParams.id, appId: $stateParams.appId })
+            .$promise;
         }
 
         return null;

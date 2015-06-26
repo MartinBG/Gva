@@ -1,4 +1,4 @@
-﻿// Usage: <gva-application-alert-info application="" lot-id="" set=""></gva-application-alert-info>
+﻿// Usage: <gva-application-alert-info application=""></gva-application-alert-info>
 
 /*global angular*/
 (function (angular) {
@@ -10,23 +10,13 @@
       restrict: 'E',
       replace: true,
       scope: {
-        lotId: '@',
-        set: '@',
         application: '='
       },
       templateUrl: 'js/gva/common/directives/application/applicationAlertInfoDirective.html',
       link: function ($scope) {
-        $scope.applicationName = $scope.application.applicationCode + ' ';
-        if ($scope.application.oldDocumentNumber) {
-          $scope.applicationName += $scope.application.oldDocumentNumber + '/' +
-            $filter('date')($scope.application.documentDate, 'mediumDate');
-        } else {
-          $scope.applicationName += $scope.application.documentNumber;
-        }
-
-        $scope.applicationName =
+        $scope.viewApplicationText =
           l10n.get('common.applicationAlertInfoDirective.viewApplication') +
-          $scope.applicationName;
+          $scope.application.applicationName;
       },
       controller: ['$scope', function ($scope) {
         $scope.exitApplication = function () {

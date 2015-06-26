@@ -138,6 +138,9 @@ namespace Gva.Api.Repositories.FileRepository
 
             this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(ga => ga.GvaApplication)
+                .Include(ga => ga.GvaApplication.Doc)
+                .Include(ga => ga.GvaApplication.GvaViewApplication)
+                .Include(ga => ga.GvaApplication.GvaViewApplication.ApplicationType)
                 .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
                 .Load();
 
@@ -163,6 +166,9 @@ namespace Gva.Api.Repositories.FileRepository
 
             this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(ga => ga.GvaApplication)
+                .Include(ga => ga.GvaApplication.Doc)
+                .Include(ga => ga.GvaApplication.GvaViewApplication)
+                .Include(ga => ga.GvaApplication.GvaViewApplication.ApplicationType)
                 .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
                 .Load();
 

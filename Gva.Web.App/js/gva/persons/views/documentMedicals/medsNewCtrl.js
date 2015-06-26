@@ -47,9 +47,8 @@
   DocumentMedicalsNewCtrl.$resolve = {
     med: [
       '$stateParams',
-      'application',
       'PersonDocumentMedicals',
-      function ($stateParams, application, PersonDocumentMedicals) {
+      function ($stateParams, PersonDocumentMedicals) {
         return PersonDocumentMedicals.newMedical({
           id: $stateParams.id
         }).$promise;

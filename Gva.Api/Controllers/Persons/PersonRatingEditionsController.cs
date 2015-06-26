@@ -66,9 +66,7 @@ namespace Gva.Api.Controllers.Persons
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO.Applications.Add(this.applicationRepository.GetNomApplication(appId.Value));
             }
 
             PersonRatingEditionDO newRatingEdition = new PersonRatingEditionDO()

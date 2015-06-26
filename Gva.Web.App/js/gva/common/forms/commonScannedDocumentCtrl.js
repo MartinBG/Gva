@@ -10,7 +10,6 @@
     var isMultipleMode = _.isArray($scope.model);
 
     $scope.lotId = scFormParams.lotId;
-    $scope.setPart = scFormParams.setPart;
     $scope.hideApplications = scFormParams.hideApplications;
     $scope.hideCaseTypeData = scFormParams.hideCaseTypeData;
     $scope.hideFiles = scFormParams.hideFiles;

@@ -116,38 +116,26 @@ namespace Gva.Api.Controllers
         [Route("{lotId}/applications")]
         public IHttpActionResult GetApplications(int lotId, string term = null)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var applications = this.applicationRepository.GetNomApplications(lotId)
-                .Select(a => new ApplicationNomDO(a))
-                .OrderByDescending(a => a.DocumentDate);
+            var applications = this.applicationRepository.GetNomApplications(lotId);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
                 term = term.ToLower();
-                List<ApplicationNomDO> matchingApp = new List<ApplicationNomDO>();
-                foreach(var app in applications)
-                {
-                    string applicationIdentificator = app.ApplicationCode + ' ';
-                    if (!string.IsNullOrEmpty(app.OldDocumentNumber))
-                    {
-                        applicationIdentificator += string.Format("{0}/{1}", app.OldDocumentNumber, app.DocumentDate);
-                    }
-                    else
-                    {
-                        applicationIdentificator += app.DocumentNumber;
-                    }
-                    if (applicationIdentificator.Contains(term))
-                    { 
-                        matchingApp.Add(app);
-                    }
-                }
-                return Ok(matchingApp);
+
+                return Ok(applications.Where(a => a.ApplicationName.Contains(term)).ToArray());
             }
             else
             {
-                return Ok(applications);
+                return Ok(applications.ToArray());
             }
+        }
+
+        [Route("{lotId}/applications/{appId}")]
+        public IHttpActionResult GetApplication(int lotId, int appId)
+        {
+            var application = this.applicationRepository.GetNomApplication(appId);
+
+            return Ok(application);
         }
 
         [Route("{set:regex(^(?:person|organization)$)}SetParts")]
@@ -733,7 +721,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentParts")]
-        public IHttpActionResult GetDocumentParts(string term = null, string set = null, int? parentValueId = null, bool withApplications = false)
+        public IHttpActionResult GetDocumentParts(string term = null, string set = null, bool withApplications = false)
         {
             IEnumerable<NomValue> nomValues  = null;
             if (withApplications)
@@ -748,11 +736,6 @@ namespace Gva.Api.Controllers
             if (!string.IsNullOrEmpty(set))
             {
                 nomValues = nomValues.Where(p => p.Code.Contains(set));
-            }
-
-            if (parentValueId != null)
-            {
-                nomValues = nomValues.Where(n => n.ParentValueId == parentValueId);
             }
 
             return Ok(nomValues);

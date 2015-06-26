@@ -28,9 +28,7 @@
     <sc-column data="inspector" title="persons.licencesSearch.inspector">
     </sc-column>
     <sc-column title="persons.licencesSearch.application" class="wrap" has-content="true">
-      <sc-button btn-sref="{state: 'root.applications.edit.data', params: { id: item.application.applicationId }}"
-        text="{{ item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}">
-      </sc-button>
+      <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.application.applicationId }}" text="{{ item.application.applicationName }}"></sc-button>
     </sc-column>
     <sc-column data="notes" title="persons.licencesSearch.notes" visible="false" class="wrap">
     </sc-column>

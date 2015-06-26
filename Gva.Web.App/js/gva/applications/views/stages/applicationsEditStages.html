@@ -14,7 +14,7 @@
     </sc-column>
   </sc-datatable>
   <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-primary btn-xs" icon="glyphicon-plus"></sc-button>
-  <div ng-if="!applicationPart.part.oldDocumentNumber">
+  <div ng-if="doc">
     <h5 class="table-header" l10n-text="applications.edit.stages.docStages"></h5>
     <table class="table table-bordered table-condensed" style="margin-bottom:15px;">
       <thead>

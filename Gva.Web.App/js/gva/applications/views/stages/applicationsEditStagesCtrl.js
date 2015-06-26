@@ -18,13 +18,15 @@
     $scope.appStages = appStages;
     $scope.lastAppStage = _.last(appStages);
 
-    $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
-      function (docElectronicServiceStage) {
-        docElectronicServiceStage.electronicServiceStageExecutors =
-          $sce.trustAsHtml(docElectronicServiceStage.electronicServiceStageExecutors);
+    if ($scope.doc) {
+      $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
+        function (docElectronicServiceStage) {
+          docElectronicServiceStage.electronicServiceStageExecutors =
+            $sce.trustAsHtml(docElectronicServiceStage.electronicServiceStageExecutors);
 
-        return docElectronicServiceStage;
-      });
+          return docElectronicServiceStage;
+        });
+    }
 
     $scope.newAppStage = function () {
       var nextOrdinal = Math.max(0, _.max(_.pluck($scope.appStages, 'ordinal'))) + 1;
@@ -139,7 +141,7 @@
           });
         }
         else {
-          return {};
+          return null;
         }
       }
     ],

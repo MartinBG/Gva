@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Airports;
@@ -7,33 +8,26 @@ using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.ModelsDO.Applications
 {
-    public class ApplicationDO
+    public class ApplicationDO : ApplicationNomDO
     {
         public ApplicationDO()
         {
             this.AppDocCase = new List<ApplicationDocRelationDO>();
             this.AppFilesNotInCase = new List<ApplicationLotFileDO>();
-            
         }
 
-        public ApplicationDO(GvaApplication gvaApp, string lotSetAlias, int lotSetId, ApplicationNomDO nom)
-            : this()
+        public ApplicationDO(GvaApplication application, string lotSetAlias)
+            : base(application)
         {
-            if (gvaApp != null)
-            {
-                this.ApplicationId = gvaApp.GvaApplicationId;
-                this.DocId = gvaApp.DocId;
-                this.LotId = gvaApp.LotId;
-                this.PartIndex = gvaApp.GvaAppLotPart != null ? (int?)gvaApp.GvaAppLotPart.Index : null;
-                this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
-                this.LotSetAlias = lotSetAlias.ToLowerInvariant();
-                this.LotSetId = lotSetId;
-                this.OldDocumentNumber = nom != null ? nom.OldDocumentNumber : null;
-                this.ApplicationTypeCode = nom != null ? nom.ApplicationCode : null;
-            }
-        }
+            this.DocId = application.DocId;
+            this.LotId = application.LotId;
+            this.PartIndex = application.GvaAppLotPart != null ? (int?)application.GvaAppLotPart.Index : null;
+            this.LotSetAlias = lotSetAlias.ToLowerInvariant();
+            this.ApplicationType = application.GvaViewApplication != null ? application.GvaViewApplication.ApplicationType : null;
 
-        public int ApplicationId { get; set; }
+            this.AppDocCase = new List<ApplicationDocRelationDO>();
+            this.AppFilesNotInCase = new List<ApplicationLotFileDO>();
+        }
 
         public int? DocId { get; set; }
 
@@ -41,15 +35,9 @@ namespace Gva.Api.ModelsDO.Applications
 
         public int? PartIndex { get; set; }
 
-        public int? GvaAppLotPartId { get; set; }
-
         public string LotSetAlias { get; set; }
 
-        public int LotSetId { get; set; }
-
-        public string OldDocumentNumber { get; set; }
-
-        public string ApplicationTypeCode { get; set; }
+        public NomValue ApplicationType { get; set; }
 
         public PersonViewDO Person { get; set; }
 

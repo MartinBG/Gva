@@ -345,20 +345,6 @@ namespace Gva.Api.Controllers.Persons
             return Ok(result);
         }
 
-        [Route("{lotId}/applications/{appId}")]
-        public IHttpActionResult GetApplication(int lotId, int appId)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            GvaApplication gvaNomApp = this.applicationRepository.GetNomApplication(appId);
-            if (gvaNomApp != null && gvaNomApp.GvaAppLotPart != null)
-            {
-                return Ok(new ApplicationNomDO(gvaNomApp));
-            }
-
-            return Ok();
-        }
-
         [Route("nextLin")]
         public IHttpActionResult GetNextLin(int linTypeId)
         {

@@ -600,19 +600,28 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return this.unitOfWork.DbContext.Set<GvaApplication>().Where(e => e.DocId.HasValue).AsQueryable();
         }
 
-        public GvaApplication[] GetNomApplications(int lotId)
+        public IEnumerable<ApplicationNomDO> GetNomApplications(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotPart)
-                .Where(a => a.LotId == lotId && a.GvaAppLotPart != null && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
-                .ToArray();
+                .Include(a => a.GvaViewApplication)
+                .Include(a => a.GvaViewApplication.ApplicationType)
+                .Include(a => a.Doc)
+                .Where(a => a.LotId == lotId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
+                .AsEnumerable()
+                .Select(a => new ApplicationNomDO(a))
+                .OrderByDescending(a => a.ApplicationDate ?? DateTime.MaxValue);
         }
 
-        public GvaApplication GetNomApplication(int applicationId)
+        public ApplicationNomDO GetNomApplication(int applicationId)
         {
-            return this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotPart.Lot)
-                .FirstOrDefault(a => a.GvaApplicationId == applicationId);
+            var app = this.unitOfWork.DbContext.Set<GvaApplication>()
+                .Include(a => a.GvaViewApplication)
+                .Include(a => a.GvaViewApplication.ApplicationType)
+                .Include(a => a.Doc)
+                .Where(a => a.GvaApplicationId == applicationId)
+                .SingleOrDefault();
+
+            return new ApplicationNomDO(app);
         }
 
         public void AddGvaApplication(GvaApplication gvaApplication)
@@ -690,22 +699,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             return this.unitOfWork.DbContext.Set<Set>()
                 .SingleOrDefault(p => p.SetId == lotSetId);
-        }
-
-        public ApplicationNomDO GetInitApplication(int? applicationId)
-        {
-            if (!applicationId.HasValue)
-            {
-                return null;
-            }
-
-            GvaApplication nomApp = this.GetNomApplication((int)applicationId);
-            if (nomApp != null && nomApp.GvaAppLotPart != null)
-            {
-                return new ApplicationNomDO(nomApp);
-            }
-
-            return null;
         }
 
         public List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null)

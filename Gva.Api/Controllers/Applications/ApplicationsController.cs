@@ -133,6 +133,8 @@ namespace Gva.Api.Controllers.Applications
         {
             var application = this.unitOfWork.DbContext.Set<GvaApplication>()
                 .Include(a => a.Doc)
+                .Include(a => a.GvaViewApplication)
+                .Include(a => a.GvaViewApplication.ApplicationType)
                 .Include(a => a.GvaAppLotPart)
                 .SingleOrDefault(a => a.GvaApplicationId == id);
 
@@ -141,26 +143,11 @@ namespace Gva.Api.Controllers.Applications
                 throw new Exception("Cannot find application with id " + id);
             }
 
-            this.unitOfWork.DbContext.Set<DocFile>()
-                .Where(df => df.DocId == application.DocId)
-                .Load();
-
-            this.unitOfWork.DbContext.Set<GvaAppLotFile>()
-                .Include(af => af.GvaLotFile)
-                .Include(af => af.DocFile)
-                .Where(af => af.GvaApplicationId == id)
-                .Load();
-
             Set set = this.unitOfWork.DbContext.Set<Lot>()
                 .Single(l => l.LotId == application.LotId)
                 .Set;
 
-            if (application.GvaAppLotPart != null)
-            {
-                this.lotRepository.GetLotIndex(application.LotId).Index.GetPart<DocumentApplicationDO>(application.GvaAppLotPart.Path);
-            }
-
-            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId, application.GvaAppLotPart != null ? new ApplicationNomDO(application) : null);
+            ApplicationDO returnValue = new ApplicationDO(application, set.Alias);
 
             if (set.Alias == "Person")
             {

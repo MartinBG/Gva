@@ -212,20 +212,6 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route("{lotId}/applications/{appId}")]
-        public IHttpActionResult GetApplication(int lotId, int appId)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            GvaApplication gvaNomApp = this.applicationRepository.GetNomApplication(appId);
-            if (gvaNomApp != null)
-            {
-                return Ok(new ApplicationNomDO(gvaNomApp));
-            }
-
-            return Ok();
-        }
-
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
         public IHttpActionResult GetAircraftData(int lotId)
         {

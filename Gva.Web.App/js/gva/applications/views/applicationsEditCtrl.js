@@ -9,9 +9,8 @@
     application
     ) {
     $scope.application = application;
-    $scope.set = application.lotSetAlias;
 
-    if ($scope.application.oldDocumentNumber) {
+    if (!$scope.application.docId) {
       $scope.tabs = {
         'applications.tabs.data': 'root.applications.edit.data',
         'applications.tabs.stages': 'root.applications.edit.stages'
@@ -23,8 +22,9 @@
         'applications.tabs.stages': 'root.applications.edit.stages'
       };
 
-      if ($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
-          $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
+      if ($scope.application.applicationType &&
+          ($scope.application.applicationType.code.indexOf('EX-') === 0 ||
+           $scope.application.applicationType.code.indexOf('EX/') === 0)) {
         $scope.tabs = _.assign($scope.tabs, {
           'applications.tabs.examSyst': 'root.applications.edit.examSyst'
         });
@@ -39,7 +39,7 @@
       return $state.go('root.persons.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -47,7 +47,7 @@
       return $state.go('root.organizations.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -55,7 +55,7 @@
       return $state.go('root.aircrafts.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -63,7 +63,7 @@
       return $state.go('root.airports.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -71,7 +71,7 @@
       return $state.go('root.equipments.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
   }

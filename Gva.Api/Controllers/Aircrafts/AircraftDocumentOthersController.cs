@@ -64,9 +64,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO.Applications.Add(this.applicationRepository.GetNomApplication(appId.Value));
             }
 
             return Ok(new CaseTypePartDO<AircraftDocumentOtherDO>(newDocumentOther, caseDO));
