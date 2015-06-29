@@ -67,25 +67,6 @@ namespace Gva.Api.Repositories.WordTemplateRepository
             return results;
         }
 
-        public DataGeneratorDO ChangeDataGeneratorPerTemplate(int templateId, string dataGenerator)
-        {
-            GvaWordTemplate template = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
-                .Where(t => t.GvaWordTemplateId == templateId)
-                .Single();
-
-            template.DataGeneratorCode = dataGenerator;
-
-            this.unitOfWork.Save();
-
-            var generator = this.dataGenerators.Where(d => d.GeneratorCode == dataGenerator).First();
-
-            return new DataGeneratorDO
-            {
-                Name = generator.GeneratorName,
-                Code = generator.GeneratorCode
-            };
-        }
-
         public void ChangeTemplateData(int templateId, WordTemplateDO template)
         {
             GvaWordTemplate templateData = this.unitOfWork.DbContext.Set<GvaWordTemplate>()

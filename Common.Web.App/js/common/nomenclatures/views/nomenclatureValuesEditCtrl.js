@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function NomenclaturevaluesEditCtrl(
@@ -14,8 +14,7 @@
     caseTypeOptions,
     templateOptions,
     qualificationOptions,
-    scMessage,
-    scModal
+    scMessage
   ) {
     $scope.nomenclatureValue = nomenclatureValue;
     $scope.alias = $stateParams.alias;
@@ -38,23 +37,6 @@
             });
         }
       });
-    };
-
-    $scope.chooseDataGenerator = function () {
-      var params = {
-        template: _.where($scope.templateOptions, {
-            code: $scope.nomenclatureValue.textContent.templateName
-          })[0],
-        dataGenerator: $scope.dataGenerator.code
-      };
-
-      var modalInstance = scModal.open('chooseDataGenerator', params);
-
-      modalInstance.result.then(function (dataGenerator) {
-        $scope.dataGenerator = dataGenerator;
-      });
-
-      return modalInstance.opened;
     };
 
     $scope.cancel = function cancel() {
@@ -109,8 +91,7 @@
     'caseTypeOptions',
     'templateOptions',
     'qualificationOptions',
-    'scMessage',
-    'scModal'
+    'scMessage'
   ];
 
   NomenclaturevaluesEditCtrl.$resolve = {
@@ -185,4 +166,4 @@
   };
 
   angular.module('common').controller('NomenclaturevaluesEditCtrl', NomenclaturevaluesEditCtrl);
-}(angular, _));
+}(angular));

@@ -4,14 +4,6 @@
 
   angular.module('gva').factory('WordTemplates', ['$resource', function ($resource) {
     return $resource('api/wordTemplates/:templateId', {}, {
-      changeTemplateDataDenerator: {
-        method: 'POST',
-        url: 'api/wordTemplates/:templateId',
-        params: {
-          templateId: '@templateId',
-          dataGenerator: '@dataGenerator'
-        }
-      },
       isUniqueTemplateName: {
         method: 'GET',
         url: 'api/wordTemplates/isUniqueTemplateName'

@@ -311,8 +311,6 @@
     <Content Include="js\gva\common\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModal.html" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModalCtrl.js" />
-    <Content Include="js\gva\common\modals\wordTemplates\chooseDataGeneratorModal.html" />
-    <Content Include="js\gva\common\modals\wordTemplates\chooseDataGeneratorModalCtrl.js" />
     <Content Include="js\gva\common\resources\wordTemplates.js" />
     <Content Include="js\gva\common\resources\integration.js" />
     <Content Include="js\gva\persons\forms\qualificationfState.html" />

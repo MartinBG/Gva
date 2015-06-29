@@ -24,13 +24,6 @@
           caa: 'Въздушна администрация',
           other: 'Други'
         },
-        wordTemplateDataGenerator: {
-          cancel: 'Отказ',
-          save: 'Запис',
-          title: 'Избор на генератор на данни за темплейт',
-          templateName: 'Наименование на темплейт',
-          dataGenerator: 'Генератор'
-        },
         linkAppModal: {
           title: 'Свързване със заявление',
           choosePortalApp: 'Избор на заявление от портала',

@@ -11,8 +11,6 @@ namespace Gva.Api.Repositories.WordTemplateRepository
     {
         IList<WordTemplateDO> GetTemplates();
 
-        DataGeneratorDO ChangeDataGeneratorPerTemplate(int templateId, string dataGenerator);
-
         WordTemplateDO GetTemplate(int templateId);
 
         void ChangeTemplateData(int templateId, WordTemplateDO template);

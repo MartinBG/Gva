@@ -389,8 +389,7 @@
      .modal('chooseInspectors'    , 'js/gva/common/modals/inspectors/chooseInspectorsModal.html'      , 'ChooseInspectorsModalCtrl'           )
      .modal('editDisparity'       , 'js/gva/common/modals/disparities/editDisparityModal.html'        , 'EditDisparityModalCtrl'              )
      .modal('viewApplication'     , 'js/gva/common/modals/applications/viewApplicationModal.html'     , 'ViewApplicationModalCtrl'            )
-     .modal('linkApplication'     , 'js/gva/common/modals/integration/linkAppModal.html'              , 'LinkAppModalCtrl'                    )
-     .modal('chooseDataGenerator' , 'js/gva/common/modals/wordTemplates/chooseDataGeneratorModal.html', 'ChooseDataGeneratorModalCtrl', 'xs-2');
+     .modal('linkApplication'     , 'js/gva/common/modals/integration/linkAppModal.html'              , 'LinkAppModalCtrl'                    );
   }])
     .config(['$stateProvider', function ($stateProvider) {
     $stateProvider

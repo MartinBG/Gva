@@ -41,20 +41,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{templateId}")]
-        [HttpPost]
-        public IHttpActionResult ChangeDataGeneratorPerTemplate(int templateId, string dataGenerator)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var result = this.wordTemplateRepository.ChangeDataGeneratorPerTemplate(templateId, dataGenerator);
-
-                transaction.Commit();
-
-                return Ok(result);
-            }
-        }
-
-        [Route("{templateId}")]
         [HttpGet]
         public IHttpActionResult GetTemplate(int templateId)
         {
