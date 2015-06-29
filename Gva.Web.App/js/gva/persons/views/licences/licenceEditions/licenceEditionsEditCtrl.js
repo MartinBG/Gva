@@ -70,15 +70,6 @@
       return modalInstance.opened;
     };
 
-    $scope.viewApplication = function (appId, lotId, partIndex) {
-      return $state.go('root.applications.edit.data', {
-        id: appId,
-        set: 'person',
-        lotId: lotId,
-        ind: partIndex
-      });
-    };
-
     $scope.deleteCurrentEdition = function () {
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {

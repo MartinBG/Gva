@@ -21,41 +21,33 @@ namespace Gva.Api.ModelsDO.Integration
 
         public IntegrationDocRelationDO(DocRelation d, GvaCaseType caseType)
         {
-            this.DocRelationId = d.DocRelationId;
             this.DocId = d.DocId;
            
             if (d.Doc != null)
             {
                 this.DocRegUri = d.Doc.RegUri;
-
-                this.DocDocTypeId = d.Doc.DocType != null ? d.Doc.DocType.DocTypeId : (int?)null;
                 this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
             }
 
-            this.CaseType = caseType;
+            this.CaseTypeId = caseType.GvaCaseTypeId;
             this.Set = caseType.LotSet.Alias;
         }
 
-        public int DocRelationId { get; set; }
-
-        public int? DocId { get; set; }
+        public int DocId { get; set; }
 
         public string DocRegUri { get; set; }
 
-        public int? DocDocTypeId { get; set; }
-
         public string DocDocTypeName { get; set; }
 
-        public GvaCaseType CaseType { get; set; }
 
-        public String Set { get; set; }
+        public string Set { get; set; }
+
+        public int CaseTypeId { get; set; }
 
         public PersonDataDO PersonData { get; set; }
 
         public AircraftDataDO AircraftData { get; set; }
 
         public OrganizationDataDO OrganizationData { get; set; }
-
-        public CorrespondentDO CorrespondentData { get; set; }
     }
 }

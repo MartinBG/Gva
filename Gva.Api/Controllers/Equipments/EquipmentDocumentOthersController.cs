@@ -58,8 +58,7 @@ namespace Gva.Api.Controllers.Equipments
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO.Applications.Add(this.applicationRepository.GetNomApplication(appId.Value));
             }
 
             EquipmentDocumentOtherDO newDocumentOther = new EquipmentDocumentOtherDO()

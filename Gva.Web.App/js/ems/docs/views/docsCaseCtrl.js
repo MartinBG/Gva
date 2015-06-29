@@ -54,12 +54,11 @@
     $scope.linkApplication = function () {
       var modalInstance = scModal.open('linkApplication', { 
         docId: $scope.docId,
-        isFromPortal: doc.isElectronic,
-        docRegUri: doc.regUri
+        isFromPortal: doc.isElectronic
       });
 
       modalInstance.result.then(function (res) {
-        return $state.go('root.applications.edit.data', {
+        return $state.go('root.applications.edit.case', {
           id: res.gvaApplicationId,
           set: res.set,
           lotId: res.lotId,

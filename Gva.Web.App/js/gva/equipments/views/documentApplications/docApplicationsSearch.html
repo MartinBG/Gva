@@ -2,16 +2,7 @@
 <sc-datatable items="equipmentDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate"
   row-class="{'declinedApplication' : isDeclinedApp(item), 'doneApplication' : isDoneApp(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-sref="{ 
-      state: 'root.applications.edit.data',
-      params: { 
-        id: item.part.applicationId,
-        set: 'equipment',
-        lotId: lotId,
-        ind: item.partIndex
-      } 
-    }" class="btn btn-xs btn-primary" icon="glyphicon-pencil">
-    </sc-button>
+    <sc-button name="editBtn" btn-sref="{ state: 'root.applications.edit.data', params: { id: item.part.applicationId } }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.applicationType.name" title="equipments.equipmentDocApplicationSearch.applicationType" class="wrap">
   </sc-column>

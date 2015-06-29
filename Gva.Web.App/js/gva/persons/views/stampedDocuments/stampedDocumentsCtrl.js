@@ -7,8 +7,7 @@
     $state,
     $stateParams,
     Persons,
-    docs,
-    scModal
+    docs
     ) {
     $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
@@ -90,27 +89,6 @@
       }
     };
 
-    $scope.viewApplication = function (appId, lotId, partIndex) {
-      var modalInstance = scModal.open('viewApplication', {
-        id: appId,
-        lotId: lotId,
-        path: 'personDocumentApplications',
-        partIndex: partIndex,
-        setPart: 'person'
-      });
-
-      modalInstance.result.then(function () {
-        return $state.go('root.applications.edit.data', {
-          id: appId,
-          set: 'person',
-          lotId: lotId,
-          ind: partIndex
-        });
-      });
-
-      return modalInstance.opened;
-    };
-
     $scope.getDocuments = function (page, pageSize) {
       var params = {};
 
@@ -129,8 +107,7 @@
     '$state',
     '$stateParams',
     'Persons',
-    'docs',
-    'scModal'
+    'docs'
   ];
 
   StampedDocumentsCtrl.$resolve = {

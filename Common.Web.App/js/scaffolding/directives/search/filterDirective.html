@@ -1,4 +1,4 @@
-﻿<div ng-class="{'labeless': !label && !removable(), 'form-group': true}" ng-show="show()">
+﻿<div ng-class="{'labeless': !label && !removable, 'form-group': true}" ng-show="show()">
   <label ng-show="label" class="control-label">{{label}}</label>
-  <button type="button" class="close" aria-hidden="true" style="float: none; vertical-align: middle;" ng-show="removable()" ng-click="removeFilter()">&times;</button>
+  <button type="button" class="close" aria-hidden="true" style="float: none; vertical-align: middle;" ng-show="removable" ng-click="removeFilter()">&times;</button>
 </div>

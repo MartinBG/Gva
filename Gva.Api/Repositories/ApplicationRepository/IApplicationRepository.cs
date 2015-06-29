@@ -80,9 +80,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null);
 
-        GvaApplication[] GetNomApplications(int lotId);
+        IEnumerable<ApplicationNomDO> GetNomApplications(int lotId);
 
-        GvaApplication GetNomApplication(int applicationId);
+        ApplicationNomDO GetNomApplication(int applicationId);
 
         IEnumerable<GvaApplication> GetLinkedToDocsApplications();
 
@@ -108,14 +108,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         Set GetLotSet(int lotSetId);
 
-        ApplicationNomDO GetInitApplication(int? applicationId);
-
         List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null);
 
         CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId);
 
         List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId);
 
-        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, string docRegUri = null);
+        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, int? docId = null);
     }
 }

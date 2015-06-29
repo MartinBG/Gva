@@ -66,9 +66,7 @@ namespace Gva.Api.Controllers.Organizations
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
-
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO.Applications.Add(this.applicationRepository.GetNomApplication(appId.Value));
             }
 
             OrganizationAmendmentDO newApprovalAmendment = new OrganizationAmendmentDO()

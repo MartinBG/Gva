@@ -6,6 +6,8 @@
     $scope,
     $state,
     $stateParams,
+    scMessage,
+    Applications,
     application
     ) {
     $scope.application = application;
@@ -50,29 +52,11 @@
     };
 
     $scope.viewPart = function (value) {
-      var state,
-        set;
+      var state;
 
       if(value.setPartAlias.indexOf('Application') > 0) {
-        state = 'root.applications.edit.data';
-        if (value.setPartAlias === 'personApplication') {
-          set = 'person';
-        }
-        else if (value.setPartAlias === 'aircraftApplication') {
-          set = 'aircraft';
-        }
-        else if (value.setPartAlias === 'organizationApplication') {
-          set = 'organization';
-        }
-        else if (value.setPartAlias === 'airportApplication') {
-          set = 'airport';
-        }
-
-        return $state.go(state, {
-          id: application.applicationId,
-          ind: value.partIndex,
-          lotId: application.lotId,
-          set: set
+        return $state.go('root.applications.edit.data', {
+          id: application.applicationId
         });
       }
 
@@ -156,7 +140,7 @@
       }
 
       return $state.go(state, {
-        id: $scope.application.lotId,
+        id: application.lotId,
         ind: value.partIndex,
         appId: application.applicationId,
         set: $stateParams.set
@@ -166,12 +150,55 @@
     $scope.viewDoc = function (docId) {
       return $state.go('root.docs.edit.case', { id: docId });
     };
+
+    $scope.unlink = function () {
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return Applications
+            .remove({ id: $stateParams.id })
+            .$promise.then(function () {
+              if (application.lotSetAlias === 'person') {
+                return $state.go(
+                  'root.persons.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'organization') {
+                return $state.go(
+                  'root.organizations.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'aircraft') {
+                return $state.go(
+                  'root.aircrafts.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'airport') {
+                return $state.go(
+                  'root.airports.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'equipment') {
+                return $state.go(
+                  'root.equipments.view.documentApplications.search', { id: application.lotId });
+              }
+            });
+        }
+      });
+    };
+
+    $scope.moveToCase = function (item) {
+      return Applications.movePartToCase({
+        id: $stateParams.id,
+        gvaLotFileId: item.gvaLotFileId
+      }).$promise.then(function () {
+        return $state.transitionTo($state.$current, $stateParams, { reload: true });
+      });
+    };
   }
 
   ApplicationsEditCaseCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
+    'scMessage',
+    'Applications',
     'application'
   ];
 

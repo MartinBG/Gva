@@ -7,10 +7,10 @@ using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Blob;
-using Common.Linq;
 using Common.Data;
+using Common.Json;
 using Common.Utils;
-using System.Data.Entity;
+using Docs.Api.DataObjects;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
@@ -25,7 +25,6 @@ using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.Repositories.LotRepositories;
 using Rio.Data.Utils.RioDocumentParser;
-using Docs.Api.DataObjects;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -44,46 +43,77 @@ namespace Gva.Api.Controllers.Integration
         private IRioDocumentParser rioDocumentParser;
         private UserContext userContext;
 
-        private Dictionary<string, List<string>> CaseTypeAliasByPortalAppCode =
-            new Dictionary<string, List<string>>(){
-                    {"flightCrew", new List<string>() {
-                        "R-4186", "R-4244", "R-4864", "R-5144",
-                        "R-4296", "R-5178", "R-5196", "R-5248", "R-5250",
-                        "R-5242", "R-5134", "R-5244", "R-5246"
-                    }},
-                    {"ovd", new List<string>() {
-                        "R-4242", "R-4284", "R-5160", "R-5164", "R-5166"
-                    }},
-                    {"to_vs", new List<string>() {
-                        "R-4240"
-                    }},
-                    {"to_suvd", new List<string>() {
-                         "R-4958", "R-5168", "R-5170", "R-5218"
-                    }},
-                    {"aircraft", new List<string>() {
-                        "R-4356", "R-4378", "R-4396", "R-4470", "R-4490", "R-4514", "R-4544", "R-4566", "R-4578", "R-5104"
-                    }},
-                    {"airCarrier", new List<string>() {
-                        "R-4686"
-                    }},
-                    {"educationOrg", new List<string>() {
-                        "R-4824", "R-4834", "R-4860", "R-4862"
-                    }},
-                    {"airNavSvcProvider", new List<string>() {
-                        "R-4738"
-                    }},
-                    {"equipment", new List<string>() { // case types in equipments are not separated
-                        "R-4764", "R-4766", "R-4614" 
-                    }},
-                    {"airport", new List<string>() {
-                        "R-4588", "R-4590"
-                    }},
-                    {"airportOperator", new List<string>() {
-                        "R-4598", "R-4606"
-                    }},
-                    {"approvedOrg", new List<string>() {
-                        "R-4926", "R-5094", "R-5096", "R-5116", "R-5132"
-                    }}
+        private Dictionary<string, string> CaseTypeAliasByPortalAppCode =
+            new Dictionary<string,string>
+            {
+                { "R-4186", "flightCrew" },
+                { "R-4244", "flightCrew" },
+                { "R-4864", "flightCrew" },
+                { "R-5144", "flightCrew" },
+                { "R-4296", "flightCrew" },
+                { "R-5178", "flightCrew" },
+                { "R-5196", "flightCrew" },
+                { "R-5248", "flightCrew" },
+                { "R-5250", "flightCrew" },
+                { "R-5242", "flightCrew" },
+                { "R-5134", "flightCrew" },
+                { "R-5244", "flightCrew" },
+                { "R-5246", "flightCrew" },
+
+                { "R-4242", "ovd" },
+                { "R-4284", "ovd" },
+                { "R-5160", "ovd" },
+                { "R-5164", "ovd" },
+                { "R-5166", "ovd" },
+
+                { "R-4240", "to_vs"},
+
+                { "R-4958", "to_suvd" },
+                { "R-5168", "to_suvd" },
+                { "R-5170", "to_suvd" },
+                { "R-5218", "to_suvd" },
+
+                { "R-4356", "aircraft" },
+                { "R-4378", "aircraft" },
+                { "R-4396", "aircraft" },
+                { "R-4470", "aircraft" },
+                { "R-4490", "aircraft" },
+                { "R-4514", "aircraft" },
+                { "R-4544", "aircraft" },
+                { "R-4566", "aircraft" },
+                { "R-4578", "aircraft" },
+                { "R-5104", "aircraft" },
+
+                { "R-4686", "airCarrier" },
+
+                { "R-4824", "educationOrg" },
+                { "R-4834", "educationOrg" },
+                { "R-4860", "educationOrg" },
+                { "R-4862", "educationOrg" },
+
+                { "R-4738", "airNavSvcProvider" },
+
+                // case types in equipments are not separated
+                { "R-4764", "equipment" },
+                { "R-4766", "equipment" },
+                { "R-4614", "equipment" },
+
+                { "R-4588", "airport" },
+                { "R-4590", "airport" },
+
+                { "R-4598", "airportOperator" },
+                { "R-4606", "airportOperator" },
+
+                { "R-4926", "approvedOrg" },
+                { "R-5094", "approvedOrg" },
+                { "R-5096", "approvedOrg" },
+                { "R-5116", "approvedOrg" },
+                { "R-5132", "approvedOrg" },
+
+                // 4810
+                // 4900
+                // 5000
+                // 5090
             };
 
         public IntegrationController(
@@ -121,20 +151,17 @@ namespace Gva.Api.Controllers.Integration
                 .Where(dr => dr.Doc.IsRegistered); 
 
             List<IntegrationDocRelationDO> result = new List<IntegrationDocRelationDO>();
+
             foreach (var docRelation in docRelations)
             {
-                var caseTypeAlias = CaseTypeAliasByPortalAppCode
-                    .Where(c => c.Value.Contains(docRelation.Doc.DocType.Alias))
-                    .SingleOrDefault();
-
-                IntegrationDocRelationDO intDocRelation = null;
-                GvaCaseType caseType = null;
-                if (caseTypeAlias.Key != null)
+                if (!CaseTypeAliasByPortalAppCode.ContainsKey(docRelation.Doc.DocType.Alias))
                 {
-                    caseType = this.caseTypeRepository.GetCaseType(caseTypeAlias.Key);
-                    intDocRelation = new IntegrationDocRelationDO(docRelation, caseType);
-                    result.Add(intDocRelation);
+                    continue;
                 }
+
+                GvaCaseType caseType = this.caseTypeRepository.GetCaseType(CaseTypeAliasByPortalAppCode[docRelation.Doc.DocType.Alias]);
+                IntegrationDocRelationDO intDocRelation = new IntegrationDocRelationDO(docRelation, caseType);
+                result.Add(intDocRelation);
 
                 var appDocFiles =
                     docRelation.Doc.DocFiles
@@ -328,7 +355,6 @@ namespace Gva.Api.Controllers.Integration
                                 aircraftData.AircraftProducer = this.nomRepository.GetNomValues("aircraftProducers", producerName).FirstOrDefault();
                                 
                                 intDocRelation.AircraftData = aircraftData;
-                                intDocRelation.CorrespondentData = this.integrationRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
                                 break;
                             }
                         case "R-5132":
@@ -346,35 +372,45 @@ namespace Gva.Api.Controllers.Integration
                                 organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
                                 intDocRelation.OrganizationData = organizationData;
-                                intDocRelation.CorrespondentData = this.integrationRepository.ConvertOrganizationDataToCorrespondent(organizationData);
                                 break;
                             }
+                        // 4378
+                        // 4396
+                        // 4470
+                        // 4490
+                        // 4514
+                        // 4544
+                        // 4566
+                        // 4578
+                        // 4588
+                        // 4590
+                        // 4598
+                        // 4606
+                        // 4614
+                        // 4686
+                        // 4738
+                        // 4764
+                        // 4766
+                        // 4810
+                        // 4824
+                        // 4834
+                        // 4860
+                        // 4862
+                        // 4900
+                        // 4926
+                        // 5000
+                        // 5090
+                        // 5094
+                        // 5096
+                        // 5104
+                        // 5116
                         default:
                             break;
-
                     }
                 }
             }
+
             return result;
-        }
-
-        [Route("emptyIntegrationDocRelation")]
-        public IntegrationDocRelationDO GetEmptyIntegrationDocRelation(int caseTypeId, string docRegUri, int docId)
-        {
-            var caseType = this.unitOfWork.DbContext.Set<GvaCaseType>()
-                .Include(i => i.LotSet)
-                .Where(c => c.GvaCaseTypeId == caseTypeId).FirstOrDefault();
-
-            return new IntegrationDocRelationDO()
-            {
-                DocId = docId,
-                DocRegUri = docRegUri,
-                Set = caseType.LotSet.Alias,
-                CaseType = caseType,
-                PersonData = new PersonDataDO(),
-                AircraftData = new AircraftDataDO(),
-                OrganizationData = new OrganizationDataDO()
-            };
         }
 
         [HttpGet]
@@ -407,68 +443,60 @@ namespace Gva.Api.Controllers.Integration
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var doc = this.docRepository.Find(
-                    newAppDO.DocId,
-                    d => d.DocType,
-                    d => d.DocFiles.Select(df => df.DocFileOriginType));
+                ApplicationNewDO applicationNewDO;
 
-                var lot = this.lotRepository.GetLotIndex(newAppDO.LotId);
-
-                PersonDataDO personData = null;
-                List<string> lotCaseTypes = null;
-                List<int> correspondentIds = null;
-                AircraftDataDO aircraftData = null;
-                OrganizationDataDO organizationData = null;
-
-                List<GvaCorrespondent> correspondents = this.unitOfWork.DbContext.Set<GvaCorrespondent>()
-                        .Include(e => e.Correspondent)
-                        .Where(p => p.LotId == newAppDO.LotId)
-                        .ToList();
-
-                if (lot.Set.Alias == "Person")
+                if (newAppDO.ApplicationType != null)
                 {
-                    personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
-                    lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
-                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
-                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>() { this.integrationRepository.CreateCorrespondentPerPersonLot(personData, lot.LotId, this.userContext) };
-                }
-                else if (lot.Set.Alias == "Aircraft")
-                {
-                    aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
-                    lotCaseTypes = new List<string>() { "aircraft" };
-                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
-                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>(){ this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext) };
-                }
-                else if (lot.Set.Alias == "Organization")
-                {
-                    organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
-                    lotCaseTypes = organizationData.CaseTypes.Select(c => c.Alias).ToList();
-                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
-                    if (newAppDO.CorrespondentData == null)
+                    var lot = this.lotRepository.GetLotIndex(newAppDO.LotId);
+
+                    List<string> lotCaseTypes = null;
+                    if (lot.Set.Alias == "Person")
                     {
-                        newAppDO.CorrespondentData = this.integrationRepository.ConvertOrganizationDataToCorrespondent(organizationData);
+                        var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+                        lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
                     }
-                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>() { this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext) };
-                }
-
-                if(!lotCaseTypes.Any(c => c == newAppDO.CaseType.Alias))
-                {
-                    if (lot.Set.Alias == "Person" || lot.Set.Alias == "Organization")
+                    else if (lot.Set.Alias == "Aircraft")
                     {
-                        this.integrationRepository.UpdateLotCaseTypes(lot.Set.Alias, newAppDO.CaseType, lot, this.userContext);
+                        var aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
+                        lotCaseTypes = new List<string>() { "aircraft" };
                     }
+                    else if (lot.Set.Alias == "Organization")
+                    {
+                        var organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
+                        lotCaseTypes = organizationData.CaseTypes.Select(c => c.Alias).ToList();
+                    }
+
+                    var appType = this.nomRepository.GetNomValue(newAppDO.ApplicationType.NomValueId);
+                    var caseTypeAlias = appType.TextContent.GetItems<string>("caseTypes").First();
+                    var caseType = this.caseTypeRepository.GetCaseType(caseTypeAlias);
+
+                    if (!lotCaseTypes.Contains(caseTypeAlias))
+                    {
+                        if (lot.Set.Alias == "Person" || lot.Set.Alias == "Organization")
+                        {
+                            this.integrationRepository.UpdateLotCaseTypes(lot.Set.Alias, caseType, lot, this.userContext);
+                        }
+                    }
+
+                    applicationNewDO = new ApplicationNewDO()
+                    {
+                        LotId = newAppDO.LotId,
+                        SetPartPath = lot.Set.Alias.ToLower() + "DocumentApplications",
+                        Correspondents = new List<int>(),
+                        ApplicationType = newAppDO.ApplicationType,
+                        CaseTypeId = caseType.GvaCaseTypeId
+                    };
+                }
+                else
+                {
+                    applicationNewDO = new ApplicationNewDO()
+                    {
+                        LotId = newAppDO.LotId,
+                        Correspondents = new List<int>()
+                    };
                 }
 
-                ApplicationNewDO applicationNewDO = new ApplicationNewDO()
-                {
-                    LotId = newAppDO.LotId,
-                    SetPartPath =  lot.Set.Alias.ToLower()+"DocumentApplications",
-                    Correspondents = correspondentIds,
-                    ApplicationType = newAppDO.ApplicationType,
-                    CaseTypeId = newAppDO.CaseType.GvaCaseTypeId
-                };
-
-                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, this.userContext, doc.RegUri);
+                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, this.userContext, newAppDO.DocId);
 
                 transaction.Commit();
 

@@ -95,7 +95,6 @@
     <Content Include="js\gva\aircrafts\modals\radios\manageRadioEntryModal.html" />
     <Content Include="js\gva\aircrafts\modals\radios\manageRadioEntryModalCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoises.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadios.js" />
@@ -196,7 +195,6 @@
     <Content Include="js\gva\airports\forms\airportDocumentOwner.html" />
     <Content Include="js\gva\airports\modals\documents\chooseDocumentsModal.html" />
     <Content Include="js\gva\airports\modals\documents\chooseDocumentsModalCtrl.js" />
-    <Content Include="js\gva\airports\resources\airportApplications.js" />
     <Content Include="js\gva\airports\resources\airportCertOperationals.js" />
     <Content Include="js\gva\airports\resources\airportDocumentApplications.js" />
     <Content Include="js\gva\airports\resources\airportDocumentOthers.js" />
@@ -364,7 +362,6 @@
     <Content Include="js\gva\common\modals\persons\newPersonModalCtrl.js" />
     <Content Include="js\gva\common\directives\application\applicationDirective.js" />
     <Content Include="js\gva\common\resources\applicationNoms.js" />
-    <Content Include="js\gva\common\resources\applicationNoms.js" />
     <Content Include="js\gva\common\resources\auditPartRequirementDetails.js" />
     <Content Include="js\gva\organizations\forms\organizationDocumentOtherCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationApprovalCtrl.js" />
@@ -377,7 +374,6 @@
     <Content Include="js\gva\equipments\forms\equipmentDocumentOwner.html" />
     <Content Include="js\gva\equipments\modals\documents\chooseDocumentsModal.html" />
     <Content Include="js\gva\equipments\modals\documents\chooseDocumentsModalCtrl.js" />
-    <Content Include="js\gva\equipments\resources\equipmentApplications.js" />
     <Content Include="js\gva\equipments\resources\equipmentCertOperationals.js" />
     <Content Include="js\gva\equipments\resources\equipmentDocumentApplications.js" />
     <Content Include="js\gva\equipments\resources\equipmentDocumentOthers.js" />
@@ -454,7 +450,6 @@
     <Content Include="js\gva\organizations\modals\limitations\chooseLimitationModal.html" />
     <Content Include="js\gva\organizations\modals\limitations\chooseLimitationModalCtrl.js" />
     <Content Include="js\gva\organizations\resources\organizationAddresses.js" />
-    <Content Include="js\gva\organizations\resources\organizationApplications.js" />
     <Content Include="js\gva\organizations\resources\organizationApprovalAmendments.js" />
     <Content Include="js\gva\organizations\resources\organizationApprovals.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirCarriers.js" />
@@ -700,7 +695,6 @@
     <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModal.html" />
     <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personAddresses.js" />
-    <Content Include="js\gva\persons\resources\personApplications.js" />
     <Content Include="js\gva\persons\resources\personDocumentApplications.js" />
     <Content Include="js\gva\persons\resources\personDocumentChecks.js" />
     <Content Include="js\gva\persons\resources\personDocumentEducations.js" />

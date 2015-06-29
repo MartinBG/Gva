@@ -59,9 +59,13 @@
               url: 'api/apps/exams',
               isArray: true
             },
-            getAppSetAlias: {
-              method: 'GET',
-              url: 'api/apps/:id/setAlias'
+            movePartToCase: {
+              method: 'POST',
+              url: 'api/apps/:id/movePartToCase/:gvaLotFileId',
+              params: {
+                id: '@id',
+                gvaLotFileId: '@gvaLotFileId'
+              }
             }
           });
       }]);

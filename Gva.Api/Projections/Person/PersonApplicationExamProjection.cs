@@ -33,7 +33,7 @@ namespace Gva.Api.Projections.Person
             {
                 List<GvaViewPersonApplicationExam> exams = application.Content.ExaminationSystemData.Exams
                     .Select(t =>
-                        this.Create(t, application.PartId, application.Part.LotId, application.Content.ExaminationSystemData.CertCampaign))
+                        this.Create(t, application.Part.PartId, application.Part.LotId, application.Content.ExaminationSystemData.CertCampaign))
                     .ToList();
                 result = result.Union(exams)
                     .ToList();

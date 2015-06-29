@@ -34,9 +34,7 @@
     <sc-ajaxcolumn title="persons.printableDocsSearch.dateValidTo" data="dateValidTo" type="date">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.printableDocsSearch.application" has-content="true">
-      <a ng-click="viewApplication(item.application.applicationId, item.lotId, item.application.partIndex)">
-        {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
-      </a>
+      <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.application.applicationId }}" text="{{ item.application.applicationName }}"></sc-button>
     </sc-ajaxcolumn>
   </sc-ajaxdatatable>
 </div>

@@ -22,12 +22,7 @@
           stateName;
 
       if (item.setPartAlias === 'aircraftApplication') {
-        params = { 
-          ind: item.partIndex,
-          id: item.applicationId,
-          set: 'aircraft',
-          lotId: $stateParams.id
-        };
+        params = { id: item.applicationId };
       } else {
         params = { ind: item.partIndex };
       }

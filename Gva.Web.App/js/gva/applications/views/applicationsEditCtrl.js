@@ -9,55 +9,37 @@
     application
     ) {
     $scope.application = application;
-    $scope.set = $stateParams.set;
 
-    if ($scope.application.oldDocumentNumber) {
+    if (!$scope.application.docId) {
       $scope.tabs = {
-        'applications.tabs.data': {
-            state: 'root.applications.edit.data',
-            stateParams: {
-              lotId: application.lotId,
-              ind: application.partIndex,
-              set: $scope.set
-            }
-          },
-          'applications.tabs.stages': 'root.applications.edit.stages'
-        };
-    } else {
+        'applications.tabs.data': 'root.applications.edit.data',
+        'applications.tabs.stages': 'root.applications.edit.stages'
+      };
+    } else if ($scope.application.partIndex) {
       $scope.tabs = {
-        'applications.tabs.data': {
-          state: 'root.applications.edit.data',
-          stateParams: {
-            lotId: $scope.application.lotId,
-            ind: $scope.application.partIndex,
-            set: $scope.set
-          }
-        },
+        'applications.tabs.data': 'root.applications.edit.data',
         'applications.tabs.case': 'root.applications.edit.case',
         'applications.tabs.stages': 'root.applications.edit.stages'
       };
-    }
 
-    if($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
-      $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
-      var examSystState = {
-        'applications.tabs.examSyst': {
-          state: 'root.applications.edit.examSyst',
-          stateParams: {
-            lotId: $scope.application.lotId,
-            ind: $scope.application.partIndex,
-            set: $scope.set
-          }
-        }
+      if ($scope.application.applicationType &&
+          ($scope.application.applicationType.code.indexOf('EX-') === 0 ||
+           $scope.application.applicationType.code.indexOf('EX/') === 0)) {
+        $scope.tabs = _.assign($scope.tabs, {
+          'applications.tabs.examSyst': 'root.applications.edit.examSyst'
+        });
+      }
+    } else {
+      $scope.tabs = {
+        'applications.tabs.case': 'root.applications.edit.case'
       };
-      $scope.tabs = _.assign($scope.tabs, examSystState);
     }
 
     $scope.viewPerson = function (id) {
       return $state.go('root.persons.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -65,7 +47,7 @@
       return $state.go('root.organizations.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -73,7 +55,7 @@
       return $state.go('root.aircrafts.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -81,7 +63,7 @@
       return $state.go('root.airports.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
 
@@ -89,7 +71,7 @@
       return $state.go('root.equipments.view', {
         id: id,
         appId: application.applicationId,
-        set: $scope.set
+        set: application.lotSetAlias
       });
     };
   }

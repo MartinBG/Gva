@@ -1,4 +1,4 @@
-﻿// Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applications>
+﻿// Usage: <gva-applications ng-model="model" lot-id="lotId"></gva-applications>
 
 /*global angular, Select2*/
 (function (angular, Select2) {
@@ -10,7 +10,6 @@
     $stateParams,
     $compile,
     $parse,
-    $filter,
     ApplicationNoms)
   {
     function preLink(scope, element, attrs) {
@@ -23,36 +22,23 @@
         },
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [],
-            application = result.applicationCode + ' ';
-
-          if (result.oldDocumentNumber) {
-            application += result.oldDocumentNumber + '/' +
-              $filter('date')(result.documentDate, 'mediumDate');
-          } else {
-            application += result.documentNumber;
-          }
+            application = result.applicationName;
 
           Select2.util.markMatch(application, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var application = app.applicationCode + ' ';
-          if (app.oldDocumentNumber) {
-            application += app.oldDocumentNumber + '/' +
-              $filter('date')(app.documentDate, 'mediumDate');
-          } else {
-            application += app.documentNumber;
-          }
+          var application = app.applicationName;
 
           var text = Select2.util.escapeMarkup(application),
-              elem = '<a ng-click="viewApplication(' + 
-              app.partIndex  + ',' + app.applicationId + 
-              ')">' + text + '</a>';
+              elem = '<sc-button btn-sref=\'' +
+              '{ state: "root.applications.edit.case", params: { id: ' +
+              app.applicationId + ' } }\' text=\'' + text + '\'></sc-button>';
 
           container.append($compile(elem)(scope));
         },
         query: function (query) {
-          ApplicationNoms.query({ id: lotId, term: query.term }).$promise
+          ApplicationNoms.query({ lotId: lotId, term: query.term }).$promise
               .then(function (result) {
                 query.callback({
                   results: result
@@ -62,32 +48,7 @@
       };
     }
 
-    function postLink(scope, iElement, iAttrs) {
-      var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
-          lotId = $parse(iAttrs.lotId)(scope) || $stateParams.id,
-          path = setPart + 'DocumentApplications';
-
-      scope.viewApplication = function (partIndex, applicationId) {
-        var modalInstance = scModal.open('viewApplication', {
-          lotId: lotId,
-          path: path,
-          partIndex: partIndex,
-          setPart: setPart
-        });
-
-        modalInstance.result.then(function () {
-          var stateName = 'root.applications.edit.data',
-            params = {
-              set: setPart,
-              id: applicationId,
-              lotId: lotId,
-              ind: partIndex
-            };
-          $state.go(stateName, params);
-        });
-
-        return modalInstance.opened;
-      };
+    function postLink() {
     }
 
     return {
@@ -105,7 +66,6 @@
     '$stateParams',
     '$compile',
     '$parse',
-    '$filter',
     'ApplicationNoms'
   ];
 

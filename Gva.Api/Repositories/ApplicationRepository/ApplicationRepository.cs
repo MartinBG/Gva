@@ -600,19 +600,28 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return this.unitOfWork.DbContext.Set<GvaApplication>().Where(e => e.DocId.HasValue).AsQueryable();
         }
 
-        public GvaApplication[] GetNomApplications(int lotId)
+        public IEnumerable<ApplicationNomDO> GetNomApplications(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotPart)
-                .Where(a => a.LotId == lotId && a.GvaAppLotPart != null && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
-                .ToArray();
+                .Include(a => a.GvaViewApplication)
+                .Include(a => a.GvaViewApplication.ApplicationType)
+                .Include(a => a.Doc)
+                .Where(a => a.LotId == lotId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
+                .AsEnumerable()
+                .Select(a => new ApplicationNomDO(a))
+                .OrderByDescending(a => a.ApplicationDate ?? DateTime.MaxValue);
         }
 
-        public GvaApplication GetNomApplication(int applicationId)
+        public ApplicationNomDO GetNomApplication(int applicationId)
         {
-            return this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotPart.Lot)
-                .FirstOrDefault(a => a.GvaApplicationId == applicationId);
+            var app = this.unitOfWork.DbContext.Set<GvaApplication>()
+                .Include(a => a.GvaViewApplication)
+                .Include(a => a.GvaViewApplication.ApplicationType)
+                .Include(a => a.Doc)
+                .Where(a => a.GvaApplicationId == applicationId)
+                .SingleOrDefault();
+
+            return new ApplicationNomDO(app);
         }
 
         public void AddGvaApplication(GvaApplication gvaApplication)
@@ -690,22 +699,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             return this.unitOfWork.DbContext.Set<Set>()
                 .SingleOrDefault(p => p.SetId == lotSetId);
-        }
-
-        public ApplicationNomDO GetInitApplication(int? applicationId)
-        {
-            if (!applicationId.HasValue)
-            {
-                return null;
-            }
-
-            GvaApplication nomApp = this.GetNomApplication((int)applicationId);
-            if (nomApp != null && nomApp.GvaAppLotPart != null)
-            {
-                return new ApplicationNomDO(nomApp);
-            }
-
-            return null;
         }
 
         public List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null)
@@ -911,7 +904,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return newDoc;
         }
 
-        public ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, string docRegUri = null)
+        public ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, int? docId = null)
         {
             var gvaCorrespondents = this.GetGvaCorrespondentsByLotId(applicationNewDO.LotId);
 
@@ -928,94 +921,116 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 }
             }
 
-            NomValue applicationType = this.nomRepository.GetNomValue("applicationTypes", applicationNewDO.ApplicationType.NomValueId);
             Doc doc = null;
-            if(!string.IsNullOrEmpty(docRegUri))
+            if(docId.HasValue)
             {
-                doc = this.docRepository.GetDocByRegUri(docRegUri);
+                int caseId = this.docRepository.GetCaseId(docId.Value);
+
+                doc = this.docRepository.Find(caseId);
             }
             else
             {
                 doc = this.CreateNewDoc(applicationNewDO.Correspondents, applicationNewDO.ApplicationType, userContext);
             }
 
-            var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-
-            var application = new DocumentApplicationDO
+            if (applicationNewDO.ApplicationType != null)
             {
-                DocumentDate = doc.RegDate.Value,
-                ApplicationType = applicationNewDO.ApplicationType,
-                DocumentNumber = !string.IsNullOrEmpty(docRegUri) ? docRegUri : doc.DocRelations.First().Doc.RegUri
-            };
+                var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
 
-            PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, userContext);
+                var application = new DocumentApplicationDO
+                {
+                    DocumentDate = doc.RegDate,
+                    ApplicationType = applicationNewDO.ApplicationType,
+                    DocumentNumber = doc.RegUri
+                };
 
-            lot.Commit(userContext, lotEventDispatcher);
+                PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, userContext);
 
-            GvaApplication newGvaApplication = new GvaApplication()
-            {
-                LotId = applicationNewDO.LotId,
-                Doc = doc,
-                GvaAppLotPart = partVersion.Part
-            };
+                lot.Commit(userContext, lotEventDispatcher);
 
-            this.AddGvaApplication(newGvaApplication);
+                GvaApplication newGvaApplication = new GvaApplication()
+                {
+                    LotId = applicationNewDO.LotId,
+                    Doc = doc,
+                    GvaAppLotPart = partVersion != null ? partVersion.Part : null
+                };
 
-            GvaLotFile lotFile = new GvaLotFile()
-            {
-                LotPart = partVersion.Part,
-                DocFile = null,
-                GvaCaseTypeId = applicationNewDO.CaseTypeId,
-                PageIndex = null,
-                PageIndexInt = null,
-                PageNumber = null,
-                Note = null
-            };
+                this.AddGvaApplication(newGvaApplication);
 
-            GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
-            {
-                GvaApplication = newGvaApplication,
-                GvaLotFile = lotFile,
-                DocFile = null
-            };
+                GvaLotFile lotFile = new GvaLotFile()
+                {
+                    LotPart = partVersion.Part,
+                    DocFile = null,
+                    GvaCaseTypeId = applicationNewDO.CaseTypeId,
+                    PageIndex = null,
+                    PageIndexInt = null,
+                    PageNumber = null,
+                    Note = null
+                };
 
-            this.AddGvaLotFile(lotFile);
-            this.AddGvaAppLotFile(gvaAppLotFile);
+                GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
+                {
+                    GvaApplication = newGvaApplication,
+                    GvaLotFile = lotFile,
+                    DocFile = null
+                };
 
-            this.unitOfWork.Save();
+                this.AddGvaLotFile(lotFile);
+                this.AddGvaAppLotFile(gvaAppLotFile);
 
-            int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
-                .Where(s => s.Alias.Equals("new"))
-                .Single().GvaStageId;
+                this.unitOfWork.Save();
 
-            dynamic stageTermDate = null;
-            int? duration = this.nomRepository.GetNomValue("applicationTypes", application.ApplicationType.NomValueId).TextContent.Get<int?>("duration");
-            if (duration.HasValue)
-            {
-                stageTermDate = DateTime.Now.AddDays(duration.Value);
+                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    .Where(s => s.Alias.Equals("new"))
+                    .Single().GvaStageId;
+
+                dynamic stageTermDate = null;
+                int? duration = this.nomRepository.GetNomValue("applicationTypes", applicationNewDO.ApplicationType.NomValueId).TextContent.Get<int?>("duration");
+                if (duration.HasValue)
+                {
+                    stageTermDate = DateTime.Now.AddDays(duration.Value);
+                }
+
+                GvaApplicationStage applicationStage = new GvaApplicationStage()
+                {
+                    GvaStageId = stageId,
+                    StartingDate = DateTime.Now,
+                    Ordinal = 0,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    StageTermDate = stageTermDate
+                };
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                return new ApplicationMainDO()
+                {
+                    LotId = applicationNewDO.LotId,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    PartIndex = partVersion.Part.Index,
+                    Set = partVersion.Part.Lot.Set.Alias.ToLower()
+                };
             }
-
-            GvaApplicationStage applicationStage = new GvaApplicationStage()
+            else
             {
-                GvaStageId = stageId,
-                StartingDate = DateTime.Now,
-                Ordinal = 0,
-                GvaApplicationId = newGvaApplication.GvaApplicationId,
-                StageTermDate = stageTermDate
-            };
+                GvaApplication newGvaApplication = new GvaApplication()
+                {
+                    LotId = applicationNewDO.LotId,
+                    Doc = doc
+                };
 
-            this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
-            this.unitOfWork.Save();
+                this.AddGvaApplication(newGvaApplication);
 
-            this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+                this.unitOfWork.Save();
 
-            return new ApplicationMainDO()
-            {
-                LotId = lot.LotId,
-                GvaApplicationId = newGvaApplication.GvaApplicationId,
-                PartIndex = partVersion.Part.Index,
-                Set = partVersion.Part.Lot.Set.Alias.ToLower()
-            };
+                return new ApplicationMainDO()
+                {
+                    LotId = applicationNewDO.LotId,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId
+                };
+            }
         }
     }
 }

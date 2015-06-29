@@ -17,9 +17,5 @@ namespace Gva.Api.ModelsDO.Integration
         public int LotId { get; set; }
 
         public NomValue ApplicationType { get; set; }
-
-        public GvaCaseType CaseType { get; set; }
-
-        public CorrespondentDO CorrespondentData { get; set; }
     }
 }

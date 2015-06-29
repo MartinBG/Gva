@@ -139,19 +139,5 @@ namespace Gva.Api.Controllers.Equipments
 
             return Ok(inventory);
         }
-
-        [Route("{lotId}/applications/{appId}")]
-        public IHttpActionResult GetApplication(int lotId, int appId)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            GvaApplication gvaNomApp = this.applicationRepository.GetNomApplication(appId);
-            if (gvaNomApp != null)
-            {
-                return Ok(new ApplicationNomDO(gvaNomApp));
-            }
-
-            return Ok();
-        }
     }
 }

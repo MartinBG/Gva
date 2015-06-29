@@ -17,7 +17,7 @@
       </div>
       <div class="form-group" ng-if="!hideApplications" ng-class="{'col-sm-3 col-md-5': !hideFiles, 'col-sm-6': hideFiles, 'col-md-3': showNote}">
         <label class="control-label" l10n-text="common.scannedDocumentDirective.applications"></label>
-        <gva-applications ng-model="file.applications" set-part="setPart" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
+        <gva-applications ng-model="file.applications" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
       </div>
       <sc-field ng-if="showNote" type="text" ng-model="file.note" l10n-text="common.scannedDocumentDirective.note" class="col-sm-3 col-md-2"></sc-field>
     </div>

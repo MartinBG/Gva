@@ -13,8 +13,6 @@
     $scope.organization = organization;
     $scope.application = application;
     $scope.caseType = parseInt($stateParams.caseTypeId, 10);
-    $scope.set = $stateParams.set;
-    $scope.lotId = $stateParams.id;
 
     $scope.edit = function () {
       return $state.go('root.organizations.view.edit');
@@ -123,17 +121,12 @@
     ],
     application: [
       '$stateParams',
-      'OrganizationApplications',
-      function ResolveApplication($stateParams, OrganizationApplications) {
-        if (!!$stateParams.appId) {
-          return OrganizationApplications.get($stateParams).$promise
-            .then(function (result) {
-              if (result.applicationId) {
-                return result;
-              }
-
-              return null;
-            });
+      'ApplicationNoms',
+      function ResolveApplication($stateParams, ApplicationNoms) {
+        if ($stateParams.appId) {
+          return ApplicationNoms
+            .get({ lotId: $stateParams.id, appId: $stateParams.appId })
+            .$promise;
         }
 
         return null;

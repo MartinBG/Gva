@@ -9,7 +9,7 @@
     application,
     docPartType
     ) {
-    $scope.lotSetId = application.lotSetId;
+    $scope.lotSetAlias = application.lotSetAlias;
     $scope.lotId = application.lotId;
     $scope.docPartType = docPartType;
     $scope.chooseDocPartType = !docPartType;

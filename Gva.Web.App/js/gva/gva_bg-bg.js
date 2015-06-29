@@ -35,13 +35,17 @@
           title: 'Свързване със заявление',
           choosePortalApp: 'Избор на заявление от портала',
           chooseGvaApp: 'Избор на тип заявление в ГВА',
-          chooseCaseType: 'Избор на тип дело',
+          chooseSet: 'Избор на вид преписка',
           forward: 'Напред',
           app: 'Заявление',
-          chooseLot: 'Избор на партида',
+          chooseLotPerson: 'Избор на лице',
+          chooseLotAircraft: 'Избор на ВС',
+          chooseLotOrganization: 'Избор на организация',
           back: 'Назад',
           chooseBtn: 'Избор',
-          newLot: 'Нова партида',
+          createLotPerson: 'Ново лице',
+          createLotAircraft: 'Ново ВС',
+          createLotOrganization: 'Нова организация',
           cancel: 'Отказ',
           saveLot: 'Запис',
           personDataForm: 'Лични данни',
@@ -50,7 +54,9 @@
           name: 'Наименование',
           code: 'Код',
           search: 'Търси',
-          caseType: 'Тип дело'
+          caseType: 'Тип дело',
+          set: 'Преписка за',
+          hasNoApp: 'Без заявление'
         },
         newPersonModal: {
           newApplicant: 'Нов заявител',
@@ -2901,7 +2907,9 @@
             newFile: 'Нов файл и страница',
             newDocFile: 'Нов файл',
             viewPart: 'Преглед',
-            linkApplication: 'Свържи заявление'
+            linkApplication: 'Свържи заявление',
+            unlink: 'Изтрий връзката',
+            moveToCase: 'Премести в преписката'
           },
           stages: {
             docStages: 'Деловодни етапи',
@@ -2992,7 +3000,8 @@
           title: 'Преглед на заявление',
           edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteApp: 'Изтрий'
         },
         equipmentSelect: {
           equipment: 'Съоръжение',

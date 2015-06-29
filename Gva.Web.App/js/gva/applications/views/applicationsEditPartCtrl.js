@@ -6,17 +6,16 @@
     $scope,
     $state,
     $stateParams,
+    scMessage,
     Applications,
     application,
-    setAlias) {
-    var originalApplication = _.cloneDeep(application);
+    applicationPart) {
+    var originalApplicationPart = _.cloneDeep(applicationPart);
 
-    $scope.application = application;
+    $scope.applicationPart = applicationPart;
     $scope.editMode = null;
-    $scope.lotId = $stateParams.lotId;
-    $scope.set = $stateParams.set;
-    $scope.appId = $stateParams.id;
-    $scope.setAlias = setAlias;
+    $scope.lotId = application.lotId;
+    $scope.set = application.lotSetAlias;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -24,19 +23,51 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.application = _.cloneDeep(originalApplication);
+      $scope.applicationPart = _.cloneDeep(originalApplicationPart);
     };
 
     $scope.save = function () {
       return $scope.editDocumentApplicationForm.$validate().then(function () {
         if ($scope.editDocumentApplicationForm.$valid) {
           return Applications.editAppPart({
-            lotId: $scope.lotId,
-            ind: $stateParams.ind
+            lotId: application.lotId,
+            ind: application.partIndex
           },
-          $scope.application).$promise.then(function () {
+          $scope.applicationPart).$promise.then(function () {
             $scope.editMode = null;
           });
+        }
+      });
+    };
+
+    $scope.deleteApp = function () {
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return Applications
+            .remove({ id: $stateParams.id })
+            .$promise.then(function () {
+              if (application.lotSetAlias === 'person') {
+                return $state.go(
+                  'root.persons.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'organization') {
+                return $state.go(
+                  'root.organizations.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'aircraft') {
+                return $state.go(
+                  'root.aircrafts.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'airport') {
+                return $state.go(
+                  'root.airports.view.documentApplications.search', { id: application.lotId });
+              }
+              else if (application.lotSetAlias === 'equipment') {
+                return $state.go(
+                  'root.equipments.view.documentApplications.search', { id: application.lotId });
+              }
+            });
         }
       });
     };
@@ -46,33 +77,21 @@
     '$scope',
     '$state',
     '$stateParams',
+    'scMessage',
     'Applications',
     'application',
-    'setAlias'
+    'applicationPart'
   ];
 
   AppEditPartCtrl.$resolve = {
-    application: [
-      '$stateParams',
+    applicationPart: [
       'Applications',
-      function ($stateParams, Applications) {
+      'application',
+      function (Applications, application) {
         return Applications.getAppPart({
-          lotId: $stateParams.lotId,
-          ind: $stateParams.ind,
-          id: $stateParams.id
+          lotId: application.lotId,
+          ind: application.partIndex
         }).$promise;
-      }
-    ],
-    setAlias: [
-      '$stateParams',
-      'Applications',
-      function ($stateParams, Applications) {
-        return Applications.getAppSetAlias({
-          id: $stateParams.id
-        }).$promise
-        .then(function (result) {
-          return result.setAlias;
-        });
       }
     ]
   };

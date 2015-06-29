@@ -54,11 +54,10 @@ namespace Gva.Api.Controllers.Aircrafts
 
             if (appId.HasValue)
             {
-                this.lotRepository.GetLotIndex(lotId);
                 caseDO.IsAdded = true;
                 caseDO.Applications = new List<ApplicationNomDO>()
                 {
-                    this.applicationRepository.GetInitApplication(appId)
+                    this.applicationRepository.GetNomApplication(appId.Value)
                 };
             }
 

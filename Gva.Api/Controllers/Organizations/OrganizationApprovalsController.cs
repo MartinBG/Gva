@@ -90,7 +90,6 @@ namespace Gva.Api.Controllers.Organizations
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var approvals = this.organizationRepository.GetApprovals(lotId, caseTypeId);
-            this.lotRepository.GetLotIndex(lotId);
 
             return Ok(approvals.Select(approval =>  {
 

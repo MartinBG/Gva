@@ -44,15 +44,7 @@ namespace Gva.Api.ModelsDO.Persons
 
             if (edition.Application != null)
             {
-                this.Application = new ApplicationNomDO
-                {
-                    ApplicationCode = edition.Application.ApplicationType.Code,
-                    PartIndex = edition.Application.Part.Index,
-                    ApplicationId = edition.GvaApplicationId.Value,
-                    DocumentDate = edition.Application.DocumentDate,
-                    DocumentNumber = edition.Application.DocumentNumber,
-                    OldDocumentNumber = edition.Application.OldDocumentNumber
-                };
+                this.Application = new ApplicationNomDO(edition.GvaApplication);
             }
 
             this.LicenceType = edition.LicenceType;

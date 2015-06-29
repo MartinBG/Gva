@@ -24,7 +24,9 @@
         attrs.$set('href', $state.href(sref.state, sref.params, sref.options));
       }
 
-      scope.$parent[attrs.name] = elementCtrl;
+      if (attrs.name) {
+        scope.$parent[attrs.name] = elementCtrl;
+      }
 
       element.on('click', function (event) {
         if (event.which !== 1) {

@@ -1,7 +1,4 @@
 ﻿<div class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
-  <a ng-click="viewApplication(application.applicationId, application.partIndex)" class="alert-link" style="cursor: pointer;">
-    <span l10n-text="common.applicationAlertInfoDirective.viewApplication"></span>
-    {{applicationName}}
-  </a>
+  <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: application.applicationId }}" class="alert-link" style="cursor: pointer;" text="{{viewApplicationText}}"></sc-button>
   <button type="button" class="close" ng-click="exitApplication()">×</button>
 </div>

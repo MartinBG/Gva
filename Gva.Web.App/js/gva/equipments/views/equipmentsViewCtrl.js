@@ -11,8 +11,6 @@
   ) {
     $scope.equipment = equipment;
     $scope.application = application;
-    $scope.set = $stateParams.set;
-    $scope.lotId = $stateParams.id;
 
     $scope.edit = function () {
       return $state.go('root.equipments.view.edit');
@@ -37,17 +35,12 @@
     ],
     application: [
       '$stateParams',
-      'EquipmentApplications',
-      function ResolveApplication($stateParams, EquipmentApplications) {
-        if (!!$stateParams.appId) {
-          return EquipmentApplications.get($stateParams).$promise
-            .then(function (result) {
-              if (result.applicationId) {
-                return result;
-              }
-
-              return null;
-            });
+      'ApplicationNoms',
+      function ResolveApplication($stateParams, ApplicationNoms) {
+        if ($stateParams.appId) {
+          return ApplicationNoms
+            .get({ lotId: $stateParams.id, appId: $stateParams.appId })
+            .$promise;
         }
 
         return null;
