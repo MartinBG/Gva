@@ -33,6 +33,7 @@ using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Docs.Api.Models.ClassificationModels;
 using Docs.Api.Models.UnitModels;
+using System.IO;
 
 namespace Gva.Api.Controllers.Applications
 {
@@ -277,6 +278,68 @@ namespace Gva.Api.Controllers.Applications
                 this.unitOfWork.DbContext.Set<GvaApplicationStage>().RemoveRange(application.Stages);
 
                 this.unitOfWork.DbContext.Set<GvaApplication>().Remove(application);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [HttpPost]
+        [Route(@"{id:int}/movePartToCase/{gvaLotFileId:int}")]
+        public IHttpActionResult MovePartToCase(int id, int gvaLotFileId)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var application = this.unitOfWork.DbContext.Set<GvaApplication>()
+                    .Include(a => a.Doc)
+                    .Include(a => a.GvaAppLotFiles)
+                    .Where(a => a.GvaApplicationId == id)
+                    .Single();
+
+                var gvaLotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                    .Include(lf => lf.GvaFile)
+                    .Include(lf => lf.LotPart.SetPart)
+                    .Where(lf => lf.GvaLotFileId == gvaLotFileId)
+                    .Single();
+
+                var appLotFile = application.GvaAppLotFiles
+                    .Where(af => af.GvaLotFileId == gvaLotFileId)
+                    .Single();
+
+                if (gvaLotFile.GvaFile == null || gvaLotFile.DocFileId != null)
+                {
+                    throw new ApplicationException("Corrupt gva lot file.");
+                }
+
+                var fileExtension = Path.GetExtension(gvaLotFile.GvaFile.Filename);
+
+                DocFileKind privateDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>()
+                    .SingleOrDefault(e => e.Alias == "PrivateAttachedFile");
+                var docFileType = this.unitOfWork.DbContext.Set<DocFileType>()
+                    .FirstOrDefault(e => e.Extention == fileExtension);
+
+                if (docFileType == null)
+                {
+                    docFileType = this.unitOfWork.DbContext.Set<DocFileType>().FirstOrDefault(e => e.Alias == "UnknownBinary");
+                }
+
+                var docFile = application.Doc.CreateDocFile(
+                    privateDocFileKind.DocFileKindId,
+                    docFileType.DocFileTypeId,
+                    null,
+                    gvaLotFile.LotPart.SetPart.Name,
+                    gvaLotFile.GvaFile.Filename,
+                    String.Empty,
+                    gvaLotFile.GvaFile.FileContentId,
+                    this.userContext);
+
+                gvaLotFile.GvaFile = null;
+                gvaLotFile.DocFile = docFile;
+
+                appLotFile.DocFile = docFile;
 
                 this.unitOfWork.Save();
 

@@ -2908,7 +2908,8 @@
             newDocFile: 'Нов файл',
             viewPart: 'Преглед',
             linkApplication: 'Свържи заявление',
-            unlink: 'Изтрий връзката'
+            unlink: 'Изтрий връзката',
+            moveToCase: 'Премести в преписката'
           },
           stages: {
             docStages: 'Деловодни етапи',

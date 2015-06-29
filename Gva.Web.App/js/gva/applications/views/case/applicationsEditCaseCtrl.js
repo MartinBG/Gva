@@ -182,6 +182,15 @@
         }
       });
     };
+
+    $scope.moveToCase = function (item) {
+      return Applications.movePartToCase({
+        id: $stateParams.id,
+        gvaLotFileId: item.gvaLotFileId
+      }).$promise.then(function () {
+        return $state.transitionTo($state.$current, $stateParams, { reload: true });
+      });
+    };
   }
 
   ApplicationsEditCaseCtrl.$inject = [

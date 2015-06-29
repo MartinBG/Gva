@@ -58,6 +58,14 @@
               method: 'GET',
               url: 'api/apps/exams',
               isArray: true
+            },
+            movePartToCase: {
+              method: 'POST',
+              url: 'api/apps/:id/movePartToCase/:gvaLotFileId',
+              params: {
+                id: '@id',
+                gvaLotFileId: '@gvaLotFileId'
+              }
             }
           });
       }]);
