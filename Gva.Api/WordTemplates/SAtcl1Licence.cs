@@ -102,8 +102,8 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
             var langLevel = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
-            var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false);
-             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true);
+            var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false, false);
+            var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true, true);
             var endorsementsAndOtherEndorsements = this.GetEndorsements(includedRatings, ratingEditions);
 
             var json = new
@@ -162,8 +162,6 @@ namespace Gva.Api.WordTemplates
                     L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
                     T_ENDORSEMENT = Utils.FillBlankData(tEndorsements, 9)
                 }
-
-
             };
 
             return json;
@@ -277,7 +275,11 @@ namespace Gva.Api.WordTemplates
             return Utils.FillBlankData(result, 3);
         }
 
-        private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions, bool withIssueDate)
+        private List<object> GetEndorsements2(
+            IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
+            IEnumerable<PartVersion<PersonRatingEditionDO>> editions,
+            bool withIssueDate,
+            bool includeOtherEndorsements)
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
             List<string> otherEndorsementCodes = new List<string>() { "OJTI", "STDI", "Assessor" };
@@ -289,7 +291,7 @@ namespace Gva.Api.WordTemplates
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
 
-                if (otherEndorsementCodes.Any(oe => authorization.Contains(oe)))
+                if (authorization == null || (!includeOtherEndorsements && otherEndorsementCodes.Any(oe => authorization.Contains(oe))))
                 {
                     continue;
                 }
