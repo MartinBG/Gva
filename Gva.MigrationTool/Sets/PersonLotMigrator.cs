@@ -106,19 +106,21 @@ namespace Gva.MigrationTool.Sets
                             };
 
                             applicationRepository.AddGvaApplication(application);
+                            string typeCode = docApplication.Get<string>("part.applicationType.code");
+                            string oldDocumentNumber = docApplication.Get<string>("part.oldDocumentNumber");
+                            DateTime? documentDate = docApplication.Get<DateTime?>("part.documentDate");
+
+                            ApplicationNomDO applicationNom = new ApplicationNomDO()
+                            {
+                                ApplicationId = 0,
+                                ApplicationName = string.Format("{0} {1}/{2:dd.MM.yyyy}", typeCode, oldDocumentNumber, documentDate),
+                                ApplicationDate = documentDate
+                            };
 
                             applications.Add(
                                 docApplication.Get<int>("part.__oldId"),
                                     Tuple.Create(
-                                        application,
-                                        new ApplicationNomDO
-                                        {
-                                            ApplicationId = 0, //will be set later
-                                            PartIndex = pv.Part.Index,
-                                            ApplicationName = docApplication.Get<string>("part.applicationType.name"),
-                                            ApplicationCode = docApplication.Get<string>("part.applicationType.code"),
-                                            OldDocumentNumber = docApplication.Get<string>("part.oldDocumentNumber")
-                                        }));
+                                        application, applicationNom));
                         }
 
                         unitOfWork.Save();

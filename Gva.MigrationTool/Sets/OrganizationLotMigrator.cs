@@ -111,19 +111,21 @@ namespace Gva.MigrationTool.Sets
                             };
 
                             applicationRepository.AddGvaApplication(application);
+                            string typeCode = organizationDocumentApplication.Get<string>("part.applicationType.code");
+                            string oldDocumentNumber = organizationDocumentApplication.Get<string>("part.oldDocumentNumber");
+                            DateTime? documentDate = organizationDocumentApplication.Get<DateTime?>("part.documentDate");
+
+                            ApplicationNomDO applicationNom = new ApplicationNomDO()
+                            {
+                                ApplicationId = 0,
+                                ApplicationName = string.Format("{0} {1}/{2:dd.MM.yyyy}", typeCode, oldDocumentNumber, documentDate),
+                                ApplicationDate = documentDate
+                            };
 
                             applications.Add(
                                 organizationDocumentApplication.Get<int>("part.__oldId"),
                                     Tuple.Create(
-                                        application,
-                                        new ApplicationNomDO
-                                        {
-                                            ApplicationId = 0, //will be set later
-                                            PartIndex = pv.Part.Index,
-                                            ApplicationName = organizationDocumentApplication.Get<string>("part.applicationType.name"),
-                                            ApplicationCode = organizationDocumentApplication.Get<string>("part.applicationType.code"),
-                                            OldDocumentNumber = organizationDocumentApplication.Get<string>("part.oldDocumentNumber")
-                                        }));
+                                        application, applicationNom));
                         }
 
                         unitOfWork.Save();
