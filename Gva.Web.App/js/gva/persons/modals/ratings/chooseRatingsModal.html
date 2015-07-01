@@ -9,8 +9,11 @@
 
   <div class="well-sm panel-body">
     <div class="form-group">
-      <label class="control-label" l10n-text="persons.chooseRatingsModal.showAll" class="col-sm-3 col-md-2"></label>
-      <input type="checkbox"  sc-click="showAllRatings($event)"/>
+      <label class="control-label" l10n-text="persons.chooseRatingsModal.showAll" class="col-sm-4 col-md-3"></label>
+      <input type="checkbox"  sc-click="showAllRatings($event)" style="margin-right:20px"/>
+
+      <label class="control-label" l10n-text="persons.chooseRatingsModal.showAllEditions" class="col-sm-3 col-md-2" ng-if="showAllEditionsCheckbox"></label>
+      <input type="checkbox" sc-click="showAllEditions($event)" ng-if="showAllEditionsCheckbox"/>
     </div>
 
     <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="lastDocDateValidFrom">

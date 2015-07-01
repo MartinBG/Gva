@@ -30,10 +30,23 @@
     };
 
     $scope.showAllRatings = function (event) {
+      $scope.showAllEditionsCheckbox = $(event.target).is(':checked');
+
       PersonRatings.getRatingsByValidity({ 
         id: scModalParams.lotId,
         valid: !$(event.target).is(':checked'),
         caseTypeId: scModalParams.caseTypeId
+      }).$promise.then(function (allRatings) {
+        $scope.ratings =  $scope.filterRatings(allRatings);
+      });
+    };
+
+    $scope.showAllEditions = function (event) {
+      PersonRatings.getRatingsByValidity({ 
+        id: scModalParams.lotId,
+        showAllEditions: $(event.target).is(':checked'),
+        caseTypeId: scModalParams.caseTypeId,
+        valid: false
       }).$promise.then(function (allRatings) {
         $scope.ratings =  $scope.filterRatings(allRatings);
       });
