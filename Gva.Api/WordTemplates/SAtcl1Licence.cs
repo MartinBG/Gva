@@ -110,10 +110,10 @@ namespace Gva.Api.WordTemplates
             {
                 root = new
                 {
-                    L_NAME = licenceType.Name.ToUpper(),
-                    L_NAME_TRANS = licenceType.NameAlt == null ? string.Empty : licenceType.NameAlt.ToUpper(),
-                    L_NAME1 = licenceType.Name.ToUpper(),
-                    L_NAME1_TRANS = licenceType.NameAlt == null ? string.Empty : licenceType.NameAlt.ToUpper(),
+                    L_NAME = "УЧЕНИК-РЪКОВОДИТЕЛ НА ПОЛЕТИ",
+                    L_NAME_TRANS = "STUDENT AIR TRAFFIC CONTROLLER",
+                    L_NAME1 = "УЧЕНИК-РЪКОВОДИТЕЛ НА ПОЛЕТИ",
+                    L_NAME1_TRANS = "STUDENT AIR TRAFFIC CONTROLLER",
                     L_LICENCE_NO = licenceNumber,
                     FAMILY_BG = personData.LastName.ToUpper(),
                     FAMILY_TRANS = personData.LastNameAlt.ToUpper(),
@@ -160,7 +160,7 @@ namespace Gva.Api.WordTemplates
                     T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
                     L_ENDORSEMENT1 = Utils.FillBlankData(lEndorsements, 16),
                     L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
-                    T_ENDORSEMENT = Utils.FillBlankData(tEndorsements, 9)
+                    T_ENDORSEMENT = Utils.FillBlankData(tEndorsements, 8)
                 }
             };
 
