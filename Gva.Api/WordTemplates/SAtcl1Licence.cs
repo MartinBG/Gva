@@ -291,9 +291,12 @@ namespace Gva.Api.WordTemplates
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
 
-                if (authorization == null || (!includeOtherEndorsements && otherEndorsementCodes.Any(oe => authorization.Contains(oe))))
+                if (!includeOtherEndorsements && authorization != null)
                 {
-                    continue;
+                    if(otherEndorsementCodes.Any(oe => authorization.Contains(oe)))
+                    {
+                        continue;
+                    }
                 }
 
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
