@@ -119,23 +119,31 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("byValidity")]
-        public IHttpActionResult GetRatingsByValidity(int lotId, int? caseTypeId = null, bool? valid = true)
+        public IHttpActionResult GetRatingsByValidity(int lotId, int? caseTypeId = null, bool? valid = true, bool? showAllEditions = false)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
             List<GvaViewPersonRatingDO> ratingDOs = new List<GvaViewPersonRatingDO>();
             foreach (GvaViewPersonRating rating in ratings)
             { 
-                var editions = rating.Editions;
-                if (valid == true)
+                var editions = rating.Editions.OrderBy(e => e.Index).ToList();
+                if (valid == true && !showAllEditions.Value)
                 {
                     editions = editions.Where(e => !e.DocDateValidTo.HasValue || DateTime.Compare(e.DocDateValidTo.Value, DateTime.Now) >= 0).ToList();
                 }
-                if (editions.Count > 0)
+
+                if (editions.Count() > 0 && !showAllEditions.Value)
                 {
-                    ratingDOs.Add(new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()));
+                    ratingDOs.Add(new GvaViewPersonRatingDO(rating, editions.First(), editions.Last()));
+                }
+                else if (editions.Count() > 0 && showAllEditions.Value)
+                {
+                    rating.Editions.ForEach(edition =>
+                    {
+                        ratingDOs.Add(new GvaViewPersonRatingDO(rating, editions.First(), edition));
+                    });
                 }
             }
-           
+
             return Ok(ratingDOs);
         }
 
@@ -159,7 +167,11 @@ namespace Gva.Api.Controllers.Persons
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
             List<GvaViewPersonRatingDO> ratingDOs = ratings.Select(rating =>
-                new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()))
+                {
+                    var editions = rating.Editions.OrderBy(e => e.Index).ToList();
+                    return new GvaViewPersonRatingDO(rating, editions.First(), editions.Last());
+                })
+                
                 .ToList();
 
             return Ok(ratingDOs);

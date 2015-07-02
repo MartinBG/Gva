@@ -158,7 +158,7 @@ namespace Gva.Api.WordTemplates
                     T_LANG_LEVEL_NO = number++,
                     T_LANG_LEVEL = langLevel,
                     T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
-                    L_ENDORSEMENT1 = Utils.FillBlankData(lEndorsements, 16),
+                    L_ENDORSEMENT1 = Utils.FillBlankData(lEndorsements, 15),
                     L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
                     T_ENDORSEMENT = Utils.FillBlankData(tEndorsements, 8)
                 }

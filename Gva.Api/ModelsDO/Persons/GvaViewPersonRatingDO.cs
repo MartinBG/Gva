@@ -11,28 +11,28 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class GvaViewPersonRatingDO
     {
-        public GvaViewPersonRatingDO(GvaViewPersonRating rating, List<GvaViewPersonRatingEdition> editions)
+        public GvaViewPersonRatingDO(
+            GvaViewPersonRating rating,
+            GvaViewPersonRatingEdition firstEdition,
+            GvaViewPersonRatingEdition currentEdition)
         {
-            GvaViewPersonRatingEdition lastEdition = editions.Last();
-            GvaViewPersonRatingEdition firstEdition = editions.First();
-
             this.LotId = rating.LotId;
-            this.EditionIndex = lastEdition.Index;
+            this.EditionIndex = currentEdition.Index;
             this.RatingPartIndex = rating.PartIndex;
-            this.EditionPartIndex = lastEdition.PartIndex;
+            this.EditionPartIndex = currentEdition.PartIndex;
             this.RatingTypes = rating.RatingTypes;
             this.PersonRatingLevel = rating.RatingLevel;
             this.RatingClass = rating.RatingClass;
             this.AircraftTypeGroup = rating.AircraftTypeGroup;
             this.Authorization = rating.Authorization;
             this.AircraftTypeCategory = rating.AircraftTypeCategory;
-            this.RatingSubClasses = lastEdition.RatingSubClasses;
-            this.Limitations = lastEdition.Limitations;
-            this.LastDocDateValidFrom = lastEdition.DocDateValidFrom;
-            this.LastDocDateValidTo = lastEdition.DocDateValidTo;
+            this.RatingSubClasses = currentEdition.RatingSubClasses;
+            this.Limitations = currentEdition.Limitations;
+            this.LastDocDateValidFrom = currentEdition.DocDateValidFrom;
+            this.LastDocDateValidTo = currentEdition.DocDateValidTo;
             this.FirstDocDateValidFrom = firstEdition.DocDateValidFrom;
-            this.Notes = lastEdition.Notes;
-            this.NotesAlt = lastEdition.NotesAlt;
+            this.Notes = currentEdition.Notes;
+            this.NotesAlt = currentEdition.NotesAlt;
             this.LocationIndicator = rating.LocationIndicator;
             this.Sector = rating.Sector;
         }

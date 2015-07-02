@@ -2554,7 +2554,8 @@
           authorizationAndLimitations: 'Разрешение <br>(ограничения)',
           lastEditionValidFrom: 'Издаден',
           lastEditionValidTo: 'Валиден до',
-          showAll: 'Покажи всички',
+          showAll: 'Покажи и невалидни',
+          showAllEditions: 'Покажи с всички вписвания',
           add: 'Добави',
           cancel: 'Отказ'
         },
