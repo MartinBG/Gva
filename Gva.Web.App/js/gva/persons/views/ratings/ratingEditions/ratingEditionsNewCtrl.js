@@ -17,6 +17,9 @@
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
 
+    $scope.isRequiredDateValidTo = $scope.rating.part.ratingClass ||
+      $scope.rating.part.ratingTypes;
+
     $scope.save = function () {
       return $scope.newRatingEditionForm.$validate().then(function () {
         if ($scope.newRatingEditionForm.$valid) {
