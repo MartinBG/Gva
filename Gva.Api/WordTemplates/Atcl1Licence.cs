@@ -100,15 +100,8 @@ namespace Gva.Api.WordTemplates
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
-            var langLevel = includedLangCerts
-                .Where(c => c.LangLevel != null)
-                .Select(c => new
-                {
-                    LEVEL = c.LangLevel.Name,
-                    ISSUE_DATE = c.DocumentDateValidFrom,
-                    VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
-                }).ToList<object>();
 
+            var langLevel = Utils.GetATCLLangCerts(includedLangCerts, nomRepository);
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
             var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false, false);
             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true, true);
