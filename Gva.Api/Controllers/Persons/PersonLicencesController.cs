@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
+using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
@@ -26,6 +30,7 @@ namespace Gva.Api.Controllers.Persons
         private INomRepository nomRepository;
         private UserContext userContext;
         private IPersonRepository personRepository;
+        private string path;
 
         public PersonLicencesController(
             IUnitOfWork unitOfWork,
@@ -44,6 +49,7 @@ namespace Gva.Api.Controllers.Persons
             this.nomRepository = nomRepository;
             this.userContext = userContext;
             this.personRepository = personRepository;
+            this.path = "licences";
         }
 
         [Route("new")]
@@ -51,11 +57,58 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonLicenceDO licence = new PersonLicenceDO()
             {
-                Valid = this.nomRepository.GetNomValue("boolean", "yes"),
-                Publisher = this.nomRepository.GetNomValue("caa", "BGR")
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId,
+                PublisherId = this.nomRepository.GetNomValue("caa", "BGR").NomValueId
             };
 
             return Ok(new CaseTypePartDO<PersonLicenceDO>(licence));
+        }
+
+        [Route("{licencePartIndex}/data")]
+        public IHttpActionResult GetPart(int lotId, int licencePartIndex, int? caseTypeId = null)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonLicenceDO>(string.Format("{0}/{1}", path, licencePartIndex));
+            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+
+            var statuses = partVersion.Content.Statuses == null ? null :
+                partVersion.Content.Statuses.Select(s =>
+                    {
+                        NomValue inspector = null;
+                        if(s.InspectorId.HasValue)
+                        {
+                            GvaViewPerson person = this.personRepository.GetPerson(s.InspectorId.Value);
+                            inspector = new NomValue()
+                            {
+                                NomValueId = person.LotId,
+                                Name = string.Format("{0} {1}", person.Lin, person.Names)
+                            };
+                        }
+
+                        return new PersonLicenceStatusViewDO()
+                        {
+                            ChangeDate = s.ChangeDate,
+                            Inspector = inspector,
+                            ChangeReason = s.ChangeReasonId.HasValue ? this.nomRepository.GetNomValue(s.ChangeReasonId.Value) : null,
+                            Valid = s.ValidId.HasValue ? this.nomRepository.GetNomValue(s.ValidId.Value) : null,
+                            Notes = s.Notes
+                        };
+                    }).ToList();
+
+            var licence = new PersonLicenceViewDO()
+            {
+                PartIndex = licencePartIndex,
+                LicenceType = partVersion.Content.LicenceTypeId.HasValue ? this.nomRepository.GetNomValue(partVersion.Content.LicenceTypeId.Value) : null, 
+                LicenceNumber = partVersion.Content.LicenceNumber,
+                ForeignLicenceNumber = partVersion.Content.ForeignLicenceNumber,
+                ForeignPublisher = partVersion.Content.ForeignPublisherId.HasValue ? this.nomRepository.GetNomValue(partVersion.Content.ForeignPublisherId.Value) : null, 
+                Employment = partVersion.Content.EmploymentId.HasValue ? this.nomRepository.GetNomValue(partVersion.Content.EmploymentId.Value) : null, 
+                Publisher = partVersion.Content.PublisherId.HasValue ? this.nomRepository.GetNomValue(partVersion.Content.PublisherId.Value) : null, 
+                Valid = partVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue(partVersion.Content.ValidId.Value) : null,
+                Statuses = statuses,
+                CaseTypeId = lotFile.GvaCaseType.GvaCaseTypeId
+            };
+
+            return Ok(licence);
         }
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
@@ -77,16 +130,21 @@ namespace Gva.Api.Controllers.Persons
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                string LicenceTypeCode = null;
+                if (newLicence.Licence.Part.LicenceTypeId.HasValue)
+                {
+                    LicenceTypeCode = this.nomRepository.GetNomValue(newLicence.Licence.Part.LicenceTypeId.Value).Code;
+                }
 
-                if (newLicence.Licence.Part.LicenceType.Code == "FOREIGN" &&
-                    (newLicence.Licence.Part.ForeignLicenceNumber == null || newLicence.Licence.Part.ForeignPublisher == null || newLicence.Licence.Part.Employment == null))
+                if (LicenceTypeCode == "FOREIGN" &&
+                    (newLicence.Licence.Part.ForeignLicenceNumber == null || !newLicence.Licence.Part.ForeignPublisherId.HasValue || !newLicence.Licence.Part.EmploymentId.HasValue))
                 {
                     return BadRequest();
                 }
 
                 if (!newLicence.Licence.Part.LicenceNumber.HasValue)
                 {
-                    string licenceNumber = this.personRepository.GetLastLicenceNumber(lotId, newLicence.Licence.Part.LicenceType.Code);
+                    string licenceNumber = this.personRepository.GetLastLicenceNumber(lotId, LicenceTypeCode);
                     if (licenceNumber == null)
                     {
                         newLicence.Licence.Part.LicenceNumber = 1;
@@ -131,9 +189,42 @@ namespace Gva.Api.Controllers.Persons
             }
         }
 
-        [Route("lastLicenceNumber")]
-        public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceTypeCode)
+        [HttpPost]
+        [Route("{licencePartIndex}/status")]
+        public IHttpActionResult UpdateLicenceStatus(int lotId, int licencePartIndex, PersonLicenceStatusDO status)
         {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var licencePartVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonLicenceDO>(string.Format("{0}/{1}", this.path, licencePartIndex));
+                if (licencePartVersion.Content.Statuses == null)
+                {
+                    licencePartVersion.Content.Statuses = new List<PersonLicenceStatusDO>();
+                }
+
+                licencePartVersion.Content.Statuses.Add(status);
+                licencePartVersion.Content.ValidId = status.ValidId;
+
+                PartVersion<PersonLicenceDO> partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, licencePartIndex),
+                    licencePartVersion.Content,
+                    this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+            }
+            return Ok();
+        }
+
+        [Route("lastLicenceNumber")]
+        public IHttpActionResult GetLastLicenceNumber(int lotId, int licenceTypeId)
+        {
+            string licenceTypeCode = this.nomRepository.GetNomValue(licenceTypeId).Code;
             string licenceNumber = this.personRepository.GetLastLicenceNumber(lotId, licenceTypeCode);
 
             return Ok(new JObject(new JProperty("number", licenceNumber)));
@@ -142,10 +233,10 @@ namespace Gva.Api.Controllers.Persons
         [Route("newStatus")]
         public IHttpActionResult GetNewLicenceStatus(int lotId)
         {
-            PersonLicenceStatusDO licenceStatus = new PersonLicenceStatusDO();
-            licenceStatus.Valid = this.nomRepository.GetNomValue("boolean", "yes");
-
-            return Ok(licenceStatus);
+            return Ok(new PersonLicenceStatusDO()
+            {
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
+            });
         }
 
         [Route("{licencePartIndex}/lastEditionIndex")]
@@ -158,8 +249,10 @@ namespace Gva.Api.Controllers.Persons
 
         [HttpGet]
         [Route("isUniqueLicenceNumber")]
-        public IHttpActionResult IsUniqueLicenceNumber(string licenceTypeCode, int licenceNumber)
+        public IHttpActionResult IsUniqueLicenceNumber(int licenceTypeId, int licenceNumber)
         {
+            string licenceTypeCode = this.nomRepository.GetNomValue(licenceTypeId).Code;
+
             return Ok(
                 new
                 {

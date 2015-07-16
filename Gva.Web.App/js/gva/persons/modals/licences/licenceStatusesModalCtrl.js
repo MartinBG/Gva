@@ -16,17 +16,17 @@
     $scope.save = function () {
       return $scope.form.licenceStatusesForm.$validate().then(function () {
         if ($scope.form.licenceStatusesForm.$valid) {
-          if (!$scope.licence.part.statuses) {
-            $scope.licence.part.statuses = [];
+          if (!$scope.licence.statuses) {
+            $scope.licence.statuses = [];
           }
-          $scope.licence.part.statuses.push(statusModel);
-          $scope.licence.part.valid = statusModel.valid;
+          $scope.licence.statuses.push(statusModel);
+          $scope.licence.valid = statusModel.valid;
 
-          return PersonLicences.save({
+          return PersonLicences.updateLicenceStatus({
             id: scModalParams.personId,
             ind: scModalParams.licenceInd
           },
-          $scope.licence).$promise.then(function () {
+          statusModel).$promise.then(function () {
            return $modalInstance.close();
           });
         }

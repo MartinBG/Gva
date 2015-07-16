@@ -9,6 +9,7 @@
     $filter,
     PersonLicences,
     PersonLicenceEditions,
+    Nomenclatures,
     newLicence
   ) {
     $scope.newLicence = newLicence;
@@ -16,11 +17,17 @@
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
-    $scope.$watch('newLicence.part.licenceType', function () {
-      if ($scope.newLicence.part.licenceType) {
-        var licenceTypeCode = $scope.newLicence.part.licenceType.code;
-        $scope.isFcl = licenceTypeCode.indexOf('FCL') >= 0 || 
-          licenceTypeCode === 'BG CCA';
+    $scope.$watch('newLicence.part.licenceTypeId', function () {
+      if ($scope.newLicence.part.licenceTypeId) {
+        Nomenclatures.get({
+          alias: 'licenceTypes',
+          id: $scope.newLicence.part.licenceTypeId 
+        })
+          .$promise
+          .then(function (licenceType) {
+            $scope.isFcl = licenceType.code.indexOf('FCL') >= 0 || 
+              licenceType.code === 'BG CCA';
+          });
       }
     });
 
@@ -62,6 +69,7 @@
     '$filter',
     'PersonLicences',
     'PersonLicenceEditions',
+    'Nomenclatures',
     'newLicence'
   ];
 

@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonLicenceStatusDO
+    public class PersonLicenceStatusDO_Old
     {
         [Required(ErrorMessage = "Valid is required!")]
-        public int? ValidId { get; set; }
+        public NomValue Valid { get; set; }
 
         [Required(ErrorMessage = "ChangeReason is required!")]
-        public int? ChangeReasonId { get; set; }
+        public NomValue ChangeReason { get; set; }
 
         [Required(ErrorMessage = "ChangeDate is required!")]
         public DateTime? ChangeDate { get; set; }
 
-        public int? InspectorId { get; set; }
+        public NomValue Inspector { get; set; }
 
         public string Notes { get; set; }
     }

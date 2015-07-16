@@ -85,7 +85,7 @@ namespace Gva.Api.WordTemplates
                 VALID_UNTIL = bgMedical.DocumentDateValidTo.HasValue ? bgMedical.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
             } : null;
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
 
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",

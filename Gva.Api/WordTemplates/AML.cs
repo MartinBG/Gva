@@ -64,9 +64,9 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
-            string licenceCode = licence.LicenceType.Code;
+            string licenceCode = licenceType.Code;
             var licenceNumber = string.Format(
                 "BG.66.{0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -85,7 +85,7 @@ namespace Gva.Api.WordTemplates
 
             var categoryNP = AMLUtils.GetCategoryNP(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository, this.lotRepository);
             var acLimitations = AMLUtils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
-            var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition) : new object[0];
+            var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
 
             var json = new
             {

@@ -71,7 +71,7 @@ namespace Gva.Api.WordTemplates
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             string number = string.Format("BG/{0}/{1}", code, personData.Lin);
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue(licence.Content.LicenceTypeId.Value);
             
             var licenceNumber = string.Format(
                 "{0} - {1} - {2}",

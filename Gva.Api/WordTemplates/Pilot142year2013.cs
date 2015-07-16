@@ -96,7 +96,7 @@ namespace Gva.Api.WordTemplates
                 } :
                 null;
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
@@ -108,9 +108,8 @@ namespace Gva.Api.WordTemplates
             })
             .ToList<object>();
             
-            var allIncludedLimitations66Codes = lastEdition.Limitations.Select(s => s.Code);
             var allIncludedLimitations66 = this.nomRepository.GetNomValues("limitations66")
-                .Where(l => allIncludedLimitations66Codes.Contains(l.Code));
+                .Where(l => lastEdition.Limitations.Contains(l.NomValueId));
 
             var limitationsP8 = allIncludedLimitations66
                 .Where(l => l.TextContent.Get<int>("point") == 8)

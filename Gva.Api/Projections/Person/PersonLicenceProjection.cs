@@ -31,29 +31,45 @@ namespace Gva.Api.Projections.Person
             List<GvaViewPersonLicence> licencesView = new List<GvaViewPersonLicence>();
             foreach (var licence in licences)
             {
-                var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
-                licencesView.Add(this.Create(licence, licenceType));
+                licencesView.Add(this.Create(licence));
             }
 
             return licencesView;
         }
 
-        private GvaViewPersonLicence Create(
-            PartVersion<PersonLicenceDO> personLicence,
-            NomValue licenceType)
+        private GvaViewPersonLicence Create(PartVersion<PersonLicenceDO> personLicence)
         {
-            GvaViewPersonLicence licence = new GvaViewPersonLicence();
+            var licenceType = this.nomRepository.GetNomValue(personLicence.Content.LicenceTypeId.Value);
 
+            GvaViewPersonLicence licence = new GvaViewPersonLicence();
             licence.LotId = personLicence.Part.Lot.LotId;
             licence.PartId = personLicence.Part.PartId;
             licence.PartIndex = personLicence.Part.Index;
-            licence.LicenceTypeId = personLicence.Content.LicenceType.NomValueId;
+            licence.LicenceTypeId = personLicence.Content.LicenceTypeId.Value;
             licence.LicenceNumber = personLicence.Content.LicenceNumber;
-            licence.Valid = personLicence.Content.Valid != null && personLicence.Content.Valid.Code == "Y";
+
+            if (personLicence.Content.ValidId.HasValue)
+            {
+                licence.Valid = this.nomRepository.GetNomValue(personLicence.Content.ValidId.Value).Code == "Y";
+            }
+            else
+            {
+                licence.Valid = false;
+            }
+
             licence.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
-            licence.PublisherCode = personLicence.Content.Publisher.Code;
+
+            if (personLicence.Content.PublisherId.HasValue)
+            {
+                licence.PublisherCode = this.nomRepository.GetNomValue("caa", personLicence.Content.PublisherId.Value).Code;
+            }
+
             licence.ForeignLicenceNumber = personLicence.Content.ForeignLicenceNumber;
-            licence.ForeignPublisher = personLicence.Content.ForeignPublisher != null?  personLicence.Content.ForeignPublisher.Name : null;
+
+            if (personLicence.Content.ForeignPublisherId.HasValue)
+            {
+                licence.ForeignPublisher = this.nomRepository.GetNomValue("caa", personLicence.Content.ForeignPublisherId.Value).Name;
+            }
 
             return licence;
         }

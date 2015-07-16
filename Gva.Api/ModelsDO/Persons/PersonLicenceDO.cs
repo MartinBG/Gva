@@ -8,20 +8,20 @@ namespace Gva.Api.ModelsDO.Persons
     public class PersonLicenceDO
     {
         [Required(ErrorMessage = "LicenceType is required.")]
-        public NomValue LicenceType { get; set; }
+        public int? LicenceTypeId { get; set; }
 
         public int? LicenceNumber { get; set; }
 
         public string ForeignLicenceNumber { get; set; }
 
-        public NomValue ForeignPublisher { get; set; }
+        public int? ForeignPublisherId { get; set; }
 
-        public NomValue Employment { get; set; }
+        public int? EmploymentId { get; set; }
 
         [Required(ErrorMessage = "Publisher is required.")]
-        public NomValue Publisher { get; set; }
+        public int? PublisherId { get; set; }
 
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         public List<PersonLicenceStatusDO> Statuses { get; set; }
     }

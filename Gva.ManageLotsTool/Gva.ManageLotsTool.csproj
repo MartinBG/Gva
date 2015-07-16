@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OldDOs\PersonLicenceAmlLimitationsDO_Old.cs" />
+    <Compile Include="OldDOs\PersonLicenceDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceEditionDO_Old.cs" />
+    <Compile Include="OldDOs\PersonLicenceStatusDO_Old.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

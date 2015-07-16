@@ -392,7 +392,7 @@ namespace Gva.Api.Projections.Person
 
         private GvaViewPersonDocument Create(PartVersion<PersonLicenceDO> personLicence, PartVersion<PersonLicenceEditionDO> edition, int roleId)
         {
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", personLicence.Content.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue(personLicence.Content.LicenceTypeId.Value);
 
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
@@ -401,12 +401,18 @@ namespace Gva.Api.Projections.Person
             document.ParentPartId = personLicence.Part.PartId;
             document.SetPartAlias = personLicence.Part.SetPart.Alias;
             document.RoleId = roleId;
+
+            string publisherCode = null;
+            if(personLicence.Content.PublisherId.HasValue)
+            {
+                publisherCode = this.nomRepository.GetNomValue(personLicence.Content.PublisherId.Value).Code;
+            }
             document.DocumentNumber = personLicence.Content.LicenceNumber.HasValue ?
-                string.Format("{0} {1} - {2}", personLicence.Content.Publisher.Code, licenceType.TextContent.Get<string>("codeCA"), personLicence.Content.LicenceNumber) :
+                string.Format("{0} {1} - {2}", publisherCode, licenceType.TextContent.Get<string>("codeCA"), personLicence.Content.LicenceNumber) :
                 null;
             document.Date = edition.Content.DocumentDateValidFrom.Value;
-            document.Publisher = personLicence.Content.Publisher.Code;
-            document.Valid = personLicence.Content.Valid == null ? (bool?)null : personLicence.Content.Valid.Code == "Y";
+            document.Publisher =  publisherCode;
+            document.Valid = !personLicence.Content.ValidId.HasValue ? (bool?)null : this.nomRepository.GetNomValue(personLicence.Content.ValidId.Value).Code == "Y";
             document.FromDate = edition.Content.DocumentDateValidFrom.Value;
             document.ToDate = edition.Content.DocumentDateValidTo;
             document.Notes = edition.Content.Notes;

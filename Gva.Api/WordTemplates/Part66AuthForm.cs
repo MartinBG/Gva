@@ -71,8 +71,8 @@ namespace Gva.Api.WordTemplates
                 NAME = string.Format("{0} {1}", l.LangLevel.Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
             });
 
-            var limitations =  lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition) : new object[0];
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var limitations =  lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
 
             var licenceNumber = string.Format(
                 "BG.66.A - {0} - {1}",

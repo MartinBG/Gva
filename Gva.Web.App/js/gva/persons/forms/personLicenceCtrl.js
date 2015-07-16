@@ -13,11 +13,11 @@
     $scope.caseTypeId = scFormParams.caseTypeId;
 
     if ($scope.isNew) {
-      $scope.$watch('model.part.licenceType', function () {
-        if ($scope.model.part.licenceType) {
+      $scope.$watch('model.part.licenceTypeId', function () {
+        if ($scope.model.part.licenceTypeId) {
           PersonLicences.lastLicenceNumber({
             id: $scope.lotId,
-            licenceTypeCode: $scope.model.part.licenceType.code
+            licenceTypeId: $scope.model.part.licenceTypeId
           }).$promise
             .then(function (lastLicenceNumber) {
               if (lastLicenceNumber.number === null) {
@@ -35,17 +35,18 @@
     }
 
      $scope.isUniqueLicenceNumber = function () {
-      if($scope.model.part.licenceNumber) {
-        return PersonLicences
-          .isUniqueLicenceNumber({
-            id: $scope.lotId,
-            licenceNumber: $scope.model.part.licenceNumber,
-            licenceTypeCode: $scope.model.part.licenceType.code
-          })
-        .$promise
-        .then(function (result) {
-          return result.isUnique;
-        });
+      if($scope.model.part.licenceNumber && 
+        $scope.model.part.licenceTypeId) {
+          return PersonLicences
+            .isUniqueLicenceNumber({
+              id: $scope.lotId,
+              licenceNumber: $scope.model.part.licenceNumber,
+              licenceTypeId: $scope.model.part.licenceTypeId
+            })
+          .$promise
+          .then(function (result) {
+            return result.isUnique;
+          });
       } else {
         return true;
       }

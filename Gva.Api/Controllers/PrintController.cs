@@ -91,7 +91,7 @@ namespace Gva.Api.Controllers
             string editionPath = string.Format("licenceEditions/{0}", editionPartIndex);
             PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(editionPath);
 
-            int licenceTypeId = lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceType.NomValueId;
+            int licenceTypeId = lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceTypeId.Value;
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             Guid licenceEditionDocBlobKey;
@@ -180,7 +180,7 @@ namespace Gva.Api.Controllers
         {
             string path = string.Format("{0}/{1}", "licences", licenceInd);
             var lot = this.lotRepository.GetLotIndex(lotId);
-            string licenceTypeCode = lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceType.Code;
+            string licenceTypeCode = this.nomRepository.GetNomValue(lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceTypeId.Value).Code;
             if (licenceTypeCode.Contains("FCL") || licenceTypeCode == "BG CCA" || licenceTypeCode.Contains("Part-66"))
             {
                 string templateName = licenceTypeCode.Contains("Part-66") ? "part66_auth_form" : "fcl_auth_form";

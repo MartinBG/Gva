@@ -164,7 +164,7 @@ namespace Gva.Api.WordTemplates
             return categories.ToArray();
         }
 
-        internal static object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)
+        internal static object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition, INomRepository nomRepository)
         {
             string noLimitations = "No limitations";
             IList<object> limitations = new List<object>();
@@ -178,94 +178,94 @@ namespace Gva.Api.WordTemplates
                 return new object[0];
             }
 
-            List<NomValue> AT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> AT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.At_a_Ids;
-            List<NomValue> AT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> AT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.At_b1_Ids;
-            List<NomValue> AP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> AP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Ap_a_Ids;
-            List<NomValue> AP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> AP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Ap_b1_Ids;
-            List<NomValue> HT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> HT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Ht_a_Ids;
-            List<NomValue> HT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> HT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Ht_b1_Ids;
-            List<NomValue> HP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> HP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Hp_a_Ids;
-            List<NomValue> HP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> HP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Hp_b1_Ids;
-            List<NomValue> avionics_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
+            List<int> avionics_Ids = lastLicenceEdition.AmlLimitations == null ?
+                new List<int>() :
                 lastLicenceEdition.AmlLimitations.Avionics_Ids;
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Turbine",
                 CAT = "A 1",
-                LIMT = AT_a_Ids != null && AT_a_Ids.Count > 0 ? string.Join(",", AT_a_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = AT_a_Ids != null && AT_a_Ids.Count > 0 ? string.Join(",", AT_a_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Turbine",
                 CAT = "B 1.1",
-                LIMT = AT_b1_Ids != null && AT_b1_Ids.Count > 0 ? string.Join(",", AT_b1_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = AT_b1_Ids != null && AT_b1_Ids.Count > 0 ? string.Join(",", AT_b1_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Piston",
                 CAT = "A 2",
-                LIMT = AP_a_Ids != null && AP_a_Ids.Count > 0 ? string.Join(",", AP_a_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = AP_a_Ids != null && AP_a_Ids.Count > 0 ? string.Join(",", AP_a_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Piston",
                 CAT = "B 1.2",
-                LIMT = AP_b1_Ids != null && AP_b1_Ids.Count > 0 ? string.Join(",", AP_b1_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = AP_b1_Ids != null && AP_b1_Ids.Count > 0 ? string.Join(",", AP_b1_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Turbine",
                 CAT = "A 3",
-                LIMT = HT_a_Ids != null && HT_a_Ids.Count > 0 ? string.Join(",", HT_a_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = HT_a_Ids != null && HT_a_Ids.Count > 0 ? string.Join(",", HT_a_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Turbine",
                 CAT = "B 1.3",
-                LIMT = HT_b1_Ids != null && HT_b1_Ids.Count > 0 ? string.Join(",", HT_b1_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = HT_b1_Ids != null && HT_b1_Ids.Count > 0 ? string.Join(",", HT_b1_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Piston",
                 CAT = "A 4",
-                LIMT = HP_a_Ids != null && HP_a_Ids.Count > 0 ? string.Join(",", HP_a_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = HP_a_Ids != null && HP_a_Ids.Count > 0 ? string.Join(",", HP_a_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Piston",
                 CAT = "B 1.4",
-                LIMT = HP_b1_Ids != null && HP_b1_Ids.Count > 0 ? string.Join(",", HP_b1_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = HP_b1_Ids != null && HP_b1_Ids.Count > 0 ? string.Join(",", HP_b1_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
             limitations.Add(new
             {
                 NAME = "Avionics",
                 CAT = "B 2",
-                LIMT = avionics_Ids != null && avionics_Ids.Count > 0 ? string.Join(",", avionics_Ids.Select(l => l.Name)) : noLimitations
+                LIMT = avionics_Ids != null && avionics_Ids.Count > 0 ? string.Join(",", avionics_Ids.Select(l => nomRepository.GetNomValue(l).Name)) : noLimitations
             });
 
             return limitations.ToArray<object>();
