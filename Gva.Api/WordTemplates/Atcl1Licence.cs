@@ -100,7 +100,15 @@ namespace Gva.Api.WordTemplates
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
-            var langLevel = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
+            var langLevel = includedLangCerts
+                .Where(c => c.LangLevel != null)
+                .Select(c => new
+                {
+                    LEVEL = c.LangLevel.Name,
+                    ISSUE_DATE = c.DocumentDateValidFrom,
+                    VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
+                }).ToList<object>();
+
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
             var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false, false);
             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true, true);
@@ -136,7 +144,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
                     ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item1, 3),
-                    L_LANG_LEVEL = langLevel,
+                    L_LANG_LEVEL = Utils.FillBlankData(langLevel, 1),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     NAME = string.Format(
@@ -156,7 +164,7 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS = documents.Take(6),
                     T_DOCUMENTS2 = documents.Skip(6),
                     T_LANG_LEVEL_NO = number++,
-                    T_LANG_LEVEL = langLevel,
+                    T_LANG_LEVEL = Utils.FillBlankData(langLevel, 1),
                     T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
                     L_ENDORSEMENT1 = Utils.FillBlankData(lEndorsements, 15),
                     L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
