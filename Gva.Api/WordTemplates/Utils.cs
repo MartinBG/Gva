@@ -160,9 +160,64 @@ namespace Gva.Api.WordTemplates
                 LEVEL = c.LangLevel.Name,
                 ISSUE_DATE = c.DocumentDateValidFrom,
                 VALID_DATE = c.LangLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-
             })
             .ToList<object>();
+        }
+
+        internal static List<object> GetATCLLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
+        {
+            var langLevel = new List<object>();
+            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
+            {
+                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
+                if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
+                {
+                    langLevel.Add(new
+                    {
+                        LEVEL = cert.LangLevel.Name,
+                        ISSUE_DATE = cert.DocumentDateValidFrom,
+                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                    });
+                }
+                else
+                {
+                    langLevel.Add(new
+                    {
+                        LEVEL = cert.LangLevel.Name,
+                        ISSUE_DATE = cert.DocumentDateValidFrom,
+                        VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
+                    });
+                }
+            }
+
+            return langLevel;
+        }
+
+        internal static List<object> GetATCLLangCertsForEndosement(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
+        {
+            var langLevel = new List<object>();
+            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
+            {
+                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
+                if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
+                {
+                    langLevel.Add(new
+                    {
+                        AUTH = cert.LangLevel.Name.ToUpper(),
+                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                    });
+                }
+                else
+                {
+                    langLevel.Add(new
+                    {
+                        AUTH = cert.LangLevel.Name.ToUpper(),
+                        VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
+                    });
+                }
+            }
+
+            return langLevel;
         }
 
         internal static List<object> GetRatings(
