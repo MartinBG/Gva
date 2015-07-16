@@ -101,7 +101,6 @@ namespace Gva.Api.WordTemplates
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
             var langLevel = Utils.GetATCLLangCerts(includedLangCerts, nomRepository);
-            var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
             var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false, false);
             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true, true);
             var endorsementsAndOtherEndorsements = this.GetEndorsements(includedRatings, ratingEditions);

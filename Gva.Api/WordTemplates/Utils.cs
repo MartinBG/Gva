@@ -25,6 +25,27 @@ namespace Gva.Api.WordTemplates
             return String.Join(", ", phones);
         }
 
+        internal static string GetAuthFormAddress(PersonAddressDO personAddress, NomValue country)
+        {
+            List<string> addressData = new List<string>();
+            if (country != null)
+            {
+                addressData.Add(country.NameAlt);
+            }
+
+            if (personAddress.Settlement != null)
+            {
+                addressData.Add(personAddress.Settlement.NameAlt);
+            }
+
+            if (personAddress != null)
+            {
+                addressData.Add(personAddress.AddressAlt);
+            }
+
+            return string.Join(", ", addressData);
+        }
+
         internal static object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
         {
             return new
@@ -185,33 +206,6 @@ namespace Gva.Api.WordTemplates
                     {
                         LEVEL = cert.LangLevel.Name,
                         ISSUE_DATE = cert.DocumentDateValidFrom,
-                        VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
-                    });
-                }
-            }
-
-            return langLevel;
-        }
-
-        internal static List<object> GetATCLLangCertsForEndosement(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
-        {
-            var langLevel = new List<object>();
-            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
-            {
-                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
-                if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
-                {
-                    langLevel.Add(new
-                    {
-                        AUTH = cert.LangLevel.Name.ToUpper(),
-                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-                    });
-                }
-                else
-                {
-                    langLevel.Add(new
-                    {
-                        AUTH = cert.LangLevel.Name.ToUpper(),
                         VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
                     });
                 }

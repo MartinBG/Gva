@@ -75,26 +75,26 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
 
             var licenceNumber = string.Format(
-                "BGR. {0} - {1} - {2}",
-                licenceType.Code.Replace("/", "."),
+                "BG.66.A - {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
+            string address = Utils.GetAuthFormAddress(personAddress, country);
 
             var json = new
             {
                 root = new
                 {
                     STATE = country != null ? country.NameAlt : null,
-                    LICENCE_CODE = licenceType.Code,
+                    LICENCE_CODE = "Part-66",
                     LICENCE_NUMBER = licenceNumber,
-                    NAMES_ALT = string.Format("{0} {1} {2}", personData.FirstName.ToUpper(), personData.MiddleName.ToUpper(), personData.LastName.ToUpper()),
+                    NAMES_ALT = string.Format("{0} {1} {2}", personData.FirstNameAlt.ToUpper(), personData.MiddleNameAlt.ToUpper(), personData.LastNameAlt.ToUpper()),
                     DATE_AND_PLACE_OF_BIRTH = string.Format("{0} {1}", personData.DateOfBirth.HasValue ? personData.DateOfBirth.Value.ToString("dd.MM.yyyy") : "", personData.PlaceOfBirth.NameAlt),
                     DATE_OF_ISSUE = lastEdition.DocumentDateValidFrom,
                     VALID_DATE = lastEdition.DocumentDateValidTo,
-                    ADDRESS_ALT = personAddress != null ? personAddress.AddressAlt : null,
+                    ADDRESS_ALT = address,
                     NATIONALITY = countryCode,
                     RATINGS = Utils.FillBlankData(ratings, 1),
                     LANGUAGES_AND_LIMITATIONS = langCerts,
@@ -129,7 +129,7 @@ namespace Gva.Api.WordTemplates
                                  rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
                          CATEGORY = rating.Content.AircraftTypeCategory.Code,
                          LIMITATION = edition.Content.Limitations.Count() > 0 ? string.Join(", ", edition.Content.Limitations.Select(l => l.Code)) : null,
-                         DATE = edition.Content.DocumentDateValidTo
+                         DATE = edition.Content.DocumentDateValidFrom
                      });
                  }
             }
