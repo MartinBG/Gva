@@ -114,6 +114,7 @@ namespace Gva.Api.Controllers.Reports
             int? limitationId = null,
             int? ratingTypeId = null,
             string sortBy = null,
+            int? showAllPerPersonId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -131,6 +132,7 @@ namespace Gva.Api.Controllers.Reports
                     lin: lin,
                     limitationId: limitationId,
                     ratingTypeId: ratingTypeId,
+                    showAllPerPersonId: showAllPerPersonId,
                     sortBy: sortBy,
                     offset: offset,
                     limit: limit);

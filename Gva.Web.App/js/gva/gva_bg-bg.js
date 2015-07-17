@@ -1552,7 +1552,8 @@
           locationIndicator: 'Индикатор на местопол.',
           authorizationCode: 'Разрешение',
           sector: 'Сектор',
-          ratingType: 'Тип ВС'
+          ratingType: 'Тип ВС',
+          showAllPerPerson: 'Покажи всички кв.класове за човек'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',
