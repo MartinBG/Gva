@@ -335,10 +335,21 @@ namespace Gva.Api.Controllers.Persons
             var allItemsExceptLicences = inventory.Where(i => i.SetPartAlias != "personLicence");
 
             var distinctLicences = inventory.Where(i => i.SetPartAlias == "personLicence")
-                .GroupBy(i => i.ParentPartIndex)
-                .Select(l => l.Last());
+                .GroupBy(i => i.ParentPartIndex);
 
-            var result = allItemsExceptLicences.Union(distinctLicences)
+            List<InventoryItemDO> licenceInventoryResult = new List<InventoryItemDO>();
+            foreach (var joinedLicenceEditionsWithFiles in distinctLicences)
+            {
+                var lastEdition = joinedLicenceEditionsWithFiles.OrderByDescending(e => e.FromDate).First();
+                var edition = joinedLicenceEditionsWithFiles
+                    .Where(e => e.PartIndex == lastEdition.PartIndex)
+                    .OrderByDescending(e => e.BookPageNumber)
+                    .First();
+
+                licenceInventoryResult.Add(edition);
+            }
+
+            var result = allItemsExceptLicences.Union(licenceInventoryResult)
                 .OrderBy(f => f.BookPageNumber)
                 .ToList();
 
