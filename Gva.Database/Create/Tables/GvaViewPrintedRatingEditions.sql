@@ -8,6 +8,8 @@ CREATE TABLE [dbo].[GvaViewPrintedRatingEditions] (
     [LicencePartIndex]        INT              NOT NULL,
     [LicenceEditionPartIndex] INT              NOT NULL,
     [PrintedFileId]           INT              NOT NULL,
+    [LicenceStatusId]         INT              NULL,
+	[NoNumber]                BIT              NULL,
     CONSTRAINT [PK_GvaViewPrintedRatingEditions]                              PRIMARY KEY ([LotId], [RatingPartIndex], [RatingEditionPartIndex], [LicencePartIndex], [LicenceEditionPartIndex]),
     CONSTRAINT [FK_GvaViewPrintedRatingEditions_GvaViewPersonLicenceEditions] FOREIGN KEY ([LotId], [LicencePartIndex], [LicenceEditionPartIndex]) REFERENCES [dbo].[GvaViewPersonLicenceEditions] ([LotId], [LicencePartIndex], [PartIndex]),
     CONSTRAINT [FK_GvaViewPrintedRatingEditions_GvaFiles]                     FOREIGN KEY ([PrintedFileId])                                        REFERENCES [dbo].[GvaFiles] ([GvaFileId])
@@ -21,4 +23,7 @@ exec spDescColumn N'GvaViewPrintedRatingEditions', N'RatingEditionPartIndex'  , 
 exec spDescColumn N'GvaViewPrintedRatingEditions', N'LicencePartIndex'        , N'Идентификатор на индекс на лиценз.'
 exec spDescColumn N'GvaViewPrintedRatingEditions', N'LicenceEditionPartIndex' , N'Идентификатор на вписване на лиценз.'
 exec spDescColumn N'GvaViewPrintedRatingEditions', N'PrintedFileId'           , N'Идентификатор на файла на принтиран лиценз.'
+exec spDescColumn N'GvaViewPrintedRatingEditions', N'LicenceStatusId'         , N'Статус за готов/получен лиценз.'
+exec spDescColumn N'GvaViewPrintedRatingEditions', N'NoNumber'                , N'Флаг за лиценз номер.'
+
 GO

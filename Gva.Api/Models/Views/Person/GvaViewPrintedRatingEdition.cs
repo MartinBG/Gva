@@ -22,6 +22,12 @@ namespace Gva.Api.Models.Views.Person
 
         public int PrintedFileId { get; set; }
 
+        public int? LicenceStatusId { get; set; }
+
+        public bool? NoNumber { get; set; }
+
+        public virtual GvaViewPerson Person { get; set; }
+
         public virtual GvaViewPersonLicenceEdition LicenceEdition { get; set; }
     }
 
@@ -59,6 +65,12 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicencePartIndex).HasColumnName("LicencePartIndex");
             this.Property(t => t.LicenceEditionPartIndex).HasColumnName("LicenceEditionPartIndex");
             this.Property(t => t.PrintedFileId).HasColumnName("PrintedFileId");
+            this.Property(t => t.LicenceStatusId).HasColumnName("LicenceStatusId");
+            this.Property(t => t.NoNumber).HasColumnName("NoNumber");
+
+            this.HasRequired(t => t.Person)
+                .WithMany()
+                .HasForeignKey(t => t.LotId);
 
             this.HasRequired(t => t.LicenceEdition)
                 .WithMany(t => t.PrintedRatingEditions)

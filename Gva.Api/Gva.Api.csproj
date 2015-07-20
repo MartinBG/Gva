@@ -183,6 +183,8 @@
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\Persons\StampedLicenceDO.cs" />
+    <Compile Include="ModelsDO\Persons\RatingEditionLicenceDO.cs" />
     <Compile Include="ModelsDO\SModeCodes\ConnectedRegistrationViewDO.cs" />
     <Compile Include="ModelsDO\WordTemplateDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertCampaignDO.cs" />

@@ -53,7 +53,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         bool IsUniqueUin(string uin, int? personId = null);
 
-        Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetStampedDocuments(
+        Tuple<int, IEnumerable<StampedLicenceDO>> GetStampedDocuments(
             string uin,
             string names,
             string stampNumber,

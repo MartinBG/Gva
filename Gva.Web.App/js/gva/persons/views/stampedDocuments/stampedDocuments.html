@@ -40,13 +40,13 @@
     <sc-ajaxcolumn data="licenceAction.code" title="persons.stampedDocumentsView.licenceAction">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.ready" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">
+      <input type="checkbox" ng-checked="isChecked(item, 'licenceReady') || item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.received" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.isReceived || !item.isReady" sc-click="selectCheck($event, item, 'returned')" >
+      <input type="checkbox" ng-checked="isChecked(item, 'returned') || item.isReceived" ng-disabled="item.isReceived || !item.isReady" sc-click="selectCheck($event, item, 'returned')" >
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" sc-click="selectCheck($event, item, 'done')" ng-if="!item.isOfficiallyReissued">
+      <input type="checkbox" ng-checked="isChecked(item, 'done') || item.isDone" sc-click="selectCheck($event, item, 'done')" ng-if="!item.isOfficiallyReissued && !item.ratingPartIndex">
     </sc-ajaxcolumn>
   </sc-ajaxdatatable>
 </ng-form>

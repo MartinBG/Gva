@@ -247,7 +247,7 @@ namespace Gva.Api.Repositories.PersonRepository
             }
         }
 
-        public Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetStampedDocuments(
+        public Tuple<int, IEnumerable<StampedLicenceDO>> GetStampedDocuments(
             string uin,
             string names,
             string stampNumber,
@@ -257,44 +257,50 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<GvaLicenceEdition>()
+            var predicatePerLicences = PredicateBuilder.True<GvaLicenceEdition>()
                 .And(e => e.StampNumber != null && (e.GvaStageId.HasValue || e.OfficiallyReissuedStageId.HasValue))
                 .And(e => (e.GvaStageId.HasValue ? e.GvaStageId < GvaConstants.IsDoneApplication : e.OfficiallyReissuedStageId < GvaConstants.IsReceivedLicence));
+
+            var predicatePerRatingLicences = PredicateBuilder.True<GvaViewPrintedRatingEdition>()
+                .And(e => e.NoNumber.HasValue && e.NoNumber.Value == true && (!e.LicenceStatusId.HasValue || e.LicenceStatusId < GvaConstants.IsReceivedLicence));
 
             if (isOfficiallyReissuedId.HasValue)
             {
                 bool searchForOfficiallyReissued = this.nomRepository.GetNomValue(isOfficiallyReissuedId.Value).Code == "Y";
-                predicate = predicate.And(e => searchForOfficiallyReissued ? e.OfficiallyReissuedStageId.HasValue : !e.OfficiallyReissuedStageId.HasValue);
+                predicatePerLicences = predicatePerLicences.And(e => searchForOfficiallyReissued ? e.OfficiallyReissuedStageId.HasValue : !e.OfficiallyReissuedStageId.HasValue);
             }
 
             if (lin.HasValue) 
             {
-                predicate = predicate.And(e => e.Person.Lin == lin);
+                predicatePerLicences = predicatePerLicences.And(e => e.Person.Lin == lin);
+                predicatePerRatingLicences = predicatePerRatingLicences.And(r => r.Person.Lin == lin);
             }
 
             if (!string.IsNullOrEmpty(uin))
             {
-                predicate = predicate.And(e => e.Person.Uin.Contains(uin));
+                predicatePerLicences = predicatePerLicences.And(e => e.Person.Uin.Contains(uin));
+                predicatePerRatingLicences = predicatePerRatingLicences.And(r => r.Person.Uin.Contains(uin));
             }
 
             if (!string.IsNullOrEmpty(names)) 
             {
-                predicate = predicate.And(e => e.Person.Names.Contains(names));
+                predicatePerLicences = predicatePerLicences.And(e => e.Person.Names.Contains(names));
+                predicatePerRatingLicences = predicatePerRatingLicences.And(r => r.Person.Names.Contains(names));
             }
-
 
             if (licenceNumber.HasValue)
             {
-                predicate = predicate.And(e => e.LicenceNumber != null && e.LicenceNumber.Value == licenceNumber);
+                predicatePerLicences = predicatePerLicences.And(e => e.LicenceNumber != null && e.LicenceNumber.Value == licenceNumber);
+                predicatePerRatingLicences = predicatePerRatingLicences.And(r => 
+                    r.LicenceEdition.Licence.LicenceNumber != null && r.LicenceEdition.Licence.LicenceNumber.Value == licenceNumber);
             }
 
             if (!string.IsNullOrEmpty(stampNumber))
             {
-                predicate = predicate.And(e => e.StampNumber.Contains(stampNumber));
+                predicatePerLicences = predicatePerLicences.And(e => e.StampNumber.Contains(stampNumber));
             }
 
-
-            var query = this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
+            var licencesQuery = this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
                 .Include(e => e.Person)
                 .Include(e => e.Person.LinType)
@@ -302,14 +308,26 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.GvaApplication.Doc)
                 .Include(e => e.GvaApplication.GvaViewApplication)
                 .Include(e => e.GvaApplication.GvaViewApplication.ApplicationType)
-                .Where(predicate)
+                .Where(predicatePerLicences)
                 .OrderByDescending(i => i.DateValidFrom);
 
-            var result = query
-                .WithOffsetAndLimit(offset, limit)
-                .ToList();
+            var licencesResult = licencesQuery.ToList().Select(d => new StampedLicenceDO(d));
 
-            return new Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>>(query.Count(), result.Select(d => new GvaViewPersonLicenceEditionDO(d)));
+            var ratingLicencesQuery = this.unitOfWork.DbContext.Set<GvaViewPrintedRatingEdition>()
+                .Include(r => r.Person)
+                .Include(e => e.Person.LinType)
+                .Include(r => r.LicenceEdition)
+                .Include(r => r.LicenceEdition.Licence)
+                .Include(e => e.LicenceEdition.LicenceAction)
+                .Where(predicatePerRatingLicences)
+                .OrderByDescending(r => r.LicenceEdition.DateValidFrom);
+
+            var ratingLicencesResult = ratingLicencesQuery.ToList().Select(r => new StampedLicenceDO(r));
+
+            var result = licencesResult.Union(ratingLicencesResult).OrderByDescending(r => r.DateValidFrom);
+            int count = licencesQuery.Count() + ratingLicencesQuery.Count();
+
+            return new Tuple<int, IEnumerable<StampedLicenceDO>>(count, result.WithOffsetAndLimit(offset, limit));
         }
 
         public IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId)
