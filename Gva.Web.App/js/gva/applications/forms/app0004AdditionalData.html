@@ -1,0 +1,96 @@
+﻿<ng-form class="form-inline" sc-form-readonly>
+  <h5 class="form-header" l10n-text="applications.app0004AdditionalData.title" style="margin:10px 0px;"></h5>
+    <table class="table table-striped table-bordered" style="width:50px; margin-bottom: 10px">
+    <tbody>
+      <tr>
+        <td l10n-text="applications.app0004AdditionalData.firstIssue" colspan="5"></td>
+        <td>
+          <input type="checkbox" ng-model="model.firstIssue" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.confirmation" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.confirmation" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.reissue" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.reissue" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.extension" colspan="6"></td>
+        <td>
+          <input type="checkbox" ng-model="model.extension" ng-disabled="form.$readonly" />
+        </td>
+      </tr>
+      <tr>
+        <td l10n-text="applications.app0004AdditionalData.fe"></td>
+        <td>
+          <input type="checkbox" ng-model="model.fe" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.tre"></td>
+        <td>
+          <input type="checkbox" ng-model="model.tre" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.cre"></td>
+        <td>
+          <input type="checkbox" ng-model="model.cre" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.ire" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.ire" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.sfe" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.sfe" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.fie" colspan="6"></td>
+        <td>
+          <input type="checkbox" ng-model="model.fie" ng-disabled="form.$readonly" />
+        </td>
+      </tr>
+      <tr>
+        <td l10n-text="applications.app0004AdditionalData.a"></td>
+        <td>
+          <input type="checkbox" ng-model="model.a" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.h"></td>
+        <td>
+          <input type="checkbox" ng-model="model.h" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.pl"></td>
+        <td>
+          <input type="checkbox" ng-model="model.pl" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.as" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.as" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.b" colspan="2"></td>
+        <td>
+          <input type="checkbox" ng-model="model.b" ng-disabled="form.$readonly" />
+        </td>
+
+        <td l10n-text="applications.app0004AdditionalData.s" colspan="6"></td>
+        <td>
+          <input type="checkbox" ng-model="model.s" ng-disabled="form.$readonly" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <sc-field type="text" name="ratingClassTypeFstd" ng-model="model.ratingClassTypeFstd" l10n-text="applications.app0004AdditionalData.ratingClassTypeFstd" class="col-sm-7"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" name="extensionForExaminer" ng-model="model.extensionForExaminer" l10n-text="applications.app0004AdditionalData.extensionForExaminer" class="col-sm-7"></sc-field>
+  </div>
+</ng-form>

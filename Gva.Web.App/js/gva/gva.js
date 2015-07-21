@@ -27,6 +27,18 @@
       controller: 'AppExSystDataCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaApp0001AdditionalData',
+      templateUrl: 'js/gva/applications/forms/app0001AdditionalData.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaApp0004AdditionalData',
+      templateUrl: 'js/gva/applications/forms/app0004AdditionalData.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaApp0008AdditionalData',
+      templateUrl: 'js/gva/applications/forms/app0008AdditionalData.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaCommonSelectPerson',
       templateUrl: 'js/gva/common/forms/commonSelectPerson.html',
       controller: 'CommonSelectPersonCtrl'

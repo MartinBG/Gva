@@ -178,6 +178,9 @@
     <Compile Include="ModelsDO\Applications\ApplicationExamListDO.cs" />
     <Compile Include="ModelsDO\Applications\ApplicationsDO.cs" />
     <Compile Include="ModelsDO\Applications\ApplicationMainDO.cs" />
+    <Compile Include="ModelsDO\Applications\App0001AdditionalDataDO.cs" />
+    <Compile Include="ModelsDO\Applications\App0004AdditionalDataDO.cs" />
+    <Compile Include="ModelsDO\Applications\App0008AdditionalDataDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />

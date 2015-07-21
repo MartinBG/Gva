@@ -15,6 +15,15 @@
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.part.applicationType" ng-readonly="!isNew" alias="'applicationTypes'" params="{ lotId: lotId }" ng-required="true" l10n-text="common.docApplicationDirective.applicationType" class="col-sm-10"></sc-field>
   </div>
+  <div ng-if="model.part.applicationType.code === 'APP-0001'">
+    <gva-app-0001-additional-data name="0001AdditionalData" ng-model="model.part.app0001AdditionalData"></gva-app-0001-additional-data>
+  </div>
+  <div ng-if="model.part.applicationType.code === 'APP-0004'">
+    <gva-app-0004-additional-data name="0004AdditionalData" ng-model="model.part.app0004AdditionalData"></gva-app-0004-additional-data>
+  </div>
+  <div ng-if="model.part.applicationType.code === 'APP-0008'">
+    <gva-app-0008-additional-data name="0008AdditionalData" ng-model="model.part.app0008AdditionalData"></gva-app-0008-additional-data>
+  </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.part.applicationPaymentType" alias="'applicationPaymentTypes'" l10n-text="common.docApplicationDirective.applicationPaymentType" class="col-sm-4 col-md-6"></sc-field>
   </div>

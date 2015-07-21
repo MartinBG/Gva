@@ -70,6 +70,9 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFMCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
+    <Content Include="js\gva\applications\forms\app0001AdditionalData.html" />
+    <Content Include="js\gva\applications\forms\app0004AdditionalData.html" />
+    <Content Include="js\gva\applications\forms\app0008AdditionalData.html" />
     <Content Include="js\gva\sModeCodes\forms\aircraftSModeCodeData.html" />
     <Content Include="js\gva\sModeCodes\forms\aircraftSModeCodeDataCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftData.html" />
