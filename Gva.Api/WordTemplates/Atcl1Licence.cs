@@ -86,14 +86,22 @@ namespace Gva.Api.WordTemplates
                 "BGR - ATCO - {0} - {1} ATCO licence",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
-            var placeOfBirth = personData.PlaceOfBirth;
+
+            NomValue placeOfBirth = null;
             NomValue country = null;
             NomValue nationality = null;
-            if (placeOfBirth != null)
+
+            if (personData.PlaceOfBirth != null)
             {
+                placeOfBirth = this.nomRepository.GetNomValue("cities", personData.PlaceOfBirth.NomValueId);
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+            }
+
+            if (personData.Country != null)
+            {
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
+
             var address = string.Format(
                 "{0}, {1}",
                 personAddress.Settlement != null? personAddress.Settlement.Name : null,
