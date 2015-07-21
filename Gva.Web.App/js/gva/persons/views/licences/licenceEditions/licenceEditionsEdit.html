@@ -45,10 +45,10 @@
        <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.cases[0].applications[0].applicationId }}" text="{{ item.cases[0].applications[0].applicationName }}"></sc-button>
     </sc-column>
     <sc-column data="case.bookPageNumber" title="persons.editLicenceEditions.bookPageNumber" has-content="true">
-      {{item.case.bookPageNumber}}
+      {{item.cases[0].bookPageNumber}}
     </sc-column>
     <sc-column data="case.pageCount" title="persons.editLicenceEditions.pageCount" has-content="true">
-      {{item.case.pageCount}}
+      {{item.cases[0].pageCount}}
     </sc-column>
   </sc-datatable>
   <div style="clear: both"></div>
