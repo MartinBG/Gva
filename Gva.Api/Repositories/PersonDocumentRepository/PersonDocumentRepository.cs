@@ -25,12 +25,7 @@ namespace Gva.Api.Repositories.PersonDocumentRepository
 
         public IEnumerable<InventoryItemDO> GetInventoryItems(
             int? lotId = null,
-            int? caseTypeId = null,
-            string setAlias = null,
-            string documentPart = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? typeId = null)
+            int? caseTypeId = null)
         {
             var query =
                 from i in this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
@@ -83,29 +78,9 @@ namespace Gva.Api.Repositories.PersonDocumentRepository
                 predicate = predicate.And(i => i.LotId == lotId.Value);
             }
 
-            if (!string.IsNullOrEmpty(setAlias))
+            if (caseTypeId.HasValue)
             {
-                predicate = predicate.And(i => i.Set.Alias == setAlias);
-            }
-
-            if (typeId.HasValue)
-            {
-                predicate = predicate.And(i => i.Type.NomValueId == typeId.Value);
-            }
-
-            if (!string.IsNullOrEmpty(documentPart))
-            {
-                predicate = predicate.And(i => i.Name.ToLower().Contains(documentPart.ToLower()));
-            }
-
-            if (fromDate.HasValue)
-            {
-                predicate = predicate.AndDateTimeGreaterThanOrEqual(e => e.FromDate, fromDate);
-            }
-
-            if (toDate.HasValue)
-            {
-                predicate = predicate.AndDateTimeLessThanOrEqual(e => e.ToDate, toDate);
+                predicate = predicate.And(i => i.GvaCaseTypeId == caseTypeId.Value);
             }
 
             return query.Where(predicate)

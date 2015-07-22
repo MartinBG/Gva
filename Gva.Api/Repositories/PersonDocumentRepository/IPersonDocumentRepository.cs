@@ -9,12 +9,7 @@ namespace Gva.Api.Repositories.PersonDocumentRepository
     {
         IEnumerable<InventoryItemDO> GetInventoryItems(
             int? lotId = null,
-            int? caseTypeId = null,
-            string setAlias = null,
-            string documentPart = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? typeId = null);
+            int? caseTypeId = null);
 
         IEnumerable<string> GetNotes(string term);
     }
