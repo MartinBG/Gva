@@ -15,6 +15,11 @@
       getRatings: {
         method: 'GET',
         url: 'api/reports/persons/ratings'
+      },
+      getPapers: {
+        method: 'GET',
+        isArray: true,
+        url: 'api/reports/persons/papers'
       }
     });
   }]);

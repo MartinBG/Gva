@@ -1,0 +1,22 @@
+<ng-form name="papersEditForm" sc-validate="{}" sc-form-readonly="!editMode">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="papers.papersEdit.title"></strong>
+
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="papers.papersEdit.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deletePaper()" text="papers.papersEdit.delete" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="papers.papersEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="papers.papersEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-paper-data name="paperDataForm" ng-model="paper" sc-form-params="{ isNew: false }"></gva-paper-data>
+    </div>
+  </div>
+</ng-form>

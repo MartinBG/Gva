@@ -181,6 +181,35 @@
           cancel: 'Отказ'
         }
       },
+      papers: {
+        papersSearch: {
+          'new': 'Нова хартия',
+          name: 'Наименование',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          isActive: 'Активен',
+          firstNumber: 'Първи № на хартия'
+        },
+        papersEdit: {
+          title: 'Преглед на данни за хартия',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          'delete': 'Изтрий'
+        },
+        paperDataDirective: {
+          name: 'Наименование',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          isActive: 'Активен',
+          firstNumber: 'Първи № на хартия'
+        },
+        papersNew: {
+          title: 'Нова хартия',
+          save: 'Запис',
+          cancel: 'Отказ'
+        }
+      },
       airports: {
         tabs: {
           docs: 'Документи',
@@ -1482,7 +1511,8 @@
           tabs: {
             documents: 'Документи',
             licences: 'Лицензи',
-            ratings: 'Квалификационни класове'
+            ratings: 'Квалификационни класове',
+            paper: 'Хартия'
           }
         },
         reportDocuments: {
@@ -1554,6 +1584,17 @@
           sector: 'Сектор',
           ratingType: 'Тип ВС',
           showAllPerPerson: 'Покажи всички кв.класове за човек'
+        },
+        reportPapers: {
+          paperName: 'Наименование',
+          firstNumber: 'Първи №',
+          issuedCount: 'Брой издадени',
+          skippedCount: 'Брой бракувани',
+          lastIssuedNumber: 'Последен издаден №',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          search: 'Търси',
+          'export': 'Експорт'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',
@@ -2735,7 +2776,8 @@
           edit: 'Редакция',
           printExaminerCert: 'Принтиране на сертификат за проверяващ',
           printInstructorCert: 'Принтиране на сертификат за инструктор',
-          printLicenceAuthForm: 'Принтиране на форма за потвърждаване'
+          printLicenceAuthForm: 'Принтиране на форма за потвърждаване',
+          paper: 'Хартия'
         },
         printRatingEditionModal: {
           title: 'Принтиране на квалификационен клас',
@@ -3989,10 +4031,11 @@
         notValidRating: 'Вече съществува такава квалификация',
         notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер',
         notUniqueMSN: 'Серийния номер не е уникален',
-        invalidTemplateName: 
+        invalidPaperName: 
           'Наименованието може да съдържа само букви на латиница, цифри и символите \'_\', \'-\'',
-        notUniqueTemplateName: 'Наименованието не е уникално',
-        invalidRegMark: 'Невалиден формат на рег. знак'
+        notUniquePaperName: 'Наименованието не е уникално',
+        invalidRegMark: 'Невалиден формат на рег. знак',
+        notValidPaperData: 'Съществува хартия с тези данни'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',
@@ -4221,12 +4264,16 @@
         'root.personsReports.documents': 'Документи',
         'root.personsReports.licences': 'Лицензи',
         'root.personsReports.ratings': 'Квалификационни класове',
+        'root.personsReports.papers': 'Хартия',
         'root.sModeCodes': 'S-mode кодове',
         'root.sModeCodes.new': 'Нов S-mode код',
         'root.sModeCodes.edit': 'Редакция на S-mode код',
         'root.templates': 'Темплейти',
         'root.templates.new': 'Нов Темплейт',
-        'root.templates.edit': 'Редакция на Темплейт'
+        'root.templates.edit': 'Редакция на Темплейт',
+        'root.papers': 'Хартии',
+        'root.papers.new': 'Нова хартия',
+        'root.papers.edit': 'Редакция на хартия'
       }
     });
   }]);

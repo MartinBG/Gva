@@ -54,6 +54,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaInvalidActNumberMap());
             modelBuilder.Configurations.Add(new GvaViewEquipmentMap());
             modelBuilder.Configurations.Add(new GvaWordTemplateMap());
+            modelBuilder.Configurations.Add(new GvaPaperMap());
             modelBuilder.Configurations.Add(new ASExamVariantQuestionMap());
             modelBuilder.Configurations.Add(new ASExamVariantMap());
             modelBuilder.Configurations.Add(new ASExamQuestionMap());

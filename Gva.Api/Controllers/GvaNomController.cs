@@ -76,6 +76,50 @@ namespace Gva.Api.Controllers
             this.dataGenerators = dataGenerators;
         }
 
+        [Route("papers")]
+        public IHttpActionResult GetPapers(string term = null)
+        {
+            var papers = this.unitOfWork.DbContext.Set<GvaPaper>()
+                .Where(p => p.IsActive)
+                .ToList()
+                .Select(p => new NomValue()
+                {
+                    Name = string.Format("{0} {1}-{2}",
+                            p.Name,
+                            p.FromDate.ToString("dd.MM.yyyy"),
+                            p.ToDate.ToString("dd.MM.yyyy")),
+                    NomValueId = p.PaperId
+                });
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                papers = papers
+                    .Where(d => d.Name.ToLower().Contains(term.ToLower()))
+                    .ToList();
+            }
+
+            return Ok(papers);
+        }
+
+        [Route("papers/{id:int}")]
+        public IHttpActionResult GetPaper(int id)
+        {
+            var paper = this.unitOfWork.DbContext.Set<GvaPaper>()
+                .Where(p => p.PaperId == id)
+                .Single();
+
+            string name = string.Format("{0} {1}-{2}",
+                paper.Name,
+                paper.FromDate.ToString("dd.MM.yyyy"),
+                paper.ToDate.ToString("dd.MM.yyyy"));
+
+            return Ok(new
+            {
+                nomValueId = paper.PaperId,
+                name = name,
+            });
+        }
+
         [Route("dataGenerators")]
         public IHttpActionResult GetDataDenerators(string term = null)
         {

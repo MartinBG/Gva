@@ -58,5 +58,7 @@ namespace Gva.Api.Repositories.Reports
             int? showAllPerPersonId = null,
             int offset = 0,
             int limit = 10);
+
+        List<PersonReportPaperDO> GetPapers(SqlConnection conn, int? paperId);
     }
 }

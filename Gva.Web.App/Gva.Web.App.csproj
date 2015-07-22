@@ -73,6 +73,17 @@
     <Content Include="js\gva\applications\forms\app0001AdditionalData.html" />
     <Content Include="js\gva\applications\forms\app0004AdditionalData.html" />
     <Content Include="js\gva\applications\forms\app0008AdditionalData.html" />
+    <Content Include="js\gva\papers\forms\paperData.html" />
+    <Content Include="js\gva\papers\forms\paperDataCtrl.js" />
+    <Content Include="js\gva\papers\resources\papers.js" />
+    <Content Include="js\gva\papers\views\papersEdit.html" />
+    <Content Include="js\gva\papers\views\papersEditCtrl.js" />
+    <Content Include="js\gva\papers\views\papersNew.html" />
+    <Content Include="js\gva\papers\views\papersNewCtrl.js" />
+    <Content Include="js\gva\papers\views\papersSearch.html" />
+    <Content Include="js\gva\papers\views\papersSearchCtrl.js" />
+    <Content Include="js\gva\persons\views\personsReports\personReportPapers.html" />
+    <Content Include="js\gva\persons\views\personsReports\personReportPapersCtrl.js" />
     <Content Include="js\gva\sModeCodes\forms\aircraftSModeCodeData.html" />
     <Content Include="js\gva\sModeCodes\forms\aircraftSModeCodeDataCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftData.html" />
@@ -314,7 +325,7 @@
     <Content Include="js\gva\common\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModal.html" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModalCtrl.js" />
-    <Content Include="js\gva\common\resources\wordTemplates.js" />
+    <Content Include="js\gva\templates\resources\wordTemplates.js" />
     <Content Include="js\gva\common\resources\integration.js" />
     <Content Include="js\gva\persons\forms\qualificationfState.html" />
     <Content Include="js\gva\persons\modals\checks\checkOfForeignerModal.html" />

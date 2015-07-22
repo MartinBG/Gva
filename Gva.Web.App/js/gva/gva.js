@@ -391,6 +391,11 @@
       templateUrl: 'js/gva/templates/forms/templateData.html',
       controller: 'TemplateDataCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPaperData',
+      templateUrl: 'js/gva/papers/forms/paperData.html',
+      controller: 'PaperDataCtrl'
+    });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
      .modal('choosePublisher'     , 'js/gva/common/modals/publishers/choosePublisherModal.html'       , 'ChoosePublisherModalCtrl'            )
@@ -402,15 +407,19 @@
      .modal('editDisparity'       , 'js/gva/common/modals/disparities/editDisparityModal.html'        , 'EditDisparityModalCtrl'              )
      .modal('viewApplication'     , 'js/gva/common/modals/applications/viewApplicationModal.html'     , 'ViewApplicationModalCtrl'            )
      .modal('linkApplication'     , 'js/gva/common/modals/integration/linkAppModal.html'              , 'LinkAppModalCtrl'                    );
-  }])
-    .config(['$stateProvider', function ($stateProvider) {
+  }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.templates'                                  , '/templates'                                                                                                          ])
       .state(['root.templates.search'                           , ''                 , ['@root'  , 'js/gva/templates/views/templatesSearch.html'        , 'TemplatesSearchCtrl'        ]])
       .state(['root.templates.new'                              , '/new'             , ['@root'  , 'js/gva/templates/views/templatesNew.html'           , 'TemplatesNewCtrl'           ]])
       .state(['root.templates.edit'                             , '/:id'             , ['@root'  , 'js/gva/templates/views/templatesEdit.html'          , 'TemplatesEditCtrl'          ]]);
-  }])
-    .config(['$stateProvider', function ($stateProvider) {
+  }]).config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state(['root.papers'                                  , '/papers'                                                                                                    ])
+      .state(['root.papers.search'                           , ''                 , ['@root'  , 'js/gva/papers/views/papersSearch.html'        , 'PapersSearchCtrl'        ]])
+      .state(['root.papers.new'                              , '/new'             , ['@root'  , 'js/gva/papers/views/papersNew.html'           , 'PapersNewCtrl'           ]])
+      .state(['root.papers.edit'                             , '/:id'             , ['@root'  , 'js/gva/papers/views/papersEdit.html'          , 'PapersEditCtrl'          ]]);
+  }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?set'                                                                                                                                                                                                             ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin&stageId&inspectorId&applicationTypeId', ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'             , 'ApplicationsSearchCtrl'        ]])
@@ -544,7 +553,8 @@
       .state(['root.personsReports'                                        , '/personsReports'                                                                                                                                                                                , ['@root'                                            , 'js/gva/persons/views/personsReports/personReportView.html'                                                                       ]])
       .state(['root.personsReports.documents'                              , '/documents?sortBy&limit&medClassId&publisher&docNumber&limitationId&typeId&roleId&fromDatePeriodFrom&fromDatePeriodTo&toDatePeriodFrom&toDatePeriodTo&lin'                                      , ['@root.personsReports'                             , 'js/gva/persons/views/personsReports/personReportDocuments.html'                              , 'PersonReportDocumentsCtrl'       ]])
       .state(['root.personsReports.licences'                               , '/licences?sortBy&limit&limitationId&lin&licenceTypeId&licenceActionId&fromDatePeriodFrom&fromDatePeriodTo&toDatePeriodFrom&toDatePeriodTo'                                                      , ['@root.personsReports'                             , 'js/gva/persons/views/personsReports/personReportLicences.html'                               , 'PersonReportLicencesCtrl'        ]])
-      .state(['root.personsReports.ratings'                                , '/ratings?sortBy&limit&limitationId&ratingTypeId&ratingClassId&authorizationId&aircraftTypeCategoryId&lin&fromDatePeriodFrom&fromDatePeriodTo&toDatePeriodFrom&toDatePeriodTo&showAllPerPersonId', ['@root.personsReports'                             , 'js/gva/persons/views/personsReports/personReportRatings.html'                                , 'PersonReportRatingsCtrl'         ]]);
+      .state(['root.personsReports.ratings'                                , '/ratings?sortBy&limit&limitationId&ratingTypeId&ratingClassId&authorizationId&aircraftTypeCategoryId&lin&fromDatePeriodFrom&fromDatePeriodTo&toDatePeriodFrom&toDatePeriodTo&showAllPerPersonId', ['@root.personsReports'                             , 'js/gva/persons/views/personsReports/personReportRatings.html'                                , 'PersonReportRatingsCtrl'         ]])
+      .state(['root.personsReports.papers'                                 , '/papers?paperId'                                                                                                                                                                                , ['@root.personsReports'                             , 'js/gva/persons/views/personsReports/personReportPapers.html'                                 , 'PersonReportPapersCtrl'          ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
     .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'      , 'ChooseTrainingsModalCtrl'           )

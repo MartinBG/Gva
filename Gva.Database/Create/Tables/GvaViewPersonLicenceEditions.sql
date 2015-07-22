@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[GvaViewPersonLicenceEditions] (
     [Index]                     INT              NOT NULL,
     [IsLastEdition]             BIT              NOT NULL,
     [StampNumber]               NVARCHAR(50)     NULL,
+	[PaperId]                   INT              NULL,
     [FirstDocDateValidFrom]     DATETIME2        NOT NULL,
     [DateValidFrom]             DATETIME2        NOT NULL,
     [DateValidTo]               DATETIME2        NULL,
@@ -32,6 +33,7 @@ exec spDescColumn N'GvaViewPersonLicenceEditions', N'PartIndex'                 
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'LicencePartIndex'          , N'Идентификатор на индекс на лиценза.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'Index'                     , N'Индекс на вписването.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'StampNumber'               , N'Номер на печата.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'PaperId'                   , N'Идентификатор на хартия.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'FirstDocDateValidFrom'     , N'Стойността на първото вписване на Документа е валиден от.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'DateValidFrom'             , N'Документа е валиден от.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'DateValidTo'               , N'Документа е валиден до.'

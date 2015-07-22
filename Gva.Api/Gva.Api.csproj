@@ -124,6 +124,7 @@
     <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Applications\AplicationsCaseController.cs" />
     <Compile Include="Controllers\Applications\ApplicationStagesController.cs" />
+    <Compile Include="Controllers\PapersController.cs" />
     <Compile Include="Controllers\WordTemplatesController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\Reports\ReportsExportExcelController.cs" />
@@ -185,7 +186,9 @@
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
+    <Compile Include="ModelsDO\PaperDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\Persons\Reports\PersonReportPaperDO.cs" />
     <Compile Include="ModelsDO\Persons\StampedLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\RatingEditionLicenceDO.cs" />
     <Compile Include="ModelsDO\SModeCodes\ConnectedRegistrationViewDO.cs" />
@@ -329,6 +332,7 @@
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />
     <Compile Include="Models\Enums\QualificationState.cs" />
     <Compile Include="Models\GvaInvalidActNumber.cs" />
+    <Compile Include="Models\GvaPaper.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftCert.cs" />
     <Compile Include="Models\Views\GvaViewPersonApplicationExam.cs" />
     <Compile Include="Models\Views\GvaViewPersonQualification.cs" />

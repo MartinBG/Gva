@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[GvaViewPrintedRatingEditions] (
     [LicenceEditionPartIndex] INT              NOT NULL,
     [PrintedFileId]           INT              NOT NULL,
     [LicenceStatusId]         INT              NULL,
-	[NoNumber]                BIT              NULL,
+    [NoNumber]                BIT              NULL,
     CONSTRAINT [PK_GvaViewPrintedRatingEditions]                              PRIMARY KEY ([LotId], [RatingPartIndex], [RatingEditionPartIndex], [LicencePartIndex], [LicenceEditionPartIndex]),
     CONSTRAINT [FK_GvaViewPrintedRatingEditions_GvaViewPersonLicenceEditions] FOREIGN KEY ([LotId], [LicencePartIndex], [LicenceEditionPartIndex]) REFERENCES [dbo].[GvaViewPersonLicenceEditions] ([LotId], [LicencePartIndex], [PartIndex]),
     CONSTRAINT [FK_GvaViewPrintedRatingEditions_GvaFiles]                     FOREIGN KEY ([PrintedFileId])                                        REFERENCES [dbo].[GvaFiles] ([GvaFileId])

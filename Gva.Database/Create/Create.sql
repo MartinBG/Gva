@@ -45,6 +45,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewAircraftRegMarks.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftCerts.sql"
 :r $(rootPath)\"Tables\GvaWordTemplates.sql"
+:r $(rootPath)\"Tables\GvaPapers.sql"
 :r $(rootPath)\"Tables\ASExamQuestions.sql"
 :r $(rootPath)\"Tables\ASExamVariants.sql"
 :r $(rootPath)\"Tables\ASExamVariantQuestions.sql"
@@ -119,6 +120,7 @@ GO
 :r $(rootPath)\"..\Insert\migrationUser.sql"
 :r $(rootPath)\"..\Insert\gvaCaseTypes.sql"
 :r $(rootPath)\"..\Insert\gvaWordTemplates.sql"
+:r $(rootPath)\"..\Insert\gvaPapers.sql"
 :r $(rootPath)\"..\Insert\gvaStages.sql"
 
 ---------------------------------------------------------------

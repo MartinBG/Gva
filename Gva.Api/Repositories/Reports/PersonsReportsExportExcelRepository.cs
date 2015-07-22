@@ -243,5 +243,51 @@ namespace Gva.Api.Repositories.Reports
 
             return workbook;
         }
+
+        public XLWorkbook GetPapersWorkbook(
+            SqlConnection conn,
+            int? paperId = null)
+        {
+            List<PersonReportPaperDO> papers = this.personReportRepository.GetPapers(
+                        conn: conn,
+                        paperId: paperId);
+
+            var workbook = new XLWorkbook();
+            var ws = workbook.Worksheets.Add("Papers");
+
+            //headers
+            int rowIndex = 1;
+
+            var firstRowStyle = ws.Row(1).Style;
+            firstRowStyle.Font.Bold = true;
+            firstRowStyle.Font.FontColor = XLColor.DarkSlateGray;
+            firstRowStyle.Fill.BackgroundColor = XLColor.Lavender;
+
+            ws.Cell(rowIndex, "A").Value = "Наименование";
+            ws.Cell(rowIndex, "B").Value = "Първи №";
+            ws.Cell(rowIndex, "C").Value = "Последен издаден №";
+            ws.Cell(rowIndex, "D").Value = "Брой издадени";
+            ws.Cell(rowIndex, "E").Value = "Брой бракувани";
+            ws.Cell(rowIndex, "F").Value = "От дата";
+            ws.Cell(rowIndex, "G").Value = "До дата";
+
+            rowIndex++;
+            foreach (var paper in papers)
+            {
+                ws.Cell(rowIndex, "A").Value = paper.PaperName;
+                ws.Cell(rowIndex, "B").Value = paper.FirstNumber;
+                ws.Cell(rowIndex, "C").Value = paper.LastIssuedNumber;
+                ws.Cell(rowIndex, "D").Value = paper.IssuedCount;
+                ws.Cell(rowIndex, "E").Value = paper.SkippedCount;
+                ws.Cell(rowIndex, "F").Value = paper.FromDate;
+                ws.Cell(rowIndex, "G").Value = paper.ToDate;
+
+                rowIndex++;
+            }
+
+            ws.Columns().AdjustToContents();
+
+            return workbook;
+        }
     }
 }

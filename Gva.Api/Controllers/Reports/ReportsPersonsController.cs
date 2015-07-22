@@ -144,5 +144,18 @@ namespace Gva.Api.Controllers.Reports
                 });
             }
         }
+
+        [Route(@"papers")]
+        public IHttpActionResult GetPapers(int? paperId = null)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                var papers = this.personsReportRepository.GetPapers(
+                    conn: conn,
+                    paperId: paperId);
+
+                return Ok(papers);
+            }
+        }
     }
 }

@@ -45,6 +45,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string StampNumber { get; set; }
 
+        public int? PaperId { get; set; }
+
         public List<IncludedRatingDO> IncludedRatings { get; set; }
 
         public List<int> IncludedExams { get; set; }

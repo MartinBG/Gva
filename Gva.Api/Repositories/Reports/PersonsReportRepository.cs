@@ -367,5 +367,40 @@ namespace Gva.Api.Repositories.Reports
 
             return new Tuple<int, List<PersonReportRatingDO>>(count, ratings);
         }
+
+        public List<PersonReportPaperDO> GetPapers(
+                    SqlConnection conn,
+                    int? paperId)
+        {
+            return conn.CreateStoreCommand(@"SELECT
+                                    p.GvaPaperId,
+                                    p.Name,
+                                    p.FirstNumber,
+                                    p.FromDate,
+                                    p.ToDate,
+                                    count(*) IssuedCount,
+                                    max(ple.StampNumber) LastIssuedNumber,
+                                    max(ple.StampNumber) - (p.FirstNumber + count(*)) + 1 SkippedCount
+                                    FROM GvaViewPersonLicenceEditions ple 
+                                    RIGHT JOIN GvaPapers p on ple.PaperId = p.GvaPaperId
+                                    WHERE 1=1 {0}
+                                    GROUP BY p.GvaPaperId, p.FirstNumber, p.Name, p.FromDate,p.ToDate
+                                    ORDER BY p.FirstNumber DESC",
+                                    new DbClause("and p.GvaPaperId = {0}", paperId)
+                        )
+                        .Materialize(r =>
+                            new PersonReportPaperDO()
+                            {
+                                PaperId = r.Field<int>("GvaPaperId"),
+                                PaperName = r.Field<string>("Name"),
+                                FirstNumber = r.Field<int>("FirstNumber"),
+                                IssuedCount = r.Field<int?>("LastIssuedNumber").HasValue ? (r.Field<int?>("IssuedCount") ?? 0) : 0,
+                                SkippedCount = r.Field<int?>("SkippedCount") ?? 0,
+                                LastIssuedNumber = r.Field<int?>("LastIssuedNumber") ?? 0,
+                                FromDate = r.Field<DateTime>("FromDate"),
+                                ToDate = r.Field<DateTime>("ToDate")
+                            })
+                            .ToList();
+        }
     }
 }
