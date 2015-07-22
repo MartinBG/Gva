@@ -13,6 +13,8 @@ namespace Gva.Api.ModelsDO.Persons
             RatingTypes = new List<NomValue>();
         }
 
+        public NomValue AircraftTypeCategory { get; set; }
+
         public NomValue AircraftTypeGroup { get; set; }
 
         public List<NomValue> RatingTypes { get; set; }

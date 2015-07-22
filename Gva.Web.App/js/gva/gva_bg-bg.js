@@ -1893,7 +1893,8 @@
           licenceType: 'Вид правоспособност',
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
-          title: 'Данни за класификация'
+          title: 'Данни за класификация',
+          ratingCategory: 'Категория'
         },
         licenceEditionsEditChecksView: {
           cancel: 'Отказ',
