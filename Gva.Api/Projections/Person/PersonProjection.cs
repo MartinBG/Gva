@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.Persons;
@@ -10,9 +11,12 @@ namespace Gva.Api.Projections.Person
 {
     public class PersonProjection : Projection<GvaViewPerson>
     {
-        public PersonProjection(IUnitOfWork unitOfWork)
+        private INomRepository nomRepository;
+
+        public PersonProjection(IUnitOfWork unitOfWork, INomRepository nomRepository)
             : base(unitOfWork, "Person")
         {
+            this.nomRepository = nomRepository;
         }
 
         public override IEnumerable<GvaViewPerson> Execute(PartCollection parts)
@@ -29,7 +33,7 @@ namespace Gva.Api.Projections.Person
                 .FirstOrDefault();
 
             var personLicences = parts.GetAll<PersonLicenceDO>("licences")
-                .Where(pv => pv.Content.Valid != null && pv.Content.Valid.Code == "Y");
+                .Where(pv => pv.Content.ValidId.HasValue && this.nomRepository.GetNomValue(pv.Content.ValidId.Value).Code == "Y");
 
             var personRatings = parts.GetAll<PersonRatingDO>("ratings");
 
@@ -71,8 +75,8 @@ namespace Gva.Api.Projections.Person
             {
                 person.Licences = string.Join(", ",
                 (personLicences
-                .Where(l => l.Content.LicenceType != null)
-                .Select(l => l.Content.LicenceType.Code)
+                .Where(l => l.Content.LicenceTypeId.HasValue)
+                .Select(l => this.nomRepository.GetNomValue(l.Content.LicenceTypeId.Value).Code)
                 .ToArray()));
             }
 

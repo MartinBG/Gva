@@ -93,7 +93,7 @@ namespace Gva.Api.Controllers.Persons
                 }, new List<CaseDO>());
                 newPerson.PersonAddress = new PersonAddressDO()
                 {
-                    Valid = ValidTrue
+                    ValidId = ValidTrue.NomValueId
                 };
             }
 
@@ -335,10 +335,21 @@ namespace Gva.Api.Controllers.Persons
             var allItemsExceptLicences = inventory.Where(i => i.SetPartAlias != "personLicence");
 
             var distinctLicences = inventory.Where(i => i.SetPartAlias == "personLicence")
-                .GroupBy(i => i.ParentPartIndex)
-                .Select(l => l.Last());
+                .GroupBy(i => i.ParentPartIndex);
 
-            var result = allItemsExceptLicences.Union(distinctLicences)
+            List<InventoryItemDO> licenceInventoryResult = new List<InventoryItemDO>();
+            foreach (var joinedLicenceEditionsWithFiles in distinctLicences)
+            {
+                var lastEdition = joinedLicenceEditionsWithFiles.OrderByDescending(e => e.FromDate).First();
+                var edition = joinedLicenceEditionsWithFiles
+                    .Where(e => e.PartIndex == lastEdition.PartIndex)
+                    .OrderByDescending(e => e.BookPageNumber)
+                    .First();
+
+                licenceInventoryResult.Add(edition);
+            }
+
+            var result = allItemsExceptLicences.Union(licenceInventoryResult)
                 .OrderBy(f => f.BookPageNumber)
                 .ToList();
 
@@ -429,7 +440,27 @@ namespace Gva.Api.Controllers.Persons
             {
                 foreach (LicenceStageDO document in stampedDocuments)
                 {
-                    if (document.ApplicationId.HasValue)
+                    if (document.RatingPartIndex.HasValue)
+                    {
+                        var stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                            .Where(s => document.StageAliases.Contains(s.Alias))
+                            .Max(s => s.GvaStageId);
+
+                        var lot = this.lotRepository.GetLotIndex(document.LotId);
+                        var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", document.EditionPartIndex));
+
+                        var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
+                            .Where(re => re.RatingEditionPartIndex == document.RatingEditionPartIndex && re.RatingPartIndex == document.RatingPartIndex)
+                            .Single();
+
+                        rating.LicenceStatusId = stageId;
+
+                        lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
+
+                        lot.Commit(this.userContext, lotEventDispatcher);
+                        this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
+                    }
+                    else if (document.ApplicationId.HasValue)
                     {
                         var applicationStages = this.applicationStageRepository.GetApplicationStages(document.ApplicationId.Value);
                         int lastStageOrdinal = applicationStages.Last().Ordinal;
@@ -466,7 +497,7 @@ namespace Gva.Api.Controllers.Persons
                     }
                     else
                     {
-                        var lot = lotRepository.GetLotIndex(document.LotId.Value);
+                        var lot = lotRepository.GetLotIndex(document.LotId);
                         PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", document.EditionPartIndex.Value));
 
                         licenceEditionPartVersion.Content.ОfficiallyReissuedStageId = this.unitOfWork.DbContext.Set<GvaStage>()

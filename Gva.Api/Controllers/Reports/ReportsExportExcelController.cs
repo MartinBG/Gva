@@ -112,6 +112,7 @@ namespace Gva.Api.Controllers.Reports
             int? limitationId = null,
             int? ratingTypeId = null,
             string sortBy = null,
+            int? showAllPerPersonId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -129,10 +130,25 @@ namespace Gva.Api.Controllers.Reports
                     limitationId: limitationId,
                     ratingTypeId: ratingTypeId,
                     sortBy: sortBy,
+                    showAllPerPersonId: showAllPerPersonId,
                     limit: limit,
                     offset: offset);
 
                 return this.GetExcelFile(workbook, "ratings");
+            }
+        }
+
+        [HttpGet]
+        [Route("papers")]
+        public HttpResponseMessage ExportExcelPapersReport(int? paperId = null)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                var workbook = this.personsReportsExportExcelRepository.GetPapersWorkbook(
+                    conn: conn,
+                    paperId: paperId);
+
+                return this.GetExcelFile(workbook, "papers");
             }
         }
     }

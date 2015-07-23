@@ -32,5 +32,11 @@ namespace Gva.Api.ModelsDO.Common
         public NomValue Stage { get; set; }
 
         public AppExaminationSystemDataDO ExaminationSystemData { get; set; }
+
+        public App0001AdditionalDataDO App0001AdditionalData { get; set; }
+
+        public App0004AdditionalDataDO App0004AdditionalData { get; set; }
+
+        public App0008AdditionalDataDO App0008AdditionalData { get; set; }
     }
 }

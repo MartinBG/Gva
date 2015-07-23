@@ -153,7 +153,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 int lotId = person.LotId;
                 var addressPart = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonAddressDO>("personAddresses")
                     .OrderByDescending(a => a.CreateDate)
-                    .Where(a => a.Content.Valid.Code == "Y")
+                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
                     .FirstOrDefault();
                 if (addressPart != null)
                 {
@@ -166,13 +166,21 @@ namespace Gva.Api.Repositories.IntegrationRepository
                     {"М", "ман."},
                 };
 
-                    NomValue settlement = this.nomRepository.GetNomValue("cities", addressPart.Content.Settlement.NomValueId);
+                    NomValue settlement = null;
+                    Settlement settlementResult = null;
+                    if (addressPart.Content.SettlementId.HasValue)
+                    {
+                        settlement = this.nomRepository.GetNomValue("cities", addressPart.Content.SettlementId.Value);
+                    }
                     string type = settlement.TextContent.Get<string>("type");
                     var settlementType = settlementTypes.ContainsKey(type) ? settlementTypes[type] : "";
 
-                    Settlement settlementResult = this.unitOfWork.DbContext.Set<Settlement>()
-                        .Where(s => s.SettlementName == addressPart.Content.Settlement.Name && s.TypeName == settlementType)
-                        .FirstOrDefault();
+                    if(settlement != null)
+                    {
+                        settlementResult = this.unitOfWork.DbContext.Set<Settlement>()
+                            .Where(s => s.SettlementName == settlement.Name && s.TypeName == settlementType)
+                            .FirstOrDefault();
+                    }
 
                     correspondent.ContactSettlementId = settlementResult != null ? settlementResult.SettlementId : (int?)null;
                 }

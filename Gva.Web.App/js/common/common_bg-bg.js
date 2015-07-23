@@ -36,7 +36,8 @@
               title: 'Справки',
               documents: 'Документи',
               ratings: 'Квал.класове',
-              licences: 'Лицензи'
+              licences: 'Лицензи',
+              papers: 'Хартия'
             }
           },
           aircrafts: {
@@ -96,7 +97,8 @@
             nomenclatures: 'Номенклатури',
             units: 'Организационна структура',
             docNomenclatures: 'Номенклатури деловодна',
-            templates: 'Темплейти'
+            templates: 'Темплейти',
+            paper: 'Хартия'
           },
           help: {
             title: 'Помощ',

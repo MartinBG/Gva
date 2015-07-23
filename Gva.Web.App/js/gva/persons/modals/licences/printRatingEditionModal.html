@@ -1,15 +1,20 @@
-﻿<ng-form class="form-inline">
+﻿<ng-form class="form-inline"  name="printRatingEditionModalForm" sc-form-readonly="!editMode">
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="persons.printRatingEditionModal.title"></strong>
       <div class="pull-right">
-        <sc-button name="closeBtn" btn-click="close()" text="persons.printRatingEditionModal.close" class="btn btn-default btn-xs"></sc-button>
+        <sc-button name="saveBtn" btn-click="save()" ng-if="model.hasFileId" text="persons.printRatingEditionModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode"></sc-button>
+        <sc-button name="editBtn" btn-click="edit()" ng-if="model.hasFileId" text="persons.printRatingEditionModal.edit" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="!editMode"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.printRatingEditionModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
       </div>
     </div>
-
     <div class="well-sm panel-body">
-      <sc-link-button name="printBtn" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}" target="_blank" sc-access-token text="persons.printRatingEditionModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
-      <sc-link-button name="printBtn2" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printRatingEditionModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+      <sc-link-button name="printBtn" ng-click="markAsPrinted()" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}" target="_blank" sc-access-token text="persons.printRatingEditionModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+      <sc-link-button name="printBtn2" ng-click="markAsPrinted()" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printRatingEditionModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+      <div class="form-group col-sm-3 row" ng-if="model.hasFileId">
+        <label class="control-label" l10n-text="persons.printRatingEditionModal.noNumber"></label>
+        <input type="checkbox" ng-checked="model.noNumber" ng-disabled="!editMode" sc-click="setNoNumber($event)" />
+      </div>
     </div>
   </div>
 </ng-form>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using Common.Api.Repositories.NomRepository;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Gva.Api.CommonUtils;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons.Reports;
@@ -88,7 +90,7 @@ namespace Gva.Api.Repositories.Reports
                     new DbClause("{0}", offset),
                     new DbClause("{0}", limit))
                     .Materialize(r => new Tuple<int, PersonReportDocumentDO>
-                        ( 
+                        (
                         r.Field<int>("allResultsCount"),
                         new PersonReportDocumentDO()
                         {
@@ -181,20 +183,20 @@ namespace Gva.Api.Repositories.Reports
                              (
                              r.Field<int>("allResultsCount"),
                              new PersonReportLicenceDO()
-                                {
-                                    LotId = r.Field<int>("lotId"),
-                                    Lin = r.Field<int?>("lin"),
-                                    Uin = r.Field<string>("uin"),
-                                    Names = r.Field<string>("names"),
-                                    LicenceTypeName = r.Field<string>("licenceTypeName"),
-                                    LicenceCode = r.Field<string>("licenceCode"),
-                                    DateValidFrom = r.Field<DateTime?>("dateValidFrom"),
-                                    DateValidTo = r.Field<DateTime?>("dateValidTo"),
-                                    FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
-                                    LicenceAction = r.Field<string>("licenceAction"),
-                                    StampNumber = r.Field<string>("stampNumber"),
-                                    Limitations = !string.IsNullOrEmpty(r.Field<string>("limitations")) ? r.Field<string>("limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
-                            }))
+                             {
+                                 LotId = r.Field<int>("lotId"),
+                                 Lin = r.Field<int?>("lin"),
+                                 Uin = r.Field<string>("uin"),
+                                 Names = r.Field<string>("names"),
+                                 LicenceTypeName = r.Field<string>("licenceTypeName"),
+                                 LicenceCode = r.Field<string>("licenceCode"),
+                                 DateValidFrom = r.Field<DateTime?>("dateValidFrom"),
+                                 DateValidTo = r.Field<DateTime?>("dateValidTo"),
+                                 FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
+                                 LicenceAction = r.Field<string>("licenceAction"),
+                                 StampNumber = r.Field<string>("stampNumber"),
+                                 Limitations = !string.IsNullOrEmpty(r.Field<string>("limitations")) ? r.Field<string>("limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
+                             }))
                             .ToList();
 
             var results = queryResult.Select(q => q.Item2).ToList();
@@ -216,11 +218,13 @@ namespace Gva.Api.Repositories.Reports
             int? limitationId = null,
             int? ratingTypeId = null,
             string sortBy = null,
+            int? showAllPerPersonId = null,
             int offset = 0,
             int limit = 10)
         {
-            string limCode = limitationId.HasValue? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
+            string limCode = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
             string ratingTypeCode = ratingTypeId.HasValue ? this.nomRepository.GetNomValue(ratingTypeId.Value).Code : null;
+            bool showAllPerPerson = showAllPerPersonId.HasValue ? this.nomRepository.GetNomValue(showAllPerPersonId.Value).Code == "Y" : false;
 
             Dictionary<string, string> sortByToTableColumn = new Dictionary<string, string>()
             {
@@ -237,9 +241,7 @@ namespace Gva.Api.Repositories.Reports
             };
 
             string orderBy = !string.IsNullOrEmpty(sortBy) && sortByToTableColumn.ContainsKey(sortBy) ? sortByToTableColumn[sortBy] : "re.DocDateValidFrom";
-
-            var queryResult = conn.CreateStoreCommand(@"
-                         SELECT 
+            string selectQuery = @"SELECT 
                             COUNT(*) OVER() as allResultsCount,
                             p.Lin,
                             r.LotId,
@@ -256,7 +258,8 @@ namespace Gva.Api.Repositories.Reports
                             ct.Code as AircraftTypeCategory,
                             atg.Code as AircraftTypeGroup,
                             li.Code as LocationIndicator,
-                            rl.Code as RatingLevel
+                            rl.Code as RatingLevel,
+                            r.PartIndex
                         FROM  GvaViewPersonRatings r
                         INNER JOIN GvaViewPersons p ON r.LotId = p.LotId
                         INNER JOIN (select 
@@ -264,7 +267,7 @@ namespace Gva.Api.Repositories.Reports
                             max(re.PartIndex) as edition_part_index,
                             re.RatingPartIndex
                             FROM  GvaViewPersonRatings r
-                            INNER JOIn GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
+                            INNER JOIN GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
                             group by re.RatingPartIndex, r.LotId) lastEdition on lastEdition.LotId = r.LotId and lastEdition.RatingPartIndex = r.PartIndex
                         INNER JOIN GvaViewPersonRatingEditions re on lastEdition.LotId = re.LotId and re.PartIndex = lastEdition.edition_part_index
                         INNER JOIN (select 
@@ -272,7 +275,7 @@ namespace Gva.Api.Repositories.Reports
                             min(re.PartIndex) AS edition_part_index,
                             re.RatingPartIndex
                             FROM  GvaViewPersonRatings r
-                            INNER JOIn GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
+                            INNER JOIN GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
                             group by re.RatingPartIndex, r.LotId) firstEdition on firstEdition.LotId = lastEdition.LotId and firstEdition.RatingPartIndex = lastEdition.RatingPartIndex
                         INNER JOIN GvaViewPersonRatingEditions re2 on firstEdition.LotId = re2.LotId and re2.PartIndex = firstEdition.edition_part_index
                         LEFT JOIN NomValues rc ON rc.NomValueId = r.RatingClassId
@@ -280,49 +283,124 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues ct ON ct.NomValueId = r.AircraftTypeCategoryId
                         LEFT JOIN NomValues atg ON atg.NomValueId = r.AircraftTypeGroupId
                         LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
-                        LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
-                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
+                        LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId ";
+
+            List<DbClause> clauses = new List<DbClause>()
+            {
+                new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
+                new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),
+                new DbClause("and re.DocDateValidTo >= {0}", toDatePeriodFrom),
+                new DbClause("and re.DocDateValidTo <= {0}", toDatePeriodTo),
+                new DbClause("and p.Lin = {0}", lin),
+                new DbClause("and r.RatingClassId = {0}", ratingClassId),
+                new DbClause("and r.AuthorizationId = {0}", authorizationId),
+                new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
+                new DbClause("and (re.Limitations like {0} + '$$%' or re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$%' or re.Limitations like {0})", limCode),
+                new DbClause("and (r.RatingTypes like {0} + ', %' or r.RatingTypes like '%, ' + {0} or r.RatingTypes like '%, ' + {0} + ',%' or r.RatingTypes like {0})", ratingTypeCode)
+            };
+
+            DbCommand command = null;
+            if (showAllPerPerson)
+            {
+                var filteredResults = conn.CreateStoreCommand(selectQuery +
+                    @"WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}",
+                        clauses.ToArray())
+                        .Materialize(r =>
+                            new
+                            {
+                                LotId = r.Field<int>("lotId"),
+                            })
+                            .Select(l => l.LotId)
+                            .ToArray();
+
+                 command = conn.CreateStoreCommand(selectQuery +
+                        @"WHERE 1=1 {0} 
+                        ORDER BY " + orderBy + @" DESC
+                        OFFSET {1} ROWS FETCH NEXT {2} ROWS ONLY",
+                        new DbClause("and r.LotId in " + string.Format("({0})", string.Join(",", filteredResults))),
+                        new DbClause("{0}", offset),
+                        new DbClause("{0}", limit));
+            }
+            else
+            {
+                clauses = clauses
+                    .Union(new List<DbClause> {
+                        new DbClause("{0}", offset),
+                        new DbClause("{0}", limit)
+                    })
+                    .ToList();
+
+                command = conn.CreateStoreCommand(selectQuery +
+                    @"WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
                         ORDER BY " + orderBy + @" DESC
                         OFFSET {10} ROWS FETCH NEXT {11} ROWS ONLY",
-                        new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
-                        new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),
-                        new DbClause("and re.DocDateValidTo >= {0}", toDatePeriodFrom),
-                        new DbClause("and re.DocDateValidTo <= {0}", toDatePeriodTo),
-                        new DbClause("and p.Lin = {0}", lin),
-                        new DbClause("and r.RatingClassId = {0}", ratingClassId),
-                        new DbClause("and r.AuthorizationId = {0}", authorizationId),
-                        new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
-                        new DbClause("and (re.Limitations like {0} + '$$%' or re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$%' or re.Limitations like {0})", limCode),
-                        new DbClause("and (r.RatingTypes like {0} + ', %' or r.RatingTypes like '%, ' + {0} or r.RatingTypes like '%, ' + {0} + ',%' or r.RatingTypes like {0})", ratingTypeCode),
-                        new DbClause("{0}", offset),
-                        new DbClause("{0}", limit))
-                        .Materialize(r => new Tuple<int, PersonReportRatingDO>
-                             (
-                             r.Field<int>("allResultsCount"),
-                             new PersonReportRatingDO()
-                             {
-                                 Lin = r.Field<int?>("lin"),
-                                 LotId = r.Field<int>("lotId"),
-                                 RatingSubClasses = r.Field<string>("RatingSubClasses"),
-                                 Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
-                                 FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
-                                 DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
-                                 DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
-                                 RatingTypes = r.Field<string>("RatingTypes"),
-                                 Sector = r.Field<string>("Sector"),
-                                 RatingClass = r.Field<string>("RatingClass"),
-                                 AuthorizationCode = r.Field<string>("AuthorizationCode"),
-                                 AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
-                                 AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
-                                 LocationIndicator = r.Field<string>("LocationIndicator"),
-                                 RatingLevel = r.Field<string>("RatingLevel")
-                             }))
-                             .ToList();
+                        clauses.ToArray());
+            }
 
-            var results = queryResult.Select(q => q.Item2).ToList();
+            var queryResult = command
+                .Materialize(r => new Tuple<int, PersonReportRatingDO>
+                    (
+                    r.Field<int>("allResultsCount"),
+                    new PersonReportRatingDO()
+                    {
+                        Lin = r.Field<int?>("lin"),
+                        LotId = r.Field<int>("lotId"),
+                        PartIndex = r.Field<int>("partIndex"),
+                        RatingSubClasses = r.Field<string>("RatingSubClasses"),
+                        Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
+                        FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
+                        DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
+                        DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
+                        RatingTypes = r.Field<string>("RatingTypes"),
+                        Sector = r.Field<string>("Sector"),
+                        RatingClass = r.Field<string>("RatingClass"),
+                        AuthorizationCode = r.Field<string>("AuthorizationCode"),
+                        AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
+                        AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
+                        LocationIndicator = r.Field<string>("LocationIndicator"),
+                        RatingLevel = r.Field<string>("RatingLevel")
+                    }))
+                    .ToList();
+
+            var ratings = queryResult.Select(q => q.Item2).ToList();
             int count = queryResult.Select(q => q.Item1).FirstOrDefault();
-            
-            return new Tuple<int, List<PersonReportRatingDO>>(count, results);
+
+            return new Tuple<int, List<PersonReportRatingDO>>(count, ratings);
+        }
+
+        public List<PersonReportPaperDO> GetPapers(
+                    SqlConnection conn,
+                    int? paperId)
+        {
+            return conn.CreateStoreCommand(@"SELECT
+                                    p.GvaPaperId,
+                                    p.Name,
+                                    p.FirstNumber,
+                                    p.FromDate,
+                                    p.ToDate,
+                                    count(*) IssuedCount,
+                                    max(ple.StampNumber) LastIssuedNumber,
+                                    max(ple.StampNumber) - (p.FirstNumber + count(*)) + 1 SkippedCount
+                                    FROM GvaViewPersonLicenceEditions ple 
+                                    RIGHT JOIN GvaPapers p on ple.PaperId = p.GvaPaperId
+                                    WHERE 1=1 {0}
+                                    GROUP BY p.GvaPaperId, p.FirstNumber, p.Name, p.FromDate,p.ToDate
+                                    ORDER BY p.FirstNumber DESC",
+                                    new DbClause("and p.GvaPaperId = {0}", paperId)
+                        )
+                        .Materialize(r =>
+                            new PersonReportPaperDO()
+                            {
+                                PaperId = r.Field<int>("GvaPaperId"),
+                                PaperName = r.Field<string>("Name"),
+                                FirstNumber = r.Field<int>("FirstNumber"),
+                                IssuedCount = r.Field<int?>("LastIssuedNumber").HasValue ? (r.Field<int?>("IssuedCount") ?? 0) : 0,
+                                SkippedCount = r.Field<int?>("SkippedCount") ?? 0,
+                                LastIssuedNumber = r.Field<int?>("LastIssuedNumber") ?? 0,
+                                FromDate = r.Field<DateTime>("FromDate"),
+                                ToDate = r.Field<DateTime>("ToDate")
+                            })
+                            .ToList();
         }
     }
 }

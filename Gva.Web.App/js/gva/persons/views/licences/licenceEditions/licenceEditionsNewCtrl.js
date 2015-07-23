@@ -16,7 +16,7 @@
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
     $scope.licence = licence;
-    var licenceTypeCode = $scope.licence.part.licenceType.code;
+    var licenceTypeCode = $scope.licence.licenceType.code;
     $scope.isFcl = licenceTypeCode.indexOf('FCL') >= 0 ||
         licenceTypeCode === 'BG CCA';
 
@@ -63,7 +63,7 @@
           id: $stateParams.id,
           licencePartIndex: $stateParams.ind,
           appId: $stateParams.appId,
-          caseTypeId: licence['case'].caseType.nomValueId
+          caseTypeId: licence.caseTypeId
         }).$promise;
       }
     ]

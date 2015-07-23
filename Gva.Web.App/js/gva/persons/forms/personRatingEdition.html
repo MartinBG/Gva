@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
-    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="model.case.caseType.alias === 'to_suvd'" l10n-text="persons.ratingEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="model.case.caseType.alias === 'to_suvd' || (model.case.caseType.alias === 'flightCrew' && isRequiredDateTo)" l10n-text="persons.ratingEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
     <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" ng-disabled="model.part.examiner" params="{limit: null}" l10n-text="persons.ratingEditionDirective.inspector" class="col-sm-3"></sc-field>

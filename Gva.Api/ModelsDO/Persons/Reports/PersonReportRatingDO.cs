@@ -11,6 +11,8 @@ namespace Gva.Api.ModelsDO.Persons.Reports
     {
         public int LotId { get; set; }
 
+        public int PartIndex { get; set; }
+
         public int? Lin { get; set; }
 
         public string RatingSubClasses { get; set; }

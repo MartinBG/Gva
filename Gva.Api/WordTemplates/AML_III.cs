@@ -43,7 +43,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
              var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -64,9 +64,9 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
-            string licenceCode = licence.LicenceType.Code;
+            string licenceCode = licenceType.Code;
             var licenceNumber = string.Format(
                 "BG.66.A {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -85,11 +85,17 @@ namespace Gva.Api.WordTemplates
             var categoryNP = AMLUtils.GetCategoryNP(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository, this.lotRepository);
             var acLimitations = AMLUtils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
 
-            var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition) : new object[0];
+            var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
             bool isForeigner = false;
             if (country != null)
             {
                 isForeigner = country.Code != "BG";
+            }
+
+            NomValue settlement = null;
+            if(personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
             }
 
             var json = new
@@ -114,11 +120,11 @@ namespace Gva.Api.WordTemplates
                     {
                         ADDR_EN = string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null,
+                            settlement != null ? settlement.NameAlt : null,
                             personAddress.AddressAlt),
                         ADDR = !isForeigner ? string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement != null ? personAddress.Settlement.Name : null,
+                            settlement != null ? settlement.Name : null,
                             personAddress.Address) : null,
                         BG_LABEL_ADDR = !isForeigner ? "Адрес на притежателя:" : null
                     },

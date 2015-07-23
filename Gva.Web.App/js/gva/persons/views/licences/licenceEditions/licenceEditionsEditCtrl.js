@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
+    Nomenclatures,
     licence,
     currentLicenceEdition,
     licenceEditions,
@@ -21,10 +22,23 @@
     $scope.appId = $stateParams.appId;
     $scope.lastEditionIndex = _.last(licenceEditions).partIndex;
     $scope.licence = licence;
-
-    $scope.licenceTypeCode = $scope.licence.part.licenceType.code;
-    $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 ||
+    $scope.licenceTypeCode = licence.licenceType.code;
+    $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 || 
       $scope.licenceTypeCode === 'BG CCA';
+    $scope.$watch('newLicence.part.licenceTypeId', function () {
+      if ($scope.newLicence && $scope.newLicence.part.licenceTypeId) {
+        Nomenclatures.get({
+          alias: 'licenceTypes',
+          id: $scope.newLicence.part.licenceTypeId 
+        })
+          .$promise
+          .then(function (licenceType) {
+            $scope.licenceTypeCode = licenceType.code;
+            $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 || 
+              $scope.licenceTypeCode === 'BG CCA';
+          });
+      }
+    });
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -36,7 +50,8 @@
         index: $scope.licence.partIndex,
         editionIndex: edition.partIndex,
         isLastEdition: $scope.lastEditionIndex === edition.partIndex,
-        isFclOrPart66: $scope.isFcl || $scope.licenceTypeCode.indexOf('Part-66') >= 0
+        isFclOrPart66: $scope.isFcl ||
+              $scope.licence.licenceType.code.indexOf('Part-66') >= 0
       };
 
       var modalInstance = scModal.open('printLicence', params);
@@ -109,6 +124,7 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
+    'Nomenclatures',
     'licence',
     'currentLicenceEdition',
     'licenceEditions',

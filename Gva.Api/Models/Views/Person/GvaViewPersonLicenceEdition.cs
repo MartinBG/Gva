@@ -22,6 +22,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string StampNumber { get; set; }
 
+        public int? PaperId { get; set; }
+
         public DateTime FirstDocDateValidFrom { get; set; }
 
         public DateTime DateValidFrom { get; set; }
@@ -41,6 +43,8 @@ namespace Gva.Api.Models.Views.Person
         public int? PrintedFileId { get; set; }
 
         public int? OfficiallyReissuedStageId { get; set; }
+
+        public virtual GvaPaper Paper { get; set; }
 
         public virtual Part Part { get; set; }
 
@@ -75,6 +79,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.PartId).HasColumnName("PartId");
             this.Property(t => t.StampNumber).HasColumnName("StampNumber");
+            this.Property(t => t.PaperId).HasColumnName("PaperId");
             this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
             this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
@@ -91,9 +96,15 @@ namespace Gva.Api.Models.Views.Person
             this.HasRequired(t => t.Part)
                 .WithMany()
                 .HasForeignKey(t => t.PartId);
+
+            this.HasOptional(t => t.Paper)
+                .WithMany()
+                .HasForeignKey(t => t.PaperId);
+
             this.HasRequired(t => t.LicenceAction)
                 .WithMany()
                 .HasForeignKey(t => t.LicenceActionId);
+
             this.HasRequired(t => t.Licence)
                 .WithMany(d => d.Editions)
                 .HasForeignKey(t => new { t.LotId, t.LicencePartIndex });

@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public PersonLicenceEditionDO()
         {
-            this.Limitations = new List<NomValue>();
+            this.Limitations = new List<int>();
             this.IncludedRatings = new List<IncludedRatingDO>();
             this.IncludedExams = new List<int>();
             this.IncludedTrainings = new List<int>();
@@ -25,25 +25,26 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int Index { get; set; }
 
-        public NomValue Inspector { get; set; }
+        public int? InspectorId { get; set; }
 
         [Required(ErrorMessage = "DocumentDateValidFrom is required!")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        [Required(ErrorMessage = "LicenceAction is required!")]
-        public NomValue LicenceAction { get; set; }
+        public int? LicenceActionId { get; set; }
 
         public PersonLicenceAmlLimitationsDO AmlLimitations { get; set; }
 
-        public List<NomValue> Limitations { get; set; }
+        public List<int> Limitations { get; set; }
 
         public string Notes { get; set; }
 
         public string NotesAlt { get; set; }
 
         public string StampNumber { get; set; }
+
+        public int? PaperId { get; set; }
 
         public List<IncludedRatingDO> IncludedRatings { get; set; }
 

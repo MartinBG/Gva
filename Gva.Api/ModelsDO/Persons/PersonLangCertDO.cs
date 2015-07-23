@@ -27,6 +27,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public List<NomValue> RatingTypes { get; set; }
 
+        public NomValue AircraftTypeCategory { get; set; }
+
         public NomValue AircraftTypeGroup { get; set; }
 
         public NomValue LicenceType { get; set; }

@@ -1,7 +1,7 @@
 <ng-form name="editLicenceForm"  sc-form-readonly="">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong>{{title}} {{licence.part.publisher.code}} {{licence.part.licenceNumber}} - {{licence.part.licenceType.name}} </strong>
+      <strong>{{title}} {{licence.publisher.code}} {{licence.licenceNumber}} - {{licence.licenceType.name}} </strong>
       <div class="pull-right">
         <sc-button name="createBtn" btn-click="newEdition()" text="persons.licenceView.newEdition" class="btn btn-primary btn-xs" icon="glyphicon-plus">
         </sc-button>
@@ -11,12 +11,12 @@
     <div class="well-sm panel-body">
       <div class="row">
         <sc-field-group class="col-sm-3" text="persons.licenceView.valid">
-          <sc-nomenclature alias="'boolean'" ng-model="licence.part.valid" ng-readonly="true"></sc-nomenclature>
+          <sc-nomenclature alias="'boolean'" ng-model="licence.valid" ng-readonly="true"></sc-nomenclature>
           <sc-button name="viewStatusesBtn" btn-click="viewStatuses()" class="btn btn-default" icon="glyphicon-pencil" ng-disabled="editMode"></sc-button>
         </sc-field-group>
         <div class="col-sm-9">
           <h5 class="table-header" style="margin-top: 0px" l10n-text="persons.licenceView.statusChanges"></h5>
-          <sc-datatable items="licence.part.statuses" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
+          <sc-datatable items="licence.statuses" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
             <sc-column data="changeDate" type="date" title="persons.licenceView.changeDate">
             </sc-column>
             <sc-column data="valid.name" title="persons.licenceView.valid2">

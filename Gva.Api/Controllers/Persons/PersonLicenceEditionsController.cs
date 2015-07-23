@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -28,6 +32,8 @@ namespace Gva.Api.Controllers.Persons
         private ILotEventDispatcher lotEventDispatcher;
         private IFileRepository fileRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private IPersonRepository personRepository;
+        private INomRepository nomRepository;
         private UserContext userContext;
 
         public PersonLicenceEditionsController(
@@ -36,6 +42,8 @@ namespace Gva.Api.Controllers.Persons
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
             IApplicationRepository applicationRepository,
+            IPersonRepository personRepository,
+            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("licenceEditions", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -47,6 +55,8 @@ namespace Gva.Api.Controllers.Persons
             this.lotEventDispatcher = lotEventDispatcher;
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.personRepository = personRepository;
+            this.nomRepository = nomRepository;
             this.userContext = userContext;
         }
 
@@ -97,13 +107,38 @@ namespace Gva.Api.Controllers.Persons
                 .Where(epv => epv.Content.LicencePartIndex == licencePartIndex)
                 .OrderBy(epv => epv.Content.Index);
 
-            List<CaseTypesPartDO<PersonLicenceEditionDO>> partVersionDOs = new List<CaseTypesPartDO<PersonLicenceEditionDO>>();
+            List<PersonLicenceEditionViewDO> partVersionDOs = new List<PersonLicenceEditionViewDO>();
             foreach (var editionsPartVersion in editionsPartVersions)
             {
                 var lotFiles = this.fileRepository.GetFileReferences(editionsPartVersion.PartId, caseTypeId);
                 if (!caseTypeId.HasValue || lotFiles != null)
                 {
-                    partVersionDOs.Add(new CaseTypesPartDO<PersonLicenceEditionDO>(editionsPartVersion, lotFiles));
+                    string inspector = null;
+                    if(editionsPartVersion.Content.InspectorId.HasValue)
+                    {
+                        var person = this.personRepository.GetPerson(editionsPartVersion.Content.InspectorId.Value);
+                        inspector = string.Format("{0} {1}", person.Lin, person.Names);
+                    }
+
+                    var limitations = editionsPartVersion.Content.Limitations == null ? null : editionsPartVersion.Content.Limitations.Select(l => this.nomRepository.GetNomValue(l)).ToList();
+
+                    PersonLicenceEditionViewDO edition = new PersonLicenceEditionViewDO()
+                    {
+                        PartIndex = editionsPartVersion.Part.Index,
+                        LicencePartIndex = licencePartIndex,
+                        Cases = lotFiles.Select(lf => new CaseDO(lf)).ToList(),
+                        Notes = editionsPartVersion.Content.Notes,
+                        NotesAlt = editionsPartVersion.Content.NotesAlt,
+                        DocumentDateValidFrom = editionsPartVersion.Content.DocumentDateValidFrom,
+                        DocumentDateValidTo = editionsPartVersion.Content.DocumentDateValidTo,
+                        Index = editionsPartVersion.Content.Index,
+                        Inspector = inspector,
+                        Limitations = limitations,
+                        StampNumber = editionsPartVersion.Content.StampNumber,
+                        LicenceAction = editionsPartVersion.Content.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", editionsPartVersion.Content.LicenceActionId.Value) : null
+                    };
+
+                    partVersionDOs.Add(edition);
                 }
             }
             
@@ -198,6 +233,46 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok();
             }
+        }
+
+        [Route("{licenceEditionIndex}/ratingEditionLicenceStatus")]
+        public IHttpActionResult SetRatingEditionLicenceStatus(int lotId, int licencePartIndex, int licenceEditionIndex, int ratingIndex, int ratingEditionIndex, bool noNumber)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, licenceEditionIndex));
+
+                var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
+                    .Where(re => re.RatingEditionPartIndex == ratingEditionIndex && re.RatingPartIndex == ratingIndex)
+                    .Single();
+
+                rating.NoNumber = noNumber;
+
+                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [Route("{licenceEditionIndex}/ratingEditionLicence")]
+        public IHttpActionResult GetRatingEditionLicence(int lotId, int licencePartIndex, int licenceEditionIndex, int ratingIndex, int ratingEditionIndex)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, licenceEditionIndex));
+
+            var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
+                .Where(re => re.RatingEditionPartIndex == ratingEditionIndex && re.RatingPartIndex == ratingIndex)
+                .SingleOrDefault();
+
+            return Ok(rating != null ? new RatingEditionLicenceDO(rating) : new RatingEditionLicenceDO());
         }
     }
 }

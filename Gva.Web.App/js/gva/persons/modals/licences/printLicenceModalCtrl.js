@@ -18,13 +18,15 @@
       lotId: scModalParams.lotId,
       index: scModalParams.index,
       editionIndex: scModalParams.editionIndex,
-      isFclOrPart66: scModalParams.isFclOrPart66
+      isFclOrPart66: scModalParams.isFclOrPart66,
+      paperId: licenceEdition.part.paperId
     };
 
     $scope.save = function () {
       return $scope.form.printLicenceForm.$validate().then(function () {
         if ($scope.form.printLicenceForm.$valid) {
           licenceEdition.part.stampNumber = $scope.model.stampNumber;
+          licenceEdition.part.paperId = $scope.model.paperId;
 
           return PersonLicenceEditions.save({
             id: scModalParams.lotId,

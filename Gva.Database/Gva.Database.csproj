@@ -51,6 +51,7 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaPapers.sql" />
     <Content Include="Create\Tables\GvaViewSModeCodes.sql" />
     <Content Include="Create\Tables\GvaViewAircraftCerts.sql" />
     <Content Include="Create\Tables\GvaViewPrintedRatingEditions.sql" />
@@ -98,6 +99,7 @@
     <Content Include="Create\Tables\Users\RoleClassifications.sql" />
     <Content Include="Create\Views\vwGvaLicenceEditions.sql" />
     <Content Include="Insert\asExams.sql" />
+    <Content Include="Insert\gvaPapers.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
@@ -186,6 +188,7 @@
     <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\Roles.sql" />
     <Content Include="Insert\Users\UserRoles.sql" />
+    <Content Include="Update\upd20150722.sql" />
     <Content Include="Update\upd20150702.sql" />
     <Content Include="Update\upd20150630.sql" />
     <Content Include="Update\upd20150629.sql" />

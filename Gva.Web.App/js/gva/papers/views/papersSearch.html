@@ -1,0 +1,16 @@
+<sc-button name="createBtn" btn-sref="{ state: 'root.papers.new' }" text="papers.papersSearch.new" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="papers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-button name="editBtn" btn-sref="{ state: 'root.papers.edit', params: {id: item.paperId} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="name" title="papers.papersSearch.name" class="wrap">
+  </sc-column>
+  <sc-column data="fromDate" title="papers.papersSearch.fromDate" type="date">
+  </sc-column>
+  <sc-column data="toDate" title="papers.papersSearch.toDate" type="date">
+  </sc-column>
+  <sc-column data="isActive" title="papers.papersSearch.isActive" type="boolean">
+  </sc-column>
+  <sc-column data="firstNumber" title="papers.papersSearch.firstNumber">
+  </sc-column>
+</sc-datatable>

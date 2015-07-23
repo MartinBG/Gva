@@ -25,7 +25,29 @@ namespace Gva.Api.WordTemplates
             return String.Join(", ", phones);
         }
 
-        internal static object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
+        internal static string GetAuthFormAddress(PersonAddressDO personAddress, NomValue country, INomRepository nomRepository)
+        {
+            List<string> addressData = new List<string>();
+            if (country != null)
+            {
+                addressData.Add(country.NameAlt);
+            }
+
+            if (personAddress.SettlementId.HasValue)
+            {
+                string settlementAlt = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).NameAlt;
+                addressData.Add(settlementAlt);
+            }
+
+            if (personAddress != null)
+            {
+                addressData.Add(personAddress.AddressAlt);
+            }
+
+            return string.Join(", ", addressData);
+        }
+
+        internal static object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress, INomRepository nomRepository)
         {
             return new
             {
@@ -38,7 +60,7 @@ namespace Gva.Api.WordTemplates
                 EGN = personData.Uin,
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement !=null ? personAddress.Settlement.Name : null,
+                    personAddress.SettlementId.HasValue ? nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null,
                     personAddress.Address),
                 TELEPHONE = GetPhonesString(personData)
             };
@@ -193,33 +215,6 @@ namespace Gva.Api.WordTemplates
             return langLevel;
         }
 
-        internal static List<object> GetATCLLangCertsForEndosement(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
-        {
-            var langLevel = new List<object>();
-            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
-            {
-                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
-                if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
-                {
-                    langLevel.Add(new
-                    {
-                        AUTH = cert.LangLevel.Name.ToUpper(),
-                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-                    });
-                }
-                else
-                {
-                    langLevel.Add(new
-                    {
-                        AUTH = cert.LangLevel.Name.ToUpper(),
-                        VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
-                    });
-                }
-            }
-
-            return langLevel;
-        }
-
         internal static List<object> GetRatings(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> editions,
@@ -257,7 +252,13 @@ namespace Gva.Api.WordTemplates
 
         internal static NomValue GetCountry(PersonAddressDO personAddress, INomRepository nomRepository)
         {
-            int? countryId = personAddress.Settlement != null ? personAddress.Settlement.ParentValueId : null;
+            NomValue settlement = null;
+            if (personAddress.SettlementId.HasValue)
+            {
+                settlement = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
+            int? countryId = settlement != null ? settlement.ParentValueId : null;
             NomValue country = countryId.HasValue ?
                 nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue

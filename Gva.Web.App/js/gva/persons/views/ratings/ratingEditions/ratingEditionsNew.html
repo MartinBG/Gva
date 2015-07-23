@@ -8,7 +8,8 @@
       </div>
     </div>
     <div class="well-sm panel-body">
-      <gva-rating-edition name="ratingEditionForm" ng-model="newRatingEdition" sc-form-params="{ lotId: lotId }">
+      <gva-rating-edition name="ratingEditionForm" ng-model="newRatingEdition" sc-form-params="{ lotId: lotId }"
+         sc-data-is-required-date-to="rating.part.ratingClass || rating.part.ratingTypes.length > 0" >
       </gva-rating-edition>
     </div>
   </div>
