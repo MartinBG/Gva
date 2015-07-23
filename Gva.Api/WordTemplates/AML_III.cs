@@ -43,7 +43,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
              var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -92,6 +92,12 @@ namespace Gva.Api.WordTemplates
                 isForeigner = country.Code != "BG";
             }
 
+            NomValue settlement = null;
+            if(personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
             var json = new
             {
                 root = new
@@ -114,11 +120,11 @@ namespace Gva.Api.WordTemplates
                     {
                         ADDR_EN = string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null,
+                            settlement != null ? settlement.NameAlt : null,
                             personAddress.AddressAlt),
                         ADDR = !isForeigner ? string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement != null ? personAddress.Settlement.Name : null,
+                            settlement != null ? settlement.Name : null,
                             personAddress.Address) : null,
                         BG_LABEL_ADDR = !isForeigner ? "Адрес на притежателя:" : null
                     },

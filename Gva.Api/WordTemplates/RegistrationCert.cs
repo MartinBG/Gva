@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
@@ -15,15 +16,18 @@ namespace Gva.Api.WordTemplates
         private ILotRepository lotRepository;
         private IPersonRepository personRepository;
         private IOrganizationRepository organizationRepository;
+        private INomRepository nomRepository;
 
         public RegistrationCert(
             ILotRepository lotRepository,
             IPersonRepository personRepository,
-            IOrganizationRepository organizationRepository)
+            IOrganizationRepository organizationRepository,
+            INomRepository nomRepository)
         {
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
             this.organizationRepository = organizationRepository;
+            this.nomRepository = nomRepository;
         }
 
         public string GeneratorCode
@@ -97,7 +101,7 @@ namespace Gva.Api.WordTemplates
             var person = this.personRepository.GetPerson(personId);
             var personAddress = this.lotRepository.GetLotIndex(personId).Index
                 .GetParts<PersonAddressDO>("personAddresses")
-                    .Where(a => a.Content.Valid.Code == "Y")
+                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
                     .FirstOrDefault();
             string address = personAddress != null ? personAddress.Content.Address : null;
             string addressAlt = personAddress != null ? personAddress.Content.AddressAlt : null;

@@ -188,6 +188,7 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\PaperDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonAddressViewDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportPaperDO.cs" />
     <Compile Include="ModelsDO\Persons\StampedLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\RatingEditionLicenceDO.cs" />

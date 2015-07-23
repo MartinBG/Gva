@@ -28,6 +28,8 @@ namespace Gva.ManageLotsTool
                 connection.Open();
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
                 ConvertModel<PersonLicenceDO_Old, PersonLicenceDO>("licences", connection);
+                ConvertModel<PersonAddressDO_Old, PersonAddressDO>("personAddresses", connection);
+                
             }
         }
 

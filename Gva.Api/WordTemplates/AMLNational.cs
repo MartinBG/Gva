@@ -43,7 +43,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                new PersonAddressDO() :
                personAddressPart.Content;
@@ -96,7 +96,7 @@ namespace Gva.Api.WordTemplates
                     SEX = personData.Sex.Code,
                     ADDRESS = string.Format(
                         "{0}, {1}",
-                        personAddress.Settlement != null ? personAddress.Settlement.Name : null,
+                        personAddress.SettlementId.HasValue ? this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null,
                         personAddress.Address),
                     NATIONALITY = country != null ? country.Name : null,
                     NATIONALITY_EN = country != null ? country.Code : null,

@@ -93,7 +93,7 @@ namespace Gva.Api.Controllers.Persons
                 }, new List<CaseDO>());
                 newPerson.PersonAddress = new PersonAddressDO()
                 {
-                    Valid = ValidTrue
+                    ValidId = ValidTrue.NomValueId
                 };
             }
 

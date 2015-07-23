@@ -3,17 +3,19 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonAddressDO
+    public class PersonAddressViewDO
     {
-        public int? AddressTypeId { get; set; }
+        public int PartIndex { get; set; }
 
-        public int? ValidId { get; set; }
+        public NomValue AddressType { get; set; }
+
+        public NomValue Valid { get; set; }
 
         public string Address { get; set; }
 
         public string AddressAlt { get; set; }
 
-        public int? SettlementId { get; set; }
+        public NomValue Settlement { get; set; }
 
         public string PostalCode { get; set; }
 

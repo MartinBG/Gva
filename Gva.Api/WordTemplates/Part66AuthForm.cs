@@ -44,7 +44,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -81,7 +81,7 @@ namespace Gva.Api.WordTemplates
 
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
-            string address = Utils.GetAuthFormAddress(personAddress, country);
+            string address = Utils.GetAuthFormAddress(personAddress, country, this.nomRepository);
 
             var json = new
             {

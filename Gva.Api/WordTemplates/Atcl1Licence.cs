@@ -54,7 +54,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-                .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+                .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -102,9 +102,15 @@ namespace Gva.Api.WordTemplates
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
+            NomValue settlement = null;
+            if (personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
             var address = string.Format(
                 "{0}, {1}",
-                personAddress.Settlement != null? personAddress.Settlement.Name : null,
+                settlement != null? settlement.Name : null,
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
@@ -140,7 +146,7 @@ namespace Gva.Api.WordTemplates
                     ADDRESS_EN = string.Format(
                         "{0}, {1}",
                         personAddress.AddressAlt,
-                        personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
+                        personAddress.SettlementId.HasValue ? this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null),
                     NATIONALITY = nationality != null ? nationality.Name : null,
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),

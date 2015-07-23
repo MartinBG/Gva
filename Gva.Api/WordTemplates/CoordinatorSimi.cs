@@ -43,7 +43,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -152,7 +152,7 @@ namespace Gva.Api.WordTemplates
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_ENDORSEMENT = tEndorsements,
-                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress, this.nomRepository),
                     T_LICENCE_NO = licenceNumber,
                     T_LICENCE_CODE = licenceType.Code,
                     T_ACTION = licenceAction,
