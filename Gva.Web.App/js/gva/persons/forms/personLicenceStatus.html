@@ -1,11 +1,11 @@
 ﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" alias="'boolean'" ng-model="model.valid" ng-required="true" l10n-text="persons.licenceStatus.valid" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" alias="'licenceChangeReasons'" ng-model="model.changeReason" ng-required="true" l10n-text="persons.licenceStatus.changeReason" class="col-sm-5 col-md-4"></sc-field>
+    <sc-field type="nomenclature" alias="'boolean'" ng-model="model.validId" ng-required="true" mode="id" l10n-text="persons.licenceStatus.valid" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" alias="'licenceChangeReasons'" ng-model="model.changeReasonId" mode="id" ng-required="true" l10n-text="persons.licenceStatus.changeReason" class="col-sm-5 col-md-4"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.changeDate" ng-required="true" ng-required="true" l10n-text="persons.licenceStatus.changeDate" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.inspector" l10n-text="persons.licenceStatus.inspector" class="col-sm-5 col-md-4"></sc-field>
+    <sc-field type="nomenclature" alias="'inspectors'" mode="id" ng-model="model.inspectorId" l10n-text="persons.licenceStatus.inspector" class="col-sm-5 col-md-4"></sc-field>
   </div>
   <div class="row">
     <sc-field type="textarea" rows="3" cols="50" ng-model="model.notes" l10n-text="persons.licenceStatus.notes" class="col-sm-12 col-md-8"></sc-field>

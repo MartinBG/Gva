@@ -108,7 +108,7 @@ namespace Gva.Api.WordTemplates
 
                 return new
                 {
-                    LIC_NO = nomRepository.GetNomValue("licenceTypes", l.Content.LicenceType.NomValueId).TextContent.Get<string>("codeCA"),
+                    LIC_NO = nomRepository.GetNomValue("licenceTypes", l.Content.LicenceTypeId.Value).TextContent.Get<string>("codeCA"),
                     ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     C_CODE = publisherCaaCode
                 };

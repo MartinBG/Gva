@@ -8,6 +8,10 @@
         method: 'GET',
         url: 'api/persons/:id/licences/new'
       },
+      getLicenceData: {
+        method: 'GET',
+        url: 'api/persons/:id/licences/:ind/data'
+      },
       lastLicenceNumber: {
         method: 'GET',
         url: 'api/persons/:id/licences/lastLicenceNumber'
@@ -23,6 +27,10 @@
       lastEditionIndex: {
         method: 'GET',
         url: 'api/persons/:id/licences/:ind/lastEditionIndex'
+      },
+      updateLicenceStatus: {
+        method: 'POST',
+        url: 'api/persons/:id/licences/:ind/status'
       }
     });
   }]);

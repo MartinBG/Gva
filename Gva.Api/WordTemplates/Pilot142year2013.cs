@@ -46,7 +46,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -96,7 +96,7 @@ namespace Gva.Api.WordTemplates
                 } :
                 null;
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
@@ -108,9 +108,8 @@ namespace Gva.Api.WordTemplates
             })
             .ToList<object>();
             
-            var allIncludedLimitations66Codes = lastEdition.Limitations.Select(s => s.Code);
             var allIncludedLimitations66 = this.nomRepository.GetNomValues("limitations66")
-                .Where(l => allIncludedLimitations66Codes.Contains(l.Code));
+                .Where(l => lastEdition.Limitations.Contains(l.NomValueId));
 
             var limitationsP8 = allIncludedLimitations66
                 .Where(l => l.TextContent.Get<int>("point") == 8)
@@ -188,6 +187,12 @@ namespace Gva.Api.WordTemplates
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
             }
 
+            NomValue settlement = null;
+            if (personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
             return new
             {
                 FAMILY_BG = personData.LastName.ToUpper(),
@@ -207,12 +212,12 @@ namespace Gva.Api.WordTemplates
                     placeOfBirth != null ? placeOfBirth.NameAlt : null),
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement != null? personAddress.Settlement.Name : null,
+                    settlement != null? settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement != null? personAddress.Settlement.NameAlt : null)
+                    settlement != null? settlement.NameAlt : null)
             };
         }
 

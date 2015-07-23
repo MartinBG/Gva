@@ -5,20 +5,15 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonAddressDO
     {
-        [Required(ErrorMessage = "AddressType is required.")]
-        public NomValue AddressType { get; set; }
+        public int? AddressTypeId { get; set; }
 
-        [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
-        [Required(ErrorMessage = "Address is required.")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "AddressAlt is required.")]
         public string AddressAlt { get; set; }
 
-        [Required(ErrorMessage = "Settlement is required.")]
-        public NomValue Settlement { get; set; }
+        public int? SettlementId { get; set; }
 
         public string PostalCode { get; set; }
 

@@ -17,7 +17,7 @@
       <gva-licence-status name="licenceStatusForm" ng-model="statusModel"></gva-licence-status>
 
       <h5 class="table-header" l10n-text="persons.licenceStatusesModal.statusChanges"></h5>
-      <sc-datatable items="licence.part.statuses" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
+      <sc-datatable items="licence.statuses" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
         <sc-column data="changeDate" type="date" title="persons.licenceStatusesModal.changeDate">
         </sc-column>
         <sc-column data="valid.name" title="persons.licenceStatusesModal.valid">

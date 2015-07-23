@@ -48,7 +48,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -84,7 +84,7 @@ namespace Gva.Api.WordTemplates
             NomValue FTgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FT");
             List<object> instructorData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FTgroup, this.nomRepository);
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
@@ -102,8 +102,10 @@ namespace Gva.Api.WordTemplates
                 licenceType.Code.Replace("(", "").Replace(")", "").Replace("/", "."),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
-            var documents = this.GetDocuments(licence, licenceType.Code, includedTrainings, includedExams, includedChecks);
+            var documents = this.GetDocuments(licence, licenceType, includedTrainings, includedExams, includedChecks);
             var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+
+            string licenceAction = lastEdition.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", lastEdition.LicenceActionId.Value).Name.ToUpper() : null;
 
             var json = new
             {
@@ -121,12 +123,12 @@ namespace Gva.Api.WordTemplates
                     ENG_LEVEL = langCerts,
                     T_RATING = ratings,
                     INSTRUCTOR = Utils.FillBlankData(instructorData, 4),
-                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress, this.nomRepository),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
-                    T_ACTION = lastEdition.LicenceAction.Name,
+                    T_ACTION = licenceAction,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     OTHER_LICENCE2 = otherLicences,
                     T_DOCUMENTS = documents.Take(4),
@@ -156,6 +158,13 @@ namespace Gva.Api.WordTemplates
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
             }
 
+            NomValue settlement = null;
+            if (personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
+
             return new
             {
                 FAMILY_BG = personData.LastName.ToUpper(),
@@ -175,12 +184,12 @@ namespace Gva.Api.WordTemplates
                     placeOfBirth != null ? placeOfBirth.NameAlt : null),
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement != null ? personAddress.Settlement.Name : null,
+                    settlement != null ? settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null)
+                    settlement != null ? settlement.NameAlt : null)
             };
         }
 
@@ -223,15 +232,15 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetDocuments(
             PersonLicenceDO licence,
-            string licenceCode,
+            NomValue licenceType,
             IEnumerable<PersonTrainingDO> includedTrainings,
             IEnumerable<PersonTrainingDO> includedExams,
             IEnumerable<PersonCheckDO> includedChecks)
         {
-            if (licenceCode == "ATPA" || licenceCode == "CPA")
+            if (licenceType.Code == "ATPA" || licenceType.Code == "CPA")
             {
                 string[] documentRoleCodes;
-                bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licence.LicenceType.Code, out documentRoleCodes);
+                bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
 
                 if (!hasRoles)
                 {
@@ -299,7 +308,7 @@ namespace Gva.Api.WordTemplates
                     
                 };
                 
-                if (licenceCode == "ATPA")
+                if (licenceType.Code == "ATPA")
                 {
                     result.Add(new
                     {

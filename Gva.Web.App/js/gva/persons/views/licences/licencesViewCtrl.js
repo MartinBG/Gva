@@ -50,7 +50,7 @@
       '$stateParams',
       'PersonLicences',
       function ($stateParams, PersonLicences) {
-        return PersonLicences.get($stateParams).$promise;
+        return PersonLicences.getLicenceData($stateParams).$promise;
       }
     ]
   };

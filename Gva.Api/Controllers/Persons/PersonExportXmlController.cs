@@ -114,7 +114,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonDataDO person = this.lotRepository.GetLotIndex(id).Index.GetPart<PersonDataDO>("personData").Content;
             var personAddress = this.lotRepository.GetLotIndex(id).Index.GetParts<PersonAddressDO>("personAddresses")
-                    .Where(a => a.Content.Valid.Code == "Y")
+                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
                     .FirstOrDefault();
 
             row.Add(new XElement("NAME", person.FirstName));
@@ -122,10 +122,16 @@ namespace Gva.Api.Controllers.Persons
             row.Add(new XElement("FAMILY", person.LastName));
             row.Add(new XElement("LIN", person.Lin.ToString()));
             row.Add(new XElement("LIN", person.Lin.ToString()));
-            string settlement = personAddress != null? personAddress.Content.Settlement.Name : null;
+
+            NomValue settlement = null;
+            if (personAddress.Content.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.Content.SettlementId.Value);
+            }
+
             row.Add(new XElement("ADDR_EKNM_TOWN", settlement));
 
-            string settlementType = personAddress != null && personAddress.Content.Settlement.Name.Contains(".") ? personAddress.Content.Settlement.Name.Split('.')[0] : null;
+            string settlementType = personAddress != null && settlement != null && settlement.Name.Contains(".") ? settlement.Name.Split('.')[0] : null;
             row.Add(new XElement("ADDR_EKNM_TYPE", settlementType));
 
             string addrText = personAddress != null ? personAddress.Content.Address : null;

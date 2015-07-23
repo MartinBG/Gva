@@ -54,7 +54,7 @@ namespace Gva.Api.WordTemplates
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-                .FirstOrDefault(a => a.Content.Valid.Code == "Y");
+                .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -81,7 +81,7 @@ namespace Gva.Api.WordTemplates
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var licenceNumber = string.Format(
                 "BGR - ATCO - {0} - {1} ATCO licence",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -102,9 +102,15 @@ namespace Gva.Api.WordTemplates
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
+            NomValue settlement = null;
+            if (personAddress.SettlementId.HasValue)
+            {
+                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+            }
+
             var address = string.Format(
                 "{0}, {1}",
-                personAddress.Settlement != null? personAddress.Settlement.Name : null,
+                settlement != null? settlement.Name : null,
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
@@ -113,6 +119,8 @@ namespace Gva.Api.WordTemplates
             var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false, false);
             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true, true);
             var endorsementsAndOtherEndorsements = this.GetEndorsements(includedRatings, ratingEditions);
+
+            string licenceAction = lastEdition.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", lastEdition.LicenceActionId.Value).Name.ToUpper() : null;
 
             var json = new
             {
@@ -138,7 +146,7 @@ namespace Gva.Api.WordTemplates
                     ADDRESS_EN = string.Format(
                         "{0}, {1}",
                         personAddress.AddressAlt,
-                        personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
+                        personAddress.SettlementId.HasValue ? this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null),
                     NATIONALITY = nationality != null ? nationality.Name : null,
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
@@ -159,7 +167,7 @@ namespace Gva.Api.WordTemplates
                     T_LICENCE_CODE = " РП ",
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
-                    T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
+                    T_ACTION = licenceAction,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS = documents.Take(6),
                     T_DOCUMENTS2 = documents.Skip(6),

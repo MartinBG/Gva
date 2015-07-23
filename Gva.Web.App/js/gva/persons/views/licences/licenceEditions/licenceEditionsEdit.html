@@ -1,7 +1,7 @@
 ﻿<h5 class="table-header" l10n-text="persons.editLicenceEditions.editions"></h5>
 <div style="padding-bottom:20px;">
   <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="true" has-info-text="false"
-    default-sort="part.documentDateValidFrom">
+    default-sort="documentDateValidFrom">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
         btn-sref="{ state: 'root.persons.view.licences.view.editions.edit.ratings', params: { index: item.partIndex} }"
@@ -20,26 +20,22 @@
         <span class="glyphicon glyphicon-print"></span>
       </a>
     </sc-column>
-    <sc-column data="part.documentDateValidFrom" title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
-      {{item.part.documentDateValidFrom | date:'mediumDate'}}
+    <sc-column data="documentDateValidFrom" title="persons.editLicenceEditions.documentDateValidFrom" type="date">
     </sc-column>
-    <sc-column data="part.documentDateValidTo" title="persons.editLicenceEditions.documentDateValidTo" has-content="true">
-      {{item.part.documentDateValidTo | date:'mediumDate'}}
+    <sc-column data="documentDateValidTo" title="persons.editLicenceEditions.documentDateValidTo" type="date">
     </sc-column>
     <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
-      {{item.part.limitations | pluck:'code' | join:', '}}
+      {{item.limitations | pluck:'code' | join:', '}}
     </sc-column>
-    <sc-column data="part.notes" title="persons.editLicenceEditions.notes" has-content="true" visible="false">
-      {{item.part.notes}}
+    <sc-column data="notes" title="persons.editLicenceEditions.notes" visible="false">
     </sc-column>
-    <sc-column data="part.notesAlt" title="persons.editLicenceEditions.notesAlt" has-content="true" visible="false">
-      {{item.part.notesAlt}}
+    <sc-column data="notesAlt" title="persons.editLicenceEditions.notesAlt" visible="false">
     </sc-column>
-    <sc-column data="part.inspector.name" title="persons.editLicenceEditions.inspector">
+    <sc-column data="inspector" title="persons.editLicenceEditions.inspector">
     </sc-column>
-    <sc-column data="part.stampNumber" title="persons.editLicenceEditions.stampNumber">
+    <sc-column data="stampNumber" title="persons.editLicenceEditions.stampNumber">
     </sc-column>
-    <sc-column data="part.licenceAction.code" title="persons.editLicenceEditions.licenceAction">
+    <sc-column data="licenceAction.code" title="persons.editLicenceEditions.licenceAction">
     </sc-column>
     <sc-column data="cases[0].applications[0]" title="persons.editLicenceEditions.application" has-content="true">
        <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.cases[0].applications[0].applicationId }}" text="{{ item.cases[0].applications[0].applicationName }}"></sc-button>
