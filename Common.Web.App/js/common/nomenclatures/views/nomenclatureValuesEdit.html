@@ -42,6 +42,12 @@
         </div>
       </div>
 
+      <div ng-if="alias === 'cities'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'countries'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.country" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
       <div class="row" ng-if="alias === 'limitations66'">
         <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.point = nomenclatureValue.textContent.point || '8'">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limitations66Point"></label>
