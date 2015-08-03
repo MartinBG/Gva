@@ -14,7 +14,6 @@
     scMessage,
     scModal
   ) {
-    $scope.licenceTypeCode = $stateParams.licenceTypeCode;
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedRatings =

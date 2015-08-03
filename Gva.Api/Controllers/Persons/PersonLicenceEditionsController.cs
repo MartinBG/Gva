@@ -183,6 +183,18 @@ namespace Gva.Api.Controllers.Persons
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
+                var oldEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, partIndex));
+                if (oldEditionPartVersion.Content.PrintedDocumentBlobKey.HasValue && !edition.Part.PrintedDocumentBlobKey.HasValue)
+                {
+                    edition.Part.PrintedDocumentBlobKey = oldEditionPartVersion.Content.PrintedDocumentBlobKey.Value;
+                    edition.Part.PrintedFileId = oldEditionPartVersion.Content.PrintedFileId.Value;
+                }
+
+                if (oldEditionPartVersion.Content.PrintedRatingEditions.Count > 0 && edition.Part.PrintedRatingEditions.Count == 0)
+                {
+                    edition.Part.PrintedRatingEditions = oldEditionPartVersion.Content.PrintedRatingEditions;
+                }
+
                 var partVersion = lot.UpdatePart(string.Format("{0}/{1}", this.path, partIndex), edition.Part, this.userContext);
                 this.fileRepository.AddFileReferences(partVersion.Part, edition.Cases);
 
