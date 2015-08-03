@@ -31,7 +31,7 @@ namespace Gva.Api.Repositories.PersonDocumentRepository
                 from i in this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
                     .Include(i => i.Type)
                     .Include(i => i.Role)
-                    .Where(i => i.SetPartAlias != "personReport" && i.SetPartAlias != "personStatus")
+                    .Where(i => i.SetPartAlias != "personStatus")
                 join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on i.PartId equals f.LotPartId into fg
                 from f in fg.DefaultIfEmpty()
                 join df in this.unitOfWork.DbContext.Set<DocFile>() on f.DocFileId equals df.DocFileId into dfg
