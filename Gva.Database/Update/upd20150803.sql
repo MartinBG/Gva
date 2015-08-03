@@ -1,4 +1,7 @@
-﻿alter table GvaViewPersonLicenceEditions add PaperId         INT NULL
+﻿update Noms set Category = 'system' where Alias like 'caa'
+GO
+
+alter table GvaViewPersonLicenceEditions add PaperId         INT NULL
 alter table GvaViewPersonLicenceEditions add HasNoNumber     BIT NULL
 GO
 
