@@ -65,7 +65,7 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("{licencePartIndex}/data")]
-        public IHttpActionResult GetPart(int lotId, int licencePartIndex, int? caseTypeId = null)
+        public override IHttpActionResult GetPart(int lotId, int licencePartIndex, int? caseTypeId = null)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonLicenceDO>(string.Format("{0}/{1}", path, licencePartIndex));
             var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);

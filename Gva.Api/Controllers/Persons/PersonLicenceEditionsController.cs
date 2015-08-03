@@ -133,7 +133,8 @@ namespace Gva.Api.Controllers.Persons
                         Inspector = inspector,
                         Limitations = limitations,
                         StampNumber = editionsPartVersion.Content.StampNumber,
-                        LicenceAction = editionsPartVersion.Content.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", editionsPartVersion.Content.LicenceActionId.Value) : null
+                        LicenceAction = editionsPartVersion.Content.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", editionsPartVersion.Content.LicenceActionId.Value) : null,
+                        HasNoNumber = editionsPartVersion.Content.HasNoNumber
                     };
 
                     partVersionDOs.Add(edition);

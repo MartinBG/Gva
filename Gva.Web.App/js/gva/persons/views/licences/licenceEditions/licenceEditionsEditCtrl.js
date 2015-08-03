@@ -51,7 +51,8 @@
         editionIndex: edition.partIndex,
         isLastEdition: $scope.lastEditionIndex === edition.partIndex,
         isFclOrPart66: $scope.isFcl ||
-              $scope.licence.licenceType.code.indexOf('Part-66') >= 0
+              $scope.licence.licenceType.code.indexOf('Part-66') >= 0,
+        hasNoNumber: edition.hasNoNumber
       };
 
       var modalInstance = scModal.open('printLicence', params);

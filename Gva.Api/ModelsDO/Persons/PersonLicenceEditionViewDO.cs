@@ -30,6 +30,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string StampNumber { get; set; }
 
+        public bool? HasNoNumber { get; set; }
+
         public List<CaseDO> Cases { get; set; }
     }
 }

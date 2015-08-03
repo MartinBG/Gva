@@ -7,10 +7,12 @@
     $state,
     $stateParams,
     Persons,
-    docs
+    docs,
+    l10n
     ) {
     $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
+    $scope.noNumberLabel = l10n.get('persons.stampedDocumentsView.noNumber');
 
     $scope.filters = {
       licenceNumber: null,
@@ -25,39 +27,15 @@
       }
     });
 
+    $scope.documentsForStamp = [];
     $scope.save = function () {
-      var documentsForStamp = [];
-        _.each($scope.docs.documents, function(document) {
-        var stageAliases = [];
-        if(document.licenceReady) {
-          stageAliases.push('licenceReady');
-        } 
-        if (document.done) {
-          stageAliases.push('done');
-        }
-        if (document.returned) {
-          stageAliases.push('returned');
-        }
-
-        if (stageAliases.length > 0) {
-          if (!document.isOfficiallyReissued) {
-            documentsForStamp.push({
-              applicationId: document.application.applicationId,
-              stageAliases: stageAliases
-            });
-          } else {
-            documentsForStamp.push({
-              lotId: document.lotId,
-              editionPartIndex: document.editionPartIndex,
-              stageAliases: stageAliases
-            });
-          }
-        }
+      var changedDocuments = _.filter($scope.documentsForStamp, function (doc) {
+        return doc.stageAliases.length > 0;
       });
 
-      if (documentsForStamp.length > 0) {
+      if (changedDocuments.length > 0) {
         return Persons
-          .saveStampedDocuments(documentsForStamp)
+          .saveStampedDocuments(changedDocuments)
           .$promise
           .then(function () {
             return $state.transitionTo($state.current, $stateParams, { reload: true });
@@ -65,7 +43,6 @@
       } else {
         return $state.transitionTo($state.current, $stateParams);
       }
-
     };
 
     $scope.search = function () {
@@ -80,12 +57,27 @@
     };
 
     $scope.selectCheck = function (event, item, action) {
-      var index = _.findIndex($scope.docs.documents, item);
-      if ($(event.target).is(':checked')) {
-        $scope.docs.documents[index][action] = true;
-      }
-      else {
-        $scope.docs.documents[index][action] = false;
+      var data = {
+        lotId: item.lotId,
+        applicationId: item.application ? item.application.applicationId : null,
+        editionPartIndex: item.editionPartIndex
+      };
+      var existingEntryIndex = _.findIndex($scope.documentsForStamp, data);
+      if (existingEntryIndex === -1) {
+        _.assign(data, { stageAliases: [action]});
+        $scope.documentsForStamp.push(data);
+      } else {
+        if (!$scope.documentsForStamp[existingEntryIndex].stageAliases) {
+          $scope.documentsForStamp[existingEntryIndex].stageAliases = [action];
+        } else {
+          if ($(event.target).is(':checked')) {
+            $scope.documentsForStamp[existingEntryIndex].stageAliases.push(action);
+          }
+          else {
+            $scope.documentsForStamp[existingEntryIndex].stageAliases = 
+              _.without($scope.documentsForStamp[existingEntryIndex].stageAliases, action);
+          }
+        }
       }
     };
 
@@ -100,6 +92,20 @@
 
       return Persons.getStampedDocuments(params).$promise;
     };
+
+    $scope.isChecked = function (item, action) {
+      var currentItem = {
+        lotId: item.lotId,
+        applicationId: item.application ? item.application.applicationId : null,
+        editionPartIndex: item.editionPartIndex
+      };
+      var existingEntryIndex = _.findIndex($scope.documentsForStamp, currentItem);
+      if (existingEntryIndex === -1) {
+        return false;
+      } else {
+        return _.contains($scope.documentsForStamp[existingEntryIndex].stageAliases, action);
+      }
+    };
   }
 
   StampedDocumentsCtrl.$inject = [
@@ -107,7 +113,8 @@
     '$state',
     '$stateParams',
     'Persons',
-    'docs'
+    'docs',
+    'l10n'
   ];
 
   StampedDocumentsCtrl.$resolve = {

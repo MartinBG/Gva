@@ -2149,7 +2149,8 @@
           application: 'Заявление',
           received: 'Получен',
           finished: 'Приключено заявление',
-          officiallyReissued: 'Служебно преиздаден'
+          officiallyReissued: 'Служебно преиздаден',
+          noNumber: 'Без номер'
         },
         exportView: {
           tabs: {
@@ -2778,7 +2779,8 @@
           printExaminerCert: 'Принтиране на сертификат за проверяващ',
           printInstructorCert: 'Принтиране на сертификат за инструктор',
           printLicenceAuthForm: 'Принтиране на форма за потвърждаване',
-          paper: 'Хартия'
+          paper: 'Хартия',
+          noNumber: 'Без номер'
         },
         printRatingEditionModal: {
           title: 'Принтиране на квалификационен клас',

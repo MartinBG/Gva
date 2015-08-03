@@ -258,8 +258,10 @@ namespace Gva.Api.Repositories.PersonRepository
             int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaLicenceEdition>()
-                .And(e => e.StampNumber != null && (e.GvaStageId.HasValue || e.OfficiallyReissuedStageId.HasValue))
-                .And(e => (e.GvaStageId.HasValue ? e.GvaStageId < GvaConstants.IsDoneApplication : e.OfficiallyReissuedStageId < GvaConstants.IsReceivedLicence));
+                .And(e => 
+                    (e.StampNumber != null && (e.GvaStageId.HasValue || e.OfficiallyReissuedStageId.HasValue) && 
+                    (e.GvaStageId.HasValue ? e.GvaStageId < GvaConstants.IsDoneApplication : e.OfficiallyReissuedStageId < GvaConstants.IsReceivedLicence))
+                    || ((e.GvaApplicationId.HasValue && e.HasNoNumber.HasValue ? e.HasNoNumber.Value == true : false) && (e.GvaStageId.HasValue ? e.GvaStageId < GvaConstants.IsDoneApplication : false)));
 
             if (isOfficiallyReissuedId.HasValue)
             {
@@ -282,7 +284,6 @@ namespace Gva.Api.Repositories.PersonRepository
                 predicate = predicate.And(e => e.Person.Names.Contains(names));
             }
 
-
             if (licenceNumber.HasValue)
             {
                 predicate = predicate.And(e => e.LicenceNumber != null && e.LicenceNumber.Value == licenceNumber);
@@ -292,7 +293,6 @@ namespace Gva.Api.Repositories.PersonRepository
             {
                 predicate = predicate.And(e => e.StampNumber.Contains(stampNumber));
             }
-
 
             var query = this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
