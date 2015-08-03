@@ -23,7 +23,8 @@
     <sc-ajaxcolumn title="persons.printableDocsSearch.licenceNumber" has-content="true">
       {{licenceNumberFormatMask(item)}}
     </sc-ajaxcolumn>
-    <sc-ajaxcolumn title="persons.printableDocsSearch.lin"  data="person.lin">
+    <sc-ajaxcolumn title="persons.printableDocsSearch.lin" data="person.lin" has-content="true">
+      <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.edit', params: { id: item.lotId }}" text="{{item.person.lin}}"></sc-button>
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.printableDocsSearch.uin" data="person.uin">
     </sc-ajaxcolumn>
