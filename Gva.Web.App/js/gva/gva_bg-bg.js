@@ -2782,10 +2782,7 @@
         },
         printRatingEditionModal: {
           title: 'Принтиране на квалификационен клас',
-          cancel: 'Отказ',
-          save: 'Запис',
-          edit: 'Редакция',
-          noNumber: 'Без номер',
+          close: 'Затвори',
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
         },

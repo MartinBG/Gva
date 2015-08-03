@@ -52,8 +52,6 @@ namespace Gva.Api.Projections.Person
             printedRatingEdition.RatingPartIndex = edition.RatingPartIndex;
             printedRatingEdition.RatingEditionPartIndex = edition.RatingEditionPartIndex;
             printedRatingEdition.PrintedFileId = edition.FileId;
-            printedRatingEdition.LicenceStatusId = edition.LicenceStatusId;
-            printedRatingEdition.NoNumber = edition.NoNumber;
 
             return printedRatingEdition;
         }

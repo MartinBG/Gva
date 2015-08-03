@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
-using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -233,46 +231,6 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok();
             }
-        }
-
-        [Route("{licenceEditionIndex}/ratingEditionLicenceStatus")]
-        public IHttpActionResult SetRatingEditionLicenceStatus(int lotId, int licencePartIndex, int licenceEditionIndex, int ratingIndex, int ratingEditionIndex, bool noNumber)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var lot = this.lotRepository.GetLotIndex(lotId);
-                var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, licenceEditionIndex));
-
-                var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
-                    .Where(re => re.RatingEditionPartIndex == ratingEditionIndex && re.RatingPartIndex == ratingIndex)
-                    .Single();
-
-                rating.NoNumber = noNumber;
-
-                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
-
-                lot.Commit(this.userContext, lotEventDispatcher);
-                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
-
-                this.unitOfWork.Save();
-
-                transaction.Commit();
-
-                return Ok();
-            }
-        }
-
-        [Route("{licenceEditionIndex}/ratingEditionLicence")]
-        public IHttpActionResult GetRatingEditionLicence(int lotId, int licencePartIndex, int licenceEditionIndex, int ratingIndex, int ratingEditionIndex)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, licenceEditionIndex));
-
-            var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
-                .Where(re => re.RatingEditionPartIndex == ratingEditionIndex && re.RatingPartIndex == ratingIndex)
-                .SingleOrDefault();
-
-            return Ok(rating != null ? new RatingEditionLicenceDO(rating) : new RatingEditionLicenceDO());
         }
     }
 }
