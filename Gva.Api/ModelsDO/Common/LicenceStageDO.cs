@@ -7,14 +7,10 @@ namespace Gva.Api.ModelsDO.Common
     {
         public int? ApplicationId { get; set; }
 
-        public int LotId { get; set; }
+        public int? LotId { get; set; }
 
         public int? EditionPartIndex { get; set; }
 
         public string[] StageAliases { get; set; }
-
-        public int? RatingPartIndex { get; set; }
-
-        public int? RatingEditionPartIndex { get; set; }
     }
 }

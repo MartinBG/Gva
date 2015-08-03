@@ -11,14 +11,18 @@
 
     <div class="well-sm panel-body">
       <div class="row">
-        <sc-field type="text" ng-model="model.stampNumber" ng-required="true" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-5"></sc-field>
+        <sc-field type="text" ng-model="model.stampNumber" ng-required="!model.hasNoNumber" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-5"></sc-field>
         <div class="labeless">
           <sc-link-button name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}" target="_blank" sc-access-token text="persons.printLicenceModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
           <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printLicenceModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
         </div>
       </div>
       <div class="row">
-        <sc-field type="nomenclature" ng-model="model.paperId" alias="'papers'" mode="id" ng-required="true" l10n-text="persons.printLicenceModal.paper" class="col-sm-6"></sc-field>
+        <sc-field type="nomenclature" ng-model="model.paperId" alias="'papers'" mode="id" ng-required="!model.hasNoNumber" l10n-text="persons.printLicenceModal.paper" class="col-sm-6"></sc-field>
+      </div>
+      <div class="form-group col-sm-3 row">
+        <label class="control-label" l10n-text="persons.printLicenceModal.noNumber"></label>
+        <input type="checkbox" ng-checked="model.hasNoNumber" ng-disabled="!editMode" sc-click="setNoNumber($event)" />
       </div>
       <hr />
       <div class="row" style="margin-left :0px" class="labeless">

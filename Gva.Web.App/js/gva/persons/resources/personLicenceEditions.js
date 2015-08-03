@@ -7,14 +7,6 @@
       newLicenceEdition: {
         method: 'GET',
         url: 'api/persons/:id/licenceEditions/new'
-      },
-      setRatingEditionLicenceStatus: {
-        method: 'POST',
-        url: 'api/persons/:id/licences/:ind/licenceEditions/:index/ratingEditionLicenceStatus'
-      },
-      getRatingEditionLicence: {
-        method: 'GET',
-        url: 'api/persons/:id/licences/:ind/licenceEditions/:index/ratingEditionLicence'
       }
     });
   }]);

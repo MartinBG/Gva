@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, $*/
+(function (angular, $) {
   'use strict';
 
   function PrintLicenceModalCtrl(
@@ -19,7 +19,8 @@
       index: scModalParams.index,
       editionIndex: scModalParams.editionIndex,
       isFclOrPart66: scModalParams.isFclOrPart66,
-      paperId: licenceEdition.part.paperId
+      paperId: licenceEdition.part.paperId,
+      hasNoNumber: licenceEdition.part.hasNoNumber
     };
 
     $scope.save = function () {
@@ -27,6 +28,7 @@
         if ($scope.form.printLicenceForm.$valid) {
           licenceEdition.part.stampNumber = $scope.model.stampNumber;
           licenceEdition.part.paperId = $scope.model.paperId;
+          licenceEdition.part.hasNoNumber = $scope.model.hasNoNumber;
 
           return PersonLicenceEditions.save({
             id: scModalParams.lotId,
@@ -45,6 +47,11 @@
 
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
+    };
+
+    $scope.setNoNumber = function (event) {
+      $scope.model.hasNoNumber =
+        $(event.target).is(':checked') ? true : false;
     };
   }
 
@@ -71,4 +78,4 @@
   };
 
   angular.module('gva').controller('PrintLicenceModalCtrl', PrintLicenceModalCtrl);
-}(angular));
+}(angular, $));

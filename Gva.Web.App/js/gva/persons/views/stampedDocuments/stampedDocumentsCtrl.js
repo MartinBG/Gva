@@ -7,10 +7,12 @@
     $state,
     $stateParams,
     Persons,
-    docs
+    docs,
+    l10n
     ) {
     $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
+    $scope.noNumberLabel = l10n.get('persons.stampedDocumentsView.noNumber');
 
     $scope.filters = {
       licenceNumber: null,
@@ -41,7 +43,6 @@
       } else {
         return $state.transitionTo($state.current, $stateParams);
       }
-
     };
 
     $scope.search = function () {
@@ -59,15 +60,12 @@
       var data = {
         lotId: item.lotId,
         applicationId: item.application ? item.application.applicationId : null,
-        editionPartIndex: item.editionPartIndex,
-        ratingEditionPartIndex: item.ratingEditionPartIndex,
-        ratingPartIndex: item.ratingPartIndex
+        editionPartIndex: item.editionPartIndex
       };
       var existingEntryIndex = _.findIndex($scope.documentsForStamp, data);
       if (existingEntryIndex === -1) {
         _.assign(data, { stageAliases: [action]});
         $scope.documentsForStamp.push(data);
-
       } else {
         if (!$scope.documentsForStamp[existingEntryIndex].stageAliases) {
           $scope.documentsForStamp[existingEntryIndex].stageAliases = [action];
@@ -99,9 +97,7 @@
       var currentItem = {
         lotId: item.lotId,
         applicationId: item.application ? item.application.applicationId : null,
-        editionPartIndex: item.editionPartIndex,
-        ratingEditionPartIndex: item.ratingEditionPartIndex,
-        ratingPartIndex: item.ratingPartIndex
+        editionPartIndex: item.editionPartIndex
       };
       var existingEntryIndex = _.findIndex($scope.documentsForStamp, currentItem);
       if (existingEntryIndex === -1) {
@@ -117,7 +113,8 @@
     '$state',
     '$stateParams',
     'Persons',
-    'docs'
+    'docs',
+    'l10n'
   ];
 
   StampedDocumentsCtrl.$resolve = {

@@ -76,6 +76,7 @@ namespace Gva.Api.Projections.Person
             licenceEdition.FirstDocDateValidFrom = firstDocDateValidFrom;
             licenceEdition.IsLastEdition = isLastEdition;
             licenceEdition.PrintedFileId = edition.Content.PrintedFileId;
+            licenceEdition.HasNoNumber = edition.Content.HasNoNumber;
 
             if(edition.Content.IsOfficiallyReissued == true)
             {

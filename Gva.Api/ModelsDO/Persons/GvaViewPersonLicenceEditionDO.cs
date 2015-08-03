@@ -34,6 +34,8 @@ namespace Gva.Api.ModelsDO.Persons
                 this.IsOfficiallyReissued = false;
             }
 
+            this.HasNoNumber = edition.HasNoNumber.HasValue ? edition.HasNoNumber.Value : false;
+
             this.LicenceAction = edition.LicenceAction;
             this.LicenceNumber = edition.LicenceNumber;
 
@@ -130,5 +132,7 @@ namespace Gva.Api.ModelsDO.Persons
         public CaseDO Case { get; set; }
 
         public bool IsOfficiallyReissued { get; set; }
+
+        public bool HasNoNumber { get; set; }
     }
 }

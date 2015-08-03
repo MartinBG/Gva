@@ -190,8 +190,6 @@
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressViewDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportPaperDO.cs" />
-    <Compile Include="ModelsDO\Persons\StampedLicenceDO.cs" />
-    <Compile Include="ModelsDO\Persons\RatingEditionLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceStatusViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceViewDO.cs" />

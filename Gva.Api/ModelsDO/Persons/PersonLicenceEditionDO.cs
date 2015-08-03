@@ -69,5 +69,7 @@ namespace Gva.Api.ModelsDO.Persons
         public bool? IsOfficiallyReissued { get; set; }
 
         public int? ОfficiallyReissuedStageId { get; set; }
+
+        public bool? HasNoNumber { get; set; }
     }
 }
