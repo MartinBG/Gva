@@ -173,6 +173,8 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRegistrationDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\ActNumberDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOtherViewDO.cs" />
+    <Compile Include="ModelsDO\Airports\AirportDocumentOtherViewDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
@@ -186,6 +188,8 @@
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherViewDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherViewDO.cs" />
     <Compile Include="ModelsDO\PaperDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentOtherViewDO.cs" />

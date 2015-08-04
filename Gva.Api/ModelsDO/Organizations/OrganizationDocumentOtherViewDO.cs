@@ -4,8 +4,14 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Organizations
 {
-    public class OrganizationDocumentOtherDO
+    public class OrganizationDocumentOtherViewDO
     {
+        public CaseDO Case { get; set; }
+
+        public int PartIndex { get; set; }
+
+        public int PartId { get; set; }
+
         public string DocumentNumber { get; set; }
 
         public string DocumentPersonNumber { get; set; }
@@ -16,11 +22,11 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public int? DocumentTypeId { get; set; }
+        public NomValue DocumentType { get; set; }
 
-        public int? DocumentRoleId { get; set; }
+        public NomValue DocumentRole { get; set; }
 
-        public int? ValidId { get; set; }
+        public NomValue Valid { get; set; }
 
         public string Notes { get; set; }
     }

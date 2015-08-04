@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
@@ -22,6 +24,8 @@ namespace Gva.Api.Controllers.Airports
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private INomRepository nomRepository;
+        private IFileRepository fileRepository;
 
         public AirportDocumentOthersController(
             IUnitOfWork unitOfWork,
@@ -36,6 +40,8 @@ namespace Gva.Api.Controllers.Airports
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -59,10 +65,40 @@ namespace Gva.Api.Controllers.Airports
 
             AirportDocumentOtherDO newDocumentOther = new AirportDocumentOtherDO()
             {
-                DocumentDateValidFrom = DateTime.Now
+                DocumentDateValidFrom = DateTime.Now,
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
             };
 
             return Ok(new CaseTypePartDO<AirportDocumentOtherDO>(newDocumentOther, caseDO));
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<AirportDocumentOtherDO>("airportDocumentOthers");
+
+            List<AirportDocumentOtherViewDO> documentOtherViewDOs = new List<AirportDocumentOtherViewDO>();
+            foreach (var documentOtherPartVersion in documentOthers)
+            {
+                var lotFile = this.fileRepository.GetFileReference(documentOtherPartVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    documentOtherViewDOs.Add(new AirportDocumentOtherViewDO()
+                    {
+                        Case = lotFile != null ? new CaseDO(lotFile) : null,
+                        PartIndex = documentOtherPartVersion.Part.Index,
+                        PartId = documentOtherPartVersion.PartId,
+                        DocumentDateValidFrom = documentOtherPartVersion.Content.DocumentDateValidFrom,
+                        DocumentDateValidTo = documentOtherPartVersion.Content.DocumentDateValidTo,
+                        DocumentNumber = documentOtherPartVersion.Content.DocumentNumber,
+                        DocumentPublisher = documentOtherPartVersion.Content.DocumentPublisher,
+                        Notes = documentOtherPartVersion.Content.Notes,
+                        Valid = documentOtherPartVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", documentOtherPartVersion.Content.ValidId.Value) : null,
+                        DocumentType = documentOtherPartVersion.Content.DocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", documentOtherPartVersion.Content.DocumentTypeId.Value) : null,
+                        DocumentRole = documentOtherPartVersion.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", documentOtherPartVersion.Content.DocumentRoleId.Value) : null
+                    });
+                }
+            }
+            return Ok(documentOtherViewDOs);
         }
     }
 }

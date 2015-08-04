@@ -2,24 +2,25 @@
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Airports
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class AirportDocumentOtherDO
+    public class OrganizationDocumentOtherDO_Old
     {
         public string DocumentNumber { get; set; }
 
-        [Required(ErrorMessage = "DocumentPublisher is required.")]
+        public string DocumentPersonNumber { get; set; }
+
         public string DocumentPublisher { get; set; }
 
         public DateTime? DocumentDateValidFrom { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public int? DocumentTypeId { get; set; }
+        public NomValue DocumentType { get; set; }
 
-        public int? DocumentRoleId { get; set; }
+        public NomValue DocumentRole { get; set; }
 
-        public int? ValidId { get; set; }
+        public NomValue Valid { get; set; }
 
         public string Notes { get; set; }
     }
