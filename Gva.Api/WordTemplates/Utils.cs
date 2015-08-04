@@ -25,30 +25,48 @@ namespace Gva.Api.WordTemplates
             return String.Join(", ", phones);
         }
 
-        internal static string GetAuthFormAddress(PersonAddressDO personAddress, NomValue country, INomRepository nomRepository)
+        internal static Tuple<string, string> GetAddress(PersonAddressDO personAddress, INomRepository nomRepository)
         {
             List<string> addressData = new List<string>();
-            if (country != null)
-            {
-                addressData.Add(country.NameAlt);
-            }
+            List<string> addressDataAlt = new List<string>();
 
             if (personAddress.SettlementId.HasValue)
             {
-                string settlementAlt = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).NameAlt;
-                addressData.Add(settlementAlt);
+                NomValue settlement = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+                NomValue country = nomRepository.GetNomValue("countries", settlement.ParentValueId.Value);
+                addressDataAlt.Add(country.NameAlt);
+                addressDataAlt.Add(settlement.NameAlt);
+
+                addressData.Add(country.Name);
+                addressData.Add(settlement.Name);
             }
 
             if (personAddress != null)
             {
-                addressData.Add(personAddress.AddressAlt);
+                addressDataAlt.Add(personAddress.AddressAlt);
+                addressData.Add(personAddress.Address);
             }
 
-            return string.Join(", ", addressData);
+            return new Tuple<string, string>(string.Join(", ", addressDataAlt), string.Join(", ", addressData));
+        }
+
+        internal static Tuple<string, string> GetPlaceOfBirth(PersonDataDO personData, INomRepository nomRepository)
+        {
+            string placeOfBirth = null;
+            string placeOfBirthAlt = null;
+            if(personData.PlaceOfBirth != null)
+            {
+                NomValue country = nomRepository.GetNomValue("countries", personData.PlaceOfBirth.ParentValueId.Value);
+                placeOfBirth = string.Format("{0}, {1}", country.Name, personData.PlaceOfBirth.Name);
+                placeOfBirthAlt = string.Format("{0}, {1}", country.NameAlt, personData.PlaceOfBirth.NameAlt);
+            }
+
+            return new Tuple<string, string>(placeOfBirthAlt, placeOfBirth);
         }
 
         internal static object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress, INomRepository nomRepository)
         {
+            var address = GetAddress(personAddress, nomRepository).Item2;
             return new
             {
                 NAME = string.Format(
@@ -58,10 +76,7 @@ namespace Gva.Api.WordTemplates
                     personData.LastName).ToUpper(),
                 LIN = personData.Lin,
                 EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.SettlementId.HasValue ? nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null,
-                    personAddress.Address),
+                ADDRESS = address,
                 TELEPHONE = GetPhonesString(personData)
             };
         }
@@ -250,15 +265,9 @@ namespace Gva.Api.WordTemplates
             return Utils.FillBlankData(ratingEditions, 11);
         }
 
-        internal static NomValue GetCountry(PersonAddressDO personAddress, INomRepository nomRepository)
+        internal static NomValue GetCountry(PersonDataDO personData, INomRepository nomRepository)
         {
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
-            int? countryId = settlement != null ? settlement.ParentValueId : null;
+            int? countryId = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.ParentValueId : null;
             NomValue country = countryId.HasValue ?
                 nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue

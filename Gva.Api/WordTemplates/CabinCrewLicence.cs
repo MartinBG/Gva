@@ -167,12 +167,7 @@ namespace Gva.Api.WordTemplates
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
 
             return new
             {
@@ -196,14 +191,8 @@ namespace Gva.Api.WordTemplates
                         TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.NameAlt : null
                     }
                 },
-                ADDRESS_BG = string.Format(
-                    "{0}, {1}",
-                    settlement != null ? settlement.Name : null,
-                    personAddress.Address),
-                ADDRESS_TRANS = string.Format(
-                    "{0}, {1}",
-                    personAddress.AddressAlt,
-                    settlement != null ? settlement.NameAlt : null),
+                ADDRESS_BG = address.Item2,
+                ADDRESS_TRANS = address.Item1,
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality != null? nationality.Name : null,

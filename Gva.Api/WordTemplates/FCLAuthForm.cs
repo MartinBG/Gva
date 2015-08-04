@@ -66,10 +66,12 @@ namespace Gva.Api.WordTemplates
             var includedLangCerts = lastEdition.IncludedLangCerts
                 .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
 
-            var langCerts = includedLangCerts.Select(l => new 
-            {
-                NAME = string.Format("{0} {1}", l.LangLevel.Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-            });
+            var langCerts = includedLangCerts
+                .Where(l => l.LangLevel != null)
+                .Select(l => new 
+                {
+                    NAME = string.Format("{0} {1}", l.LangLevel.Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                });
 
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
@@ -93,9 +95,9 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            var country = Utils.GetCountry(personAddress, this.nomRepository); 
+            var country = Utils.GetCountry(personData, this.nomRepository); 
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
-            string address = Utils.GetAuthFormAddress(personAddress, country, this.nomRepository);
+            string address = Utils.GetAddress(personAddress, this.nomRepository).Item1;
             string medicalClass = bgMedical != null ? bgMedical.MedClass.Name : "";
 
             var json = new

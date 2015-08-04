@@ -96,7 +96,7 @@ namespace Gva.Api.WordTemplates
                 .ToList();
 
             var ratings = Utils.FillBlankData(PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds, this.nomRepository), 19);
-            var country = Utils.GetCountry(personAddress, this.nomRepository);
+            var country = Utils.GetCountry(personData, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR {0} - {1} - {2}",
                 licenceType.Code.Replace("(", "").Replace(")", "").Replace("/", "."),
@@ -151,19 +151,8 @@ namespace Gva.Api.WordTemplates
 
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
-            var placeOfBirth = personData.PlaceOfBirth;
-            NomValue country = null;
-            if (placeOfBirth != null)
-            {
-                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            }
-
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
+            var placeOfBirth = Utils.GetPlaceOfBirth(personData, nomRepository);
 
             return new
             {
@@ -174,22 +163,10 @@ namespace Gva.Api.WordTemplates
                 SURNAME_BG = personData.MiddleName.ToUpper(),
                 SURNAME_TRANS = personData.MiddleNameAlt.ToUpper(),
                 DATE_OF_BIRTH = personData.DateOfBirth,
-                PLACE_OF_BIRTH = string.Format(
-                    "{0} {1}",
-                    country != null ? country.Name : null,
-                    placeOfBirth != null ? placeOfBirth.Name : null),
-                PLACE_OF_BIRTH_TRANS = string.Format(
-                    "{0} {1}",
-                    country != null ? country.NameAlt : null,
-                    placeOfBirth != null ? placeOfBirth.NameAlt : null),
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    settlement != null ? settlement.Name : null,
-                    personAddress.Address),
-                ADDRESS_TRANS = string.Format(
-                    "{0}, {1}",
-                    personAddress.AddressAlt,
-                    settlement != null ? settlement.NameAlt : null)
+                PLACE_OF_BIRTH = placeOfBirth.Item2,
+                PLACE_OF_BIRTH_TRANS = placeOfBirth.Item1,
+                ADDRESS = address.Item2,
+                ADDRESS_TRANS = address.Item1
             };
         }
 
