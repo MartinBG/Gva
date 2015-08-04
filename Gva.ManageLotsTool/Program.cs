@@ -29,7 +29,6 @@ namespace Gva.ManageLotsTool
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
                 ConvertModel<PersonLicenceDO_Old, PersonLicenceDO>("licences", connection);
                 ConvertModel<PersonAddressDO_Old, PersonAddressDO>("personAddresses", connection);
-                
             }
         }
 
@@ -38,18 +37,18 @@ namespace Gva.ManageLotsTool
             where TSrc : class
         {
             var partVersionsToChange = connection.CreateStoreCommand(
-                       @"select lpv.LotPartVersionId, lpv.TextContent 
-                          from LotPartVersions lpv
-                          join LotParts lp on lp.LotPartId = lpv.LotPartId
-                          join LotSetParts lsp on lp.LotSetPartId = lsp.LotSetPartId
-                          where {0}",
-                        new DbClause("lp.Path like {0} + '/%'", path))
+                       @"SELECT lpv.LotPartVersionId, lpv.TextContent 
+                         FROM LotPartVersions lpv
+                         JOIN LotParts lp ON lp.LotPartId = lpv.LotPartId
+                         JOIN LotSetParts lsp ON lp.LotSetPartId = lsp.LotSetPartId
+                         WHERE {0}",
+                        new DbClause("lp.Path LIKE {0} + '/%'", path))
                        .Materialize(r =>
                            new
-                            {
-                                LotPartVersionId = r.Field<int>("LotPartVersionId"),
-                                TextContent = r.Field<string>("TextContent")
-                            })
+                           {
+                               LotPartVersionId = r.Field<int>("LotPartVersionId"),
+                               TextContent = r.Field<string>("TextContent")
+                           })
                        .ToList();
 
             foreach (var partVersion in partVersionsToChange)
@@ -86,12 +85,21 @@ namespace Gva.ManageLotsTool
         {
             using (var transaction = connection.BeginTransaction("transaction"))
             {
-                string result = JsonConvert.SerializeObject(textContent);
+                Formatting formatting;
+#if DEBUG
+                formatting = Formatting.Indented;
+#else
+                formatting = Formatting.None;
+#endif
+                string result = JsonConvert.SerializeObject(textContent, formatting);
 
                 string cmdText = @"UPDATE LotPartVersions
-                                   SET TextContent = '" + result + "'" +
-                                   "WHERE LotPartVersionId = " + lotPartVersionId;
+                                   SET TextContent = @NewTextContent
+                                   WHERE LotPartVersionId = @LotPartVersionId";
+
                 SqlCommand command = new SqlCommand(cmdText, connection, transaction);
+                command.Parameters.AddWithValue("@NewTextContent", result);
+                command.Parameters.AddWithValue("@LotPartVersionId", lotPartVersionId);
 
                 try
                 {
@@ -131,7 +139,7 @@ namespace Gva.ManageLotsTool
         }
 
         public static void CopyProperty<TSrc, TDest>(PropertyInfo srcProp, TSrc srcModel, TDest destModel)
-            where TDest : class, new ()
+            where TDest : class, new()
         {
             var srcPropValue = srcProp.GetValue(srcModel);
             Type srcType = srcProp.PropertyType;
@@ -198,7 +206,7 @@ namespace Gva.ManageLotsTool
                     destType.GetProperty(srcProp.Name).SetValue(destModel, srcPropValue);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e);
                 throw;
