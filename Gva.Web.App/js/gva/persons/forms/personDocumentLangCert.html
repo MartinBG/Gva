@@ -6,16 +6,16 @@
   <div ng-show="model.case.caseType">
     <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
     <div class="row">
-      <sc-field  ng-if="isNew" type="nomenclature" ng-model="model.part.langLevel" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.newDocumentLangCert.langLevel" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field  ng-if="isNew" type="nomenclature" ng-model="model.part.langLevelId" mode="id" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.newDocumentLangCert.langLevel" class="col-sm-3 col-md-2"></sc-field>
      
       <sc-field-group  ng-if="!isNew" class="col-sm-3" text="persons.personDocumentLangCertDirective.langLevel">
-        <sc-nomenclature alias="'langLevels'" ng-model="model.part.langLevel" ng-readonly="true"></sc-nomenclature>
+        <sc-nomenclature alias="'langLevels'" ng-model="model.part.langLevelId" mode="id" ng-readonly="true"></sc-nomenclature>
         <sc-button name="viewLevelsBtn" btn-click="viewLangLevels()" class="btn btn-default" ng-disabled="form.$readonly" icon="glyphicon-pencil"></sc-button>
       </sc-field-group>
     </div>
     <div ng-if="!isNew">
       <h5 class="table-header" style="margin-top: 10px" l10n-text="persons.personDocumentLangCertDirective.langLevelEntries"></h5>
-      <sc-datatable items="model.part.langLevelEntries" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
+      <sc-datatable items="langLevelHistory" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
         <sc-column data="changeDate" type="date" title="persons.licenceView.changeDate">
         </sc-column>
         <sc-column data="langLevel.name" title="persons.personDocumentLangCertDirective.langLevel">

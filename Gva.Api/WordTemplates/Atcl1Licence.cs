@@ -53,8 +53,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("booelan", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-                .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+                .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -186,12 +187,17 @@ namespace Gva.Api.WordTemplates
         private List<object> GetLangCertsForEndosement(IEnumerable<PersonLangCertDO> includedLangCerts)
         {
             return includedLangCerts
-                .Where(c => c.LangLevel != null)
-                .Select(c => new
-                {
-                    AUTH = c.LangLevel.Name.ToUpper(),
-                    VALID_DATE = !c.LangLevel.Code.Contains("6") && c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : "unlimited"
+                .Where(c => c.LangLevelId.HasValue)
 
+                .Select(c =>
+                {   
+                    var langLevel = this.nomRepository.GetNomValue("langLevels", c.LangLevelId.Value);
+                    return new
+                    {
+                        AUTH = langLevel.Name.ToUpper(),
+                        VALID_DATE = !langLevel.Code.Contains("6") && c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : "unlimited"
+
+                    };
                 }).ToList<object>();
         }
 
@@ -372,7 +378,12 @@ namespace Gva.Api.WordTemplates
         {
             IEnumerable<object> result = new List<object>();
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
+            documentRoleIds = documentRoleCodes
+                .Select(c =>
+                    this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                    .ToArray();
 
             if (!hasRoles)
             {
@@ -388,14 +399,14 @@ namespace Gva.Api.WordTemplates
             NomValue practExamToGainAccessRole = this.nomRepository.GetNomValue("documentRoles", "practExamToGainAccess");
             NomValue RPcertRole = this.nomRepository.GetNomValue("documentRoles", "RPcert");
 
-            var theoreticalExamsTransitionalEducation = Utils.GetTrainingsByCode(includedTrainings, theoreticalExamTransitionalEducationRole.Code, documentRoleCodes);
-            var practicalExamsPreliminaryEducation = Utils.GetTrainingsByCode(includedTrainings, practicalExamPreliminaryEducationRole.Code, documentRoleCodes);
-            var accessOrdersPracticalEducation = Utils.GetTrainingsByCode(includedTrainings, accessOrderPracticalEducationRole.Code, documentRoleCodes);
-            var practicalExamsToGainAccess = Utils.GetTrainingsByCode(includedTrainings, practExamToGainAccessRole.Code, documentRoleCodes);
-            var accessOrdersToWorkAlone = Utils.GetTrainingsByCode(includedTrainings, accessOrderWorkAloneRole.Code, documentRoleCodes);
-            var RPcerts = Utils.GetTrainingsByCode(includedTrainings, RPcertRole.Code, documentRoleCodes);
-            var bgLangCerts = Utils.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
-            var engLangCerts = Utils.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
+            var theoreticalExamsTransitionalEducation = Utils.GetTrainingsById(includedTrainings, theoreticalExamTransitionalEducationRole.NomValueId, documentRoleIds, this.nomRepository);
+            var practicalExamsPreliminaryEducation = Utils.GetTrainingsById(includedTrainings, practicalExamPreliminaryEducationRole.NomValueId, documentRoleIds, this.nomRepository);
+            var accessOrdersPracticalEducation = Utils.GetTrainingsById(includedTrainings, accessOrderPracticalEducationRole.NomValueId, documentRoleIds, this.nomRepository);
+            var practicalExamsToGainAccess = Utils.GetTrainingsById(includedTrainings, practExamToGainAccessRole.NomValueId, documentRoleIds, this.nomRepository);
+            var accessOrdersToWorkAlone = Utils.GetTrainingsById(includedTrainings, accessOrderWorkAloneRole.NomValueId, documentRoleIds, this.nomRepository);
+            var RPcerts = Utils.GetTrainingsById(includedTrainings, RPcertRole.NomValueId, documentRoleIds, this.nomRepository);
+            var bgLangCerts = Utils.GetLangCertsById(includedLangCerts, bgCertRole.NomValueId, documentRoleIds, this.nomRepository);
+            var engLangCerts = Utils.GetLangCertsById(includedLangCerts, engCertRole.NomValueId, documentRoleIds, this.nomRepository);
 
             return new List<object>()
             {

@@ -50,8 +50,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-                .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+                .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -90,7 +91,12 @@ namespace Gva.Api.WordTemplates
             var endorsements2 = this.GetEndorsements2(includedRatings, ratingEditions);
 
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+            documentRoleIds = documentRoleCodes
+                .Select(c =>
+                    this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                    .ToArray();
 
             dynamic theoreticalExams = null;
             dynamic practicalExams = null;
@@ -106,11 +112,11 @@ namespace Gva.Api.WordTemplates
                 NomValue accessOrderWorkAloneRole = this.nomRepository.GetNomValue("documentRoles", "accessOrderWorkAlone");
                 NomValue checkAtWorkRole = this.nomRepository.GetNomValue("documentRoles", "checkAtWork");
 
-                practicalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, practicalExamRole.Code, documentRoleCodes);
-                theoreticalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, theoreticalExamRole.Code, documentRoleCodes);
-                checksAtWork = Utils.GetChecksByCode(includedChecks, checkAtWorkRole.Code, documentRoleCodes);
-                accessOrderWorkAlone = Utils.GetTrainingsByCode(includedTrainings, accessOrderWorkAloneRole.Code, documentRoleCodes);
-                accessOrderPractEducation = Utils.GetTrainingsByCode(includedTrainings, accessOrderPractEducationRole.Code, documentRoleCodes);
+                practicalExams = Utils.GetExamsById(includedExams, includedChecks, includedTrainings, practicalExamRole.NomValueId, documentRoleIds, this.nomRepository);
+                theoreticalExams = Utils.GetExamsById(includedExams, includedChecks, includedTrainings, theoreticalExamRole.NomValueId, documentRoleIds, this.nomRepository);
+                checksAtWork = Utils.GetChecksById(includedChecks, checkAtWorkRole.NomValueId, documentRoleIds, this.nomRepository);
+                accessOrderWorkAlone = Utils.GetTrainingsById(includedTrainings, accessOrderWorkAloneRole.NomValueId, documentRoleIds, this.nomRepository);
+                accessOrderPractEducation = Utils.GetTrainingsById(includedTrainings, accessOrderPractEducationRole.NomValueId, documentRoleIds, this.nomRepository);
 
             }
 

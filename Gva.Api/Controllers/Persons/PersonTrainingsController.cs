@@ -11,6 +11,7 @@ using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.PersonTrainingRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -21,10 +22,8 @@ namespace Gva.Api.Controllers.Persons
     public class PersonTrainingsController : GvaCaseTypePartController<PersonTrainingDO>
     {
         private INomRepository nomRepository;
-        private IFileRepository fileRepository;
-        private ILotRepository lotRepository;
+        private IPersonTrainingRepository personTrainingRepository;
         private ICaseTypeRepository caseTypeRepository;
-        private string path = "personDocumentTrainings";
 
         public PersonTrainingsController(
             IUnitOfWork unitOfWork,
@@ -32,13 +31,13 @@ namespace Gva.Api.Controllers.Persons
             IFileRepository fileRepository,
             INomRepository nomRepository,
             ICaseTypeRepository caseTypeRepository,
+            IPersonTrainingRepository personTrainingRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentTrainings", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
-            this.fileRepository = fileRepository;
-            this.lotRepository = lotRepository;
+            this.personTrainingRepository = personTrainingRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 
@@ -48,7 +47,7 @@ namespace Gva.Api.Controllers.Persons
             PersonTrainingDO newTraining = new PersonTrainingDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
             };
 
             CaseDO caseDO = null;
@@ -72,20 +71,16 @@ namespace Gva.Api.Controllers.Persons
         [Route("exams")]
         public IHttpActionResult GetExams(int lotId, int? caseTypeId = null)
         {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonTrainingDO>(this.path)
-                .Where(d => d.Content.DocumentRole.Alias == "exam");
+            int roleExamId = this.nomRepository.GetNomValue("documentRoles", "exam").NomValueId;
+            var examViewDOs = this.personTrainingRepository.GetTrainings(lotId, caseTypeId, roleExamId);
 
-            List<CaseTypePartDO<PersonTrainingDO>> partVersionDOs = new List<CaseTypePartDO<PersonTrainingDO>>();
-            foreach (var partVersion in partVersions)
-            {
-                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
-                if (!caseTypeId.HasValue || lotFile != null)
-                {
-                    partVersionDOs.Add(new CaseTypePartDO<PersonTrainingDO>(partVersion, lotFile));
-                }
-            }
+            return Ok(examViewDOs);
+        }
 
-            return Ok(partVersionDOs);
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var trainingViewDOs = this.personTrainingRepository.GetTrainings(lotId, caseTypeId);
+            return Ok(trainingViewDOs);
         }
     }
 }

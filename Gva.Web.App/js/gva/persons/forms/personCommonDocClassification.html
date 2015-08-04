@@ -1,23 +1,23 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <h5 class="form-header" l10n-text="persons.personCommonDocClassificationDirective.title"></h5>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.licenceType" alias="'licenceTypes'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.licenceType" class="col-sm-9 col-md-6"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.licenceTypeId" mode="id" alias="'licenceTypes'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.licenceType" class="col-sm-9 col-md-6"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.part.ratingTypes" alias="'ratingTypes'" multiple="multiple" ng-disabled="model.part.ratingClass" l10n-text="persons.personCommonDocClassificationDirective.ratingType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingTypes" mode="id" alias="'ratingTypes'" multiple="multiple" ng-disabled="model.part.ratingClass" l10n-text="persons.personCommonDocClassificationDirective.ratingType" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_vs'">  
-    <sc-field type="nomenclature" ng-model="model.part.aircraftTypeGroup" alias="'aircraftTypeGroups'" l10n-text="persons.personCommonDocClassificationDirective.aircraftTypeGroup" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" alias="'aircraftClases66'" format-options="{{code}} {{name}}" ng-model="model.part.aircraftTypeCategory" l10n-text="persons.personCommonDocClassificationDirective.ratingCategory" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.aircraftTypeGroupId" mode="id" alias="'aircraftTypeGroups'" l10n-text="persons.personCommonDocClassificationDirective.aircraftTypeGroup" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" alias="'aircraftClases66'" mode="id" format-options="{{code}} {{name}}" ng-model="model.part.aircraftTypeCategoryId" l10n-text="persons.personCommonDocClassificationDirective.ratingCategory" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
-    <sc-field type="nomenclature" ng-model="model.part.locationIndicator" format-options="{{code}} {{name}}" alias="'locationIndicators'" l10n-text="persons.personCommonDocClassificationDirective.locationIndicator" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.locationIndicatorId" mode="id" format-options="{{code}} {{name}}" alias="'locationIndicators'" l10n-text="persons.personCommonDocClassificationDirective.locationIndicator" class="col-sm-6 col-md-4"></sc-field>
     <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.personCommonDocClassificationDirective.sector" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_suvd'">
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingTypes.length > 0" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.ratingClassId" mode="id" ng-disabled="model.part.ratingTypes.length > 0" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.authorizationId" mode="id" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
     </div>
   </div>
 </ng-form>

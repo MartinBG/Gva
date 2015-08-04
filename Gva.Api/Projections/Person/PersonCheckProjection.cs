@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Gva.Api.Models.Views.Person;
@@ -13,11 +14,15 @@ namespace Gva.Api.Projections.Person
     public class PersonCheckProjection : Projection<GvaViewPersonCheck>
     {
         private IUnitOfWork unitOfWork;
+        private INomRepository nomRepository;
 
-        public PersonCheckProjection(IUnitOfWork unitOfWork)
+        public PersonCheckProjection(
+            IUnitOfWork unitOfWork,
+            INomRepository nomRepository)
             : base(unitOfWork, "Person")
         {
             this.unitOfWork = unitOfWork;
+            this.nomRepository = nomRepository;
         }
 
         public override IEnumerable<GvaViewPersonCheck> Execute(PartCollection parts)
@@ -36,14 +41,14 @@ namespace Gva.Api.Projections.Person
             check.PartIndex = personCheck.Part.Index;
             check.Publisher = personCheck.Content.DocumentPublisher;
             check.DocumentNumber = personCheck.Content.DocumentNumber;
-            check.DocumentTypeId = personCheck.Content.DocumentType != null ? personCheck.Content.DocumentType.NomValueId : (int?)null;
-            check.DocumentRoleId = personCheck.Content.DocumentRole != null ? personCheck.Content.DocumentRole.NomValueId : (int?)null;
-            check.RatingTypes = personCheck.Content.RatingTypes.Count() > 0 ? string.Join(", ", personCheck.Content.RatingTypes.Select(r => r.Code)) : null;
-            check.RatingClassId = personCheck.Content.RatingClass != null ? personCheck.Content.RatingClass.NomValueId : (int?)null;
-            check.AuthorizationId = personCheck.Content.Authorization != null ? personCheck.Content.Authorization.NomValueId : (int?)null;
-            check.LicenceTypeId = personCheck.Content.LicenceType != null ? personCheck.Content.LicenceType.NomValueId : (int?)null;
-            check.ValidId = personCheck.Content.Valid != null ? personCheck.Content.Valid.NomValueId : (int?)null;
-            check.PersonCheckRatingValueId = personCheck.Content.PersonCheckRatingValue != null ? personCheck.Content.PersonCheckRatingValue.NomValueId : (int?)null;
+            check.DocumentTypeId = personCheck.Content.DocumentTypeId;
+            check.DocumentRoleId = personCheck.Content.DocumentRoleId;
+            check.RatingTypes = personCheck.Content.RatingTypes.Count() > 0 ? string.Join(", ", personCheck.Content.RatingTypes.Select(r => this.nomRepository.GetNomValue("ratingTypes", r).Code)) : null;
+            check.RatingClassId = personCheck.Content.RatingClassId;
+            check.AuthorizationId = personCheck.Content.AuthorizationId;
+            check.LicenceTypeId = personCheck.Content.LicenceTypeId;
+            check.ValidId = personCheck.Content.ValidId;
+            check.PersonCheckRatingValueId = personCheck.Content.PersonCheckRatingValueId;
             check.Sector = personCheck.Content.Sector;
 
             if(personCheck.Content.DocumentDateValidFrom.HasValue)

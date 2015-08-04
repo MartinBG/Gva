@@ -1,33 +1,33 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.checks.new' }" text="persons.checkSearch.newCheck" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom"
+<sc-datatable items="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom"
   row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.checks.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
+  <sc-column data="documentNumber" title="persons.checkSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.documentType.name" title="persons.checkSearch.personCheckDocumentType" class="wrap">
+  <sc-column data="documentType.name" title="persons.checkSearch.personCheckDocumentType" class="wrap">
   </sc-column>
-  <sc-column data="part.documentRole.name" title="persons.checkSearch.personCheckDocumentRole" class="wrap">
+  <sc-column data="documentRole.name" title="persons.checkSearch.personCheckDocumentRole" class="wrap">
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="persons.checkSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="persons.checkSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="persons.checkSearch.documentPublisher" class="wrap">
+  <sc-column data="documentPublisher" title="persons.checkSearch.documentPublisher" class="wrap">
   </sc-column>
   <sc-column title="persons.checkSearch.ratingType" has-content="true">
-    {{item.part.ratingTypes && item.part.ratingTypes.length > 0 ? (item.part.ratingTypes | pluck:'code' | join:', ') : (item.part.locationIndicator ? item.part.locationIndicator.code : '')  + ' ' + (item.part.sector ? item.part.sector : '')}}
+    {{item.ratingTypes && item.ratingTypes.length > 0 ? (item.ratingTypes | pluck:'code' | join:', ') : (item.locationIndicator ? item.locationIndicator.code : '')  + ' ' + (item.sector ? item.sector : '')}}
   </sc-column>
-  <sc-column data="part.ratingClass.code" title="persons.checkSearch.ratingClass" class="wrap">
+  <sc-column data="ratingClass.code" title="persons.checkSearch.ratingClass" class="wrap">
   </sc-column>
-  <sc-column data="part.authorization.code" title="persons.checkSearch.authorization" class="wrap">
+  <sc-column data="authorization.code" title="persons.checkSearch.authorization" class="wrap">
   </sc-column>
-  <sc-column data="part.licenceType.code" title="persons.checkSearch.licenceType" class="wrap">
+  <sc-column data="licenceType.code" title="persons.checkSearch.licenceType" class="wrap">
   </sc-column>
-  <sc-column data="part.valid.name" title="persons.checkSearch.valid">
+  <sc-column data="valid.name" title="persons.checkSearch.valid">
   </sc-column>
-  <sc-column data="part.personCheckRatingValue ? part.personCheckRatingValue.code : ''" title="persons.checkSearch.ratingValue">
+  <sc-column data="personCheckRatingValue ? personCheckRatingValue.code : ''" title="persons.checkSearch.ratingValue">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.checkSearch.bookPageNumber" visible="false">
   </sc-column>

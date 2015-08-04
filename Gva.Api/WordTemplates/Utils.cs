@@ -95,67 +95,72 @@ namespace Gva.Api.WordTemplates
             return data;
         }
 
-        internal static List<object> GetLangCertsByCode(IEnumerable<PersonLangCertDO> includedLangCerts, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetLangCertsById(IEnumerable<PersonLangCertDO> includedLangCerts, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
             return includedLangCerts
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetTrainingsByCode(IEnumerable<PersonTrainingDO> includedTraings, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetTrainingsById(IEnumerable<PersonTrainingDO> includedTraings, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
+
             return includedTraings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetChecksByCode(IEnumerable<PersonCheckDO> includedChecks, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetChecksById(IEnumerable<PersonCheckDO> includedChecks, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
             return includedChecks
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetExamsByCode(
+        internal static List<object> GetExamsById(
             IEnumerable<PersonTrainingDO> includedExams,
             IEnumerable<PersonCheckDO> includedChecks,
             IEnumerable<PersonTrainingDO> includedTrainings,
-            string examRoleCode,
-            string[] documentRoleCodes)
+            int examRoleId,
+            int[] documentRoleIds,
+            INomRepository nomRepository)
         {
-            var exams = includedExams.Where(d => d.DocumentRole.Code == examRoleCode)
+            var exams = includedExams.Where(d => d.DocumentRoleId == examRoleId)
                .Select(t => new
                {
-                   DOC_TYPE = t.DocumentType.Name.ToLower(),
+                   DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                    DOC_NO = t.DocumentNumber,
                    DATE = t.DocumentDateValidFrom,
                    DOC_PUBLISHER = t.DocumentPublisher
                })
                .ToList<object>();
 
-            var trainings = Utils.GetTrainingsByCode(includedTrainings, examRoleCode, documentRoleCodes);
-            var checks = Utils.GetChecksByCode(includedChecks, examRoleCode, documentRoleCodes);
+            var trainings = Utils.GetTrainingsById(includedTrainings, examRoleId, documentRoleIds, nomRepository);
+            var checks = Utils.GetChecksById(includedChecks, examRoleId, documentRoleIds, nomRepository);
 
             return exams.Union(checks).Union(trainings).ToList<object>();
         }
@@ -190,37 +195,42 @@ namespace Gva.Api.WordTemplates
             return medicals;
         }
 
-        internal static List<object> GetLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts)
+        internal static List<object> GetLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
         {
-            return includedLangCerts.Select(c => new
-            {
-                LEVEL = c.LangLevel.Name,
-                ISSUE_DATE = c.DocumentDateValidFrom,
-                VALID_DATE = c.LangLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-            })
+            return includedLangCerts.Where(l => l.LangLevelId.HasValue)
+                .Select(c => 
+                {
+                    var langLevel = nomRepository.GetNomValue("langLevels", c.LangLevelId.Value);
+                    return new
+                    {
+                        LEVEL = langLevel.Name,
+                        ISSUE_DATE = c.DocumentDateValidFrom,
+                        VALID_DATE = langLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                    };
+                })
             .ToList<object>();
         }
 
         internal static List<object> GetATCLLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
         {
             var langLevel = new List<object>();
-            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
+            foreach (var cert in includedLangCerts.Where(c => c.LangLevelId.HasValue))
             {
-                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
+                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevelId.Value);
                 if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
                 {
                     langLevel.Add(new
                     {
-                        LEVEL = cert.LangLevel.Name,
+                        LEVEL = langLevelNom.Name,
                         ISSUE_DATE = cert.DocumentDateValidFrom,
-                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                        VALID_DATE = langLevelNom.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
                     });
                 }
                 else
                 {
                     langLevel.Add(new
                     {
-                        LEVEL = cert.LangLevel.Name,
+                        LEVEL = langLevelNom.Name,
                         ISSUE_DATE = cert.DocumentDateValidFrom,
                         VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
                     });

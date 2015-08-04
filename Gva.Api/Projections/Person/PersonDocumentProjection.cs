@@ -31,6 +31,7 @@ namespace Gva.Api.Projections.Person
 
         public override IEnumerable<GvaViewPersonDocument> Execute(PartCollection parts)
         {
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personData = parts.Get<PersonDataDO>("personData");
             int personEducationRoleId = this.nomRepository.GetNomValue("documentRoles", "personEducation").NomValueId;
             int personEmploymentRoleId = this.nomRepository.GetNomValue("documentRoles", "personEmployment").NomValueId;
@@ -41,11 +42,11 @@ namespace Gva.Api.Projections.Person
             int personReportRoleId = this.nomRepository.GetNomValue("documentRoles", "personReport").NomValueId;
             int personStatusRoleId = this.nomRepository.GetNomValue("documentRoles", "personStatus").NomValueId;
 
-            var documentIds = parts.GetAll<PersonDocumentIdDO>("personDocumentIds").Select(d => this.Create(d, personDocumentIdRoleId));
-            var checks = parts.GetAll<PersonCheckDO>("personDocumentChecks").Select(d => this.Create(d));
-            var trainings = parts.GetAll<PersonTrainingDO>("personDocumentTrainings").Select(d => this.Create(d));
-            var others = parts.GetAll<PersonDocumentOtherDO>("personDocumentOthers").Select(d => this.Create(d));
-            var langCertificates = parts.GetAll<PersonLangCertDO>("personDocumentLangCertificates").Select(d => this.Create(d));
+            var documentIds = parts.GetAll<PersonDocumentIdDO>("personDocumentIds").Select(d => this.Create(d, personDocumentIdRoleId, validTrueId));
+            var checks = parts.GetAll<PersonCheckDO>("personDocumentChecks").Select(d => this.Create(d, validTrueId));
+            var trainings = parts.GetAll<PersonTrainingDO>("personDocumentTrainings").Select(d => this.Create(d, validTrueId));
+            var others = parts.GetAll<PersonDocumentOtherDO>("personDocumentOthers").Select(d => this.Create(d, validTrueId));
+            var langCertificates = parts.GetAll<PersonLangCertDO>("personDocumentLangCertificates").Select(d => this.Create(d, validTrueId));
             var statuses = parts.GetAll<PersonStatusDO>("personStatuses").Select(d => this.Create(d, personStatusRoleId));
             var medicals = parts.GetAll<PersonMedicalDO>("personDocumentMedicals").Select(d => this.Create(d, personData, personMedicalRoleId));
             var reports = parts.GetAll<PersonReportDO>("personReports").Select(d => this.Create(d, personReportRoleId));
@@ -63,7 +64,7 @@ namespace Gva.Api.Projections.Person
 
                 foreach (var edition in licenceEditions)
                 {
-                    licenceDocs.Add(this.Create(licence, edition, personLicenceRoleId));
+                    licenceDocs.Add(this.Create(licence, edition, personLicenceRoleId, validTrueId));
                 }
             }
 
@@ -81,7 +82,7 @@ namespace Gva.Api.Projections.Person
                 .Union(licenceDocs);
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonDocumentIdDO> personDocumentId, int roleId)
+        private GvaViewPersonDocument Create(PartVersion<PersonDocumentIdDO> personDocumentId, int roleId, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
@@ -89,10 +90,10 @@ namespace Gva.Api.Projections.Person
             document.PartId = personDocumentId.Part.PartId;
             document.SetPartAlias = personDocumentId.Part.SetPart.Alias;
             document.RoleId = roleId;
-            document.TypeId = personDocumentId.Content.DocumentType == null ? (int?)null : personDocumentId.Content.DocumentType.NomValueId;
+            document.TypeId = personDocumentId.Content.DocumentTypeId;
             document.Date = personDocumentId.Content.DocumentDateValidFrom;
             document.Publisher = personDocumentId.Content.DocumentPublisher;
-            document.Valid = personDocumentId.Content.Valid.Code == "Y";
+            document.Valid = personDocumentId.Content.ValidId == validTrueId;
             document.FromDate = personDocumentId.Content.DocumentDateValidFrom;
             document.ToDate = personDocumentId.Content.DocumentDateValidTo;
             document.DocumentNumber = personDocumentId.Content.DocumentNumber;
@@ -109,20 +110,20 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonCheckDO> personCheck)
+        private GvaViewPersonDocument Create(PartVersion<PersonCheckDO> personCheck, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
             document.LotId = personCheck.Part.Lot.LotId;
             document.PartId = personCheck.Part.PartId;
             document.SetPartAlias = personCheck.Part.SetPart.Alias;
-            document.RoleId = personCheck.Content.DocumentRole != null? personCheck.Content.DocumentRole.NomValueId : (int?)null;
-            document.TypeId = personCheck.Content.DocumentType != null ? personCheck.Content.DocumentType.NomValueId : (int?)null;
+            document.RoleId = personCheck.Content.DocumentRoleId;
+            document.TypeId = personCheck.Content.DocumentTypeId;
             document.DocumentNumber = personCheck.Content.DocumentNumber;
             document.DocumentPersonNumber = personCheck.Content.DocumentPersonNumber;
             document.Date = personCheck.Content.DocumentDateValidFrom.Value;
             document.Publisher = personCheck.Content.DocumentPublisher;
-            document.Valid = personCheck.Content.Valid.Code == "Y";
+            document.Valid = personCheck.Content.ValidId.HasValue ? personCheck.Content.ValidId.Value == validTrueId : (bool?)null;
             document.FromDate = personCheck.Content.DocumentDateValidFrom.Value;
             document.ToDate = personCheck.Content.DocumentDateValidTo;
             document.Notes = personCheck.Content.Notes;
@@ -139,19 +140,19 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonTrainingDO> personTraining)
+        private GvaViewPersonDocument Create(PartVersion<PersonTrainingDO> personTraining, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
             document.LotId = personTraining.Part.Lot.LotId;
             document.PartId = personTraining.Part.PartId;
             document.SetPartAlias = personTraining.Part.SetPart.Alias;
-            document.RoleId = personTraining.Content.DocumentRole != null ? personTraining.Content.DocumentRole.NomValueId : (int?)null;
-            document.TypeId = personTraining.Content.DocumentType != null ? personTraining.Content.DocumentType.NomValueId : (int?)null;
+            document.RoleId = personTraining.Content.DocumentRoleId;
+            document.TypeId = personTraining.Content.DocumentTypeId;
             document.DocumentNumber = personTraining.Content.DocumentNumber;
             document.DocumentPersonNumber = personTraining.Content.DocumentPersonNumber;
             document.Date = personTraining.Content.DocumentDateValidFrom.Value;
             document.Publisher = personTraining.Content.DocumentPublisher;
-            document.Valid = personTraining.Content.Valid.Code == "Y";
+            document.Valid = personTraining.Content.ValidId.HasValue ? personTraining.Content.ValidId.Value == validTrueId : (bool?)null;
             document.FromDate = personTraining.Content.DocumentDateValidFrom.Value;
             document.ToDate = personTraining.Content.DocumentDateValidTo;
             document.Notes = personTraining.Content.Notes;
@@ -168,20 +169,20 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonDocumentOtherDO> personOther)
+        private GvaViewPersonDocument Create(PartVersion<PersonDocumentOtherDO> personOther, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
             document.LotId = personOther.Part.Lot.LotId;
             document.PartId = personOther.Part.PartId;
             document.SetPartAlias = personOther.Part.SetPart.Alias;
-            document.RoleId = personOther.Content.DocumentRole != null ? personOther.Content.DocumentRole.NomValueId : (int?)null;
-            document.TypeId = personOther.Content.DocumentType != null ? personOther.Content.DocumentType.NomValueId : (int?)null;
+            document.RoleId = personOther.Content.DocumentRoleId;
+            document.TypeId = personOther.Content.DocumentTypeId;
             document.DocumentNumber = personOther.Content.DocumentNumber;
             document.DocumentPersonNumber = personOther.Content.DocumentPersonNumber;
             document.Date = personOther.Content.DocumentDateValidFrom;
             document.Publisher = personOther.Content.DocumentPublisher;
-            document.Valid = personOther.Content.Valid.Code == "Y";
+            document.Valid = personOther.Content.ValidId.HasValue ? personOther.Content.ValidId.Value == validTrueId : (bool?)null;
             document.FromDate = personOther.Content.DocumentDateValidFrom;
             document.ToDate = personOther.Content.DocumentDateValidTo;
             document.Notes = personOther.Content.Notes;
@@ -198,20 +199,20 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonLangCertDO> langCert)
+        private GvaViewPersonDocument Create(PartVersion<PersonLangCertDO> langCert, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
             document.LotId = langCert.Part.Lot.LotId;
             document.PartId = langCert.Part.PartId;
             document.SetPartAlias = langCert.Part.SetPart.Alias;
-            document.RoleId = langCert.Content.DocumentRole != null ? langCert.Content.DocumentRole.NomValueId : (int?)null;
-            document.TypeId = langCert.Content.DocumentType != null ? langCert.Content.DocumentType.NomValueId : (int?)null;
+            document.RoleId = langCert.Content.DocumentRoleId;
+            document.TypeId = langCert.Content.DocumentTypeId;
             document.DocumentNumber = langCert.Content.DocumentNumber;
             document.DocumentPersonNumber = langCert.Content.DocumentPersonNumber;
             document.Date = langCert.Content.DocumentDateValidFrom;
             document.Publisher = langCert.Content.DocumentPublisher;
-            document.Valid = langCert.Content.Valid.Code == "Y";
+            document.Valid = langCert.Content.ValidId.HasValue ? langCert.Content.ValidId.Value == validTrueId : (bool?)null;
             document.FromDate = langCert.Content.DocumentDateValidFrom;
             document.ToDate = langCert.Content.DocumentDateValidTo;
             document.Notes = langCert.Content.Notes;
@@ -390,7 +391,7 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonLicenceDO> personLicence, PartVersion<PersonLicenceEditionDO> edition, int roleId)
+        private GvaViewPersonDocument Create(PartVersion<PersonLicenceDO> personLicence, PartVersion<PersonLicenceEditionDO> edition, int roleId, int validTrueId)
         {
             var licenceType = this.nomRepository.GetNomValue(personLicence.Content.LicenceTypeId.Value);
 
@@ -412,7 +413,7 @@ namespace Gva.Api.Projections.Person
                 null;
             document.Date = edition.Content.DocumentDateValidFrom.Value;
             document.Publisher =  publisherCode;
-            document.Valid = !personLicence.Content.ValidId.HasValue ? (bool?)null : this.nomRepository.GetNomValue(personLicence.Content.ValidId.Value).Code == "Y";
+            document.Valid = !personLicence.Content.ValidId.HasValue ? (bool?)null : personLicence.Content.ValidId.Value == validTrueId;
             document.FromDate = edition.Content.DocumentDateValidFrom.Value;
             document.ToDate = edition.Content.DocumentDateValidTo;
             document.Notes = edition.Content.Notes;

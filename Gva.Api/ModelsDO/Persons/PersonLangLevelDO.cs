@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonLangLevelDO
     {
-        public NomValue LangLevel { get; set; }
+        public int? LangLevelId { get; set; }
 
         public DateTime? ChangeDate { get; set; }
     }

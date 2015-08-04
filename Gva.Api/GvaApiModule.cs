@@ -34,7 +34,9 @@ using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonDocumentRepository;
+using Gva.Api.Repositories.PersonLangCertRepository;
 using Gva.Api.Repositories.PersonRepository;
+using Gva.Api.Repositories.PersonTrainingRepository;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.Reports;
@@ -120,6 +122,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PrintRepository>().As<IPrintRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonDocumentRepository>().As<IPersonDocumentRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonLangCertRepository>().As<IPersonLangCertRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonTrainingRepository>().As<IPersonTrainingRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonsReportRepository>().As<IPersonsReportRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonsReportsExportExcelRepository>().As<IPersonsReportsExportExcelRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();

@@ -1079,9 +1079,14 @@ namespace Gva.Api.Controllers
         }
 
         [Route("ratingTypes")]
-        public IHttpActionResult GetRatingTypes(string term = null, string caseTypeAlias = null)
+        public IHttpActionResult GetRatingTypes(string term = null, string caseTypeAlias = null, [FromUri] int[] ids = null)
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("ratingTypes");
+
+            if (ids.Count() > 0)
+            {
+                nomValues = nomValues.Where(nv => ids.Contains(nv.NomValueId));
+            }
 
             if (!string.IsNullOrEmpty(caseTypeAlias))
             {

@@ -188,6 +188,12 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\PaperDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDocumentOtherViewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonLangLevelViewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonLangCertViewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonCheckViewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonTrainingViewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDocumentIdViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressViewDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportPaperDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionViewDO.cs" />
@@ -465,6 +471,10 @@
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\AirportRepository\AirportRepository.cs" />
     <Compile Include="Repositories\AirportRepository\IAirportRepository.cs" />
+    <Compile Include="Repositories\PersonTrainingRepository\IPersonTrainingRepository.cs" />
+    <Compile Include="Repositories\PersonTrainingRepository\PersonTrainingRepository.cs" />
+    <Compile Include="Repositories\PersonLangCertRepository\IPersonLangCertRepository.cs" />
+    <Compile Include="Repositories\PersonLangCertRepository\PersonLangCertRepository.cs" />
     <Compile Include="Repositories\ExaminationSystemRepository\IExaminationSystemRepository.cs" />
     <Compile Include="Repositories\ExaminationSystemRepository\ExaminationSystemRepository.cs" />
     <Compile Include="Repositories\IntegrationRepository\IntegrationRepository.cs" />

@@ -8,17 +8,17 @@
   </div>
 
   <div class="well-sm panel-body">
-    <sc-datatable items="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
+    <sc-datatable items="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedExams | contains:item" sc-click="selectExam($event, item)">
       </sc-column>
-      <sc-column data="part.documentNumber" title="persons.chooseExamsModal.documentNumber">
+      <sc-column data="documentNumber" title="persons.chooseExamsModal.documentNumber">
       </sc-column>
-      <sc-column data="part.documentDateValidFrom" title="persons.chooseExamsModal.documentDateValidFrom" type="date">
+      <sc-column data="documentDateValidFrom" title="persons.chooseExamsModal.documentDateValidFrom" type="date">
       </sc-column>
-      <sc-column data="part.documentPublisher" title="persons.chooseExamsModal.documentPublisher">
+      <sc-column data="documentPublisher" title="persons.chooseExamsModal.documentPublisher">
       </sc-column>
-      <sc-column data="part.valid.name" title="persons.chooseExamsModal.valid">
+      <sc-column data="valid.name" title="persons.chooseExamsModal.valid">
       </sc-column>
     </sc-datatable>
   </div>

@@ -55,8 +55,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-                .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+                .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -96,13 +97,20 @@ namespace Gva.Api.WordTemplates
                 personData.Lin);
 
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+
             dynamic trainings = null;
             dynamic exams = null;
             dynamic simulators = null;
             if (hasRoles)
             {
-                trainings = this.GetTrainings(includedTrainings, documentRoleCodes);
+                documentRoleIds = documentRoleCodes
+                    .Select(c =>
+                        this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                        .ToArray();
+
+                trainings = this.GetTrainings(includedTrainings, documentRoleIds);
 
                 NomValue examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
@@ -115,7 +123,7 @@ namespace Gva.Api.WordTemplates
 
                 if (documentRoleCodes.Contains(simulatorRole.Code))
                 {
-                    simulators = this.GetSimulators(includedChecks, simulatorRole);
+                    simulators = this.GetSimulators(includedChecks, simulatorRole.NomValueId);
                 }
             }
 
@@ -228,13 +236,13 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetTrainings(
             IEnumerable<PersonTrainingDO> includedTrainings,
-            string[] documentRoleCodes)
+            int[] documentRoleIds)
         {
             var trainings = includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
+                .Where(t => documentRoleIds.Contains(t.DocumentRoleId.Value))
                 .Select(t => new
                 {
-                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
+                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => this.nomRepository.GetNomValue("ratingTypes", rt).Code)) : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
@@ -251,16 +259,16 @@ namespace Gva.Api.WordTemplates
             var exams  = includedExams
                 .Select(t => new
                 {
-                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
+                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => this.nomRepository.GetNomValue("ratingTypes", rt).Code)) : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
                 .ToList<object>();
 
-           var checks =  includedChecks.Where(d => d.DocumentRole.Code == practicalCheckRole.Code)
+           var checks =  includedChecks.Where(d => d.DocumentRoleId == practicalCheckRole.NomValueId)
                 .Select(t => new
                 {
-                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
+                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => this.nomRepository.GetNomValue("ratingTypes", rt).Code)) : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
@@ -271,12 +279,12 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetSimulators(
             IEnumerable<PersonCheckDO> includedChecks,
-            NomValue simulatorRole)
+            int simulatorRoleId)
         {
-            var simulators = includedChecks.Where(t => t.DocumentRole.Code == simulatorRole.Code)
+            var simulators = includedChecks.Where(t => t.DocumentRoleId == simulatorRoleId)
                 .Select(t => new
                 {
-                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
+                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => this.nomRepository.GetNomValue("ratingTypes", rt).Code)) : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })

@@ -98,9 +98,10 @@ namespace Gva.Api.WordTemplates
         private Tuple<string, string, string, string> GetPersonNamesAndAddress(int personId)
         {
             var person = this.personRepository.GetPerson(personId);
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddress = this.lotRepository.GetLotIndex(personId).Index
                 .GetParts<PersonAddressDO>("personAddresses")
-                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
+                    .Where(a => a.Content.ValidId == validTrueId)
                     .FirstOrDefault();
             string address = personAddress != null ? personAddress.Content.Address : null;
             string addressAlt = personAddress != null ? personAddress.Content.AddressAlt : null;

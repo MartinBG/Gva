@@ -29,6 +29,11 @@ namespace Gva.ManageLotsTool
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
                 ConvertModel<PersonLicenceDO_Old, PersonLicenceDO>("licences", connection);
                 ConvertModel<PersonAddressDO_Old, PersonAddressDO>("personAddresses", connection);
+                ConvertModel<PersonLangLevelDO_Old, PersonLangLevelDO>("personDocumentLangCertificates", connection);
+                ConvertModel<PersonCheckDO_Old, PersonCheckDO>("personDocumentChecks", connection);
+                ConvertModel<PersonTrainingDO_Old, PersonTrainingDO>("personDocumentTrainings", connection);
+                ConvertModel<PersonDocumentIdDO_Old, PersonDocumentIdDO>("personDocumentIds", connection);
+                ConvertModel<PersonDocumentOtherDO_Old, PersonDocumentOtherDO>("personDocumentOthers", connection);
             }
         }
 
