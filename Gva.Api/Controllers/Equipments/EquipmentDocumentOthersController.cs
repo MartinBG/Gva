@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
@@ -24,6 +25,7 @@ namespace Gva.Api.Controllers.Equipments
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private IFileRepository fileRepository;
 
         public EquipmentDocumentOthersController(
             IUnitOfWork unitOfWork,
@@ -40,6 +42,7 @@ namespace Gva.Api.Controllers.Equipments
             this.applicationRepository = applicationRepository;
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -64,10 +67,39 @@ namespace Gva.Api.Controllers.Equipments
             EquipmentDocumentOtherDO newDocumentOther = new EquipmentDocumentOtherDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
             };
 
             return Ok(new CaseTypePartDO<EquipmentDocumentOtherDO>(newDocumentOther, caseDO));
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<EquipmentDocumentOtherDO>("equipmentDocumentOthers");
+
+            List<EquipmentDocumentOtherViewDO> documentOtherViewDOs = new List<EquipmentDocumentOtherViewDO>();
+            foreach (var documentOtherPartVersion in documentOthers)
+            {
+                var lotFile = this.fileRepository.GetFileReference(documentOtherPartVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    documentOtherViewDOs.Add(new EquipmentDocumentOtherViewDO()
+                    {
+                        Case = lotFile != null ? new CaseDO(lotFile) : null,
+                        PartIndex = documentOtherPartVersion.Part.Index,
+                        PartId = documentOtherPartVersion.PartId,
+                        DocumentDateValidFrom = documentOtherPartVersion.Content.DocumentDateValidFrom,
+                        DocumentDateValidTo = documentOtherPartVersion.Content.DocumentDateValidTo,
+                        DocumentNumber = documentOtherPartVersion.Content.DocumentNumber,
+                        DocumentPublisher = documentOtherPartVersion.Content.DocumentPublisher,
+                        Notes = documentOtherPartVersion.Content.Notes,
+                        Valid = documentOtherPartVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", documentOtherPartVersion.Content.ValidId.Value) : null,
+                        DocumentType = documentOtherPartVersion.Content.DocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", documentOtherPartVersion.Content.DocumentTypeId.Value) : null,
+                        DocumentRole = documentOtherPartVersion.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", documentOtherPartVersion.Content.DocumentRoleId.Value) : null
+                    });
+                }
+            }
+            return Ok(documentOtherViewDOs);
         }
     }
 }

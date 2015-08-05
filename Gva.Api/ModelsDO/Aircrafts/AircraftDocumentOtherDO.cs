@@ -12,16 +12,13 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        [Required(ErrorMessage = "DocumentPublisher is required.")]
         public string DocumentPublisher { get; set; }
 
-        [Required(ErrorMessage = "OtherDocumentType is required.")]
-        public NomValue OtherDocumentType { get; set; }
+        public int? OtherDocumentTypeId { get; set; }
 
-        [Required(ErrorMessage = "OtherDocumentRole is required.")]
-        public NomValue OtherDocumentRole { get; set; }
+        public int? OtherDocumentRoleId { get; set; }
 
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         public string Notes { get; set; }
     }

@@ -9,7 +9,7 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public PersonTrainingDO()
         {
-            RatingTypes = new List<NomValue>();
+            RatingTypes = new List<int>();
         }
 
         public string DocumentNumber { get; set; }
@@ -24,30 +24,30 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public List<NomValue> RatingTypes { get; set; }
+        public List<int> RatingTypes { get; set; }
 
-        public NomValue AircraftTypeCategory { get; set; }
+        public int? AircraftTypeCategoryId { get; set; }
 
-        public NomValue AircraftTypeGroup { get; set; }
+        public int? AircraftTypeGroupId { get; set; }
 
-        public NomValue LicenceType { get; set; }
+        public int? LicenceTypeId { get; set; }
 
-        public NomValue LocationIndicator { get; set; }
+        public int? LocationIndicatorId { get; set; }
 
         public string Sector { get; set; }
 
-        public NomValue RatingClass { get; set; }
+        public int? RatingClassId { get; set; }
 
-        public NomValue Authorization { get; set; }
+        public int? AuthorizationId { get; set; }
 
         [Required(ErrorMessage = "DocumentType is required.")]
-        public NomValue DocumentType { get; set; }
+        public int? DocumentTypeId { get; set; }
 
         [Required(ErrorMessage = "DocumentRole is required.")]
-        public NomValue DocumentRole { get; set; }
+        public int? DocumentRoleId { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         public string Notes { get; set; }
     }

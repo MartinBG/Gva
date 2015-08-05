@@ -16,6 +16,11 @@
         method: 'GET',
         url: 'api/persons/:id/personDocumentLangCertificates/byValidity',
         isArray: true
+      },
+      getLangLevelHistory: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentLangCertificates/:ind/langLevelHistory',
+        isArray: true
       }
     });
   }]);

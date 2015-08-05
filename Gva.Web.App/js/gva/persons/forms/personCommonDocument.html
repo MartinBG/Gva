@@ -27,15 +27,15 @@
       <sc-text ng-model="model.part.documentPublisher" name="documentPublisher" ng-required="categoryAlias !== 'check'" ng-readonly="form.$readonly" sc-validate="{ unique: isUniqueDocData }"></sc-text>
       <sc-button class="btn btn-default" btn-click="choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
     </sc-field-group>
-    <sc-field type="nomenclature" sc-validate="{ unique: isUniqueDocData }" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personCommonDocDirective.valid" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" sc-validate="{ unique: isUniqueDocData }" ng-model="model.part.validId" alias="'boolean'" mode="id" ng-required="true" l10n-text="persons.personCommonDocDirective.valid" class="col-sm-3 col-md-2"></sc-field>
   </div>
 
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" ng-required="true"
+    <sc-field type="nomenclature" ng-model="model.part.documentTypeId" alias="'documentTypes'" ng-required="true" mode="id"
       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData', required: 'default' }"
       params="{ isIdDocument: false, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentType"
       class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true"
+    <sc-field type="nomenclature" ng-model="model.part.documentRoleId" alias="'documentRoles'" ng-required="true" mode="id"
       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData', required: 'default' }"
       params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias], withoutCertsAliases: withoutCertsAliases }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
       class="col-sm-6 col-md-4"></sc-field>

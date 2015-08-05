@@ -16,6 +16,8 @@ using Common.Api.Models;
 using System.Collections;
 using Gva.ManageLotsTool.OldDOs;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Organizations;
 
 namespace Gva.ManageLotsTool
 {
@@ -29,6 +31,13 @@ namespace Gva.ManageLotsTool
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
                 ConvertModel<PersonLicenceDO_Old, PersonLicenceDO>("licences", connection);
                 ConvertModel<PersonAddressDO_Old, PersonAddressDO>("personAddresses", connection);
+                ConvertModel<PersonLangLevelDO_Old, PersonLangLevelDO>("personDocumentLangCertificates", connection);
+                ConvertModel<PersonCheckDO_Old, PersonCheckDO>("personDocumentChecks", connection);
+                ConvertModel<PersonTrainingDO_Old, PersonTrainingDO>("personDocumentTrainings", connection);
+                ConvertModel<PersonDocumentIdDO_Old, PersonDocumentIdDO>("personDocumentIds", connection);
+                ConvertModel<PersonDocumentOtherDO_Old, PersonDocumentOtherDO>("personDocumentOthers", connection);
+                ConvertModel<AircraftDocumentOtherDO_Old, AircraftDocumentOtherDO>("aircraftDocumentOthers", connection);
+                ConvertModel<OrganizationDocumentOtherDO_Old, OrganizationDocumentOtherDO>("airportDocumentOthers", connection);
             }
         }
 

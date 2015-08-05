@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Gva.Api.Models.Views;
@@ -12,11 +13,17 @@ namespace Gva.Api.Projections.Inventory.Organizations
     public class OrganizationOtherProjection : Projection<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
+        private INomRepository nomRepository;
 
-        public OrganizationOtherProjection(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public OrganizationOtherProjection(
+            IUnitOfWork unitOfWork,
+            IUserRepository userRepository,
+            INomRepository nomRepository)
             : base(unitOfWork, "Organization")
         {
             this.userRepository = userRepository;
+            this.nomRepository = nomRepository;
+
         }
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
@@ -33,13 +40,12 @@ namespace Gva.Api.Projections.Inventory.Organizations
             invItem.LotId = organizationOther.Part.Lot.LotId;
             invItem.PartId = organizationOther.Part.PartId;
             invItem.SetPartAlias = organizationOther.Part.SetPart.Alias;
-
-            invItem.Name = organizationOther.Content.DocumentRole.Name;
-            invItem.TypeId = organizationOther.Content.DocumentType.NomValueId;
+            invItem.Name = organizationOther.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", organizationOther.Content.DocumentRoleId.Value).Name : null;
+            invItem.TypeId = organizationOther.Content.DocumentTypeId;
             invItem.Number = organizationOther.Content.DocumentNumber;
             invItem.Date = organizationOther.Content.DocumentDateValidFrom.Value;
             invItem.Publisher = organizationOther.Content.DocumentPublisher;
-            invItem.Valid = organizationOther.Content.Valid.Code == "Y";
+            invItem.Valid = !organizationOther.Content.ValidId.HasValue ? (bool?)null : this.nomRepository.GetNomValue("boolean", organizationOther.Content.ValidId.Value).Code == "Y";
             invItem.FromDate = organizationOther.Content.DocumentDateValidFrom.Value;
             invItem.ToDate = organizationOther.Content.DocumentDateValidTo;
             invItem.Notes = organizationOther.Content.Notes;

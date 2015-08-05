@@ -1,24 +1,24 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.documentOthers.new' }" text="persons.otherSearch.newOther" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom"
+<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom"
   row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.documentOthers.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.documentNumber" title="persons.otherSearch.documentNumber" class="wrap">
+  <sc-column data="documentNumber" title="persons.otherSearch.documentNumber" class="wrap">
   </sc-column>
-  <sc-column data="part.documentPersonNumber" title="persons.otherSearch.documentPersonNumber">
+  <sc-column data="documentPersonNumber" title="persons.otherSearch.documentPersonNumber">
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="persons.otherSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="persons.otherSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="persons.otherSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="persons.otherSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="persons.otherSearch.documentPublisher" class="wrap">
+  <sc-column data="documentPublisher" title="persons.otherSearch.documentPublisher" class="wrap">
   </sc-column>
-  <sc-column data="part.documentType.name" title="persons.otherSearch.personOtherDocumentType" class="wrap">
+  <sc-column data="documentType.name" title="persons.otherSearch.personOtherDocumentType" class="wrap">
   </sc-column>
-  <sc-column data="part.documentRole.name" title="persons.otherSearch.personOtherDocumentRole">
+  <sc-column data="documentRole.name" title="persons.otherSearch.personOtherDocumentRole">
   </sc-column>
-  <sc-column data="part.notes" title="persons.otherSearch.notes" visible="false">
+  <sc-column data="notes" title="persons.otherSearch.notes" visible="false">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.otherSearch.bookPageNumber">
   </sc-column>

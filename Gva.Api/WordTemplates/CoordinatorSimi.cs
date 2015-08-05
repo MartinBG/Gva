@@ -42,8 +42,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+                .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -76,7 +77,12 @@ namespace Gva.Api.WordTemplates
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+            documentRoleIds = documentRoleCodes
+                .Select(c =>
+                    this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                    .ToArray();
 
             dynamic theoreticalExams = null;
             dynamic practicalExams = null;
@@ -92,29 +98,30 @@ namespace Gva.Api.WordTemplates
                 NomValue accessOrderWorkAloneRole = this.nomRepository.GetNomValue("documentRoles", "accessOrderWorkAlone");
                 NomValue checkAtWorkRole = this.nomRepository.GetNomValue("documentRoles", "checkAtWork");
 
-                practicalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, practicalExamRole.Code, documentRoleCodes);
-                theoreticalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, theoreticalExamRole.Code, documentRoleCodes);
-                checksAtWork = Utils.GetChecksByCode(includedChecks, checkAtWorkRole.Code, documentRoleCodes);
-                accessOrderWorkAlone = Utils.GetTrainingsByCode(includedTrainings, accessOrderWorkAloneRole.Code, documentRoleCodes);
-                accessOrderPractEducation = Utils.GetTrainingsByCode(includedTrainings, accessOrderPractEducationRole.Code, documentRoleCodes);
+                practicalExams = Utils.GetExamsById(includedExams, includedChecks, includedTrainings, practicalExamRole.NomValueId, documentRoleIds, this.nomRepository);
+                theoreticalExams = Utils.GetExamsById(includedExams, includedChecks, includedTrainings, theoreticalExamRole.NomValueId, documentRoleIds, this.nomRepository);
+                checksAtWork = Utils.GetChecksById(includedChecks, checkAtWorkRole.NomValueId, documentRoleIds, this.nomRepository);
+                accessOrderWorkAlone = Utils.GetTrainingsById(includedTrainings, accessOrderWorkAloneRole.NomValueId, documentRoleIds, this.nomRepository);
+                accessOrderPractEducation = Utils.GetTrainingsById(includedTrainings, accessOrderPractEducationRole.NomValueId, documentRoleIds, this.nomRepository);
             }
 
-            IEnumerable<PersonLangCertDO> langLevels = includedLangCerts.Where(t => t.LangLevel != null);
+            IEnumerable<PersonLangCertDO> langLevels = includedLangCerts.Where(t => t.LangLevelId.HasValue);
 
             List<object> lLangLevel = new List<object>();
             List<object> tLangLevel = new List<object>();
             if (langLevels.Count() > 0)
             {
-                lLangLevel = langLevels.Select(l => new
+                lLangLevel = langLevels
+                    .Select(l => new
                 {
-                    LEVEL = l.LangLevel.Name,
+                    LEVEL = this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value).Name,
                     VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                 })
                 .ToList<object>();
 
                 tLangLevel = langLevels.Select(l => new
                 {
-                    LEVEL = l.LangLevel.Name,
+                    LEVEL = this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value).Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
                     VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                 })
@@ -265,11 +272,13 @@ namespace Gva.Api.WordTemplates
             };
 
             endorsements = endorsements
-                .Union(langLevels.Select(l => new
-                {
-                    AUTH = l.LangLevel.Name.ToUpper(),
-                    VALID_DATE = l.DocumentDateValidTo
-                }))
+                .Union(langLevels
+                    .Where(l => l.LangLevelId.HasValue)
+                    .Select(l => new
+                    {
+                        AUTH = this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value).Name.ToUpper(),
+                        VALID_DATE = l.DocumentDateValidTo
+                    }))
                 .ToList<object>();
 
             return Utils.FillBlankData(endorsements, 11);

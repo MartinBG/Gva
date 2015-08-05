@@ -29,10 +29,10 @@
             <td ng-if="currentLicenceEdition.part.includedExams.length && !changeOrderMode && isLast">
               <sc-button name="deleteExamBtn" class="btn btn-xs btn-danger" btn-click="removeExam(exam)" icon="glyphicon-remove"></sc-button>
             </td>
-            <td>{{exam.part.documentNumber}}</td>
-            <td>{{exam.part.documentDateValidFrom | date:'mediumDate'}}</td>
-            <td>{{exam.part.documentPublisher}}</td>
-            <td>{{exam.part.valid.name}}</td>
+            <td>{{exam.documentNumber}}</td>
+            <td>{{exam.documentDateValidFrom | date:'mediumDate'}}</td>
+            <td>{{exam.documentPublisher}}</td>
+            <td>{{exam.valid.name}}</td>
           </tr>
         </tbody>
       </table>

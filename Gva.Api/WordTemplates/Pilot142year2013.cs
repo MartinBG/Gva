@@ -45,8 +45,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -100,13 +101,18 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
-            var langLevel = includedLangCerts.Where(c => c.LangLevel != null).Select(c => new
-            {
-                LEVEL = c.LangLevel.Name,
-                VALID_DATE = c.LangLevel.Name.Contains("6") ? "for life" :
-                    (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited")
-            })
-            .ToList<object>();
+            var langLevel = includedLangCerts.Where(c => c.LangLevelId.HasValue)
+                .Select(c =>
+                    {
+                        string langLevelName = string.Format("{0} {1}", this.nomRepository.GetNomValue("langLevels", c.LangLevelId.Value).Name);
+                        return new
+                        {
+                            LEVEL = langLevelName,
+                            VALID_DATE = langLevelName.Contains("6") ? "for life" :
+                                (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited")
+                        };
+                    })
+                .ToList<object>();
             
             var allIncludedLimitations66 = this.nomRepository.GetNomValues("limitations66")
                 .Where(l => lastEdition.Limitations.Contains(l.NomValueId));

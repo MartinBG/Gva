@@ -11,18 +11,18 @@
     $scope.documentTrainings = trainings;
 
     $scope.isInvalidDocument = function(item){
-      return item.part.valid.code === 'N';
+      return item.valid && item.valid.code === 'N';
     };
 
     $scope.isExpiringDocument = function(item) {
       var today = moment(new Date()),
-          difference = moment(item.part.documentDateValidTo).diff(today, 'days');
+          difference = moment(item.documentDateValidTo).diff(today, 'days');
 
       return 0 <= difference && difference <= 30;
     };
 
     $scope.isExpiredDocument = function(item) {
-      return moment(new Date()).isAfter(item.part.documentDateValidTo);
+      return moment(new Date()).isAfter(item.documentDateValidTo);
     };
   }
 

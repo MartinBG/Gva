@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
@@ -11,6 +11,7 @@ using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.PersonLangCertRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -22,8 +23,8 @@ namespace Gva.Api.Controllers.Persons
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private IPersonLangCertRepository personLangCertRepository;
         private ILotRepository lotRepository;
-        private IFileRepository fileRepository;
 
         public PersonLanguageCertificatesController(
             IUnitOfWork unitOfWork,
@@ -31,6 +32,7 @@ namespace Gva.Api.Controllers.Persons
             IFileRepository fileRepository,
             INomRepository nomRepository,
             ICaseTypeRepository caseTypeRepository,
+            IPersonLangCertRepository personLangCertRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentLangCertificates", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -38,7 +40,7 @@ namespace Gva.Api.Controllers.Persons
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
-            this.fileRepository = fileRepository;
+            this.personLangCertRepository = personLangCertRepository;
         }
 
         [Route("new")]
@@ -47,7 +49,7 @@ namespace Gva.Api.Controllers.Persons
             PersonLangCertDO newLangCert = new PersonLangCertDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes"),
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId,
                 LangLevelEntries = new List<PersonLangLevelDO>()
             };
 
@@ -83,24 +85,29 @@ namespace Gva.Api.Controllers.Persons
         [Route("byValidity")]
         public IHttpActionResult GetLangCertsByValidity(int lotId, int? caseTypeId = null, bool? valid = true)
         {
-            var langCerts = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonLangCertDO>("personDocumentLangCertificates").ToList();
-            if (valid == true)
-            {
-                langCerts = langCerts
-                    .Where(e => !e.Content.DocumentDateValidTo.HasValue || DateTime.Compare(e.Content.DocumentDateValidTo.Value, DateTime.Now) >= 0)
-                    .ToList();
-            }
+            var langCertViewDOs = this.personLangCertRepository.GetLangCerts(lotId, caseTypeId, valid);
+            return Ok(langCertViewDOs);
+        }
 
-            List<CaseTypePartDO<PersonLangCertDO>> langCertDOs = new List<CaseTypePartDO<PersonLangCertDO>>();
-            foreach (var partVersion in langCerts)
-            {
-                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
-                if (!caseTypeId.HasValue || lotFile != null)
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var langCertViewDOs = this.personLangCertRepository.GetLangCerts(lotId, caseTypeId);
+            return Ok(langCertViewDOs);
+        }
+
+        [Route("{partIndex}/langLevelHistory")]
+        public IHttpActionResult GetLangLevelHistory(int lotId, int partIndex)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonLangCertDO>(string.Format("personDocumentLangCertificates/{0}", partIndex));
+            List<PersonLangLevelViewDO> langLevelHistoryDOs = partVersion.Content.LangLevelEntries
+                .Select(l => new PersonLangLevelViewDO()
                 {
-                    langCertDOs.Add(new CaseTypePartDO<PersonLangCertDO>(partVersion, lotFile));
-                }
-            }
-            return Ok(langCertDOs);
+                    ChangeDate = l.ChangeDate,
+                    LangLevel = l.LangLevelId.HasValue ? this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value) : null
+                })
+                .ToList();
+
+            return Ok(langLevelHistoryDOs);
         }
     }
 }

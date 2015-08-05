@@ -46,11 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OldDOs\AircraftDocumentOtherDO_Old.cs" />
+    <Compile Include="OldDOs\OrganizationDocumentOtherDO_Old.cs" />
     <Compile Include="OldDOs\PersonAddressDO_Old.cs" />
+    <Compile Include="OldDOs\PersonCheckDO_Old.cs" />
+    <Compile Include="OldDOs\PersonDocumentIdDO_Old.cs" />
+    <Compile Include="OldDOs\PersonDocumentOtherDO_Old.cs" />
+    <Compile Include="OldDOs\PersonLangCertDO_Old.cs" />
+    <Compile Include="OldDOs\PersonLangLevelDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceAmlLimitationsDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceEditionDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceStatusDO_Old.cs" />
+    <Compile Include="OldDOs\PersonTrainingDO_Old.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

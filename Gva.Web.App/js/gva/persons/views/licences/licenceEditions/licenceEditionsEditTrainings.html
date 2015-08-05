@@ -32,15 +32,15 @@
           <td ng-if="currentLicenceEdition.part.includedTrainings.length && !changeOrderMode && isLast">
             <sc-button name="deleteTrainingBtn" class="btn btn-xs btn-danger" btn-click="removeTraining(training)" icon="glyphicon-remove"></sc-button>
           </td>
-          <td>{{training.part.documentNumber}}</td>
-          <td><span>{{training.part.documentDateValidFrom | date:'mediumDate'}}</span>
+          <td>{{training.documentNumber}}</td>
+          <td><span>{{training.documentDateValidFrom | date:'mediumDate'}}</span>
           </td>
-          <td><span>{{training.part.documentDateValidTo | date:'mediumDate'}}</span>
+          <td><span>{{training.documentDateValidTo | date:'mediumDate'}}</span>
           </td>
-          <td>{{training.part.documentPublisher}}</td>
-          <td>{{training.part.ratingTypes && training.part.ratingTypes.length > 0 ? (training.part.ratingTypes | pluck:'code' | join:', ') : (training.part.locationIndicator ? training.part.locationIndicator.code : '')  + ' ' + (training.part.sector ? training.part.sector : '')}}</td>
-          <td>{{training.part.documentType.name}}</td>
-          <td>{{training.part.documentRole.name}}</td>
+          <td>{{training.documentPublisher}}</td>
+          <td>{{training.ratingTypes && training.ratingTypes.length > 0 ? (training.ratingTypes | pluck:'code' | join:', ') : (training.locationIndicator ? training.locationIndicator.code : '')  + ' ' + (training.sector ? training.sector : '')}}</td>
+          <td>{{training.documentType.name}}</td>
+          <td>{{training.documentRole.name}}</td>
         </tr>
       </tbody>
     </table>
