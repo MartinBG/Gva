@@ -47,10 +47,10 @@ namespace Gva.Api.Controllers.Persons
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
-            var documentIds = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonEducationDO>(this.path);
+            var educations = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonEducationDO>(this.path);
 
             List<PersonEducationViewDO> educationViewDOs = new List<PersonEducationViewDO>();
-            foreach (var educationPartVersion in documentIds)
+            foreach (var educationPartVersion in educations)
             {
                 var lotFiles = this.fileRepository.GetFileReferences(educationPartVersion.PartId, caseTypeId);
                 if (!caseTypeId.HasValue || lotFiles.Length != 0)

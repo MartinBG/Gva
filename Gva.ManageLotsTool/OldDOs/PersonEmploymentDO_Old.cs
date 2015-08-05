@@ -2,24 +2,24 @@
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonEmploymentDO
+    public class PersonEmploymentDO_Old
     {
         [Required(ErrorMessage = "Hiredate is required.")]
         public DateTime? Hiredate { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public int? ValidId { get; set; }
+        public NomValue Valid { get; set; }
 
         [Required(ErrorMessage = "Organization is required.")]
-        public int? OrganizationId { get; set; }
+        public NomValue Organization { get; set; }
 
         [Required(ErrorMessage = "EmploymentCategory is required.")]
-        public int? EmploymentCategoryId { get; set; }
+        public NomValue EmploymentCategory { get; set; }
 
         [Required(ErrorMessage = "Country is required.")]
-        public int? CountryId { get; set; }
+        public NomValue Country { get; set; }
 
         public string Notes { get; set; }
     }

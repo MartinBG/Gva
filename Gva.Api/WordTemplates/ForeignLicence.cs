@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
@@ -8,10 +11,17 @@ namespace Gva.Api.WordTemplates
     public class ForeignLicence : IDataGenerator
     {
         private ILotRepository lotRepository;
+        private INomRepository nomRepository;
+        private IOrganizationRepository organizationRepository;
 
-        public ForeignLicence(ILotRepository lotRepository)
+        public ForeignLicence(
+            ILotRepository lotRepository,
+            INomRepository nomRepository,
+            IOrganizationRepository organizationRepository)
         {
             this.lotRepository = lotRepository;
+            this.nomRepository = nomRepository;
+            this.organizationRepository = organizationRepository;
         }
 
         public string GeneratorCode
@@ -34,11 +44,20 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personEmplPart = lot.Index.GetParts<PersonEmploymentDO>("personDocumentEmployments")
-                .FirstOrDefault(a => a.Content.Valid.Code == "Y");
-            var personEmploymentOrg = personEmplPart == null || personEmplPart.Content.Organization == null ?
-                null :
-                personEmplPart.Content.Organization.NameAlt;
+                .FirstOrDefault(a => a.Content.ValidId == validTrueId);
+            var organization = personEmplPart == null || !personEmplPart.Content.OrganizationId.HasValue ? null :
+                        this.organizationRepository.GetOrganization(personEmplPart.Content.OrganizationId.Value);
+            NomValue organizationNom = organization != null ?
+                new NomValue()
+                {
+                    NomValueId = organization.LotId,
+                    Name = organization.Name,
+                    NameAlt = organization.NameAlt
+                } : null;
+
+            var personEmploymentOrg = organizationNom != null?  organizationNom.NameAlt : null;
 
             var licencePart = lot.Index.GetPart<PersonLicenceDO>(path);
             var licence = licencePart.Content;
