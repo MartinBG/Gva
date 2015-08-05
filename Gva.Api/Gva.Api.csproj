@@ -192,6 +192,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherViewDO.cs" />
     <Compile Include="ModelsDO\PaperDO.cs" />
     <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonEducationViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentOtherViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangLevelViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertViewDO.cs" />

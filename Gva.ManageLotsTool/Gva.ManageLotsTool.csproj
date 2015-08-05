@@ -52,6 +52,7 @@
     <Compile Include="OldDOs\PersonCheckDO_Old.cs" />
     <Compile Include="OldDOs\PersonDocumentIdDO_Old.cs" />
     <Compile Include="OldDOs\PersonDocumentOtherDO_Old.cs" />
+    <Compile Include="OldDOs\PersonEducationDO_Old.cs" />
     <Compile Include="OldDOs\PersonLangCertDO_Old.cs" />
     <Compile Include="OldDOs\PersonLangLevelDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceAmlLimitationsDO_Old.cs" />

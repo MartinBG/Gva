@@ -349,7 +349,7 @@ namespace Gva.Api.Projections.Person
             document.RoleId = roleId;
             document.DocumentNumber = personEducation.Content.DocumentNumber;
             document.Date = personEducation.Content.CompletionDate.Value;
-            document.Publisher = personEducation.Content.School.Name;
+            document.Publisher = personEducation.Content.SchoolId.HasValue ? this.nomRepository.GetNomValue("schools", personEducation.Content.SchoolId.Value).Name : null;
             document.FromDate = document.Date = personEducation.Content.CompletionDate.Value;
             document.CreatedBy = this.userRepository.GetUser(personEducation.Part.CreatorId).Fullname;
             document.CreationDate = personEducation.Part.CreateDate;

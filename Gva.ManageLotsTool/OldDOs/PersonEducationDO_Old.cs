@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonEducationDO
+    public class PersonEducationDO_Old
     {
         [Required(ErrorMessage = "DocumentNumber is required.")]
         public string DocumentNumber { get; set; }
@@ -13,10 +13,10 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime? CompletionDate { get; set; }
 
         [Required(ErrorMessage = "Graduation is required.")]
-        public int? GraduationId { get; set; }
+        public NomValue Graduation { get; set; }
 
         [Required(ErrorMessage = "School is required.")]
-        public int? SchoolId { get; set; }
+        public NomValue School { get; set; }
 
         [Required(ErrorMessage = "Speciality is required.")]
         public string Speciality { get; set; }
