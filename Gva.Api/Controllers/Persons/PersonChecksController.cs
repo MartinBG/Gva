@@ -127,6 +127,7 @@ namespace Gva.Api.Controllers.Persons
                         Case = lotFile != null ? new CaseDO(lotFile) : null,
                         PartIndex = checkPartVersion.Part.Index,
                         PartId = checkPartVersion.PartId,
+                        LotId = lotId,
                         DocumentDateValidFrom = checkPartVersion.Content.DocumentDateValidFrom,
                         DocumentDateValidTo = checkPartVersion.Content.DocumentDateValidTo,
                         AircraftTypeGroup = checkPartVersion.Content.AircraftTypeGroupId.HasValue ? this.nomRepository.GetNomValue("aircraftTypeGroups", checkPartVersion.Content.AircraftTypeGroupId.Value) : null,
@@ -150,6 +151,42 @@ namespace Gva.Api.Controllers.Persons
                 }
             }
             return Ok(checkViewDOs);
+        }
+
+        [Route("{partIndex}/view")]
+        public IHttpActionResult GetCheck(int lotId, int partIndex)
+        {
+            var checkPartVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonCheckDO>(string.Format("{0}/{1}", this.path, partIndex));
+            var lotFile = this.fileRepository.GetFileReference(checkPartVersion.PartId, null);
+
+            PersonCheckViewDO check = new PersonCheckViewDO()
+            {
+                Case = lotFile != null ? new CaseDO(lotFile) : null,
+                PartIndex = checkPartVersion.Part.Index,
+                PartId = checkPartVersion.PartId,
+                LotId = lotId,
+                DocumentDateValidFrom = checkPartVersion.Content.DocumentDateValidFrom,
+                DocumentDateValidTo = checkPartVersion.Content.DocumentDateValidTo,
+                AircraftTypeGroup = checkPartVersion.Content.AircraftTypeGroupId.HasValue ? this.nomRepository.GetNomValue("aircraftTypeGroups", checkPartVersion.Content.AircraftTypeGroupId.Value) : null,
+                DocumentNumber = checkPartVersion.Content.DocumentNumber,
+                DocumentPublisher = checkPartVersion.Content.DocumentPublisher,
+                Notes = checkPartVersion.Content.Notes,
+                Valid = checkPartVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", checkPartVersion.Content.ValidId.Value) : null,
+                DocumentType = checkPartVersion.Content.DocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", checkPartVersion.Content.DocumentTypeId.Value) : null,
+                DocumentRole = checkPartVersion.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", checkPartVersion.Content.DocumentRoleId.Value) : null,
+                AircraftTypeCategory = checkPartVersion.Content.AircraftTypeCategoryId.HasValue ? this.nomRepository.GetNomValue("aircraftClases66", checkPartVersion.Content.AircraftTypeCategoryId.Value) : null,
+                Authorization = checkPartVersion.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", checkPartVersion.Content.AuthorizationId.Value) : null,
+                RatingClass = checkPartVersion.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", checkPartVersion.Content.RatingClassId.Value) : null,
+                LicenceType = checkPartVersion.Content.LicenceTypeId.HasValue ? this.nomRepository.GetNomValue("licenceTypes", checkPartVersion.Content.LicenceTypeId.Value) : null,
+                LocationIndicator = checkPartVersion.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", checkPartVersion.Content.LocationIndicatorId.Value) : null,
+                Sector = checkPartVersion.Content.Sector,
+                DocumentPersonNumber = checkPartVersion.Content.DocumentPersonNumber,
+                RatingTypes = checkPartVersion.Content.RatingTypes.Count > 0 ? this.nomRepository.GetNomValues("ratingTypes", checkPartVersion.Content.RatingTypes.ToArray()).ToList() : null,
+                Reports = checkPartVersion.Content.Reports,
+                PersonCheckRatingValue = checkPartVersion.Content.PersonCheckRatingValueId.HasValue ? this.nomRepository.GetNomValue("personCheckRatingValues", checkPartVersion.Content.PersonCheckRatingValueId.Value) : null
+            };
+
+            return Ok(check);
         }
     }
 }

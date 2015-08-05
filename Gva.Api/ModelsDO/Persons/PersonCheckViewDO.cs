@@ -13,6 +13,8 @@ namespace Gva.Api.ModelsDO.Persons
             RatingTypes = new List<NomValue>();
         }
 
+        public int LotId { get; set; }
+
         public int PartIndex { get; set; }
 
         public int PartId { get; set; }

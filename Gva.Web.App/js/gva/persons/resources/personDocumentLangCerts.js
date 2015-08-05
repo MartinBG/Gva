@@ -21,6 +21,10 @@
         method: 'GET',
         url: 'api/persons/:id/personDocumentLangCertificates/:ind/langLevelHistory',
         isArray: true
+      },
+       getLangCertView: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentLangCertificates/:ind/view'
       }
     });
   }]);

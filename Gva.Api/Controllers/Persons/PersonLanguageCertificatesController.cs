@@ -25,6 +25,7 @@ namespace Gva.Api.Controllers.Persons
         private ICaseTypeRepository caseTypeRepository;
         private IPersonLangCertRepository personLangCertRepository;
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
 
         public PersonLanguageCertificatesController(
             IUnitOfWork unitOfWork,
@@ -41,6 +42,7 @@ namespace Gva.Api.Controllers.Persons
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
             this.personLangCertRepository = personLangCertRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -108,6 +110,48 @@ namespace Gva.Api.Controllers.Persons
                 .ToList();
 
             return Ok(langLevelHistoryDOs);
+        }
+
+        [Route("{partIndex}/view")]
+        public IHttpActionResult GetLangCert(int lotId, int partIndex)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonLangCertDO>(string.Format("personDocumentLangCertificates/{0}", partIndex));
+            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
+
+            PersonLangCertViewDO cert = new PersonLangCertViewDO()
+            {
+                Case = lotFile != null ? new CaseDO(lotFile) : null,
+                PartIndex = partVersion.Part.Index,
+                PartId = partVersion.PartId,
+                DocumentDateValidFrom = partVersion.Content.DocumentDateValidFrom,
+                DocumentDateValidTo = partVersion.Content.DocumentDateValidTo,
+                AircraftTypeGroup = partVersion.Content.AircraftTypeGroupId.HasValue ? this.nomRepository.GetNomValue("aircraftTypeGroups", partVersion.Content.AircraftTypeGroupId.Value) : null,
+                DocumentNumber = partVersion.Content.DocumentNumber,
+                DocumentPublisher = partVersion.Content.DocumentPublisher,
+                Notes = partVersion.Content.Notes,
+                Valid = partVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", partVersion.Content.ValidId.Value) : null,
+                DocumentType = partVersion.Content.DocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", partVersion.Content.DocumentTypeId.Value) : null,
+                DocumentRole = partVersion.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", partVersion.Content.DocumentRoleId.Value) : null,
+                AircraftTypeCategory = partVersion.Content.AircraftTypeCategoryId.HasValue ? this.nomRepository.GetNomValue("aircraftClases66", partVersion.Content.AircraftTypeCategoryId.Value) : null,
+                Authorization = partVersion.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", partVersion.Content.AuthorizationId.Value) : null,
+                RatingClass = partVersion.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", partVersion.Content.RatingClassId.Value) : null,
+                LicenceType = partVersion.Content.LicenceTypeId.HasValue ? this.nomRepository.GetNomValue("licenceTypes", partVersion.Content.LicenceTypeId.Value) : null,
+                LocationIndicator = partVersion.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", partVersion.Content.LocationIndicatorId.Value) : null,
+                Sector = partVersion.Content.Sector,
+                DocumentPersonNumber = partVersion.Content.DocumentPersonNumber,
+                RatingTypes = partVersion.Content.RatingTypes.Count > 0 ? this.nomRepository.GetNomValues("ratingTypes", partVersion.Content.RatingTypes.ToArray()).ToList() : null,
+                LangLevel = partVersion.Content.LangLevelId.HasValue ? this.nomRepository.GetNomValue("langLevels", partVersion.Content.LangLevelId.Value) : null,
+                LangLevelEntries = partVersion.Content.LangLevelEntries.Count > 0 ?
+                    partVersion.Content.LangLevelEntries
+                    .Select(l =>
+                        new PersonLangLevelViewDO()
+                        {
+                            ChangeDate = l.ChangeDate,
+                            LangLevel = l.LangLevelId.HasValue ? this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value) : null
+                        }).ToList() : null
+            };
+
+            return Ok(cert);
         }
     }
 }

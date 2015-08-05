@@ -11,6 +11,10 @@
       getReport: {
         method: 'GET',
         url: 'api/persons/:id/personDocumentChecks/:ind/report'
+      },
+      getCheckView: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentChecks/:ind/view'
       }
     });
   }]);

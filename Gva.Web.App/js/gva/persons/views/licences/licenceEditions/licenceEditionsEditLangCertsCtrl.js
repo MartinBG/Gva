@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
+    PersonDocumentLangCerts,
     includedLangCerts,
     currentLicenceEdition,
     licenceEditions,
@@ -23,7 +24,7 @@
     $scope.addLangCert = function () {
       var withoutCertsAliases = _.uniq(_.map($scope.includedLangCerts,
         function (cert) { 
-          return cert.part.documentRole.alias;
+          return cert.documentRole.alias;
         }));
 
       var modalInstance = scModal.open('newLangCert', {
@@ -34,9 +35,15 @@
       });
 
       modalInstance.result.then(function (newLangCert) {
-        $scope.includedLangCerts.push(newLangCert);
         $scope.currentLicenceEdition.part.includedLangCerts.push(newLangCert.partIndex);
         $scope.save();
+        PersonDocumentLangCerts.getLangCertView({
+          id: $stateParams.id,
+          ind: newLangCert.partIndex
+        }).$promise
+          .then(function(cert) {
+            $scope.includedLangCerts.push(cert);
+          });
       });
 
       return modalInstance.opened;
@@ -110,6 +117,7 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
+    'PersonDocumentLangCerts',
     'includedLangCerts',
     'currentLicenceEdition',
     'licenceEditions',

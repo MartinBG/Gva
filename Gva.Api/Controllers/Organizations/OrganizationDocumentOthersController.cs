@@ -47,7 +47,7 @@ namespace Gva.Api.Controllers.Organizations
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
-            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<OrganizationDocumentOtherDO>("equipmentDocumentOthers");
+            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<OrganizationDocumentOtherDO>("organizationDocumentOthers");
 
             List<OrganizationDocumentOtherViewDO> documentOtherViewDOs = new List<OrganizationDocumentOtherViewDO>();
             foreach (var documentOtherPartVersion in documentOthers)

@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
+    PersonDocumentChecks,
     includedChecks,
     currentLicenceEdition,
     licenceEditions,
@@ -29,9 +30,15 @@
       });
 
       modalInstance.result.then(function (newCheck) {
-        $scope.includedChecks.push(newCheck);
         $scope.currentLicenceEdition.part.includedChecks.push(newCheck.partIndex);
         $scope.save();
+        PersonDocumentChecks.getCheckView({
+          id: $stateParams.id,
+          ind: newCheck.partIndex
+        }).$promise
+          .then(function(check) {
+            $scope.includedChecks.push(check);
+          });
       });
 
       return modalInstance.opened;
@@ -105,6 +112,7 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
+    'PersonDocumentChecks',
     'includedChecks',
     'currentLicenceEdition',
     'licenceEditions',
