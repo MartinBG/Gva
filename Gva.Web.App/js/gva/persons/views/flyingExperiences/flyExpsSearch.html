@@ -3,41 +3,41 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.flyingExperiences.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate" type="date">
+  <sc-column data="documentDate" title="persons.flyingExperienceSearch.documentDate" type="date">
   </sc-column>
   <sc-column data="ratingTypesAndLocation" title="persons.flyingExperienceSearch.ratingType" class="wrap">
   </sc-column>
-  <sc-column data="part.ratingClass.code" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
+  <sc-column data="ratingClass.code" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
   </sc-column>
-  <sc-column data="part.authorization.code" title="persons.flyingExperienceSearch.authorization" class="wrap">
+  <sc-column data="authorization.code" title="persons.flyingExperienceSearch.authorization" class="wrap">
   </sc-column>
-  <sc-column data="part.licenceType.code" title="persons.flyingExperienceSearch.licenceType" class="wrap">
+  <sc-column data="licenceType.code" title="persons.flyingExperienceSearch.licenceType" class="wrap">
   </sc-column>
-  <sc-column data="part.experienceRole.name" title="persons.flyingExperienceSearch.experienceRole">
+  <sc-column data="experienceRole.name" title="persons.flyingExperienceSearch.experienceRole">
   </sc-column>
-  <sc-column data="part.experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
+  <sc-column data="experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
   </sc-column>
   <sc-column data="totalDocHours" title="persons.flyingExperienceSearch.totalDoc">
   </sc-column>
   <sc-column data="totalHours" title="persons.flyingExperienceSearch.total">
   </sc-column>
   <sc-column title="persons.flyingExperienceSearch.dayIFR" has-content="true" visible="false">
-    <span ng-show="item.part.dayIFR.hours">{{item.part.dayIFR.hours + ':' + item.part.dayIFR.minutes}}</span>
+    <span ng-show="item.dayIFR.hours">{{item.dayIFR.hours + ':' + item.dayIFR.minutes}}</span>
   </sc-column>
   <sc-column title="persons.flyingExperienceSearch.dayVFR" has-content="true" visible="false">
-    <span ng-show="item.part.dayVFR.hours">{{item.part.dayVFR.hours + ':' + item.part.dayVFR.minutes}}</span>
+    <span ng-show="item.dayVFR.hours">{{item.dayVFR.hours + ':' + item.dayVFR.minutes}}</span>
   </sc-column>
-  <sc-column data="part.dayLandings" title="persons.flyingExperienceSearch.dayLandings" visible="false">
+  <sc-column data="dayLandings" title="persons.flyingExperienceSearch.dayLandings" visible="false">
   </sc-column>
   <sc-column title="persons.flyingExperienceSearch.nightIFR" has-content="true" visible="false">
-    <span ng-show="item.part.nightIFR.hours">{{item.part.nightIFR.hours + ':' + item.part.nightIFR.minutes}}</span>
+    <span ng-show="item.nightIFR.hours">{{item.nightIFR.hours + ':' + item.nightIFR.minutes}}</span>
   </sc-column>
   <sc-column title="persons.flyingExperienceSearch.nightVFR" has-content="true" visible="false">
-    <span ng-show="item.part.nightVFR.hours">{{item.part.nightVFR.hours + ':' + item.part.nightVFR.minutes}}</span>
+    <span ng-show="item.nightVFR.hours">{{item.nightVFR.hours + ':' + item.nightVFR.minutes}}</span>
   </sc-column>
-  <sc-column data="part.nightLandings" title="persons.flyingExperienceSearch.nightLandings" visible="false">
+  <sc-column data="nightLandings" title="persons.flyingExperienceSearch.nightLandings" visible="false">
   </sc-column>
-  <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization" visible="false">
+  <sc-column data="organization.name" title="persons.flyingExperienceSearch.organization" visible="false">
   </sc-column>
   <sc-column sortable="false" title="persons.flyingExperienceSearch.file" has-content="true">
     <a target="_blank" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}&mimeType={{item.case.file.mimeType}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
