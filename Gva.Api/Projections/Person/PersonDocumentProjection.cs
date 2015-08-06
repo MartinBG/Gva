@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
@@ -9,6 +10,7 @@ using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -18,15 +20,18 @@ namespace Gva.Api.Projections.Person
     {
         private IUserRepository userRepository;
         private INomRepository nomRepository;
+        private IOrganizationRepository organizationRepository;
 
         public PersonDocumentProjection(
             IUnitOfWork unitOfWork,
             IUserRepository userRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IOrganizationRepository organizationRepository)
             : base(unitOfWork, "Person")
         {
             this.userRepository = userRepository;
             this.nomRepository = nomRepository;
+            this.organizationRepository = organizationRepository;
         }
 
         public override IEnumerable<GvaViewPersonDocument> Execute(PartCollection parts)
@@ -50,7 +55,7 @@ namespace Gva.Api.Projections.Person
             var statuses = parts.GetAll<PersonStatusDO>("personStatuses").Select(d => this.Create(d, personStatusRoleId));
             var medicals = parts.GetAll<PersonMedicalDO>("personDocumentMedicals").Select(d => this.Create(d, personData, personMedicalRoleId));
             var reports = parts.GetAll<PersonReportDO>("personReports").Select(d => this.Create(d, personReportRoleId));
-            var employments = parts.GetAll<PersonEmploymentDO>("personDocumentEmployments").Select(d => this.Create(d, personEmploymentRoleId));
+            var employments = parts.GetAll<PersonEmploymentDO>("personDocumentEmployments").Select(d => this.Create(d, personEmploymentRoleId, validTrueId));
             var educations = parts.GetAll<PersonEducationDO>("personDocumentEducations").Select(d => this.Create(d, personEducationRoleId));
             var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications").Select(d => this.Create(d, personApplicationRoleId));
 
@@ -314,7 +319,7 @@ namespace Gva.Api.Projections.Person
             return document;
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonEmploymentDO> personEmployment, int roleId)
+        private GvaViewPersonDocument Create(PartVersion<PersonEmploymentDO> personEmployment, int roleId, int validTrueId)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
             document.LotId = personEmployment.Part.Lot.LotId;
@@ -322,8 +327,19 @@ namespace Gva.Api.Projections.Person
             document.SetPartAlias = personEmployment.Part.SetPart.Alias;
             document.RoleId = roleId;
             document.Date = personEmployment.Content.Hiredate.Value;
-            document.Publisher = personEmployment.Content.Organization == null ? null : personEmployment.Content.Organization.Name;
-            document.Valid = personEmployment.Content.Valid.Code == "Y";
+
+            var organization = personEmployment.Content.OrganizationId.HasValue ?
+                        this.organizationRepository.GetOrganization(personEmployment.Content.OrganizationId.Value) : null;
+            NomValue organizationNom = organization != null ?
+                new NomValue()
+                {
+                    NomValueId = organization.LotId,
+                    Name = organization.Name,
+                    NameAlt = organization.NameAlt
+                } : null;
+
+            document.Publisher = !personEmployment.Content.OrganizationId.HasValue ? null : organizationNom.Name;
+            document.Valid = personEmployment.Content.ValidId == validTrueId;
             document.FromDate = personEmployment.Content.Hiredate.Value;
             document.ToDate = null;
             document.Notes = personEmployment.Content.Notes;
@@ -349,7 +365,7 @@ namespace Gva.Api.Projections.Person
             document.RoleId = roleId;
             document.DocumentNumber = personEducation.Content.DocumentNumber;
             document.Date = personEducation.Content.CompletionDate.Value;
-            document.Publisher = personEducation.Content.School.Name;
+            document.Publisher = personEducation.Content.SchoolId.HasValue ? this.nomRepository.GetNomValue("schools", personEducation.Content.SchoolId.Value).Name : null;
             document.FromDate = document.Date = personEducation.Content.CompletionDate.Value;
             document.CreatedBy = this.userRepository.GetUser(personEducation.Part.CreatorId).Fullname;
             document.CreationDate = personEducation.Part.CreateDate;

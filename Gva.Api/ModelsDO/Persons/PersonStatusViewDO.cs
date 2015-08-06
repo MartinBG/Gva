@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonStatusDO
+    public class PersonStatusViewDO
     {
-        [Required(ErrorMessage = "PersonStatusType is required.")]
-        public int? PersonStatusTypeId { get; set; }
+        public int PartIndex { get; set; }
+
+        public List<CaseDO> Cases { get; set; }
+
+        public NomValue PersonStatusType { get; set; }
 
         public string DocumentNumber { get; set; }
 
-        [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }

@@ -1064,16 +1064,23 @@ namespace Gva.Api.Controllers
         [Route("employments")]
         public IHttpActionResult GetEmployments(int lotId)
         {
+            int validFalseId = this.nomRepository.GetNomValue("boolean", "no").NomValueId;
             var returnValue = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonEmploymentDO>("personDocumentEmployments")
-                .Select(e => new
-                {
-                    nomValueId = e.Part.Index,
-                    name = string.Format(
-                        "{0}, {1} {2}",
-                        e.Content.Organization.Name,
-                        e.Content.Hiredate.Value.ToString("dd.MM.yyyy"),
-                        e.Content.Valid.Code == "N" ? "(НЕВАЛИДНА)" : null)
-                });
+                .Select(e =>
+                    {
+                        var organization = e.Content.OrganizationId.HasValue ?
+                            this.organizationRepository.GetOrganization(e.Content.OrganizationId.Value) : null;
+
+                        return new
+                        {
+                            nomValueId = e.Part.Index,
+                            name = string.Format(
+                                "{0}, {1} {2}",
+                                organization != null ? organization.Name : null,
+                                e.Content.Hiredate.Value.ToString("dd.MM.yyyy"),
+                                e.Content.ValidId == validFalseId ? "(НЕВАЛИДНА)" : null)
+                        };
+                    });
 
             return Ok(returnValue);
         }
