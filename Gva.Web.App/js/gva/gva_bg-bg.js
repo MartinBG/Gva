@@ -3107,7 +3107,8 @@
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
-          deleteApp: 'Изтрий'
+          deleteApp: 'Изтрий',
+          controlCard: 'Контролна карта'
         },
         equipmentSelect: {
           equipment: 'Съоръжение',
