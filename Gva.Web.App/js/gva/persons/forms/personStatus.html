@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.personStatusType" alias="'personStatusTypes'" ng-required="true" l10n-text="persons.personStatusDirective.personStatusType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.personStatusTypeId" mode="id" alias="'personStatusTypes'" ng-required="true" l10n-text="persons.personStatusDirective.personStatusType" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personStatusDirective.documentNumber" sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-6 col-md-4"></sc-field>

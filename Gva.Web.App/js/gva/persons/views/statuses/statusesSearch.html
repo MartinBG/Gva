@@ -1,17 +1,17 @@
 ﻿<sc-button name="createBtn" btn-sref="{state: 'root.persons.view.statuses.new'}" text="persons.statusSearch.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="statuses" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom"
+<sc-datatable items="statuses" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom"
   row-class="{'expiredDocument' : isExpiredDocument(item), 'expiringDocument' : isExpiringDocument(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{state: 'root.persons.view.statuses.edit', params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.personStatusType.name" title="persons.statusSearch.personStatusType" type="string">
+  <sc-column data="personStatusType.name" title="persons.statusSearch.personStatusType" type="string">
   </sc-column>
-  <sc-column data="part.documentNumber" title="persons.statusSearch.documentNumber" type="string">
+  <sc-column data="documentNumber" title="persons.statusSearch.documentNumber" type="string">
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="persons.statusSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="persons.statusSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="persons.statusSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="persons.statusSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.notes" title="persons.statusSearch.notes" type="string" visible="false">
+  <sc-column data="notes" title="persons.statusSearch.notes" type="string" visible="false">
   </sc-column>
 </sc-datatable>

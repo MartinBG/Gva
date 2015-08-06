@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonStatusDO
+    public class PersonStatusDO_Old
     {
         [Required(ErrorMessage = "PersonStatusType is required.")]
-        public int? PersonStatusTypeId { get; set; }
+        public NomValue PersonStatusType { get; set; }
 
         public string DocumentNumber { get; set; }
 
