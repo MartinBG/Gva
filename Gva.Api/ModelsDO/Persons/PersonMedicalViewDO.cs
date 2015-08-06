@@ -5,14 +5,19 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonMedicalDO
+    public class PersonMedicalViewDO
     {
-        public PersonMedicalDO()
+        public PersonMedicalViewDO()
         {
-            this.Limitations = new List<int>();
+            this.Limitations = new List<NomValue>();
         }
 
-        [Required(ErrorMessage = "DocumentNumberPrefix is required.")]
+        public int PartIndex { get; set; }
+
+        public int PartId { get; set; }
+
+        public CaseDO Case { get; set; }
+
         public string DocumentNumberPrefix { get; set; }
 
         public string DocumentNumber { get; set; }
@@ -20,18 +25,15 @@ namespace Gva.Api.ModelsDO.Persons
         public string DocumentNumberSuffix { get; set; }
 
         [Required(ErrorMessage = "MedClass is required.")]
-        public int? MedClassId { get; set; }
+        public NomValue MedClass { get; set; }
 
-        [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
-        [Required(ErrorMessage = "DocumentDateValidTo is required.")]
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public List<int> Limitations { get; set; }
+        public IEnumerable<NomValue> Limitations { get; set; }
 
-        [Required(ErrorMessage = "DocumentPublisher is required.")]
-        public int? DocumentPublisherId { get; set; }
+        public NomValue DocumentPublisherId { get; set; }
 
         public string Notes { get; set; }
     }

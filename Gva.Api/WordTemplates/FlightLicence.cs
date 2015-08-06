@@ -252,7 +252,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS = documents.Take((documents.Count() / 2) + 1),
                     T_DOCUMENTS2 = documents.Skip((documents.Count() / 2) + 1),
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_RATING = this.GetTRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetLRatings(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations(licenceType.Code)

@@ -40,6 +40,7 @@ namespace Gva.ManageLotsTool
                 ConvertModel<PersonDocumentOtherDO_Old, PersonDocumentOtherDO>("personDocumentOthers", connection);
                 ConvertModel<PersonStatusDO_Old, PersonStatusDO>("personStatuses", connection);
                 ConvertModel<PersonFlyingExperienceDO_Old, PersonFlyingExperienceDO>("personFlyingExperiences", connection);
+                ConvertModel<PersonMedicalDO_Old, PersonMedicalDO>("personDocumentMedicals", connection);
                 ConvertModel<AircraftDocumentOtherDO_Old, AircraftDocumentOtherDO>("aircraftDocumentOthers", connection);
                 ConvertModel<OrganizationDocumentOtherDO_Old, OrganizationDocumentOtherDO>("organizationDocumentOthers", connection);
             }

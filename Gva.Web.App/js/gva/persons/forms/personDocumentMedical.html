@@ -23,17 +23,17 @@
     <sc-field type="text" ng-model="model.part.documentNumberSuffix" class="col-md-2 col-sm-3 labeless"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.medClass" alias="'medClasses'" ng-required="true" l10n-text="persons.personMedicalDirective.medClass" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.medClassId" mode="id" alias="'medClasses'" ng-required="true" l10n-text="persons.personMedicalDirective.medClass" class="col-md-2 col-sm-3"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true"
       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData', required: 'default'}" 
       l10n-text="persons.personMedicalDirective.documentDateValidFrom" class="col-md-2 col-sm-3"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="true" l10n-text="persons.personMedicalDirective.documentDateValidTo" class="col-md-2 col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'medLimitation'" multiple="multiple" l10n-text="persons.personMedicalDirective.limitations" class="col-sm-9 col-md-6"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.limitations" mode="id" alias="'medLimitation'" multiple="multiple" l10n-text="persons.personMedicalDirective.limitations" class="col-sm-9 col-md-6"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.documentPublisher" alias="'medDocPublishers'" ng-required="true" 
+    <sc-field type="nomenclature" ng-model="model.part.documentPublisherId" mode="id" alias="'medDocPublishers'" ng-required="true" 
       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData', required: 'default'}"
       l10n-text="persons.personMedicalDirective.documentPublisher" class="col-sm-9 col-md-6"></sc-field>
   </div>

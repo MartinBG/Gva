@@ -61,6 +61,7 @@
     <Compile Include="OldDOs\PersonLicenceDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceEditionDO_Old.cs" />
     <Compile Include="OldDOs\PersonLicenceStatusDO_Old.cs" />
+    <Compile Include="OldDOs\PersonMedicalDO_Old.cs" />
     <Compile Include="OldDOs\PersonStatusDO_Old.cs" />
     <Compile Include="OldDOs\PersonTrainingDO_Old.cs" />
     <Compile Include="Program.cs" />

@@ -136,23 +136,24 @@
         <sc-column sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
         </sc-column>
-        <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
+        <sc-column title="persons.medicalSearch.testimonial" has-content="true">
+          {{item.documentNumberPrefix}}-{{item.documentNumber}}-{{person.lin}}-{{item.documentNumberSuffix}}
         </sc-column>
-        <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
+        <sc-column data="documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
         </sc-column>
-        <sc-column data="part.documentDateValidTo" title="persons.medicalSearch.documentDateValidTo" type="date">
+        <sc-column data="documentDateValidTo" title="persons.medicalSearch.documentDateValidTo" type="date">
         </sc-column>
-        <sc-column data="part.medClass.name" title="persons.medicalSearch.medClass">
+        <sc-column data="medClass.name" title="persons.medicalSearch.medClass">
         </sc-column>
-        <sc-column data="part.limitations" title="persons.medicalSearch.limitations">
+        <sc-column data="limitations | pluck:'name' | join:', '" title="persons.medicalSearch.limitations">
         </sc-column>
-        <sc-column data="part.documentPublisher" title="persons.medicalSearch.documentPublisher">
+        <sc-column data="documentPublisher.name" title="persons.medicalSearch.documentPublisher" class="wrap">
         </sc-column>
         <sc-column data="case.bookPageNumber" title="persons.medicalSearch.bookPageNumber">
         </sc-column>
         <sc-column data="case.pageCount" title="persons.medicalSearch.pageCount">
         </sc-column>
-        <sc-column data="part.notes" title="persons.medicalSearch.notes" visible="false">
+        <sc-column data="notes" title="persons.medicalSearch.notes" visible="false">
         </sc-column>
         <sc-column sortable="false" title="persons.medicalSearch.file" has-content="true">
           <a target="_blank" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}&mimeType={{item.case.file.mimeType}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">

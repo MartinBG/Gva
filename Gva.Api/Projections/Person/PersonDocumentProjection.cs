@@ -277,13 +277,13 @@ namespace Gva.Api.Projections.Person
                     personMedical.Content.DocumentNumberSuffix);
 
             document.Date = personMedical.Content.DocumentDateValidFrom.Value;
-            document.Publisher = personMedical.Content.DocumentPublisher.Name;
+            document.Publisher = personMedical.Content.DocumentPublisherId.HasValue ? this.nomRepository.GetNomValue("medDocPublishers", personMedical.Content.DocumentPublisherId.Value).Name : null;
             document.Valid = null;
             document.FromDate = personMedical.Content.DocumentDateValidFrom.Value;
             document.ToDate = personMedical.Content.DocumentDateValidTo.Value;
             document.Notes = personMedical.Content.Notes;
-            document.Limitations = personMedical.Content.Limitations.Count() > 0 ? string.Join(GvaConstants.ConcatenatingExp, personMedical.Content.Limitations.Select(l => l.Name)) : null;
-            document.MedClassId = personMedical.Content.MedClass != null ? personMedical.Content.MedClass.NomValueId : (int?)null;
+            document.Limitations = personMedical.Content.Limitations.Count > 0 ? string.Join(",", nomRepository.GetNomValues("medLimitation", personMedical.Content.Limitations.ToArray()).Select(l => l.Name)) : null;
+            document.MedClassId = personMedical.Content.MedClassId;
             document.CreatedBy = this.userRepository.GetUser(personMedical.Part.CreatorId).Fullname;
             document.CreationDate = personMedical.Part.CreateDate;
 

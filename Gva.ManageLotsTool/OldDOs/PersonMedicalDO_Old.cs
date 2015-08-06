@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonMedicalDO
+    public class PersonMedicalDO_Old
     {
-        public PersonMedicalDO()
+        public PersonMedicalDO_Old()
         {
-            this.Limitations = new List<int>();
+            this.Limitations = new List<NomValue>();
         }
 
         [Required(ErrorMessage = "DocumentNumberPrefix is required.")]
@@ -20,7 +20,7 @@ namespace Gva.Api.ModelsDO.Persons
         public string DocumentNumberSuffix { get; set; }
 
         [Required(ErrorMessage = "MedClass is required.")]
-        public int? MedClassId { get; set; }
+        public NomValue MedClass { get; set; }
 
         [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
@@ -28,10 +28,10 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentDateValidTo is required.")]
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public List<int> Limitations { get; set; }
+        public List<NomValue> Limitations { get; set; }
 
         [Required(ErrorMessage = "DocumentPublisher is required.")]
-        public int? DocumentPublisherId { get; set; }
+        public NomValue DocumentPublisher { get; set; }
 
         public string Notes { get; set; }
     }

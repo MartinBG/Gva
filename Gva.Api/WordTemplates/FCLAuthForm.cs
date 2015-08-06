@@ -85,7 +85,7 @@ namespace Gva.Api.WordTemplates
 
             var medicalData = bgMedical != null ? new 
             {
-                LIMITATIONS = bgMedical.Limitations.Count() > 0 ? string.Join(", ", bgMedical.Limitations.Select(l => l.Code)) : null,
+                LIMITATIONS = bgMedical.Limitations.Count() > 0 ? string.Join(",", nomRepository.GetNomValues("medLimitation", bgMedical.Limitations.ToArray()).Select(l => l.Code)) : null,
                 VALID_UNTIL = bgMedical.DocumentDateValidTo.HasValue ? bgMedical.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
             } : null;
 
@@ -100,7 +100,7 @@ namespace Gva.Api.WordTemplates
             var country = Utils.GetCountry(personData, this.nomRepository); 
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
             string address = Utils.GetAddress(personAddress, this.nomRepository).Item1;
-            string medicalClass = bgMedical != null ? bgMedical.MedClass.Name : "";
+            string medicalClass = bgMedical != null && bgMedical.MedClassId.HasValue? nomRepository.GetNomValue("medClasses", bgMedical.MedClassId.Value).Name  : "";
 
             var json = new
             {

@@ -133,7 +133,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     OTHER_LICENCE2 = otherLicences,
                     T_DOCUMENTS = documents.Take(4),
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_DOCUMENTS2 = documents.Skip(4),
                     RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
                     RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,

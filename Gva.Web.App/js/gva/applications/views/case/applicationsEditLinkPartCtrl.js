@@ -6,7 +6,9 @@
     $scope,
     $state,
     $stateParams,
+    $q,
     AplicationsCase,
+    Persons,
     PersonDocumentIds,
     PersonReports,
     PersonDocumentEducations,
@@ -81,26 +83,15 @@
             });
         }
         else if ($scope.docPartType.alias === 'personMedical') {
-          return PersonDocumentMedicals.query({ id: $scope.application.lotId })
-            .$promise.then(function (medicals) {
-              $scope.documentPart = medicals.map(function (medical) {
-                var testimonial = medical.part.documentNumberPrefix + ' ' +
-                  medical.part.documentNumber + ' ' +
-                  medical.part.documentNumberSuffix;
-
-                medical.part.testimonial = testimonial;
-
-                var limitations = '';
-                for (var i = 0; i < medical.part.limitations.length; i++) {
-                  limitations += medical.part.limitations[i].name + ', ';
-                }
-                limitations = limitations.substring(0, limitations.length - 2);
-                medical.part.limitations = limitations;
-
-                return medical;
-              });
-              $scope.showPDocumentMed = !!medicals;
-            });
+          return $q.all([
+            Persons.get({ id: $scope.application.lotId }).$promise,
+            PersonDocumentMedicals.query({ id: $scope.application.lotId}).$promise
+          ]).then(function (results) {
+            $scope.person = results[0];
+            var medicals = results[1];
+            $scope.documentPart = medicals;
+            $scope.showPDocumentMed = !!medicals;
+          });
         }
         else if ($scope.docPartType.alias === 'personCheck') {
           return PersonDocumentChecks.query({ id: $scope.application.lotId })
@@ -217,7 +208,9 @@
     '$scope',
     '$state',
     '$stateParams',
+    '$q',
     'AplicationsCase',
+    'Persons',
     'PersonDocumentIds',
     'PersonReports',
     'PersonDocumentEducations',

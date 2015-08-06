@@ -139,7 +139,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS =  trainings,
                     T_DOCUMENTS2 = educations,
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_RATING = this.GetRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetSchools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()

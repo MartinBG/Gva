@@ -165,7 +165,10 @@ namespace Gva.Api.WordTemplates
             return exams.Union(checks).Union(trainings).ToList<object>();
         }
 
-        internal static List<object> GetMedCerts(int orderNumber, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
+        internal static List<object> GetMedCerts(
+            int orderNumber, IEnumerable<PersonMedicalDO> includedMedicals,
+            PersonDataDO personData,
+            INomRepository nomRepository)
         {
             var medicals = includedMedicals.Select(m =>
                 new
@@ -179,9 +182,9 @@ namespace Gva.Api.WordTemplates
                         m.DocumentNumberSuffix),
                     ISSUE_DATE = m.DocumentDateValidFrom,
                     VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name.ToUpper(),
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
+                    CLASS = m.MedClassId.HasValue ? nomRepository.GetNomValue("medClasses", m.MedClassId.Value).Name.ToUpper() : null,
+                    PUBLISHER = m.DocumentPublisherId.HasValue ? nomRepository.GetNomValue("medDocPublishers", m.DocumentPublisherId.Value).Name : null,
+                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",",nomRepository.GetNomValues("medLimitation", m.Limitations.ToArray()).Select(l => l.Name)) : null
                 }).ToList<object>();
 
             if (medicals.Count() == 0)
