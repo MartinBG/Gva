@@ -67,8 +67,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -103,13 +104,18 @@ namespace Gva.Api.WordTemplates
                 personData.Lin);
             
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
+            documentRoleIds = documentRoleCodes
+                .Select(c =>
+                    this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                    .ToArray();
             dynamic trainings = null;
             dynamic educations = null;
             if (hasRoles)
             {
-                trainings = this.GetTrainings(includedTrainings, documentRoleCodes);
-                educations = this.GetEducations(includedTrainings, documentRoleCodes);
+                trainings = this.GetTrainings(includedTrainings, documentRoleIds);
+                educations = this.GetEducations(includedTrainings, documentRoleIds);
             }
 
             string licenceAction = lastEdition.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", lastEdition.LicenceActionId.Value).Name.ToUpper() : null;
@@ -133,7 +139,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS =  trainings,
                     T_DOCUMENTS2 = educations,
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_RATING = this.GetRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetSchools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()
@@ -154,12 +160,7 @@ namespace Gva.Api.WordTemplates
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
 
             return new
             {
@@ -183,14 +184,8 @@ namespace Gva.Api.WordTemplates
                             TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.NameAlt : null
                         }
                 },
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    settlement != null ? settlement.Name : null,
-                    personAddress.Address),
-                ADDRESS_TRANS = string.Format(
-                    "{0}, {1}",
-                    personAddress.AddressAlt,
-                    settlement != null ? settlement.NameAlt : null),
+                ADDRESS = address.Item2,
+                ADDRESS_TRANS = address.Item1,
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality != null ? nationality.Name : null,
@@ -230,10 +225,10 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetEducations(
             IEnumerable<PersonTrainingDO> includedTrainings,
-            string[] documentRoleCodes)
+            int[] documentRoleIds)
         {
             var educationRole = this.nomRepository.GetNomValue("documentRoles", "diploma");
-            var trainings = Utils.GetTrainingsByCode(includedTrainings, educationRole.Code, documentRoleCodes);
+            var trainings = Utils.GetTrainingsById(includedTrainings, educationRole.NomValueId, documentRoleIds, this.nomRepository);
 
             return new List<object>()
             {
@@ -250,10 +245,10 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetTrainings(
             IEnumerable<PersonTrainingDO> includedTrainings,
-            string[] documentRoleCodes)
+            int[] documentRoleIds)
         {
             var trainingRole = this.nomRepository.GetNomValue("documentRoles", "theoreticalTraining");
-            var trainings = Utils.GetTrainingsByCode(includedTrainings, trainingRole.Code, documentRoleCodes);
+            var trainings = Utils.GetTrainingsById(includedTrainings, trainingRole.NomValueId, documentRoleIds, this.nomRepository);
 
             return new List<object>()
             {

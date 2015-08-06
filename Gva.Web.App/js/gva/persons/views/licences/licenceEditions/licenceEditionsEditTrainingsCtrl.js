@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
+    PersonDocumentTrainings,
     currentLicenceEdition,
     licenceEditions,
     includedTrainings,
@@ -29,9 +30,15 @@
       });
 
       modalInstance.result.then(function (newTraining) {
-        $scope.includedTrainings.push(newTraining);
         $scope.currentLicenceEdition.part.includedTrainings.push(newTraining.partIndex);
         $scope.save();
+        PersonDocumentTrainings.getTrainingView({
+          id: $stateParams.id,
+          ind: newTraining.partIndex
+        }).$promise
+          .then(function(training) {
+            $scope.includedTrainings.push(training);
+          });
       });
 
       return modalInstance.opened;
@@ -102,6 +109,7 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
+    'PersonDocumentTrainings',
     'currentLicenceEdition',
     'licenceEditions',
     'includedTrainings',

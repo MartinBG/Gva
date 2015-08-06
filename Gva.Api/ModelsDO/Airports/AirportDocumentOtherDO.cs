@@ -15,13 +15,11 @@ namespace Gva.Api.ModelsDO.Airports
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        [Required(ErrorMessage = "DocumentType is required.")]
-        public NomValue DocumentType { get; set; }
+        public int? DocumentTypeId { get; set; }
 
-        [Required(ErrorMessage = "DocumentRole is required.")]
-        public NomValue DocumentRole { get; set; }
+        public int? DocumentRoleId { get; set; }
 
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         public string Notes { get; set; }
     }

@@ -9,7 +9,7 @@
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="organizations.organizationOtherDirective.documentNumber" class="col-sm-6 col-md-3"></sc-field>
     <sc-field type="text" ng-model="model.part.documentPersonNumber" l10n-text="organizations.organizationOtherDirective.documentPersonNumber" class="col-sm-6 col-md-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="organizations.organizationOtherDirective.valid" class="col-sm-2 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.validId" mode="id" alias="'boolean'" ng-required="true" l10n-text="organizations.organizationOtherDirective.valid" class="col-sm-2 col-md-2"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="organizations.organizationOtherDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
@@ -17,8 +17,8 @@
     <sc-field type="text" ng-model="model.part.documentPublisher" ng-required="true" l10n-text="organizations.organizationOtherDirective.documentPublisher" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentType" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" params="{ categoryAlias: 'other'}" ng-required="true" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentRole"
+    <sc-field type="nomenclature" ng-model="model.part.documentTypeId" mode="id" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentRoleId" mode="id" alias="'documentRoles'" params="{ categoryAlias: 'other'}" ng-required="true" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentRole"
     class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">

@@ -37,19 +37,20 @@
           <td ng-if="currentLicenceEdition.part.includedChecks.length && !changeOrderMode && isLast">
             <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
           </td>
-          <td>{{check.part.documentNumber}}</td>
-          <td>{{check.part.documentType.name}}</td>
-          <td>{{check.part.documentRole.name}}</td>
-          <td><span>{{check.part.documentDateValidFrom | date:'mediumDate'}}</span>
+          <td>{{check.documentNumber}}</td>
+          <td>{{check.documentType.name}}</td>
+          <td>{{check.documentRole.name}}</td>
+          <td><span>{{check.documentDateValidFrom | date:'mediumDate'}}</span>
           </td>
-          <td><span>{{check.part.documentDateValidTo | date:'mediumDate'}}</span>
+          <td><span>{{check.documentDateValidTo | date:'mediumDate'}}</span>
           </td>
+          <td>{{check.documentPublisher}}</td>
           <td>{{check.ratingTypes && check.ratingTypes.length > 0 ? (check.ratingTypes | pluck:'code' | join:', ') : (check.locationIndicator ? check.locationIndicator.code : '')  + ' ' + (check.sector ? check.sector : '')}}</td>
-          <td>{{check.part.ratingClass.code}}</td>
-          <td>{{check.part.authorization.code}}</td>
-          <td>{{check.part.licenceType.code}}</td>
-          <td>{{check.part.valid.name}}</td>
-          <td>{{check.part.personCheckRatingValue ? check.part.personCheckRatingValue.name + '/' + check.part.personCheckRatingValue.nameAlt : ''}}</td>
+          <td>{{check.ratingClass.code}}</td>
+          <td>{{check.authorization.code}}</td>
+          <td>{{check.licenceType.code}}</td>
+          <td>{{check.valid.name}}</td>
+          <td>{{check.personCheckRatingValue ? check.personCheckRatingValue.name + '/' + check.personCheckRatingValue.nameAlt : ''}}</td>
         </tr>
       </tbody>
     </table>

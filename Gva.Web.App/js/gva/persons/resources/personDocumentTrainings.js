@@ -12,6 +12,10 @@
         method: 'GET',
         url: 'api/persons/:id/personDocumentTrainings/exams',
         isArray: true
+      },
+      getTrainingView: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentTrainings/:ind/view'
       }
     });
   }]);

@@ -113,8 +113,9 @@ namespace Gva.Api.Controllers.Persons
         private void AppendPersonData(int id, XElement row)
         {
             PersonDataDO person = this.lotRepository.GetLotIndex(id).Index.GetPart<PersonDataDO>("personData").Content;
+            int trueValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddress = this.lotRepository.GetLotIndex(id).Index.GetParts<PersonAddressDO>("personAddresses")
-                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
+                    .Where(a => a.Content.ValidId == trueValidId)
                     .FirstOrDefault();
 
             row.Add(new XElement("NAME", person.FirstName));

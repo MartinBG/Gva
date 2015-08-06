@@ -1,27 +1,27 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.medicals.new' }" text="persons.medicalSearch.newMedical" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom"
+<sc-datatable items="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom"
   row-class="{'expiredDocument' : isExpiredDocument(item), 'expiringDocument' : isExpiringDocument(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.medicals.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column title="persons.medicalSearch.testimonial" has-content="true">
-    {{item.part.documentNumberPrefix}}-{{item.part.documentNumber}}-{{person.lin}}-{{item.part.documentNumberSuffix}}
+    {{item.documentNumberPrefix}}-{{item.documentNumber}}-{{person.lin}}-{{item.documentNumberSuffix}}
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="persons.medicalSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="persons.medicalSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.medClass.name" title="persons.medicalSearch.medClass">
+  <sc-column data="medClass.name" title="persons.medicalSearch.medClass">
   </sc-column>
-  <sc-column data="part.limitations | pluck:'name' | join:', '" title="persons.medicalSearch.limitations">
+  <sc-column data="limitations | pluck:'name' | join:', '" title="persons.medicalSearch.limitations">
   </sc-column>
-  <sc-column data="part.documentPublisher.name" title="persons.medicalSearch.documentPublisher" class="wrap">
+  <sc-column data="documentPublisher.name" title="persons.medicalSearch.documentPublisher" class="wrap">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.medicalSearch.bookPageNumber">
   </sc-column>
   <sc-column data="case.pageCount" title="persons.medicalSearch.pageCount">
   </sc-column>
-  <sc-column data="part.notes" title="persons.medicalSearch.notes" visible="false">
+  <sc-column data="notes" title="persons.medicalSearch.notes" visible="false">
   </sc-column>
   <sc-column sortable="false" title="persons.medicalSearch.file" has-content="true">
     <a target="_blank" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}&mimeType={{item.case.file.mimeType}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">

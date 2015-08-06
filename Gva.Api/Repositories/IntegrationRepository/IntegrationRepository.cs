@@ -151,9 +151,10 @@ namespace Gva.Api.Repositories.IntegrationRepository
             if (person != null)
             {
                 int lotId = person.LotId;
+                int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
                 var addressPart = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonAddressDO>("personAddresses")
                     .OrderByDescending(a => a.CreateDate)
-                    .Where(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y")
+                    .Where(a => a.Content.ValidId == validTrueId)
                     .FirstOrDefault();
                 if (addressPart != null)
                 {

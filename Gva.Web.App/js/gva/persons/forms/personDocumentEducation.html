@@ -11,10 +11,10 @@
     <sc-field type="date" ng-model="model.part.completionDate" ng-required="true" l10n-text="persons.personDocumentEducationDirective.completionDate" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.graduation" alias="'graduations'" ng-required="true" l10n-text="persons.personDocumentEducationDirective.graduation" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.graduationId" mode="id" alias="'graduations'" ng-required="true" l10n-text="persons.personDocumentEducationDirective.graduation" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.school" alias="'schools'" params="{graduationId: model.part.graduation.nomValueId}" ng-required="true" l10n-text="persons.personDocumentEducationDirective.school" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.schoolId" mode="id" alias="'schools'" params="{graduationId: model.part.graduationId}" ng-required="true" l10n-text="persons.personDocumentEducationDirective.school" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.speciality" ng-required="true" l10n-text="persons.personDocumentEducationDirective.speciality" class="col-sm-7 col-md-6 col-lg-5"></sc-field>

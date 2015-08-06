@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public PersonFlyingExperienceDO()
         {
-            RatingTypes = new List<NomValue>();
+            RatingTypes = new List<int>();
         }
 
         [Required(ErrorMessage = "DocumentDate is required.")]
@@ -18,27 +18,27 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Notes { get; set; }
 
-        public NomValue Organization { get; set; }
+        public int? OrganizationId { get; set; }
 
-        public NomValue Aircraft { get; set; }
+        public int? AircraftId { get; set; }
 
-        public List<NomValue> RatingTypes { get; set; }
+        public List<int> RatingTypes { get; set; }
 
-        public NomValue RatingClass { get; set; }
+        public int? RatingClassId { get; set; }
 
-        public NomValue LicenceType { get; set; }
+        public int? LicenceTypeId { get; set; }
 
-        public NomValue Authorization { get; set; }
+        public int? AuthorizationId { get; set; }
 
-        public NomValue LocationIndicator { get; set; }
+        public int? LocationIndicatorId { get; set; }
 
         public string Sector { get; set; }
 
         [Required(ErrorMessage = "ExperienceRole is required.")]
-        public NomValue ExperienceRole { get; set; }
+        public int? ExperienceRoleId { get; set; }
 
         [Required(ErrorMessage = "ExperienceMeasure is required.")]
-        public NomValue ExperienceMeasure { get; set; }
+        public int?  ExperienceMeasureId { get; set; }
 
         public TimeDO DayIFR { get; set; }
 

@@ -20,7 +20,7 @@
         .get({ alias: 'documentRoles', valueAlias: 'exam' })
         .$promise
         .then(function (theoreticalExamRole) {
-          $scope.personDocumentExam.part.documentRole = theoreticalExamRole;
+          $scope.personDocumentExam.part.documentRoleId = theoreticalExamRole.nomValueId;
         });
     });
 

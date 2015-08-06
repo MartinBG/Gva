@@ -52,8 +52,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -186,17 +187,18 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PersonTrainingDO> includedTrainings,
             IEnumerable<PersonTrainingDO> includedExams)
         {
+            int trueValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var trainings = includedTrainings
-                .Where(t => t.Valid.Code == "Y")
+                .Where(t => t.ValidId == trueValidId)
                 .Select(t =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = t.DocumentRole.Name,
+                            DOC_ROLE = this.nomRepository.GetNomValue("documentRoles", t.DocumentRoleId.Value).Name,
                             SUB_DOC = new
                             {
-                                DOC_TYPE = t.DocumentType.Name,
+                                DOC_TYPE = this.nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name,
                                 DOC_NO = t.DocumentNumber,
                                 DATE = t.DocumentDateValidFrom,
                                 DOC_PUBLISHER = t.DocumentPublisher
@@ -205,8 +207,9 @@ namespace Gva.Api.WordTemplates
                     }).ToArray<dynamic>();
 
             var examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
+            
             var exams = includedExams
-                .Where(e => e.Valid != null && e.Valid.Code == "Y")
+                .Where(e => e.ValidId.HasValue != null && e.ValidId == trueValidId)
                 .Select(e =>
                     new
                     {
@@ -215,7 +218,7 @@ namespace Gva.Api.WordTemplates
                             DOC_ROLE = examRole.Name,
                             SUB_DOC = new
                             {
-                                DOC_TYPE = e.DocumentType.Name,
+                                DOC_TYPE = this.nomRepository.GetNomValue("documentTypes", e.DocumentTypeId.Value).Name,
                                 DOC_NO = e.DocumentNumber,
                                 DATE = e.DocumentDateValidFrom,
                                 DOC_PUBLISHER = e.DocumentPublisher

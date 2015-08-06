@@ -10,16 +10,16 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime? Hiredate { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         [Required(ErrorMessage = "Organization is required.")]
-        public NomValue Organization { get; set; }
+        public int? OrganizationId { get; set; }
 
         [Required(ErrorMessage = "EmploymentCategory is required.")]
-        public NomValue EmploymentCategory { get; set; }
+        public int? EmploymentCategoryId { get; set; }
 
         [Required(ErrorMessage = "Country is required.")]
-        public NomValue Country { get; set; }
+        public int? CountryId { get; set; }
 
         public string Notes { get; set; }
     }

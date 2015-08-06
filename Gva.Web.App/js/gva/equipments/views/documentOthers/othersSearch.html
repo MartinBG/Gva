@@ -1,21 +1,21 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.equipments.view.others.new' }" text="equipments.otherSearch.newOther" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
+<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.equipments.view.others.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.documentNumber" title="equipments.otherSearch.documentNumber">
+  <sc-column data="documentNumber" title="equipments.otherSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="equipments.otherSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="equipments.otherSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="equipments.otherSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="equipments.otherSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="equipments.otherSearch.documentPublisher">
+  <sc-column data="documentPublisher" title="equipments.otherSearch.documentPublisher">
   </sc-column>
-  <sc-column data="part.documentType.name" title="equipments.otherSearch.otherDocumentType" class="wrap">>
+  <sc-column data="documentType.name" title="equipments.otherSearch.otherDocumentType" class="wrap">>
   </sc-column>
-  <sc-column data="part.documentRole.name" title="equipments.otherSearch.otherDocumentRole" class="wrap">>
+  <sc-column data="documentRole.name" title="equipments.otherSearch.otherDocumentRole" class="wrap">>
   </sc-column>
-  <sc-column data="part.notes" title="equipments.otherSearch.notes" visible="false">
+  <sc-column data="notes" title="equipments.otherSearch.notes" visible="false">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="equipments.otherSearch.bookPageNumber">
   </sc-column>

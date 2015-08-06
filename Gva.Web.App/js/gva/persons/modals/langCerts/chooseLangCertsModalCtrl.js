@@ -27,10 +27,10 @@
       var certs = _.union($scope.selectedLangCerts, includedLangCerts);
 
       var bgLangCerts = _.filter(certs, function (cert) {
-        return cert.part.documentRole.alias === 'bgCert';
+        return cert.documentRole.alias === 'bgCert';
       });
       var engLangCerts = _.filter(certs, function (cert) {
-        return cert.part.documentRole.alias === 'engCert';
+        return cert.documentRole.alias === 'engCert';
       });
 
       if(bgLangCerts.length > 1 || engLangCerts.length > 1) {

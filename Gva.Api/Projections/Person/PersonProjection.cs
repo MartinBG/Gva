@@ -28,8 +28,9 @@ namespace Gva.Api.Projections.Person
                 return new GvaViewPerson[] { };
             }
 
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personEmployment = parts.GetAll<PersonEmploymentDO>("personDocumentEmployments")
-                .Where(pv => pv.Content.Valid.Code == "Y")
+                .Where(pv => pv.Content.ValidId == validTrueId)
                 .FirstOrDefault();
 
             var personLicences = parts.GetAll<PersonLicenceDO>("licences")
@@ -67,8 +68,8 @@ namespace Gva.Api.Projections.Person
 
             if (personEmployment != null)
             {
-                person.EmploymentId = personEmployment.Content.EmploymentCategory != null ? personEmployment.Content.EmploymentCategory.NomValueId : (int?)null;
-                person.OrganizationId = personEmployment.Content.Organization != null ? personEmployment.Content.Organization.NomValueId : (int?)null;
+                person.EmploymentId = personEmployment.Content.EmploymentCategoryId;
+                person.OrganizationId = personEmployment.Content.OrganizationId;
             }
 
             if (personLicences.Count() > 0)

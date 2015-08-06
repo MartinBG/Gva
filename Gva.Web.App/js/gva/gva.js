@@ -575,7 +575,7 @@
     .modal('langLevelEntries'      , 'js/gva/persons/modals/langCerts/langLevelEntriesModal.html'     , 'LangLevelEntriesModalCtrl'          )
     .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'     , 'LicenceEditionDocModalCtrl'         )
     .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'          , 'PrintLicenceModalCtrl'      , 'xs-2')
-    .modal('printRatingEdition'    , 'js/gva/persons/modals/licences/printRatingEditionModal.html'    , 'PrintRatingEditionModalCtrl', 'xs-4')
+    .modal('printRatingEdition'    , 'js/gva/persons/modals/licences/printRatingEditionModal.html'    , 'PrintRatingEditionModalCtrl', 'xs-2')
     .modal('changeCaseType'        , 'js/gva/persons/modals/caseTypes/changeCaseTypeModal.html'       , 'ChangeCaseTypeModalCtrl'    , 'xs-2')
     .modal('newQualificationState' , 'js/gva/persons/modals/qualificationStates/newQlfStateModal.html', 'NewQlfStateModalCtrl'       , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {

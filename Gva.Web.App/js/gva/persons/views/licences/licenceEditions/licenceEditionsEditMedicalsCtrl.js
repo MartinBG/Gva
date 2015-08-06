@@ -7,11 +7,12 @@
     $q,
     $state,
     $stateParams,
-    Persons,
     PersonLicenceEditions,
     PersonDocumentMedicals,
     currentLicenceEdition,
     licenceEditions,
+    includedMedicals,
+    person,
     scMessage,
     scModal
   ) {
@@ -19,18 +20,8 @@
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedMedicals =
       $scope.currentLicenceEdition.part.includedMedicals || [];
-    $q.all([
-      Persons.get({ id: $stateParams.id }).$promise,
-      PersonDocumentMedicals.query({ id: $stateParams.id }).$promise
-    ]).then(function (results) {
-      $scope.person = results[0];
-      var medicals = results[1];
-
-      $scope.includedMedicals = 
-        _.map($scope.currentLicenceEdition.part.includedMedicals, function (partIndex) {
-          return _.where(medicals, { partIndex: partIndex })[0];
-        });
-    });
+    $scope.includedMedicals = includedMedicals;
+    $scope.person = person;
 
     $scope.addMedical = function () {
       var modalInstance = scModal.open('newMedical', {
@@ -40,9 +31,15 @@
       });
 
       modalInstance.result.then(function (newMedical) {
-        $scope.includedMedicals.push(newMedical);
         $scope.currentLicenceEdition.part.includedMedicals.push(newMedical.partIndex);
         $scope.save();
+        PersonDocumentMedicals.getMedicalView({
+          id: $stateParams.id,
+          ind: newMedical.partIndex
+        }).$promise
+          .then(function(medical) {
+            $scope.includedMedicals.push(medical);
+          });
       });
 
       return modalInstance.opened;
@@ -114,15 +111,40 @@
     '$q',
     '$state',
     '$stateParams',
-    'Persons',
     'PersonLicenceEditions',
     'PersonDocumentMedicals',
     'currentLicenceEdition',
     'licenceEditions',
+    'includedMedicals',
+    'person',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditMedicalsCtrl.$resolve = {
+    includedMedicals: [
+      '$stateParams',
+      'PersonDocumentMedicals',
+      'currentLicenceEdition',
+      function ($stateParams, PersonDocumentMedicals, currentLicenceEdition) {
+        return  PersonDocumentMedicals
+          .query({ id: $stateParams.id })
+          .$promise
+          .then(function (medicals) {
+            return _.map(currentLicenceEdition.part.includedMedicals, function (partIndex) {
+              return _.where(medicals, { partIndex: partIndex })[0];
+            });
+          });
+       }
+    ],
+    person: [
+      '$stateParams',
+      'Persons',
+      function($stateParams, Persons) {
+        return Persons.get({ id: $stateParams.id }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditMedicalsCtrl', LicenceEditionsEditMedicalsCtrl);

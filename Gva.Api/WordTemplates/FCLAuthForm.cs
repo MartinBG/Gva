@@ -43,8 +43,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -62,14 +63,17 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var ratings = this.GetRatings(includedRatings, ratingEditions);
-            
-            var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
 
-            var langCerts = includedLangCerts.Select(l => new 
-            {
-                NAME = string.Format("{0} {1}", l.LangLevel.Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-            });
+            var includedLangCerts = lastEdition.IncludedLangCerts
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content)
+                .Where(l => l.LangLevelId.HasValue);
+
+            var langCerts = includedLangCerts
+                .Where(l => l.LangLevelId.HasValue)
+                .Select(l => new 
+                {
+                    NAME = string.Format("{0} {1}", this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value).Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                });
 
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
@@ -81,7 +85,7 @@ namespace Gva.Api.WordTemplates
 
             var medicalData = bgMedical != null ? new 
             {
-                LIMITATIONS = bgMedical.Limitations.Count() > 0 ? string.Join(", ", bgMedical.Limitations.Select(l => l.Code)) : null,
+                LIMITATIONS = bgMedical.Limitations.Count() > 0 ? string.Join(",", nomRepository.GetNomValues("medLimitation", bgMedical.Limitations.ToArray()).Select(l => l.Code)) : null,
                 VALID_UNTIL = bgMedical.DocumentDateValidTo.HasValue ? bgMedical.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
             } : null;
 
@@ -93,10 +97,10 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            var country = Utils.GetCountry(personAddress, this.nomRepository); 
+            var country = Utils.GetCountry(personData, this.nomRepository); 
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
-            string address = Utils.GetAuthFormAddress(personAddress, country, this.nomRepository);
-            string medicalClass = bgMedical != null ? bgMedical.MedClass.Name : "";
+            string address = Utils.GetAddress(personAddress, this.nomRepository).Item1;
+            string medicalClass = bgMedical != null && bgMedical.MedClassId.HasValue? nomRepository.GetNomValue("medClasses", bgMedical.MedClassId.Value).Name  : "";
 
             var json = new
             {

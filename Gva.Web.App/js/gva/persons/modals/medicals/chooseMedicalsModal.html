@@ -2,28 +2,28 @@
   <div class="panel-heading">
     <strong l10n-text="persons.chooseMedicalsModal.title"></strong>
     <div class="pull-right">
-      <sc-button name="addBtn" btn-click="addMedicals()" text="persons.chooseMedicalsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="addBtn" btn-click="addMedicals()" ng-disabled="selectedMedicals.length === 0"  text="persons.chooseMedicalsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
       <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseMedicalsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
 
   <div class="well-sm panel-body">
-    <sc-datatable items="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
+    <sc-datatable items="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedMedicals | contains:item" sc-click="selectMedical($event, item)">
       </sc-column>
       <sc-column title="persons.chooseMedicalsModal.number" has-content="true">
-        {{item.part.documentNumberPrefix}}-{{item.part.documentNumber}}-{{person.lin}}-{{item.part.documentNumberSuffix}}
+        {{item.documentNumberPrefix}}-{{item.documentNumber}}-{{person.lin}}-{{item.documentNumberSuffix}}
       </sc-column>
-      <sc-column data="part.documentDateValidFrom" type="date" title="persons.chooseMedicalsModal.dateValidFrom">
+      <sc-column data="documentDateValidFrom" type="date" title="persons.chooseMedicalsModal.dateValidFrom">
       </sc-column>
-      <sc-column data="part.documentDateValidTo" type="date" title="persons.chooseMedicalsModal.dateValidTo">
+      <sc-column data="documentDateValidTo" type="date" title="persons.chooseMedicalsModal.dateValidTo">
       </sc-column>
-      <sc-column data="part.medClass.name"title="persons.chooseMedicalsModal.medClass">
+      <sc-column data="medClass.name"title="persons.chooseMedicalsModal.medClass">
       </sc-column>
-      <sc-column data="part.limitations | pluck:'name' | join:' , '" title="persons.chooseMedicalsModal.limitations">
+      <sc-column data="limitations | pluck:'name' | join:' , '" title="persons.chooseMedicalsModal.limitations">
       </sc-column>
-      <sc-column data="part.documentPublisher.name" title="persons.chooseMedicalsModal.publisher">
+      <sc-column data="documentPublisher.name" title="persons.chooseMedicalsModal.publisher">
       </sc-column>
     </sc-datatable>
   </div>

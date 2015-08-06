@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
@@ -16,6 +18,8 @@ namespace Gva.Api.Controllers.Persons
     public class PersonDocumentOthersController : GvaCaseTypePartController<PersonDocumentOtherDO>
     {
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
+        private ILotRepository lotRepository;
 
         public PersonDocumentOthersController(
             IUnitOfWork unitOfWork,
@@ -27,6 +31,8 @@ namespace Gva.Api.Controllers.Persons
             : base("personDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
+            this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -35,10 +41,40 @@ namespace Gva.Api.Controllers.Persons
             PersonDocumentOtherDO newDocumentOther = new PersonDocumentOtherDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
             };
 
             return Ok(new CaseTypePartDO<PersonDocumentOtherDO>(newDocumentOther, null));
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonDocumentOtherDO>("personDocumentOthers");
+
+            List<PersonDocumentOtherViewDO> documentOtherViewDOs = new List<PersonDocumentOtherViewDO>();
+            foreach (var documentOtherPartVersion in documentOthers)
+            {
+                var lotFile = this.fileRepository.GetFileReference(documentOtherPartVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    documentOtherViewDOs.Add(new PersonDocumentOtherViewDO()
+                    {
+                        Case = lotFile != null? new CaseDO(lotFile) : null,
+                        PartIndex = documentOtherPartVersion.Part.Index,
+                        PartId = documentOtherPartVersion.PartId,
+                        DocumentDateValidFrom = documentOtherPartVersion.Content.DocumentDateValidFrom,
+                        DocumentDateValidTo = documentOtherPartVersion.Content.DocumentDateValidTo,
+                        DocumentNumber = documentOtherPartVersion.Content.DocumentNumber,
+                        DocumentPublisher = documentOtherPartVersion.Content.DocumentPublisher,
+                        Notes = documentOtherPartVersion.Content.Notes,
+                        Valid = documentOtherPartVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", documentOtherPartVersion.Content.ValidId.Value) : null,
+                        DocumentType = documentOtherPartVersion.Content.DocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", documentOtherPartVersion.Content.DocumentTypeId.Value) : null,
+                        DocumentRole = documentOtherPartVersion.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", documentOtherPartVersion.Content.DocumentRoleId.Value) : null,
+                        DocumentPersonNumber = documentOtherPartVersion.Content.DocumentPersonNumber
+                    });
+                }
+            }
+            return Ok(documentOtherViewDOs);
         }
     }
 }

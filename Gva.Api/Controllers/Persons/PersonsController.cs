@@ -86,14 +86,14 @@ namespace Gva.Api.Controllers.Persons
 
             if (extendedVersion)
             {
-                NomValue ValidTrue = this.nomRepository.GetNomValue("boolean", "yes");
+                int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
                 newPerson.PersonDocumentId = new CaseTypesPartDO<PersonDocumentIdDO>(new PersonDocumentIdDO()
                 {
-                    Valid = ValidTrue
+                    ValidId = validTrueId
                 }, new List<CaseDO>());
                 newPerson.PersonAddress = new PersonAddressDO()
                 {
-                    ValidId = ValidTrue.NomValueId
+                    ValidId = validTrueId
                 };
             }
 
@@ -440,27 +440,7 @@ namespace Gva.Api.Controllers.Persons
             {
                 foreach (LicenceStageDO document in stampedDocuments)
                 {
-                    if (document.RatingPartIndex.HasValue)
-                    {
-                        var stageId = this.unitOfWork.DbContext.Set<GvaStage>()
-                            .Where(s => document.StageAliases.Contains(s.Alias))
-                            .Max(s => s.GvaStageId);
-
-                        var lot = this.lotRepository.GetLotIndex(document.LotId);
-                        var licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", document.EditionPartIndex));
-
-                        var rating = licenceEditionPartVersion.Content.PrintedRatingEditions
-                            .Where(re => re.RatingEditionPartIndex == document.RatingEditionPartIndex && re.RatingPartIndex == document.RatingPartIndex)
-                            .Single();
-
-                        rating.LicenceStatusId = stageId;
-
-                        lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
-
-                        lot.Commit(this.userContext, lotEventDispatcher);
-                        this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
-                    }
-                    else if (document.ApplicationId.HasValue)
+                    if (document.ApplicationId.HasValue)
                     {
                         var applicationStages = this.applicationStageRepository.GetApplicationStages(document.ApplicationId.Value);
                         int lastStageOrdinal = applicationStages.Last().Ordinal;
@@ -497,7 +477,7 @@ namespace Gva.Api.Controllers.Persons
                     }
                     else
                     {
-                        var lot = lotRepository.GetLotIndex(document.LotId);
+                        var lot = lotRepository.GetLotIndex(document.LotId.Value);
                         PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", document.EditionPartIndex.Value));
 
                         licenceEditionPartVersion.Content.ОfficiallyReissuedStageId = this.unitOfWork.DbContext.Set<GvaStage>()

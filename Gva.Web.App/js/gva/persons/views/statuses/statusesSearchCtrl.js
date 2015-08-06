@@ -12,13 +12,13 @@
 
     $scope.isExpiringDocument = function(item) {
       var today = moment(new Date()),
-          difference = moment(item.part.documentDateValidTo).diff(today, 'days');
+          difference = moment(item.documentDateValidTo).diff(today, 'days');
 
       return 0 <= difference && difference <= 30;
     };
 
     $scope.isExpiredDocument = function(item) {
-      return moment(new Date()).isAfter(item.part.documentDateValidTo);
+      return moment(new Date()).isAfter(item.documentDateValidTo);
     };
   }
 
@@ -38,7 +38,7 @@
         .then(function (statuses) {
           return _(statuses)
           .forEach(function (s) {
-            s.part.isActive = new Date(s.part.documentDateValidTo) > new Date();
+            s.isActive = new Date(s.documentDateValidTo) > new Date();
           })
           .value();
         });

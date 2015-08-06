@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
@@ -24,6 +25,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
 
         public AircraftDocumentOthersController(
             IUnitOfWork unitOfWork,
@@ -40,6 +42,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -48,7 +51,7 @@ namespace Gva.Api.Controllers.Aircrafts
             AircraftDocumentOtherDO newDocumentOther = new AircraftDocumentOtherDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                ValidId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
@@ -68,6 +71,35 @@ namespace Gva.Api.Controllers.Aircrafts
             }
 
             return Ok(new CaseTypePartDO<AircraftDocumentOtherDO>(newDocumentOther, caseDO));
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var documentOthers = this.lotRepository.GetLotIndex(lotId).Index.GetParts<AircraftDocumentOtherDO>("aircraftDocumentOthers");
+
+            List<AircraftDocumentOtherViewDO> documentOtherViewDOs = new List<AircraftDocumentOtherViewDO>();
+            foreach (var documentOtherPartVersion in documentOthers)
+            {
+                var lotFile = this.fileRepository.GetFileReference(documentOtherPartVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    documentOtherViewDOs.Add(new AircraftDocumentOtherViewDO()
+                    {
+                        Case = lotFile != null ? new CaseDO(lotFile) : null,
+                        PartIndex = documentOtherPartVersion.Part.Index,
+                        PartId = documentOtherPartVersion.PartId,
+                        DocumentDateValidFrom = documentOtherPartVersion.Content.DocumentDateValidFrom,
+                        DocumentDateValidTo = documentOtherPartVersion.Content.DocumentDateValidTo,
+                        DocumentNumber = documentOtherPartVersion.Content.DocumentNumber,
+                        DocumentPublisher = documentOtherPartVersion.Content.DocumentPublisher,
+                        Notes = documentOtherPartVersion.Content.Notes,
+                        Valid = documentOtherPartVersion.Content.ValidId.HasValue ? this.nomRepository.GetNomValue("boolean", documentOtherPartVersion.Content.ValidId.Value) : null,
+                        DocumentType = documentOtherPartVersion.Content.OtherDocumentTypeId.HasValue ? this.nomRepository.GetNomValue("documentTypes", documentOtherPartVersion.Content.OtherDocumentTypeId.Value) : null,
+                        DocumentRole = documentOtherPartVersion.Content.OtherDocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", documentOtherPartVersion.Content.OtherDocumentRoleId.Value) : null
+                    });
+                }
+            }
+            return Ok(documentOtherViewDOs);
         }
     }
 }

@@ -10,32 +10,32 @@
   ) {
     var groupedFlyingExp = _.groupBy(_.map(flyingExperiences, function (flyingExperience) {
       var minutes;
-      if (flyingExperience.part.totalDoc) {
-        minutes = flyingExperience.part.totalDoc / 60000;
+      if (flyingExperience.totalDoc) {
+        minutes = flyingExperience.totalDoc / 60000;
         flyingExperience.totalDocHours = Math.floor(minutes / 60);
       } else {
         flyingExperience.totalDocHours = 0;
       }
-      if (flyingExperience.part.total) {
-        minutes = flyingExperience.part.total / 60000;
+      if (flyingExperience.total) {
+        minutes = flyingExperience.total / 60000;
         flyingExperience.totalHours = Math.floor(minutes / 60);
       } else {
         flyingExperience.totalHours = 0;
       }
 
-      var location = (flyingExperience.part.locationIndicator ?
-        flyingExperience.part.locationIndicator.code : '') + ' ' +
-        (flyingExperience.part.sector ? flyingExperience.part.sector : '');
-      var ratingTypes = _.pluck(flyingExperience.part.ratingTypes, 'code').join(', ');
+      var location = (flyingExperience.locationIndicator ?
+        flyingExperience.locationIndicator.code : '') + ' ' +
+        (flyingExperience.sector ? flyingExperience.sector : '');
+      var ratingTypes = _.pluck(flyingExperience.ratingTypes, 'code').join(', ');
 
       flyingExperience.ratingTypesAndLocation = 
-        flyingExperience.part.ratingTypes && flyingExperience.part.ratingTypes.length > 0 ?
+        flyingExperience.ratingTypes && flyingExperience.ratingTypes.length > 0 ?
         ratingTypes : location;
       return flyingExperience;
     }), function (flyExp) {
-      var classCode = flyExp.part.ratingClass ? flyExp.part.ratingClass.code : '';
-      var authorizationCode = flyExp.part.authorization ? flyExp.part.authorization.code : '';
-      var licenceCode = flyExp.part.licenceType ? flyExp.part.licenceType.code : '';
+      var classCode = flyExp.ratingClass ? flyExp.ratingClass.code : '';
+      var authorizationCode = flyExp.authorization ? flyExp.authorization.code : '';
+      var licenceCode = flyExp.licenceType ? flyExp.licenceType.code : '';
       return flyExp.ratingTypesAndLocation + ' ' +
         classCode + ' ' +
         authorizationCode + ' ' +
@@ -45,7 +45,7 @@
     $scope.flyingExperiences = [].concat.apply([],
       _.map(groupedFlyingExp, function (value, key) {
         return _.sortBy(groupedFlyingExp[key], function(value) {
-          return new Date(value.part.documentDate);
+          return new Date(value.documentDate);
         }).reverse();
       }));
   }

@@ -1,19 +1,19 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.employments.new' }" text="persons.employmentSearch.newEmployment" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="employments" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.hiredate">
+<sc-datatable items="employments" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="hiredate">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.employments.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="date">
+  <sc-column data="hiredate" title="persons.employmentSearch.hiredate" type="date">
   </sc-column>
-  <sc-column data="part.employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
+  <sc-column data="employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
   </sc-column>
-  <sc-column data="part.organization.name" title="persons.employmentSearch.organization" type="string">
+  <sc-column data="organization.name" title="persons.employmentSearch.organization" type="string">
   </sc-column>
-  <sc-column data="part.country.name" title="persons.employmentSearch.country" type="string">
+  <sc-column data="country.name" title="persons.employmentSearch.country" type="string">
   </sc-column>
-  <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
+  <sc-column data="valid.name" title="persons.employmentSearch.valid">
   </sc-column>
-  <sc-column data="part.notes" title="persons.employmentSearch.notes" type="string">
+  <sc-column data="notes" title="persons.employmentSearch.notes" type="string">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.employmentSearch.bookPageNumber">
   </sc-column>

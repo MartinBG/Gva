@@ -184,8 +184,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -251,7 +252,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS = documents.Take((documents.Count() / 2) + 1),
                     T_DOCUMENTS2 = documents.Skip((documents.Count() / 2) + 1),
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_RATING = this.GetTRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetLRatings(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations(licenceType.Code)
@@ -272,11 +273,7 @@ namespace Gva.Api.WordTemplates
                 nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
 
             return new
             {
@@ -300,14 +297,8 @@ namespace Gva.Api.WordTemplates
                         TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.NameAlt : null
                     }
                 },
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    settlement != null? settlement.Name : null,
-                    personAddress.Address),
-                ADDRESS_TRANS = string.Format(
-                    "{0}, {1}",
-                    personAddress.AddressAlt,
-                    settlement != null ? settlement.NameAlt : null),
+                ADDRESS = address.Item2,
+                ADDRESS_TRANS = address.Item1,
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality != null ? nationality.Name : null,
@@ -324,7 +315,12 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PersonTrainingDO> includedExams)
         {
             string[] documentRoleCodes;
+            int[] documentRoleIds;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
+            documentRoleIds = documentRoleCodes
+                .Select(c => 
+                    this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                    .ToArray();
             List<object> documents = new List<object>();
 
             if (!hasRoles)
@@ -335,7 +331,7 @@ namespace Gva.Api.WordTemplates
             if(licenceTypeCode == "CPL(H)")
             {
                 NomValue educationRole = this.nomRepository.GetNomValue("documentRoles", "education");
-                var education = Utils.GetTrainingsByCode(includedTrainings, educationRole.Code, documentRoleCodes);
+                var education = Utils.GetTrainingsById(includedTrainings, educationRole.NomValueId, documentRoleIds, this.nomRepository);
 
                 documents.Add(new
                 {
@@ -350,7 +346,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "F/CL", "FDL", "PPL(A)", "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue theoreticalTrainingRole = this.nomRepository.GetNomValue("documentRoles", "theoreticalTraining");
-                var theoreticalTrainings = Utils.GetTrainingsByCode(includedTrainings, theoreticalTrainingRole.Code, documentRoleCodes);
+                var theoreticalTrainings = Utils.GetTrainingsById(includedTrainings, theoreticalTrainingRole.NomValueId, documentRoleIds, this.nomRepository);
 
                 documents.Add(new
                 {
@@ -365,7 +361,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "F/CL", "FDL" }).Contains(licenceTypeCode))
             {
                 NomValue practicalTrainingRole = this.nomRepository.GetNomValue("documentRoles", "practicalTraining");
-                var practicalTrainings = Utils.GetTrainingsByCode(includedTrainings, practicalTrainingRole.Code, documentRoleCodes);
+                var practicalTrainings = Utils.GetTrainingsById(includedTrainings, practicalTrainingRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {
@@ -380,7 +376,7 @@ namespace Gva.Api.WordTemplates
             if ("F/CL" == licenceTypeCode)
             {
                 NomValue practicalCheckRole = this.nomRepository.GetNomValue("documentRoles", "practicalCheck");
-                var practicalChecks = Utils.FillBlankData(Utils.GetChecksByCode(includedChecks, practicalCheckRole.Code, documentRoleCodes), 1);
+                var practicalChecks = Utils.FillBlankData(Utils.GetChecksById(includedChecks, practicalCheckRole.NomValueId, documentRoleIds, nomRepository), 1);
 
                 documents.Add(new
                 {
@@ -395,7 +391,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "PPL(A)", "CPL(A)", "ATPL(A)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue flyingTrainingRole = this.nomRepository.GetNomValue("documentRoles", "flyingTraining");
-                var flyingTrainings = Utils.GetTrainingsByCode(includedTrainings, flyingTrainingRole.Code, documentRoleCodes);
+                var flyingTrainings = Utils.GetTrainingsById(includedTrainings, flyingTrainingRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {
@@ -410,7 +406,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "PPL(A)", "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue flyingCheckRole = this.nomRepository.GetNomValue("documentRoles", "flyingCheck");
-                var flyingChecks = Utils.GetTrainingsByCode(includedTrainings, flyingCheckRole.Code, documentRoleCodes);
+                var flyingChecks = Utils.GetTrainingsById(includedTrainings, flyingCheckRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {
@@ -426,11 +422,11 @@ namespace Gva.Api.WordTemplates
             {
                 NomValue theoreticalExamRole = this.nomRepository.GetNomValue("documentRoles", "exam");
                 var theoreticalExams = includedExams
-                    .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == theoreticalExamRole.Code)
+                    .Where(t => documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == theoreticalExamRole.NomValueId)
                     .Select(t =>
                         new
                         {
-                            DOC_TYPE = t.DocumentType.Name.ToLower(),
+                            DOC_TYPE = this.nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                             DOC_NO = t.DocumentNumber,
                             DATE = t.DocumentDateValidFrom,
                             DOC_PUBLISHER = t.DocumentPublisher
@@ -449,7 +445,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "CPL(A)", "ATPL(A)", "PL(FB)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
-                var simulators = Utils.GetTrainingsByCode(includedTrainings, simulatorRole.Code, documentRoleCodes);
+                var simulators = Utils.GetTrainingsById(includedTrainings, simulatorRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {
@@ -464,7 +460,7 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "CPL(A)", "ATPL(A)" }).Contains(licenceTypeCode))
             {
                 NomValue engCertRole = this.nomRepository.GetNomValue("documentRoles", "engCert");
-                var engCerts = Utils.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
+                var engCerts = Utils.GetLangCertsById(includedLangCerts, engCertRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {
@@ -479,7 +475,7 @@ namespace Gva.Api.WordTemplates
             if ("ATPL(A)" == licenceTypeCode)
             {
                 NomValue bgCertRole = this.nomRepository.GetNomValue("documentRoles", "bgCert");
-                var bgCerts = Utils.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
+                var bgCerts = Utils.GetLangCertsById(includedLangCerts, bgCertRole.NomValueId, documentRoleIds, nomRepository);
 
                 documents.Add(new
                 {

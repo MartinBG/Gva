@@ -7,7 +7,7 @@ namespace Gva.Api.ModelsDO.Persons
     public class PersonStatusDO
     {
         [Required(ErrorMessage = "PersonStatusType is required.")]
-        public NomValue PersonStatusType { get; set; }
+        public int? PersonStatusTypeId { get; set; }
 
         public string DocumentNumber { get; set; }
 

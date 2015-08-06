@@ -44,6 +44,8 @@ namespace Gva.Api.Models.Views.Person
 
         public int? OfficiallyReissuedStageId { get; set; }
 
+        public bool? HasNoNumber { get; set; }
+
         public virtual GvaPaper Paper { get; set; }
 
         public virtual Part Part { get; set; }
@@ -91,6 +93,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Limitations).HasColumnName("Limitations");
             this.Property(t => t.PrintedFileId).HasColumnName("PrintedFileId");
             this.Property(t => t.OfficiallyReissuedStageId).HasColumnName("OfficiallyReissuedStageId");
+            this.Property(t => t.HasNoNumber).HasColumnName("HasNoNumber");
 
             // Relationships
             this.HasRequired(t => t.Part)

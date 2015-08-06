@@ -42,6 +42,12 @@
         </div>
       </div>
 
+      <div ng-if="alias === 'cities'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'countries'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.country" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
       <div class="row" ng-if="alias === 'limitations66'">
         <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.point = nomenclatureValue.textContent.point || '8'">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limitations66Point"></label>
@@ -111,10 +117,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" sc-has-error="caseType">
-            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
-            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control"  name="caseType" ng-required="true">
+          <div class="form-group col-sm-4" sc-has-error="caseTypes">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
+            <sc-validation-error field-name="caseTypes" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypeAliases" class="input-sm form-control" name="caseTypes" ng-required="true">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>
@@ -143,10 +149,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" sc-has-error="caseType">
-            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
-            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control" name="caseType" ng-required="true">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
+            <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypeAliases" class="input-sm form-control">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>

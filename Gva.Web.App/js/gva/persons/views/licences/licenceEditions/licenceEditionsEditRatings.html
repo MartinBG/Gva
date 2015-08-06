@@ -36,7 +36,7 @@
               <span class="glyphicon glyphicon-print"></span>
             </a>
           </td>
-          <td>{{rating.personRatingLevel.name || rating.ratingTypes || rating.aircraftTypeGroup.code || (rating.locationIndicator ? rating.locationIndicator.code + (rating.sector ? ' ' + rating.sector : '') : '')}}</td>
+          <td>{{rating.personRatingLevel.code || rating.ratingTypes || rating.aircraftTypeGroup.code || (rating.locationIndicator ? rating.locationIndicator.code + (rating.sector ? ' ' + rating.sector : '') : '')}}</td>
           <td>{{(rating.ratingClass.code || '') + ( rating.ratingSubClasses ? ' (' + rating.ratingSubClasses + ')' : '') || rating.aircraftTypeCategory.code}}</td>
           <td>{{((rating.authorization && rating.authorization.code) || '') + ' ' + (rating.limitations ? rating.limitations : '')}}</td>
           <td><span>{{rating.docDateValidFrom | date:'mediumDate'}}</span>

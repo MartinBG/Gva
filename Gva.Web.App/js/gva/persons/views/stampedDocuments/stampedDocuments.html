@@ -20,7 +20,7 @@
     <sc-ajaxcolumn data="licenceNumber" title="persons.stampedDocumentsView.licenceNumber">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="person.lin" title="persons.stampedDocumentsView.lin" has-content="true">
-      {{item.person.lin}}
+      <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.edit', params: { id: item.lotId }}" text="{{item.person.lin}}"></sc-button>
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="person.uin" title="persons.stampedDocumentsView.uin" has-content="true">
       {{item.person.uin}}
@@ -32,7 +32,8 @@
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="dateValidTo" title="persons.stampedDocumentsView.documentDateValidTo" type="date">
     </sc-ajaxcolumn>
-    <sc-ajaxcolumn data="stampNumber" title="persons.stampedDocumentsView.stampNumber">
+    <sc-ajaxcolumn data="stampNumber" title="persons.stampedDocumentsView.stampNumber" has-content="true">
+      {{item.hasNoNumber ? noNumberLabel : item.stampNumber}}
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.application" has-content="true">
       <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.application.applicationId }}" text="{{ item.application.applicationName }}"></sc-button>
@@ -46,7 +47,7 @@
       <input type="checkbox" ng-checked="isChecked(item, 'returned') || item.isReceived" ng-disabled="item.isReceived || !item.isReady" sc-click="selectCheck($event, item, 'returned')" >
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="isChecked(item, 'done') || item.isDone" sc-click="selectCheck($event, item, 'done')" ng-if="!item.isOfficiallyReissued && !item.ratingPartIndex">
+      <input type="checkbox" ng-checked="isChecked(item, 'done') || item.isDone" sc-click="selectCheck($event, item, 'done')" ng-if="!item.isOfficiallyReissued">
     </sc-ajaxcolumn>
   </sc-ajaxdatatable>
 </ng-form>

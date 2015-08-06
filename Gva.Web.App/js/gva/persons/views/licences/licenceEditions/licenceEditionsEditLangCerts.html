@@ -32,13 +32,13 @@
             <td ng-if="currentLicenceEdition.part.includedLangCerts.length && !changeOrderMode && isLast">
               <sc-button name="deleteLangCertBtn" class="btn btn-xs btn-danger" btn-click="removeLangCert(langCert)" icon="glyphicon-remove"></sc-button>
             </td>
-            <td>{{langCert.part.documentNumber}}</td>
-            <td>{{langCert.part.documentDateValidFrom | date:'mediumDate'}}</td>
-            <td>{{langCert.part.documentDateValidTo | date:'mediumDate'}}</td>
-            <td>{{langCert.part.documentRole.name}}</td>
-            <td>{{langCert.part.langLevel.name}}</td>
-            <td>{{langCert.part.documentPublisher}}</td>
-            <td>{{langCert.part.valid.name}}</td>
+            <td>{{langCert.documentNumber}}</td>
+            <td>{{langCert.documentDateValidFrom | date:'mediumDate'}}</td>
+            <td>{{langCert.documentDateValidTo | date:'mediumDate'}}</td>
+            <td>{{langCert.documentRole.name}}</td>
+            <td>{{langCert.langLevel.name}}</td>
+            <td>{{langCert.documentPublisher}}</td>
+            <td>{{langCert.valid.name}}</td>
           </tr>
         </tbody>
       </table>

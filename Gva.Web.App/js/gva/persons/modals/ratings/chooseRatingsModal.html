@@ -2,7 +2,7 @@
   <div class="panel-heading">
     <strong l10n-text="persons.chooseRatingsModal.title"></strong>
     <div class="pull-right">
-      <sc-button name="addBtn" btn-click="addRatings()" text="persons.chooseRatingsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="addBtn" btn-click="addRatings()" ng-disabled="selectedRatings.length === 0" text="persons.chooseRatingsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
       <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseRatingsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>

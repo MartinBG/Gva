@@ -25,30 +25,48 @@ namespace Gva.Api.WordTemplates
             return String.Join(", ", phones);
         }
 
-        internal static string GetAuthFormAddress(PersonAddressDO personAddress, NomValue country, INomRepository nomRepository)
+        internal static Tuple<string, string> GetAddress(PersonAddressDO personAddress, INomRepository nomRepository)
         {
             List<string> addressData = new List<string>();
-            if (country != null)
-            {
-                addressData.Add(country.NameAlt);
-            }
+            List<string> addressDataAlt = new List<string>();
 
             if (personAddress.SettlementId.HasValue)
             {
-                string settlementAlt = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).NameAlt;
-                addressData.Add(settlementAlt);
+                NomValue settlement = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
+                NomValue country = nomRepository.GetNomValue("countries", settlement.ParentValueId.Value);
+                addressDataAlt.Add(country.NameAlt);
+                addressDataAlt.Add(settlement.NameAlt);
+
+                addressData.Add(country.Name);
+                addressData.Add(settlement.Name);
             }
 
             if (personAddress != null)
             {
-                addressData.Add(personAddress.AddressAlt);
+                addressDataAlt.Add(personAddress.AddressAlt);
+                addressData.Add(personAddress.Address);
             }
 
-            return string.Join(", ", addressData);
+            return new Tuple<string, string>(string.Join(", ", addressDataAlt), string.Join(", ", addressData));
+        }
+
+        internal static Tuple<string, string> GetPlaceOfBirth(PersonDataDO personData, INomRepository nomRepository)
+        {
+            string placeOfBirth = null;
+            string placeOfBirthAlt = null;
+            if(personData.PlaceOfBirth != null)
+            {
+                NomValue country = nomRepository.GetNomValue("countries", personData.PlaceOfBirth.ParentValueId.Value);
+                placeOfBirth = string.Format("{0}, {1}", country.Name, personData.PlaceOfBirth.Name);
+                placeOfBirthAlt = string.Format("{0}, {1}", country.NameAlt, personData.PlaceOfBirth.NameAlt);
+            }
+
+            return new Tuple<string, string>(placeOfBirthAlt, placeOfBirth);
         }
 
         internal static object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress, INomRepository nomRepository)
         {
+            var address = GetAddress(personAddress, nomRepository).Item2;
             return new
             {
                 NAME = string.Format(
@@ -58,10 +76,7 @@ namespace Gva.Api.WordTemplates
                     personData.LastName).ToUpper(),
                 LIN = personData.Lin,
                 EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.SettlementId.HasValue ? nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null,
-                    personAddress.Address),
+                ADDRESS = address,
                 TELEPHONE = GetPhonesString(personData)
             };
         }
@@ -80,72 +95,80 @@ namespace Gva.Api.WordTemplates
             return data;
         }
 
-        internal static List<object> GetLangCertsByCode(IEnumerable<PersonLangCertDO> includedLangCerts, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetLangCertsById(IEnumerable<PersonLangCertDO> includedLangCerts, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
             return includedLangCerts
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetTrainingsByCode(IEnumerable<PersonTrainingDO> includedTraings, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetTrainingsById(IEnumerable<PersonTrainingDO> includedTraings, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
+
             return includedTraings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetChecksByCode(IEnumerable<PersonCheckDO> includedChecks, string roleCode, string[] documentRoleCodes)
+        internal static List<object> GetChecksById(IEnumerable<PersonCheckDO> includedChecks, int roleId, int[] documentRoleIds, INomRepository nomRepository)
         {
+            int validTrueId = nomRepository.GetNomValue("boolean", "yes").NomValueId;
             return includedChecks
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+                .Where(t => t.ValidId == validTrueId && documentRoleIds.Contains(t.DocumentRoleId.Value) && t.DocumentRoleId == roleId)
                 .Select(t =>
                     new
                     {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
+                        DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
         }
 
-        internal static List<object> GetExamsByCode(
+        internal static List<object> GetExamsById(
             IEnumerable<PersonTrainingDO> includedExams,
             IEnumerable<PersonCheckDO> includedChecks,
             IEnumerable<PersonTrainingDO> includedTrainings,
-            string examRoleCode,
-            string[] documentRoleCodes)
+            int examRoleId,
+            int[] documentRoleIds,
+            INomRepository nomRepository)
         {
-            var exams = includedExams.Where(d => d.DocumentRole.Code == examRoleCode)
+            var exams = includedExams.Where(d => d.DocumentRoleId == examRoleId)
                .Select(t => new
                {
-                   DOC_TYPE = t.DocumentType.Name.ToLower(),
+                   DOC_TYPE = nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                    DOC_NO = t.DocumentNumber,
                    DATE = t.DocumentDateValidFrom,
                    DOC_PUBLISHER = t.DocumentPublisher
                })
                .ToList<object>();
 
-            var trainings = Utils.GetTrainingsByCode(includedTrainings, examRoleCode, documentRoleCodes);
-            var checks = Utils.GetChecksByCode(includedChecks, examRoleCode, documentRoleCodes);
+            var trainings = Utils.GetTrainingsById(includedTrainings, examRoleId, documentRoleIds, nomRepository);
+            var checks = Utils.GetChecksById(includedChecks, examRoleId, documentRoleIds, nomRepository);
 
             return exams.Union(checks).Union(trainings).ToList<object>();
         }
 
-        internal static List<object> GetMedCerts(int orderNumber, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
+        internal static List<object> GetMedCerts(
+            int orderNumber, IEnumerable<PersonMedicalDO> includedMedicals,
+            PersonDataDO personData,
+            INomRepository nomRepository)
         {
             var medicals = includedMedicals.Select(m =>
                 new
@@ -159,9 +182,9 @@ namespace Gva.Api.WordTemplates
                         m.DocumentNumberSuffix),
                     ISSUE_DATE = m.DocumentDateValidFrom,
                     VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name.ToUpper(),
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
+                    CLASS = m.MedClassId.HasValue ? nomRepository.GetNomValue("medClasses", m.MedClassId.Value).Name.ToUpper() : null,
+                    PUBLISHER = m.DocumentPublisherId.HasValue ? nomRepository.GetNomValue("medDocPublishers", m.DocumentPublisherId.Value).Name : null,
+                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",",nomRepository.GetNomValues("medLimitation", m.Limitations.ToArray()).Select(l => l.Name)) : null
                 }).ToList<object>();
 
             if (medicals.Count() == 0)
@@ -175,37 +198,42 @@ namespace Gva.Api.WordTemplates
             return medicals;
         }
 
-        internal static List<object> GetLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts)
+        internal static List<object> GetLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
         {
-            return includedLangCerts.Select(c => new
-            {
-                LEVEL = c.LangLevel.Name,
-                ISSUE_DATE = c.DocumentDateValidFrom,
-                VALID_DATE = c.LangLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
-            })
+            return includedLangCerts.Where(l => l.LangLevelId.HasValue)
+                .Select(c => 
+                {
+                    var langLevel = nomRepository.GetNomValue("langLevels", c.LangLevelId.Value);
+                    return new
+                    {
+                        LEVEL = langLevel.Name,
+                        ISSUE_DATE = c.DocumentDateValidFrom,
+                        VALID_DATE = langLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                    };
+                })
             .ToList<object>();
         }
 
         internal static List<object> GetATCLLangCerts(IEnumerable<PersonLangCertDO> includedLangCerts, INomRepository nomRepository)
         {
             var langLevel = new List<object>();
-            foreach (var cert in includedLangCerts.Where(c => c.LangLevel != null))
+            foreach (var cert in includedLangCerts.Where(c => c.LangLevelId.HasValue))
             {
-                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevel.NomValueId);
+                var langLevelNom = nomRepository.GetNomValue("langLevels", cert.LangLevelId.Value);
                 if (langLevelNom.TextContent.GetItems<string>("roleAliases").First() == "bgCert")
                 {
                     langLevel.Add(new
                     {
-                        LEVEL = cert.LangLevel.Name,
+                        LEVEL = langLevelNom.Name,
                         ISSUE_DATE = cert.DocumentDateValidFrom,
-                        VALID_DATE = cert.LangLevel.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                        VALID_DATE = langLevelNom.Code.Contains("6") ? "unlimited" : (cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
                     });
                 }
                 else
                 {
                     langLevel.Add(new
                     {
-                        LEVEL = cert.LangLevel.Name,
+                        LEVEL = langLevelNom.Name,
                         ISSUE_DATE = cert.DocumentDateValidFrom,
                         VALID_DATE = cert.DocumentDateValidTo.HasValue ? cert.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null
                     });
@@ -250,15 +278,9 @@ namespace Gva.Api.WordTemplates
             return Utils.FillBlankData(ratingEditions, 11);
         }
 
-        internal static NomValue GetCountry(PersonAddressDO personAddress, INomRepository nomRepository)
+        internal static NomValue GetCountry(PersonDataDO personData, INomRepository nomRepository)
         {
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
-            int? countryId = settlement != null ? settlement.ParentValueId : null;
+            int? countryId = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.ParentValueId : null;
             NomValue country = countryId.HasValue ?
                 nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue

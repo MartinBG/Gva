@@ -47,8 +47,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -88,7 +89,7 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
-            var langCerts = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
+            var langCerts = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts, this.nomRepository), 1);
 
             List<int> authorizationGroupIds = nomRepository.GetNomValues("authorizationGroups")
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
@@ -96,7 +97,7 @@ namespace Gva.Api.WordTemplates
                 .ToList();
 
             var ratings = Utils.FillBlankData(PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds, this.nomRepository), 19);
-            var country = Utils.GetCountry(personAddress, this.nomRepository);
+            var country = Utils.GetCountry(personData, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR {0} - {1} - {2}",
                 licenceType.Code.Replace("(", "").Replace(")", "").Replace("/", "."),
@@ -132,7 +133,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     OTHER_LICENCE2 = otherLicences,
                     T_DOCUMENTS = documents.Take(4),
-                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData, nomRepository),
                     T_DOCUMENTS2 = documents.Skip(4),
                     RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
                     RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
@@ -151,19 +152,8 @@ namespace Gva.Api.WordTemplates
 
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
-            var placeOfBirth = personData.PlaceOfBirth;
-            NomValue country = null;
-            if (placeOfBirth != null)
-            {
-                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            }
-
-            NomValue settlement = null;
-            if (personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
-
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
+            var placeOfBirth = Utils.GetPlaceOfBirth(personData, nomRepository);
 
             return new
             {
@@ -174,22 +164,10 @@ namespace Gva.Api.WordTemplates
                 SURNAME_BG = personData.MiddleName.ToUpper(),
                 SURNAME_TRANS = personData.MiddleNameAlt.ToUpper(),
                 DATE_OF_BIRTH = personData.DateOfBirth,
-                PLACE_OF_BIRTH = string.Format(
-                    "{0} {1}",
-                    country != null ? country.Name : null,
-                    placeOfBirth != null ? placeOfBirth.Name : null),
-                PLACE_OF_BIRTH_TRANS = string.Format(
-                    "{0} {1}",
-                    country != null ? country.NameAlt : null,
-                    placeOfBirth != null ? placeOfBirth.NameAlt : null),
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    settlement != null ? settlement.Name : null,
-                    personAddress.Address),
-                ADDRESS_TRANS = string.Format(
-                    "{0}, {1}",
-                    personAddress.AddressAlt,
-                    settlement != null ? settlement.NameAlt : null)
+                PLACE_OF_BIRTH = placeOfBirth.Item2,
+                PLACE_OF_BIRTH_TRANS = placeOfBirth.Item1,
+                ADDRESS = address.Item2,
+                ADDRESS_TRANS = address.Item1
             };
         }
 
@@ -240,7 +218,12 @@ namespace Gva.Api.WordTemplates
             if (licenceType.Code == "ATPA" || licenceType.Code == "CPA")
             {
                 string[] documentRoleCodes;
+                int[] documentRoleIds;
                 bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+                documentRoleIds = documentRoleCodes
+                    .Select(c =>
+                        this.nomRepository.GetNomValues("documentRoles").Where(r => r.Code == c).SingleOrDefault().NomValueId)
+                        .ToArray();
 
                 if (!hasRoles)
                 {
@@ -252,14 +235,14 @@ namespace Gva.Api.WordTemplates
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
                 NomValue flyingCheckRole = this.nomRepository.GetNomValue("documentRoles", "flyingCheck");
                 NomValue flyingTrainingRole = this.nomRepository.GetNomValue("documentRoles", "flyingTraining");
+                int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
+                var theoreticalTrainings = Utils.GetTrainingsById(includedTrainings, theoreticalTrainingRole.NomValueId, documentRoleIds, this.nomRepository);
+                var flyingTrainings = Utils.GetTrainingsById(includedTrainings, flyingTrainingRole.NomValueId, documentRoleIds, this.nomRepository);
 
-                var theoreticalTrainings = Utils.GetTrainingsByCode(includedTrainings, theoreticalTrainingRole.Code, documentRoleCodes);
-                var flyingTrainings = Utils.GetTrainingsByCode(includedTrainings, flyingTrainingRole.Code, documentRoleCodes);
-
-                var exams = includedExams.Where(d => d.Valid.Code == "Y" && documentRoleCodes.Contains(d.DocumentRole.Code) && d.DocumentRole.Code == theoreticalExamRole.Code)
+                var exams = includedExams.Where(d => d.ValidId == validTrueId && documentRoleIds.Contains(d.DocumentRoleId.Value) && d.DocumentRoleId == theoreticalExamRole.NomValueId)
                    .Select(t => new
                    {
-                       DOC_TYPE = t.DocumentType.Name.ToLower(),
+                       DOC_TYPE = this.nomRepository.GetNomValue("documentTypes", t.DocumentTypeId.Value).Name.ToLower(),
                        DOC_NO = t.DocumentNumber,
                        DATE = t.DocumentDateValidFrom,
                        DOC_PUBLISHER = t.DocumentPublisher
@@ -268,8 +251,8 @@ namespace Gva.Api.WordTemplates
 
                 exams = Utils.FillBlankData(exams, 1);
 
-                var simulators = Utils.FillBlankData(Utils.GetChecksByCode(includedChecks, simulatorRole.Code, documentRoleCodes), 1);
-                var flyingChecks = Utils.FillBlankData(Utils.GetChecksByCode(includedChecks, flyingCheckRole.Code, documentRoleCodes), 1);
+                var simulators = Utils.FillBlankData(Utils.GetChecksById(includedChecks, simulatorRole.NomValueId, documentRoleIds, this.nomRepository), 1);
+                var flyingChecks = Utils.FillBlankData(Utils.GetChecksById(includedChecks, flyingCheckRole.NomValueId, documentRoleIds, this.nomRepository), 1);
 
                 var result = new List<object>()
                 {

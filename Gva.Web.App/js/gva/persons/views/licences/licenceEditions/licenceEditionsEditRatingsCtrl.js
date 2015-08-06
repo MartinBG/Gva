@@ -14,7 +14,6 @@
     scMessage,
     scModal
   ) {
-    $scope.licenceTypeCode = $stateParams.licenceTypeCode;
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedRatings =
@@ -130,29 +129,17 @@
     };
 
     $scope.print = function (rating) {
-      return PersonLicenceEditions
-        .getRatingEditionLicence({
-          id: $stateParams.id,
-          ind: $stateParams.ind,
-          index: $stateParams.index,
-          ratingIndex: rating.ratingPartIndex,
-          ratingEditionIndex: rating.editionPartIndex
-        })
-        .$promise
-        .then(function (existingEntry) {
-            var params = {
-            lotId: $stateParams.id,
-            licenceIndex: $stateParams.ind,
-            licenceEditionIndex: $stateParams.index,
-            ratingIndex: rating.ratingPartIndex,
-            ratingEditionIndex: rating.editionPartIndex,
-            existingEntry: existingEntry
-          };
+      var params = {
+        lotId: $stateParams.id,
+        licenceIndex: $stateParams.ind,
+        licenceEditionIndex: $stateParams.index,
+        ratingIndex: rating.ratingPartIndex,
+        ratingEditionIndex: rating.editionPartIndex
+      };
 
-          var modalInstance = scModal.open('printRatingEdition', params);
+      var modalInstance = scModal.open('printRatingEdition', params);
 
-          return modalInstance.opened;
-        });
+      return modalInstance.opened;
     };
   }
 

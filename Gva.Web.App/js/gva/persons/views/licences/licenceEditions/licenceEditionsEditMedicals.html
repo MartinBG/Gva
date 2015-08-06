@@ -31,12 +31,12 @@
           <td ng-if="currentLicenceEdition.part.includedMedicals.length && !changeOrderMode && isLast">
             <sc-button name="deleteMedicalBtn" class="btn btn-xs btn-danger" btn-click="removeMedical(medical)" icon="glyphicon-remove"></sc-button>
           </td>
-          <td>{{medical.part.documentNumberPrefix}}-{{medical.part.documentNumber}}-{{person.lin}}-{{medical.part.documentNumberSuffix}}</td>
-          <td>{{medical.part.documentDateValidFrom | date:'mediumDate'}}</td>
-          <td>{{medical.part.documentDateValidTo | date:'mediumDate'}}</td>
-          <td>{{medical.part.medClass.name}}</td>
-          <td>{{medical.part.limitations | pluck:'name' | join:', '}}</td>
-          <td>{{medical.part.documentPublisher.name}}</td>
+          <td>{{medical.documentNumberPrefix}}-{{medical.documentNumber}}-{{person.lin}}-{{medical.documentNumberSuffix}}</td>
+          <td>{{medical.documentDateValidFrom | date:'mediumDate'}}</td>
+          <td>{{medical.documentDateValidTo | date:'mediumDate'}}</td>
+          <td>{{medical.medClass.name}}</td>
+          <td>{{medical.limitations | pluck:'name' | join:', '}}</td>
+          <td>{{medical.documentPublisher.name}}</td>
         </tr>
       </tbody>
     </table>

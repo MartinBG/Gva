@@ -42,8 +42,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
              var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -65,7 +66,7 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
-            var country = Utils.GetCountry(personAddress, this.nomRepository);
+            
             string licenceCode = licenceType.Code;
             var licenceNumber = string.Format(
                 "BG.66.A {0} - {1}",
@@ -87,16 +88,15 @@ namespace Gva.Api.WordTemplates
 
             var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
             bool isForeigner = false;
+
+            var country = Utils.GetCountry(personData, this.nomRepository);
             if (country != null)
             {
-                isForeigner = country.Code != "BG";
+                isForeigner = country.Code != "BG" && country.Code != "BGR";
             }
 
-            NomValue settlement = null;
-            if(personAddress.SettlementId.HasValue)
-            {
-                settlement = this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value);
-            }
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
+            var placeOfBirth = Utils.GetPlaceOfBirth(personData, nomRepository);
 
             var json = new
             {
@@ -112,20 +112,14 @@ namespace Gva.Api.WordTemplates
                     BIRTH = new
                     {
                         DATE = personData.DateOfBirth,
-                        PLACE_EN = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.NameAlt : null,
-                        PLACE = !isForeigner && personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null,
+                        PLACE_EN = placeOfBirth.Item1,
+                        PLACE = !isForeigner && personData.PlaceOfBirth != null ? placeOfBirth.Item2 : null,
                         BG_LABEL_PLACE = !isForeigner ? "Дата и място на раждане:" : null
                     },
                     ADDRESS = new
                     {
-                        ADDR_EN = string.Format(
-                            "{0}, {1}",
-                            settlement != null ? settlement.NameAlt : null,
-                            personAddress.AddressAlt),
-                        ADDR = !isForeigner ? string.Format(
-                            "{0}, {1}",
-                            settlement != null ? settlement.Name : null,
-                            personAddress.Address) : null,
+                        ADDR_EN = address.Item1,
+                        ADDR = !isForeigner ? address.Item2 : null,
                         BG_LABEL_ADDR = !isForeigner ? "Адрес на притежателя:" : null
                     },
                     NATIONALITY = new
@@ -137,8 +131,8 @@ namespace Gva.Api.WordTemplates
                     NAME = personNameBG,
                     BIRTH1 = string.Format("{0:dd.MM.yyyy} {1}",
                        personData.DateOfBirth,
-                       personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null),
-                    ADDR = personAddress.Address,
+                       placeOfBirth.Item2),
+                    ADDR = address.Item2,
                     NATIONALITY1 = country != null ? country.Name : null,
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,

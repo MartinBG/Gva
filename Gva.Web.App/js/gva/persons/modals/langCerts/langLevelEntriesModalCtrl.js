@@ -8,22 +8,26 @@
     scModalParams,
     langLevelModel
   ) {
-
     $scope.form = {};
     $scope.langLevelModel = langLevelModel;
     $scope.langCert = scModalParams.langCert;
-
+    $scope.langLevelHistory = scModalParams.langLevelHistory;
     $scope.save = function () {
       return $scope.form.langLevelEntriesForm.$validate().then(function () {
         if ($scope.form.langLevelEntriesForm.$valid) {
+          $scope.langLevelHistory.push(langLevelModel);
+
           if (!$scope.langCert.part.langLevelEntries) {
             $scope.langCert.part.langLevelEntries = [];
           }
 
-          $scope.langCert.part.langLevelEntries.push(langLevelModel);
-          $scope.langCert.part.langLevel = langLevelModel.langLevel;
+          $scope.langCert.part.langLevelEntries.push({
+            langLevelId: langLevelModel.langLevel.nomValueId,
+            changeDate: langLevelModel.changeDate
+          });
+          $scope.langCert.part.langLevelId = langLevelModel.langLevel.nomValueId;
 
-          return $modalInstance.close();
+          return $modalInstance.close($scope.langLevelHistory);
         }
       });
     };
@@ -31,7 +35,6 @@
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
-
   }
 
   LangLevelEntriesModalCtrl.$inject = [

@@ -752,8 +752,8 @@ namespace Gva.Api.Controllers
 
                         if (isMatch && caseTypeAliases != null && caseTypeAliases.Length > 0)
                         {
-                            string caseTypeAliasStr = nv.TextContent.Get<string>("caseTypeAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(caseTypeAliasStr) || caseTypeAliases.Contains(caseTypeAliasStr);
+                            string[] nomCaseTypeAliases = nv.TextContent.GetItems<string>("caseTypeAliases").ToArray();
+                            isMatch &= nomCaseTypeAliases.Count() == 0 || caseTypeAliases.Any(cta => nomCaseTypeAliases.Contains(cta));
                         }
 
                         return isMatch;
@@ -816,10 +816,10 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentTypes")]
-        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] caseAliases = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] caseTypeAliases = null, int offset = 0, int? limit = null)
         {
             IEnumerable<NomValue> nomValues;
-            if (isIdDocument == null && (caseAliases == null || caseAliases.Length > 0))
+            if (isIdDocument == null && (caseTypeAliases == null || caseTypeAliases.Length > 0))
             {
                 nomValues = this.nomRepository.GetNomValues("documentTypes", term: term, offset: offset, limit: limit);
             }
@@ -836,10 +836,10 @@ namespace Gva.Api.Controllers
                             isMatch &= nv.TextContent.Get<bool>("isIdDocument") == isIdDocument;
                         }
 
-                        if (isMatch && caseAliases != null && caseAliases.Length > 0)
+                        if (isMatch && caseTypeAliases != null && caseTypeAliases.Length > 0)
                         {
-                            string caseTypeAliasStr = nv.TextContent.Get<string>("caseTypeAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(caseTypeAliasStr) || caseAliases.Contains(caseTypeAliasStr);
+                            string[] nomCaseTypeAliases = nv.TextContent.GetItems<string>("caseTypeAliases").ToArray();
+                            isMatch &= nomCaseTypeAliases.Count() == 0 || caseTypeAliases.Any(cta => nomCaseTypeAliases.Contains(cta));
                         }
 
                         return isMatch;
@@ -1064,24 +1064,36 @@ namespace Gva.Api.Controllers
         [Route("employments")]
         public IHttpActionResult GetEmployments(int lotId)
         {
+            int validFalseId = this.nomRepository.GetNomValue("boolean", "no").NomValueId;
             var returnValue = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonEmploymentDO>("personDocumentEmployments")
-                .Select(e => new
-                {
-                    nomValueId = e.Part.Index,
-                    name = string.Format(
-                        "{0}, {1} {2}",
-                        e.Content.Organization.Name,
-                        e.Content.Hiredate.Value.ToString("dd.MM.yyyy"),
-                        e.Content.Valid.Code == "N" ? "(НЕВАЛИДНА)" : null)
-                });
+                .Select(e =>
+                    {
+                        var organization = e.Content.OrganizationId.HasValue ?
+                            this.organizationRepository.GetOrganization(e.Content.OrganizationId.Value) : null;
+
+                        return new
+                        {
+                            nomValueId = e.Part.Index,
+                            name = string.Format(
+                                "{0}, {1} {2}",
+                                organization != null ? organization.Name : null,
+                                e.Content.Hiredate.Value.ToString("dd.MM.yyyy"),
+                                e.Content.ValidId == validFalseId ? "(НЕВАЛИДНА)" : null)
+                        };
+                    });
 
             return Ok(returnValue);
         }
 
         [Route("ratingTypes")]
-        public IHttpActionResult GetRatingTypes(string term = null, string caseTypeAlias = null)
+        public IHttpActionResult GetRatingTypes(string term = null, string caseTypeAlias = null, [FromUri] int[] ids = null)
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("ratingTypes");
+
+            if (ids.Count() > 0)
+            {
+                nomValues = nomValues.Where(nv => ids.Contains(nv.NomValueId));
+            }
 
             if (!string.IsNullOrEmpty(caseTypeAlias))
             {

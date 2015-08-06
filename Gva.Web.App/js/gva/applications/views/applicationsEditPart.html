@@ -25,6 +25,13 @@
 
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="applicationPart.case"
         sc-form-params="{ setPart: set, lotId: lotId, hideApplications: true }"></gva-common-scanned-document>
+
+      <h5 class="form-header" l10n-text="applications.editAppPart.controlCard"></h5>
+      <div class="row">
+        <div class="form-group col-sm-7">
+          <sc-files ng-model="applicationPart.part.controlCard" ng-readonly="!editMode" name="controlCard"></sc-files>
+        </div>
+      </div>
     </div>
   </div>
 </ng-form>

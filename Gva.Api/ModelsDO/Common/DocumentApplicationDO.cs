@@ -38,5 +38,7 @@ namespace Gva.Api.ModelsDO.Common
         public App0004AdditionalDataDO App0004AdditionalData { get; set; }
 
         public App0008AdditionalDataDO App0008AdditionalData { get; set; }
+
+        public FileDataDO ControlCard { get; set; }
     }
 }

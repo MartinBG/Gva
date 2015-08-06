@@ -13,10 +13,10 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime? CompletionDate { get; set; }
 
         [Required(ErrorMessage = "Graduation is required.")]
-        public NomValue Graduation { get; set; }
+        public int? GraduationId { get; set; }
 
         [Required(ErrorMessage = "School is required.")]
-        public NomValue School { get; set; }
+        public int? SchoolId { get; set; }
 
         [Required(ErrorMessage = "Speciality is required.")]
         public string Speciality { get; set; }

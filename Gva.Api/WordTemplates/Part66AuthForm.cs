@@ -43,8 +43,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                 new PersonAddressDO() :
                 personAddressPart.Content;
@@ -64,11 +65,12 @@ namespace Gva.Api.WordTemplates
             var ratings = this.GetRatings(includedRatings, ratingEditions);
             
             var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content)
+                .Where(l => l.LangLevelId.HasValue);
 
             var langCerts = includedLangCerts.Select(l => new 
             {
-                NAME = string.Format("{0} {1}", l.LangLevel.Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+                NAME = string.Format("{0} {1}", this.nomRepository.GetNomValue("langLevels", l.LangLevelId.Value).Name, l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
             });
 
             var limitations =  lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
@@ -79,9 +81,9 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            var country = Utils.GetCountry(personAddress, this.nomRepository);
+            var country = Utils.GetCountry(personData, this.nomRepository);
             var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
-            string address = Utils.GetAuthFormAddress(personAddress, country, this.nomRepository);
+            string address = Utils.GetAddress(personAddress, this.nomRepository).Item1;
 
             var json = new
             {
@@ -91,7 +93,7 @@ namespace Gva.Api.WordTemplates
                     LICENCE_CODE = "Part-66",
                     LICENCE_NUMBER = licenceNumber,
                     NAMES_ALT = string.Format("{0} {1} {2}", personData.FirstNameAlt.ToUpper(), personData.MiddleNameAlt.ToUpper(), personData.LastNameAlt.ToUpper()),
-                    DATE_AND_PLACE_OF_BIRTH = string.Format("{0} {1}", personData.DateOfBirth.HasValue ? personData.DateOfBirth.Value.ToString("dd.MM.yyyy") : "", personData.PlaceOfBirth.NameAlt),
+                    DATE_AND_PLACE_OF_BIRTH = string.Format("{0} {1}, {2}", personData.DateOfBirth.HasValue ? personData.DateOfBirth.Value.ToString("dd.MM.yyyy") : "", country != null ? country.NameAlt : "", personData.PlaceOfBirth.NameAlt),
                     DATE_OF_ISSUE = lastEdition.DocumentDateValidFrom,
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     ADDRESS_ALT = address,

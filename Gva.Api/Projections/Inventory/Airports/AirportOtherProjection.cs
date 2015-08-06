@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Gva.Api.Models.Views;
@@ -12,11 +13,16 @@ namespace Gva.Api.Projections.Inventory.Airports
     public class AirportOtherProjection : Projection<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
+        private INomRepository nomRepository;
 
-        public AirportOtherProjection(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public AirportOtherProjection(
+            IUnitOfWork unitOfWork,
+            IUserRepository userRepository,
+            INomRepository nomRepository)
             : base(unitOfWork, "Airport")
         {
             this.userRepository = userRepository;
+            this.nomRepository = nomRepository;
         }
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
@@ -34,12 +40,12 @@ namespace Gva.Api.Projections.Inventory.Airports
             invItem.PartId = airportOther.Part.PartId;
             invItem.SetPartAlias = airportOther.Part.SetPart.Alias;
 
-            invItem.Name = airportOther.Content.DocumentRole.Name;
-            invItem.TypeId = airportOther.Content.DocumentType.NomValueId;
+            invItem.Name = airportOther.Content.DocumentRoleId.HasValue ? this.nomRepository.GetNomValue("documentRoles", airportOther.Content.DocumentRoleId.Value).Name : null;
+            invItem.TypeId = airportOther.Content.DocumentTypeId;
             invItem.Number = airportOther.Content.DocumentNumber;
             invItem.Date = airportOther.Content.DocumentDateValidFrom;
             invItem.Publisher = airportOther.Content.DocumentPublisher;
-            invItem.Valid = airportOther.Content.Valid == null ? (bool?)null : airportOther.Content.Valid.Code == "Y";
+            invItem.Valid = !airportOther.Content.ValidId.HasValue ? (bool?)null : this.nomRepository.GetNomValue("boolean", airportOther.Content.ValidId.Value).Code == "Y";
             invItem.FromDate = airportOther.Content.DocumentDateValidFrom;
             invItem.ToDate = airportOther.Content.DocumentDateValidTo;
             invItem.Notes = airportOther.Content.Notes;

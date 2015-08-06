@@ -7,13 +7,13 @@ namespace Gva.Api.ModelsDO.Persons
     public class PersonDocumentIdDO
     {
         [Required(ErrorMessage = "DocumentType is required.")]
-        public NomValue DocumentType { get; set; }
+        public int? DocumentTypeId { get; set; }
 
         [Required(ErrorMessage = "DocumentNumber is required.")]
         public string DocumentNumber { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
 
         [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }

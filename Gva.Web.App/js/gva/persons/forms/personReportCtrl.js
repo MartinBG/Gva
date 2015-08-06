@@ -2,7 +2,13 @@
 (function (angular, _) {
   'use strict';
 
-  function PersonReportCtrl($scope, Persons, scModal, scMessage, scFormParams) {
+  function PersonReportCtrl(
+    $scope,
+    Persons,
+    PersonDocumentChecks,
+    scModal,
+    scMessage,
+    scFormParams) {
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.isNew = scFormParams.isNew;
     $scope.includedChecks = [];
@@ -70,12 +76,14 @@
           });
 
           modalInstance.result.then(function (newCheck) {
-            var check = newCheck.part;
-            check.person = {lin : person.lin};
-            check.lotId = person.id;
-            check.partIndex = newCheck.partIndex;
-            check.ratingTypes = _.pluck(newCheck.part.ratingTypes, 'code').join(',');
-            $scope.includedChecks.push(check);
+            PersonDocumentChecks.getCheckView({
+              id: person.id,
+              ind: newCheck.partIndex
+            }).$promise
+              .then(function(check) {
+                check.person = {lin : person.lin};
+                $scope.includedChecks.push(check);
+              });
 
             $scope.model.part.includedChecks.push(newCheck.partId);
           });
@@ -155,6 +163,7 @@
   PersonReportCtrl.$inject = [
     '$scope',
     'Persons',
+    'PersonDocumentChecks',
     'scModal',
     'scMessage',
     'scFormParams'

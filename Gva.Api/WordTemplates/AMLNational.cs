@@ -42,8 +42,9 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
-               .FirstOrDefault(a => this.nomRepository.GetNomValue("boolean", a.Content.ValidId.Value).Code == "Y");
+               .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
                new PersonAddressDO() :
                personAddressPart.Content;
@@ -65,7 +66,6 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
-            var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR. AM - {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -81,6 +81,9 @@ namespace Gva.Api.WordTemplates
             var acLimitations = AMLUtils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
             var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition, this.nomRepository) : new object[0];
 
+            var country = Utils.GetCountry(personData, this.nomRepository);
+            var address = Utils.GetAddress(personAddress, this.nomRepository);
+
             var json = new
             {
                 root = new
@@ -94,10 +97,7 @@ namespace Gva.Api.WordTemplates
                         personData.LastNameAlt).ToUpper(),
                     DATE_OF_BIRTH = personData.DateOfBirth,
                     SEX = personData.Sex.Code,
-                    ADDRESS = string.Format(
-                        "{0}, {1}",
-                        personAddress.SettlementId.HasValue ? this.nomRepository.GetNomValue("cities", personAddress.SettlementId.Value).Name : null,
-                        personAddress.Address),
+                    ADDRESS = address.Item2,
                     NATIONALITY = country != null ? country.Name : null,
                     NATIONALITY_EN = country != null ? country.Code : null,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom,
@@ -113,7 +113,7 @@ namespace Gva.Api.WordTemplates
                     DATE_OF_BIRTH1 = string.Format("{0:dd.MM.yyyy} {1}",
                         personData.DateOfBirth,
                         personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null),
-                    ADDR = personAddress.Address,
+                    ADDR = address.Item2,
                     NATIONALITY1 = country != null ? country.Name : null,
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,

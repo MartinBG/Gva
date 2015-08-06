@@ -1,23 +1,23 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.organizations.view.documentOthers.new' }" text="organizations.otherSearch.newOther" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
+<sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="documentDateValidFrom">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.organizations.view.documentOthers.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.documentNumber" title="organizations.otherSearch.documentNumber">
+  <sc-column data="documentNumber" title="organizations.otherSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.documentPersonNumber" title="organizations.otherSearch.documentPersonNumber">
+  <sc-column data="documentPersonNumber" title="organizations.otherSearch.documentPersonNumber">
   </sc-column>
-  <sc-column data="part.documentDateValidFrom" title="organizations.otherSearch.documentDateValidFrom" type="date">
+  <sc-column data="documentDateValidFrom" title="organizations.otherSearch.documentDateValidFrom" type="date">
   </sc-column>
-  <sc-column data="part.documentDateValidTo" title="organizations.otherSearch.documentDateValidTo" type="date">
+  <sc-column data="documentDateValidTo" title="organizations.otherSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="organizations.otherSearch.documentPublisher" class="wrap">>
+  <sc-column data="documentPublisher" title="organizations.otherSearch.documentPublisher" class="wrap">>
   </sc-column>
-  <sc-column data="part.documentType.name" title="organizations.otherSearch.organizationOtherDocumentType" class="wrap">>
+  <sc-column data="documentType.name" title="organizations.otherSearch.organizationOtherDocumentType" class="wrap">>
   </sc-column>
-  <sc-column data="part.documentRole.name" title="organizations.otherSearch.organizationOtherDocumentRole" class="wrap">>
+  <sc-column data="documentRole.name" title="organizations.otherSearch.organizationOtherDocumentRole" class="wrap">>
   </sc-column>
-  <sc-column data="part.notes" title="organizations.otherSearch.notes" visible="false">
+  <sc-column data="notes" title="organizations.otherSearch.notes" visible="false">
   </sc-column>
   <sc-column sortable="false" title="organizations.otherSearch.file" has-content="true">
     <a target="_blank" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}&mimeType={{item.case.file.mimeType}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">

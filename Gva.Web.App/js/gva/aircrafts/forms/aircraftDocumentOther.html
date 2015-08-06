@@ -6,9 +6,9 @@
     <sc-field type="text" ng-model="model.documentPublisher" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.documentPublisher" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentType" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.otherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other'}" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" l10n-text="aircrafts.aircraftOtherDirective.valid" class="col-sm-6 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.otherDocumentType" alias="'documentTypes'" mode="id" params="{ isIdDocument: false }" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.otherDocumentRoleId" alias="'documentRoles'" mode="id" params="{ categoryAlias: 'other'}" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.validId" alias="'boolean'" mode="id" l10n-text="aircrafts.aircraftOtherDirective.valid" class="col-sm-6 col-md-2"></sc-field>
   </div>
   <div class="row">
     <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="aircrafts.aircraftOtherDirective.notes" class="col-sm-10"></sc-field>
