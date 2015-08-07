@@ -104,7 +104,7 @@ namespace Gva.Api.WordTemplates
             var langLevel = includedLangCerts.Where(c => c.LangLevelId.HasValue)
                 .Select(c =>
                     {
-                        string langLevelName = string.Format("{0} {1}", this.nomRepository.GetNomValue("langLevels", c.LangLevelId.Value).Name);
+                        string langLevelName = this.nomRepository.GetNomValue("langLevels", c.LangLevelId.Value).Name;
                         return new
                         {
                             LEVEL = langLevelName,

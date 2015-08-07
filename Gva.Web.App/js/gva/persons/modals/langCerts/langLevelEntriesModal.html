@@ -15,7 +15,7 @@
     <div class="well-sm panel-body">
       <h5 class="form-header form-header-first" l10n-text="persons.langLevelEntriesModal.newLangLevelChange"></h5>
       <div class="row">
-        <sc-field type="nomenclature" ng-model="langLevelModel.langLevel" alias="'langLevels'" params="{ roleAlias: langCert.part.documentRole.alias }" l10n-text="persons.langLevelEntriesModal.langLevel" class="col-sm-4 col-md-3"></sc-field>
+        <sc-field type="nomenclature" ng-model="langLevelModel.langLevel" alias="'langLevels'" params="{ roleId: langCert.part.documentRoleId }" l10n-text="persons.langLevelEntriesModal.langLevel" class="col-sm-4 col-md-3"></sc-field>
         <sc-field type="date" ng-model="langLevelModel.changeDate" l10n-text="persons.langLevelEntriesModal.changeDate" class="col-sm-3 col-md-2"></sc-field>
       </div>
       <h5 class="table-header" l10n-text="persons.langLevelEntriesModal.langLevelEntries"></h5>

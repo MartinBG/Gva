@@ -6,7 +6,7 @@
   <div ng-show="model.case.caseType">
     <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
     <div class="row">
-      <sc-field  ng-if="isNew" type="nomenclature" ng-model="model.part.langLevelId" mode="id" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.newDocumentLangCert.langLevel" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field  ng-if="isNew" type="nomenclature" ng-model="model.part.langLevelId" mode="id" alias="'langLevels'" params="{ roleId: model.part.documentRoleId }" l10n-text="persons.newDocumentLangCert.langLevel" class="col-sm-3 col-md-2"></sc-field>
      
       <sc-field-group  ng-if="!isNew" class="col-sm-3" text="persons.personDocumentLangCertDirective.langLevel">
         <sc-nomenclature alias="'langLevels'" ng-model="model.part.langLevelId" mode="id" ng-readonly="true"></sc-nomenclature>

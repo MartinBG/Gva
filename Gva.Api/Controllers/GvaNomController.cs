@@ -1020,7 +1020,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("langLevels")]
-        public IHttpActionResult GetLangLevels(string roleAlias = null, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetLangLevels(string term = null, int? roleId = null, int offset = 0, int? limit = null)
         {
             var langLevels = this.nomRepository.GetNomValues(
                 alias: "langLevels",
@@ -1028,8 +1028,9 @@ namespace Gva.Api.Controllers
                 offset: offset,
                 limit: limit);
 
-            if (!string.IsNullOrEmpty(roleAlias))
+            if (roleId.HasValue)
             {
+                string roleAlias = this.nomRepository.GetNomValue("documentRoles", roleId.Value).Alias;
                 langLevels = langLevels.Where(l => l.TextContent.GetItems<string>("roleAliases").Contains(roleAlias));
             }
 
