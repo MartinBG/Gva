@@ -121,9 +121,9 @@ namespace Gva.Api.WordTemplates
         {
             var resultArr = includedRatings.Select(r =>
                 {
-                    var ratingTypes = r.RatingTypes.Count() > 0 ? string.Join(", ", r.RatingTypes.Select(rt => rt.Code)) : "";
-                    var ratingClass = r.RatingClass == null ? null : r.RatingClass.Code;
-                    var authorization = r.Authorization == null ? null : r.Authorization.Code;
+                    var ratingTypes = r.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", r.RatingTypes.ToArray()).Select(rt => rt.Code)) : "";
+                    var ratingClass = r.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", r.RatingClassId.Value).Code : null;
+                    var authorization = r.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", r.AuthorizationId.Value).Code : null;
 
                     return string.Format(
                         "{0} {1} {2}",

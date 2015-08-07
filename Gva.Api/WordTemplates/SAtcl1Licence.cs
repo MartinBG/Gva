@@ -219,12 +219,13 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
-                    if (otherEndorsementCodes.Any(oe => rating.Content.Authorization.Code.Contains(oe)))
+                    NomValue authorization = this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value);
+                    if (otherEndorsementCodes.Any(oe => authorization.Code.Contains(oe)))
                     {
                         string name = otherEndorsementCodes
-                            .Where(oe => rating.Content.Authorization.Code.Contains(oe))
+                            .Where(oe => authorization.Code.Contains(oe))
                             .First();
 
                         var lastRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
@@ -249,7 +250,7 @@ namespace Gva.Api.WordTemplates
 
                         endorsments.Add(new
                         {
-                            NAME = rating.Content.Authorization.Code,
+                            NAME = authorization != null ? authorization.Code : null,
                             DATE = firstRatingEdition.Content.DocumentDateValidFrom
                         });
                     }
@@ -274,11 +275,11 @@ namespace Gva.Api.WordTemplates
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var result = includedRatings
-                .Where(r => r.Content.RatingClass != null || r.Content.RatingTypes.Count() > 0)
+                .Where(r => r.Content.RatingClassId.HasValue || r.Content.RatingTypes.Count() > 0)
                 .GroupBy(r => string.Format(
                     "{0} {1}",
-                    r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Code,
-                    r.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", r.Content.RatingTypes.Select(rt => rt.Code))).Trim())
+                    r.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", r.Content.RatingClassId.Value).Code : string.Empty,
+                    r.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", r.Content.RatingTypes.ToArray()).Select(rt => rt.Code))).Trim())
                 .Select(g =>
                 {
                     var rating = g.Select(r => r.Part).First();
@@ -309,7 +310,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                var authorization = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null;
                 string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
 
                 if (!includeOtherEndorsements && authorization != null)
@@ -325,16 +326,16 @@ namespace Gva.Api.WordTemplates
                     .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
                     .OrderByDescending(epv => epv.Content.Index)
                     .Last();
-                var ratingTypes = rating.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code));
-                var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-
+                var ratingTypes = rating.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code));
+                var ratingClass = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null;
 
                 object result = null;
                 if (withIssueDate)
                 {
                     result = new
                     {
-                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
+
+                        ICAO = rating.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", rating.Content.LocationIndicatorId.Value).Code : null,
                         SECTOR = sector,
                         AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :

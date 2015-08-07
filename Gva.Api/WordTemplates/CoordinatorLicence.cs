@@ -137,7 +137,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.TextContent.Get<string>("codeCA")),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 3),
+                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository, this.nomRepository), 3),
                     T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress, this.nomRepository),
                     T_LICENCE_CODE = licenceCaCode,
                     T_LICENCE_NO = licenceNumber,
@@ -230,9 +230,9 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
-                var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "";
+                var ratingClass = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null;
+                var authorization = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null;
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                         .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
@@ -241,7 +241,7 @@ namespace Gva.Api.WordTemplates
 
                 ratingEditions.Add(new
                 {
-                    ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
+                    ICAO = rating.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", rating.Content.LocationIndicatorId.Value).Code : null,
                     SECTOR = rating.Content.Sector,
                     AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                         authorization :

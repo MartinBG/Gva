@@ -12,15 +12,20 @@ using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Projections.Person
 {
     public class PersonRatingEditionProjection : Projection<GvaViewPersonRatingEdition>
     {
+        private INomRepository nomRepository;
+
         public PersonRatingEditionProjection(
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            INomRepository nomRepository)
             : base(unitOfWork, "Person")
         {
+            this.nomRepository = nomRepository;
         }
 
         public override IEnumerable<GvaViewPersonRatingEdition> Execute(PartCollection parts)
@@ -37,8 +42,8 @@ namespace Gva.Api.Projections.Person
             edition.PartId = licenceEdition.Part.PartId;
             edition.PartIndex = licenceEdition.Part.Index;
             edition.RatingPartIndex = licenceEdition.Content.RatingPartIndex.Value;
-            edition.RatingSubClasses = licenceEdition.Content.RatingSubClasses.Count > 0 ? string.Join(", ", licenceEdition.Content.RatingSubClasses.Select(t => t.Code)) : null;
-            edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(GvaConstants.ConcatenatingExp, licenceEdition.Content.Limitations.Select(t => t.Code)) : null;
+            edition.RatingSubClasses = licenceEdition.Content.RatingSubClasses.Count > 0 ? string.Join(",", this.nomRepository.GetNomValues("ratingSubClasses", licenceEdition.Content.RatingSubClasses.ToArray()).Select(s => s.Code)) : string.Empty;
+            edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(GvaConstants.ConcatenatingExp, this.nomRepository.GetNomValues("limitations66", licenceEdition.Content.Limitations.ToArray()).Select(t => t.Code)) : null;
 
             if (licenceEdition.Content.DocumentDateValidTo.HasValue)
             {

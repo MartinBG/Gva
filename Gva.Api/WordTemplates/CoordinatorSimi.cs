@@ -128,7 +128,7 @@ namespace Gva.Api.WordTemplates
                 .ToList<object>();
             }
 
-            var endorsements = Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository);
+            var endorsements = Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository, this.nomRepository);
             var tEndorsements = this.GetTEndorsements(includedRatings, ratingEditions);
             var lEndorsements = this.GetLEndorsements(includedRatings, ratingEditions, langLevels);
 
@@ -227,7 +227,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
                     var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
@@ -237,8 +237,8 @@ namespace Gva.Api.WordTemplates
 
                     endosments.Add(new
                     {
-                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
-                        AUTH = rating.Content.Authorization.Code,
+                        ICAO = rating.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", rating.Content.LocationIndicatorId.Value).Code : null,
+                        AUTH = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null,
                         SECTOR = rating.Content.Sector,
                         ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
@@ -259,12 +259,12 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
                     endorsements.Add(new
                     {
-                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
-                        AUTH = rating.Content.Authorization.Code,
+                        ICAO = rating.Content.LocationIndicatorId.HasValue ? this.nomRepository.GetNomValue("locationIndicators", rating.Content.LocationIndicatorId.Value).Code : null,
+                        AUTH = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null,
                         SECTOR = rating.Content.Sector,
                         VALID_DATE = edition.Content.DocumentDateValidTo.HasValue ? edition.Content.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                     });

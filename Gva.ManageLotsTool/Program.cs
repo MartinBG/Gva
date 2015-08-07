@@ -31,6 +31,8 @@ namespace Gva.ManageLotsTool
             using (SqlConnection connection = new SqlConnection(connStr))
             {
                 connection.Open();
+                ConvertModel<PersonRatingDO_Old, PersonRatingDO>("ratings", connection);
+                ConvertModel<PersonRatingEditionDO_Old, PersonRatingEditionDO>("ratingEditions", connection);
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
                 ConvertModel<PersonLicenceDO_Old, PersonLicenceDO>("licences", connection);
                 ConvertModel<PersonAddressDO_Old, PersonAddressDO>("personAddresses", connection);

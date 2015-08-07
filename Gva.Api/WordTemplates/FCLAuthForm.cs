@@ -133,18 +133,18 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                 NomValue authorization = rating.Content.Authorization != null ? nomRepository.GetNomValue(rating.Content.Authorization.NomValueId) : null;
+                NomValue authorization = rating.Content.AuthorizationId.HasValue ? nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value) : null;
                  if (authorization == null ||
                      (authorization.Code != "RTO" &&
                      (authorization.ParentValueId.HasValue ? (authorization.Code != "FC" && authorization.Code != "FT") : true)))
                  {
                      ratings.Add(new
                      {
-                         CLASS_TYPE = rating.Content.AircraftTypeGroup != null ? rating.Content.AircraftTypeGroup.Code :
+                         CLASS_TYPE = rating.Content.AircraftTypeGroupId.HasValue ? nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Code :
                              string.Format(
                                  "{0} {1}",
-                                 rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                                 rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
+                                 rating.Content.RatingClassId.HasValue ? nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                                 rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
                          DATE = edition.Content.DocumentDateValidTo
                      });
                  }

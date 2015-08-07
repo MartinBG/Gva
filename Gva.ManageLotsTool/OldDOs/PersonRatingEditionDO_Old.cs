@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonRatingEditionDO
+    public class PersonRatingEditionDO_Old
     {
-        public PersonRatingEditionDO()
+        public PersonRatingEditionDO_Old()
         {
-            this.RatingSubClasses = new List<int>();
-            this.Limitations = new List<int>();
+            this.RatingSubClasses = new List<NomValue>();
+            this.Limitations = new List<NomValue>();
         }
 
         public int Index { get; set; }
 
         public int? RatingPartIndex { get; set; }
 
-        public List<int> RatingSubClasses { get; set; }
+        public List<NomValue> RatingSubClasses { get; set; }
 
-        public List<int> Limitations { get; set; }
+        public List<NomValue> Limitations { get; set; }
 
         [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public int? InspectorId { get; set; }
+        public NomValue Inspector { get; set; }
 
-        public int? ExaminerId { get; set; }
+        public NomValue Examiner { get; set; }
 
         public string Notes { get; set; }
 

@@ -117,20 +117,20 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                 NomValue authorization = rating.Content.Authorization != null ? nomRepository.GetNomValue(rating.Content.Authorization.NomValueId) : null;
+                 NomValue authorization = rating.Content.AuthorizationId.HasValue ? nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value) : null;
                  if (authorization == null ||
                      (authorization.Code != "RTO" &&
                      (authorization.ParentValueId.HasValue ? (authorization.Code != "FC" && authorization.Code != "FT") : true)))
                  {
                      ratings.Add(new
                      {
-                         CLASS_TYPE = rating.Content.AircraftTypeGroup != null ? rating.Content.AircraftTypeGroup.Code :
+                         CLASS_TYPE = rating.Content.AircraftTypeGroupId.HasValue ? this.nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Code :
                              string.Format(
                                  "{0} {1}",
-                                 rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                                 rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
-                         CATEGORY = rating.Content.AircraftTypeCategory.Code,
-                         LIMITATION = edition.Content.Limitations.Count() > 0 ? string.Join(", ", edition.Content.Limitations.Select(l => l.Code)) : null,
+                                 rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                                 rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
+                         CATEGORY = rating.Content.AircraftTypeCategoryId.HasValue ? this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value).Code : string.Empty,
+                         LIMITATION = edition.Content.Limitations.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(l => l.Code)) : null,
                          DATE = edition.Content.DocumentDateValidFrom
                      });
                  }

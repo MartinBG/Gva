@@ -507,11 +507,11 @@ namespace Gva.Api.WordTemplates
                 {
                     TYPE = string.Format(
                         "{0} {1}",
-                        rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
+                        rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
                     AUTH_NOTES = string.Format(
                         "{0} {1}",
-                        rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
+                        rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : string.Empty,
                         edition.Content.Notes).Trim(),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
@@ -537,9 +537,9 @@ namespace Gva.Api.WordTemplates
                 {
                     TYPE = string.Format(
                         "{0} {1}",
-                        rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
-                    AUTH = rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
+                        rating.Content.RatingClassId.HasValue ? string.Empty : this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code,
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
+                    AUTH = rating.Content.AuthorizationId.HasValue? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : string.Empty,
                     NOTES = edition.Content.Notes,
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo

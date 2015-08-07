@@ -246,15 +246,16 @@ namespace Gva.Api.WordTemplates
         internal static List<object> GetRatings(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> editions,
-            ILotRepository lotRepository)
+            ILotRepository lotRepository,
+            INomRepository nomRepository)
         {
             List<object> ratingEditions = new List<object>();
             foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
-                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ",  nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "";
+                var ratingClassName = rating.Content.RatingClassId.HasValue ?  nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null;
+                var authorizationCode = rating.Content.AuthorizationId.HasValue ? nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null;
                 var firstRatingEdition = lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                         .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
@@ -295,13 +296,14 @@ namespace Gva.Api.WordTemplates
         internal static List<object> GetEndorsements(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            ILotRepository lotRepository)
+            ILotRepository lotRepository,
+            INomRepository nomRepository)
         {
             List<object> endorsments = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
                     var firstRatingEdition = lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
@@ -311,7 +313,7 @@ namespace Gva.Api.WordTemplates
 
                     endorsments.Add(new
                     {
-                        NAME = rating.Content.Authorization.Code,
+                        NAME = nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code,
                         DATE = firstRatingEdition.Content.DocumentDateValidFrom.Value
                     });
                 }

@@ -8,27 +8,27 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public PersonRatingDO()
         {
-            RatingTypes = new List<NomValue>();
+            RatingTypes = new List<int>();
         }
 
         public int? NextIndex { get; set; }
 
-        public NomValue PersonRatingLevel { get; set; }
+        public int? PersonRatingLevelId { get; set; }
 
-        public NomValue RatingClass { get; set; }
+        public int? RatingClassId { get; set; }
 
-        public List<NomValue> RatingTypes { get; set; }
+        public List<int> RatingTypes { get; set; }
 
-        public NomValue Authorization { get; set; }
+        public int? AuthorizationId { get; set; }
 
-        public NomValue LocationIndicator { get; set; }
+        public int? LocationIndicatorId { get; set; }
 
         public string Sector { get; set; }
 
-        public NomValue AircraftTypeGroup { get; set; }
+        public int? AircraftTypeGroupId { get; set; }
 
-        public NomValue AircraftTypeCategory { get; set; }
+        public int? AircraftTypeCategoryId { get; set; }
 
-        public NomValue Caa { get; set; }
+        public int? CaaId { get; set; }
     }
 }

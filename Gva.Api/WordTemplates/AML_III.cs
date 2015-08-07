@@ -179,15 +179,15 @@ namespace Gva.Api.WordTemplates
             List<object> results = new List<object>();
             foreach (var group66 in aircraftGroups66)
             {
-                IEnumerable<int> categoriesIds = includedRatings
-                    .Where(rating => rating.Content.AircraftTypeCategory != null &&
-                        (rating.Content.AircraftTypeCategory.ParentValueId == group66.NomValueId 
-                        || (rating.Content.AircraftTypeCategory.Code =="C 1" && group66.Code == "9")
-                        || (rating.Content.AircraftTypeCategory.Code == "C 2" && group66.Code == "10")))
-                    .Select(rating => rating.Content.AircraftTypeCategory.NomValueId);
+                IEnumerable<NomValue> categoryNoms = includedRatings.Where(r => r.Content.AircraftTypeCategoryId.HasValue)
+                    .Select(r => this.nomRepository.GetNomValue("aircraftClases66", r.Content.AircraftTypeCategoryId.Value));
 
-                IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
-                IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
+                IEnumerable<string> aliases = categoryNoms
+                    .Where(category =>
+                        category.ParentValueId == group66.NomValueId ||
+                        (category.Code == "C 1" && group66.Code == "9") ||
+                        (category.Code == "C 2" && group66.Code == "10"))
+                        .Select(category => category.TextContent.Get<string>("alias"));
 
                 results.Add(new
                 {

@@ -269,9 +269,9 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
-                var ratingClassCodes = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "";
+                var ratingClassCodes = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null;
+                var authorizationCode = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null;
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                         .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
@@ -313,8 +313,8 @@ namespace Gva.Api.WordTemplates
                     SCHOOL = edition.Content.Notes,
                     TYPE = string.Format(
                         "{0} {1}",
-                        rating.Content.RatingClass != null ? rating.Content.RatingClass.Name : "",
-                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : ""),
+                        rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Name : "",
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : ""),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });

@@ -162,12 +162,12 @@ namespace Gva.Api.WordTemplates
             List<object> results = new List<object>();
             foreach (var group66 in aircraftGroups66)
             {
-                IEnumerable<int> categoriesIds = includedRatings
-                    .Where(rating => rating.Content.AircraftTypeCategory != null && rating.Content.AircraftTypeCategory.ParentValueId == group66.NomValueId)
-                    .Select(rating => rating.Content.AircraftTypeCategory.NomValueId);
+                IEnumerable<NomValue> categoryNoms = includedRatings.Where(r => r.Content.AircraftTypeCategoryId.HasValue)
+                   .Select(r => this.nomRepository.GetNomValue("aircraftClases66", r.Content.AircraftTypeCategoryId.Value));
 
-                IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
-                IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
+                IEnumerable<string> aliases = categoryNoms
+                    .Where(category => category.ParentValueId == group66.NomValueId)
+                        .Select(category => category.TextContent.Get<string>("alias"));
 
                 if (group66.NameAlt != "Reserved")
                 {

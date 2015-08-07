@@ -59,7 +59,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonRatingDO rating = new PersonRatingDO()
             {
-                Caa = this.nomRepository.GetNomValue("caa", "BGR")
+                CaaId = this.nomRepository.GetNomValue("caa", "BGR").NomValueId
             };
 
             CaseDO caseDO = null;
@@ -192,13 +192,13 @@ namespace Gva.Api.Controllers.Persons
             var predicate = PredicateBuilder.True<GvaViewPersonRating>()
                 .And(r => r.LotId == lotId)
                 .AndEquals(r => rating.Sector, rating.Sector)
-                .AndEquals(r => r.RatingClassId, rating.RatingClass != null ? rating.RatingClass.NomValueId : (int?)null)
-                .AndEquals(r => r.AuthorizationId, rating.Authorization != null ? rating.Authorization.NomValueId : (int?)null)
-                .AndEquals(r => r.AircraftTypeGroupId, rating.AircraftTypeGroup != null ? rating.AircraftTypeGroup.NomValueId : (int?)null)
-                .AndEquals(r => r.AircraftTypeCategoryId, rating.AircraftTypeCategory != null ? rating.AircraftTypeCategory.NomValueId : (int?)null)
-                .AndEquals(r => r.CaaId, rating.Caa != null ? rating.Caa.NomValueId : (int?)null);
+                .AndEquals(r => r.RatingClassId, rating.RatingClassId)
+                .AndEquals(r => r.AuthorizationId, rating.AuthorizationId)
+                .AndEquals(r => r.AircraftTypeGroupId, rating.AircraftTypeGroupId)
+                .AndEquals(r => r.AircraftTypeCategoryId, rating.AircraftTypeCategoryId)
+                .AndEquals(r => r.CaaId, rating.CaaId);
 
-            string types = string.Join(", ", rating.RatingTypes.OrderBy(r => r.NomValueId).Select(r => r.Code));
+            string types = string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.RatingTypes.ToArray()).Select(r => r.Code));
             predicate = predicate.AndEquals(r => r.RatingTypes, types);
 
             if (ratingPartIndex.HasValue)

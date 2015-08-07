@@ -84,14 +84,14 @@ namespace Gva.Api.Projections.Person
             List<string> ratings = new List<string>();
             foreach (var rating in personRatings)
             {
-                if (rating.Content.AircraftTypeCategory != null)
+                if (rating.Content.AircraftTypeCategoryId.HasValue)
                 {
-                    ratings.Add(rating.Content.AircraftTypeCategory.Code);
+                    ratings.Add(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value).Code);
                 }
-                else { 
-                    var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(s => s.Code)) : null;
-                    var ratingClass = rating.Content.RatingClass != null ? rating.Content.RatingClass.Code : null;
-                    var authorization = rating.Content.Authorization != null ? rating.Content.Authorization.Code : null;
+                else {
+                    var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(s => s.Code)) : null;
+                    var ratingClass = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty;
+                    var authorization = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null;
 
                     var ratingData = (ratingTypes ?? ratingClass) + (authorization != null ? "/" + authorization : string.Empty);
                     if (!string.IsNullOrEmpty(ratingData))

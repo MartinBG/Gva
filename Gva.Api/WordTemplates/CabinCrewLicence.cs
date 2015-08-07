@@ -127,7 +127,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository);
+            var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository, this.nomRepository);
 
             string licenceAction = lastEdition.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", lastEdition.LicenceActionId.Value).Name.ToUpper() : null;
 

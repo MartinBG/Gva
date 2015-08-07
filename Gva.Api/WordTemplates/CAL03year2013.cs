@@ -59,7 +59,7 @@ namespace Gva.Api.WordTemplates
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
 
-            var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository);
+            var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository, this.nomRepository);
             var placeOfBirth = personData.PlaceOfBirth;
             NomValue country = null;
             NomValue nationality = null;

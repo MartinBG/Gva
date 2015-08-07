@@ -41,15 +41,15 @@ namespace Gva.Api.Projections.Person
             rating.LotId = personRating.Part.Lot.LotId;
             rating.PartId = personRating.Part.PartId;
             rating.PartIndex = personRating.Part.Index;
-            rating.LocationIndicatorId = personRating.Content.LocationIndicator != null ? personRating.Content.LocationIndicator.NomValueId : (int?)null;
-            rating.RatingTypes = personRating.Content.RatingTypes.Count() > 0 ? string.Join(", ", personRating.Content.RatingTypes.Select(t => t.Code)) : null;
-            rating.RatingLevelId = personRating.Content.PersonRatingLevel != null ?  personRating.Content.PersonRatingLevel.NomValueId : (int?)null;
-            rating.RatingClassId = personRating.Content.RatingClass != null ? personRating.Content.RatingClass.NomValueId : (int?)null;
-            rating.AircraftTypeGroupId = personRating.Content.AircraftTypeGroup != null ? personRating.Content.AircraftTypeGroup.NomValueId : (int?)null;
-            rating.AuthorizationId = personRating.Content.Authorization != null ? personRating.Content.Authorization.NomValueId : (int?)null;
+            rating.LocationIndicatorId = personRating.Content.LocationIndicatorId;
+            rating.RatingTypes = personRating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", personRating.Content.RatingTypes.ToArray()).Select(t => t.Code)) : null;
+            rating.RatingLevelId = personRating.Content.PersonRatingLevelId;
+            rating.RatingClassId = personRating.Content.RatingClassId;
+            rating.AircraftTypeGroupId = personRating.Content.AircraftTypeGroupId;
+            rating.AuthorizationId = personRating.Content.AuthorizationId;
             rating.Sector = personRating.Content.Sector;
-            rating.CaaId = personRating.Content.Caa != null ? personRating.Content.Caa.NomValueId : (int?)null;
-            rating.AircraftTypeCategoryId = personRating.Content.AircraftTypeCategory != null ? personRating.Content.AircraftTypeCategory.NomValueId : (int?)null;
+            rating.CaaId = personRating.Content.CaaId;
+            rating.AircraftTypeCategoryId = personRating.Content.AircraftTypeCategoryId;
 
             return rating;
         }

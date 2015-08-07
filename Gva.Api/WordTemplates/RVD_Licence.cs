@@ -258,11 +258,11 @@ namespace Gva.Api.WordTemplates
 
                     classes.Add(new
                     {
-                        LEVEL = rating.Content.PersonRatingLevel == null ? null : rating.Content.PersonRatingLevel.Code,
-                        RATING = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code,
-                        SUBRATING = edition.Content.RatingSubClasses.Count > 0 ? string.Join(",", edition.Content.RatingSubClasses.Select(s => s.Code)) : string.Empty,
-                        LICENCE = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code,
-                        LIMITATION = edition.Content.Limitations.Count > 0 ? string.Join(",", edition.Content.Limitations.Select(s => s.Name)) : string.Empty,
+                        LEVEL = rating.Content.PersonRatingLevelId.HasValue ? this.nomRepository.GetNomValue("", rating.Content.PersonRatingLevelId.Value).Code : null,
+                        RATING = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null,
+                        SUBRATING = edition.Content.RatingSubClasses.Count > 0 ? string.Join(",", this.nomRepository.GetNomValues("ratingSubClasses", edition.Content.RatingSubClasses.ToArray()).Select(s => s.Code)) : string.Empty,
+                        LICENCE = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null,
+                        LIMITATION = edition.Content.Limitations.Count > 0 ? string.Join(",", this.nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(s => s.Name)) : string.Empty,
                         ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     });

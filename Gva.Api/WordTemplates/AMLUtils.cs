@@ -25,31 +25,32 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    edition.Content.Limitations != null && edition.Content.Limitations.Count > 0)
+                if (rating.Content.AircraftTypeGroupId.HasValue &&
+                    rating.Content.AircraftTypeCategoryId.HasValue &&
+                    edition.Content.Limitations != null &&
+                    edition.Content.Limitations.Count > 0)
                 {
-                    var firstRatingEdition = lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    string category = null;
-                    if (rating.Content.AircraftTypeCategory != null)
+                    NomValue categoryNom = nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value);
+                    NomValue categoryGroup = nomRepository.GetNomValue("aircraftGroup66", categoryNom.ParentValueId.Value);
+                    if (validCodes.Contains(categoryGroup.Code) &&
+                        validAliases.Contains(categoryNom.TextContent.Get<string>("alias")))
                     {
-                        category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
+
+                        var firstRatingEdition = lotRepository.GetLotIndex(rating.Part.LotId)
+                            .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                            .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                            .OrderByDescending(epv => epv.Content.Index)
+                            .Last();
+
+                        categories.Add(new
+                        {
+                            TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Name,
+                            CAT = categoryNom.Code.Contains("C") ? "C" : categoryNom.Code,
+                            DATE_FROM = firstRatingEdition.Content.DocumentDateValidFrom,
+                            DATE_TO = edition.Content.DocumentDateValidTo,
+                            LIMIT = string.Join(",", nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(l => l.Name))
+                        });
                     }
-
-                    categories.Add(new
-                    {
-                        TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
-                        CAT = category,
-                        DATE_FROM = firstRatingEdition.Content.DocumentDateValidFrom,
-                        DATE_TO = edition.Content.DocumentDateValidTo,
-                        LIMIT = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
                 }
             }
 
@@ -67,22 +68,25 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
+                NomValue aircraftTypeCategory = rating.Content.AircraftTypeCategoryId.HasValue ? nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value) : null;
+                
+                if (rating.Content.AircraftTypeGroupId.HasValue && aircraftTypeCategory != null &&
+                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", aircraftTypeCategory.ParentValueId.Value).Code) &&
+                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value).TextContent.Get<string>("alias")) &&
                     (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
                 {
                     string category = null;
-                    if (rating.Content.AircraftTypeCategory != null)
+                    if (rating.Content.AircraftTypeCategoryId.HasValue)
                     {
-                        category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
+                        NomValue categoryNom = nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value);
+                        category = categoryNom.Code.Contains("C") ? "C" : categoryNom.Code;
                     }
 
                     acLimitations.Add(new
                     {
-                        AIRCRAFT = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
+                        AIRCRAFT = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Name,
                         CAT = category,
-                        LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
+                        LIM = string.Join(",", nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(l => l.Name))
                     });
                 }
             }
@@ -100,19 +104,20 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeCategory != null && edition.Content.Limitations.Count == 0)
+                if (rating.Content.AircraftTypeCategoryId.HasValue && edition.Content.Limitations.Count == 0)
                 {
                     var firstRatingEdition = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                         .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
                         .OrderByDescending(epv => epv.Content.Index)
                         .Last();
 
-                    string category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
-
+                    NomValue categoryNom = nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value);
+                    string category = categoryNom.Code.Contains("C") ? "C" : categoryNom.Code;
+                    var acType = rating.Content.AircraftTypeGroupId.HasValue ? nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Name : null;
 
                     aircrafts.Add(new
                     {
-                        AC_TYPE = rating.Content.AircraftTypeGroup != null ? nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name : null,
+                        AC_TYPE = acType,
                         CATEGORY = category,
                         DATE = firstRatingEdition.Content.DocumentDateValidFrom
                     });
@@ -134,30 +139,28 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
+                if (rating.Content.AircraftTypeGroupId.HasValue && rating.Content.AircraftTypeCategoryId.HasValue)
                 {
-                    var firstRatingEdition = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    string category = null;
-                    if(rating.Content.AircraftTypeCategory != null)
+                    NomValue categoryNom = nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value);
+                    NomValue categoryGroup = nomRepository.GetNomValue("aircraftGroup66", categoryNom.ParentValueId.Value);
+                    if(validCodes.Contains(categoryGroup.Code) &&
+                        validAliases.Contains(categoryNom.TextContent.Get<string>("alias")))
                     {
-                        category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
+                        var firstRatingEdition = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                            .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                            .OrderByDescending(epv => epv.Content.Index)
+                            .Last();
+
+                        categories.Add(new
+                        {
+                            TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Name,
+                            CAT = categoryNom.Code.Contains("C") ? "C" : categoryNom.Code,
+                            DATE = firstRatingEdition.Content.DocumentDateValidFrom,
+                            LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
+                                string.Join(",", nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(l => l.Name)) :
+                                ""
+                        });
                     }
-
-                    categories.Add(new
-                    {
-                        TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
-                        CAT = category,
-                        DATE = firstRatingEdition.Content.DocumentDateValidFrom,
-                        LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
-                            string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                            ""
-                    });
                 }
             }
 

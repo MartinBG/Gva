@@ -52,9 +52,9 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
-                    NomValue authorization = nomRepository.GetNomValue(rating.Content.Authorization.NomValueId);
+                    NomValue authorization = nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value);
                     if (authorization.ParentValueId != null &&
                         authorizationGroup.NomValueId == authorization.ParentValueId.Value &&
                         authorization.Code != "RTO")
@@ -64,8 +64,8 @@ namespace Gva.Api.WordTemplates
                             EXAMINER = authorization.Code,
                             CLASS_TYPE = string.Format(
                                 "{0} {1}",
-                                rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                                rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : ""),
+                                rating.Content.RatingClassId.HasValue ? nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                                rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : ""),
                             DATE = edition.Content.DocumentDateValidTo
                         });
 

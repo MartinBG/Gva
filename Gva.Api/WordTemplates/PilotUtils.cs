@@ -23,7 +23,7 @@ namespace Gva.Api.WordTemplates
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
 
-                NomValue authorization = rating.Content.Authorization != null ? nomRepository.GetNomValue(rating.Content.Authorization.NomValueId) : null;
+                NomValue authorization = rating.Content.AuthorizationId.HasValue ? nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value) : null;
                 if (authorization == null ||
                     (authorization.Code != "RTO" &&
                     (authorization.ParentValueId.HasValue ? !authorizationGroupIds.Contains(authorization.ParentValueId.Value) : true)))
@@ -32,8 +32,8 @@ namespace Gva.Api.WordTemplates
                     {
                         TYPE = string.Format(
                             "{0} {1}",
-                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                            rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
+                            rating.Content.RatingClassId.HasValue ? nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                            rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
                         AUTH_NOTES = string.Format(
                             "{0} {1}",
                             authorization == null ? string.Empty : authorization.Code,
@@ -56,9 +56,9 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null)
+                if (rating.Content.AuthorizationId.HasValue)
                 {
-                    NomValue authorization = nomRepository.GetNomValue(rating.Content.Authorization.NomValueId);
+                    NomValue authorization = nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value);
                     if (authorization.ParentValueId != null &&
                         authorizationGroup.NomValueId == authorization.ParentValueId.Value &&
                         authorization.Code != "RTO")
@@ -67,8 +67,8 @@ namespace Gva.Api.WordTemplates
                         {
                             TYPE = string.Format(
                                 "{0} {1} {2}",
-                                rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
-                                rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "",
+                                rating.Content.RatingClassId.HasValue ? nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Name : string.Empty,
+                                rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "",
                                 authorization == null ? string.Empty : authorization.Code).Trim(),
                             AUTH_NOTES = string.Format("{0}", edition.Content.NotesAlt).Trim(),
                             VALID_DATE = edition.Content.DocumentDateValidTo
@@ -120,15 +120,16 @@ namespace Gva.Api.WordTemplates
 
         internal static PersonRatingEditionDO GetRtoRating(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
-            IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+            IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
+            INomRepository nomRepository)
         {
-            var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.Authorization != null && r.Content.Authorization.Code == "RTO");
+            var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.AuthorizationId.HasValue && nomRepository.GetNomValue("authorizations", r.Content.AuthorizationId.Value).Code == "RTO");
 
             List<PersonRatingEditionDO> rtoRatings = new List<PersonRatingEditionDO>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null && rating.Content.Authorization.Code == "RTO")
+                if (rating.Content.AuthorizationId.HasValue && nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code == "RTO")
                 {
                     rtoRatings.Add(edition.Content);
                 }

@@ -54,8 +54,8 @@ namespace Gva.Api.WordTemplates
             List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
             List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6", "7" };
             var acLimitations = this.GetACLimitations(includedRating, ratingEdition, validAliases, validCodes);
-            var engineType = includedRating.Content.AircraftTypeGroup != null ? includedRating.Content.AircraftTypeGroup.Code : null;
-            var category = includedRating.Content.AircraftTypeCategory != null ? includedRating.Content.AircraftTypeCategory.Code : null;
+            var engineType = includedRating.Content.AircraftTypeGroupId.HasValue ? this.nomRepository.GetNomValue("aircraftTypeGroups", includedRating.Content.AircraftTypeGroupId.Value).Code : null;
+            var category = includedRating.Content.AircraftTypeCategoryId.HasValue ? this.nomRepository.GetNomValue("aircraftClases66", includedRating.Content.AircraftTypeCategoryId.Value).Code : null;
 
             var json = new
             {
@@ -89,23 +89,20 @@ namespace Gva.Api.WordTemplates
         {
             List<object> acLimitations = new List<object>();
 
-            if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
+            if (rating.Content.AircraftTypeGroupId.HasValue && rating.Content.AircraftTypeCategoryId.HasValue &&
                 (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
             {
-                string category = null;
-                if (rating.Content.AircraftTypeCategory != null)
+                var aircraftTypeCategory = this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategoryId.Value);
+                if (validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", aircraftTypeCategory.ParentValueId.Value).Code) &&
+                validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", aircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
                 {
-                    category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
+                    acLimitations.Add(new
+                    {
+                        AIRCRAFT = this.nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroupId.Value).Name,
+                        CAT = aircraftTypeCategory.Code.Contains("C") ? "C" : aircraftTypeCategory.Code,
+                        LIM = string.Join(",", this.nomRepository.GetNomValues("limitations66", edition.Content.Limitations.ToArray()).Select(l => l.Name))
+                    });
                 }
-
-                acLimitations.Add(new
-                {
-                    AIRCRAFT = this.nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
-                    CAT = category,
-                    LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                });
             }
             
             return acLimitations.ToArray();

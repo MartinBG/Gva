@@ -88,7 +88,7 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
-            var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
+            var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions, this.nomRepository);
             var langCerts = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts, this.nomRepository), 1);
 
             List<int> authorizationGroupIds = nomRepository.GetNomValues("authorizationGroups")
