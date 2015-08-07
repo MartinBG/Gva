@@ -18,14 +18,17 @@ using Gva.ManageLotsTool.OldDOs;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Organizations;
+using System.Configuration;
 
 namespace Gva.ManageLotsTool
 {
     class Program
     {
+        private static string connStr = ConfigurationManager.ConnectionStrings["Gva"].ConnectionString;
+
         static void Main(string[] args)
         {
-            using (SqlConnection connection = new SqlConnection("Data Source=.\\;Initial Catalog=Gva;Integrated Security=True;MultipleActiveResultSets=True"))
+            using (SqlConnection connection = new SqlConnection(connStr))
             {
                 connection.Open();
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);

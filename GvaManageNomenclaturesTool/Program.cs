@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Gva.Api.CommonUtils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GvaManageNomenclaturesTool
+namespace Gva.ManageNomenclaturesTool
 {
     class Program
     {
+        private static string connStr = ConfigurationManager.ConnectionStrings["Gva"].ConnectionString;
+
         static void Main(string[] args)
         {
-            using (SqlConnection connection = new SqlConnection("Data Source=.\\;Initial Catalog=Gva;Integrated Security=True;MultipleActiveResultSets=True"))
+           
+            using (SqlConnection connection = new SqlConnection(connStr))
             {
                 connection.Open();
                 UpdateNomenclature("documentRoles", "caseTypeAlias", "caseTypeAliases", connection);
