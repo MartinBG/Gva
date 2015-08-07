@@ -18,7 +18,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int? EmploymentId { get; set; }
 
-        [Required(ErrorMessage = "Publisher is required.")]
         public int? PublisherId { get; set; }
 
         public int? ValidId { get; set; }
