@@ -26,7 +26,8 @@
           .$promise
           .then(function (licenceType) {
             $scope.isFcl = licenceType.code.indexOf('FCL') >= 0 || 
-              licenceType.code === 'BG CCA';
+              licenceType.code === 'BG CCA' ||
+              licenceType.code === 'NPPM';
           });
       }
     });

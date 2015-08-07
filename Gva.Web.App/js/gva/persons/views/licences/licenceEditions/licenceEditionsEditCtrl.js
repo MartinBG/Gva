@@ -24,7 +24,8 @@
     $scope.licence = licence;
     $scope.licenceTypeCode = licence.licenceType.code;
     $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 || 
-      $scope.licenceTypeCode === 'BG CCA';
+      $scope.licenceTypeCode === 'BG CCA' ||
+      $scope.licenceTypeCode === 'NPPM';
     $scope.$watch('newLicence.part.licenceTypeId', function () {
       if ($scope.newLicence && $scope.newLicence.part.licenceTypeId) {
         Nomenclatures.get({
@@ -35,7 +36,8 @@
           .then(function (licenceType) {
             $scope.licenceTypeCode = licenceType.code;
             $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 || 
-              $scope.licenceTypeCode === 'BG CCA';
+              $scope.licenceTypeCode === 'BG CCA' ||
+              $scope.licenceTypeCode === 'NPPM';
           });
       }
     });

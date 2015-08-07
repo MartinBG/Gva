@@ -18,7 +18,8 @@
     $scope.licence = licence;
     var licenceTypeCode = $scope.licence.licenceType.code;
     $scope.isFcl = licenceTypeCode.indexOf('FCL') >= 0 ||
-        licenceTypeCode === 'BG CCA';
+        licenceTypeCode === 'BG CCA' ||
+        licenceTypeCode === 'NPPM';
 
     $scope.save = function () {
       return $scope.newLicenceEditionForm.$validate().then(function () {
