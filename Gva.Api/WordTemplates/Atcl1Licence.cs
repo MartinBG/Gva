@@ -53,7 +53,7 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
-            int validTrueId = this.nomRepository.GetNomValue("booelan", "yes").NomValueId;
+            int validTrueId = this.nomRepository.GetNomValue("boolean", "yes").NomValueId;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
                 .FirstOrDefault(a => a.Content.ValidId == validTrueId);
             var personAddress = personAddressPart == null ?
