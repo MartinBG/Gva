@@ -31,6 +31,9 @@ namespace Gva.ManageLotsTool
             using (SqlConnection connection = new SqlConnection(connStr))
             {
                 connection.Open();
+                ConvertModel<PersonDataDO_Old, PersonDataDO>("personData", connection);
+                ConvertModel<ExaminerDataDO_Old, ExaminerDataDO>("examinerData", connection);
+                ConvertModel<InspectorDataDO_Old, InspectorDataDO>("inspectorData", connection);
                 ConvertModel<PersonRatingDO_Old, PersonRatingDO>("ratings", connection);
                 ConvertModel<PersonRatingEditionDO_Old, PersonRatingEditionDO>("ratingEditions", connection);
                 ConvertModel<PersonLicenceEditionDO_Old, PersonLicenceEditionDO>("licenceEditions", connection);
@@ -61,7 +64,7 @@ namespace Gva.ManageLotsTool
                          JOIN LotParts lp ON lp.LotPartId = lpv.LotPartId
                          JOIN LotSetParts lsp ON lp.LotSetPartId = lsp.LotSetPartId
                          WHERE {0}",
-                        new DbClause("lp.Path LIKE {0} + '/%'", path))
+                        new DbClause("lp.Path LIKE {0} + '%'", path))
                        .Materialize(r =>
                            new
                            {

@@ -5,7 +5,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class InspectorDataDO
     {
-        public NomValue Caa { get; set; }
+        public int? CaaId { get; set; }
 
         [Required(ErrorMessage = "ExaminerCode is required.")]
         public string ExaminerCode { get; set; }
@@ -13,6 +13,6 @@ namespace Gva.Api.ModelsDO.Persons
         public string StampNum { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public int? ValidId { get; set; }
     }
 }

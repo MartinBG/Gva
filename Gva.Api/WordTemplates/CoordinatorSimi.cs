@@ -180,13 +180,13 @@ namespace Gva.Api.WordTemplates
 
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
-            var placeOfBirth = personData.PlaceOfBirth;
+            NomValue placeOfBirth = nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
             NomValue country = null;
             NomValue nationality = null;
             if (placeOfBirth != null)
             {
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+                nationality = this.nomRepository.GetNomValue("countries", personData.CountryId.Value);
             }
 
             return new

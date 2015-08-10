@@ -2,8 +2,10 @@
 using System.Linq;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -12,17 +14,24 @@ namespace Gva.Api.Projections.Person
     public class PersonProjection : Projection<GvaViewPerson>
     {
         private INomRepository nomRepository;
+        private ICaseTypeRepository caseTypeRepository;
+        private string setAlias;
 
-        public PersonProjection(IUnitOfWork unitOfWork, INomRepository nomRepository)
+        public PersonProjection(
+            IUnitOfWork unitOfWork,
+            INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository)
             : base(unitOfWork, "Person")
         {
             this.nomRepository = nomRepository;
+            this.caseTypeRepository = caseTypeRepository;
+            this.setAlias = "Person";
         }
 
         public override IEnumerable<GvaViewPerson> Execute(PartCollection parts)
         {
             var personData = parts.Get<PersonDataDO>("personData");
-
+            IEnumerable<GvaCaseType> caseTypesForSet = this.caseTypeRepository.GetCaseTypesForSet(this.setAlias);
             if (personData == null)
             {
                 return new GvaViewPerson[] { };
@@ -38,21 +47,26 @@ namespace Gva.Api.Projections.Person
 
             var personRatings = parts.GetAll<PersonRatingDO>("ratings");
 
-            return new[] { this.Create(personData, personEmployment, personLicences, personRatings) };
+            return new[] { this.Create(personData, personEmployment, personLicences, personRatings, caseTypesForSet) };
         }
 
         private GvaViewPerson Create(
             PartVersion<PersonDataDO> personData,
             PartVersion<PersonEmploymentDO> personEmployment,
             IEnumerable<PartVersion<PersonLicenceDO>> personLicences,
-            IEnumerable<PartVersion<PersonRatingDO>> personRatings)
+            IEnumerable<PartVersion<PersonRatingDO>> personRatings,
+            IEnumerable<GvaCaseType> caseTypesForSet)
         {
             GvaViewPerson person = new GvaViewPerson();
 
-            person.CaseTypes = string.Join(", ", personData.Content.CaseTypes.Select(c => c.Alias));
+            person.CaseTypes = string.Join(", ",
+                caseTypesForSet
+                .Where(c => personData.Content.CaseTypes.Contains(c.GvaCaseTypeId))
+                .Select(c => c.Alias));
+
             person.LotId = personData.Part.Lot.LotId;
             person.Lin = personData.Content.Lin;
-            person.LinTypeId = personData.Content.LinType.NomValueId;
+            person.LinTypeId = personData.Content.LinTypeId.Value;
             person.Uin = personData.Content.Uin;
             person.Names = string.Format(
                 "{0} {1} {2}",

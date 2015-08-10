@@ -4,11 +4,12 @@
 
   function InspDataCtrl($scope, Nomenclatures) {
     if (!$scope.model) {
-      Nomenclatures.get({ alias: 'caa', valueAlias: 'BGR' }).$promise.then(function (caa) {
-        $scope.model = {
-          caa: caa
-        };
-      });
+      Nomenclatures.get({ alias: 'caa', valueAlias: 'BGR' })
+        .$promise.then(function (caa) {
+          $scope.model = {
+            caaId: caa.nomValueId
+          };
+        });
     }
   }
 

@@ -7,10 +7,12 @@
     $state,
     $stateParams,
     PersonsInfo,
-    personInfo
+    personInfo,
+    personCaseTypes
   ) {
     var originalPersonInfo = _.cloneDeep(personInfo);
-
+    $scope.inspectorCaseType = _.where(personCaseTypes, { alias: 'inspector' })[0];
+    $scope.examinerCaseType = _.where(personCaseTypes, { alias: 'staffExaminer' })[0];
     $scope.personInfo = personInfo;
     $scope.editMode = null;
     $scope.personId = $stateParams.id;
@@ -39,15 +41,15 @@
     };
 
     $scope.showInspData = function () {
-      return _.some($scope.personInfo.personData.caseTypes, function (caseType) {
-        return caseType.alias === 'inspector';
-      });
+      return _.contains(
+        $scope.personInfo.personData.caseTypes,
+        $scope.inspectorCaseType.nomValueId);
     };
 
     $scope.showExaminerData = function () {
-      return _.some($scope.personInfo.personData.caseTypes, function (caseType) {
-        return caseType.alias === 'staffExaminer';
-      });
+      return _.contains(
+        $scope.personInfo.personData.caseTypes,
+        $scope.examinerCaseType.nomValueId);
     };
   }
 
@@ -56,7 +58,8 @@
     '$state',
     '$stateParams',
     'PersonsInfo',
-    'personInfo'
+    'personInfo',
+    'personCaseTypes'
   ];
 
   PersonInfoEditCtrl.$resolve = {
@@ -65,6 +68,12 @@
       'PersonsInfo',
       function ($stateParams, PersonsInfo) {
         return PersonsInfo.get({ id: $stateParams.id }).$promise;
+      }
+    ],
+    personCaseTypes: [
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.query({ alias: 'personCaseTypes' }).$promise;
       }
     ]
   };

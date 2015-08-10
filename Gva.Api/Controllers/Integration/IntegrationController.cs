@@ -450,10 +450,13 @@ namespace Gva.Api.Controllers.Integration
                     var lot = this.lotRepository.GetLotIndex(newAppDO.LotId);
 
                     List<string> lotCaseTypes = null;
+                    IEnumerable<GvaCaseType> caseTypesForSet = this.caseTypeRepository.GetCaseTypesForSet(lot.Set.Alias);
                     if (lot.Set.Alias == "Person")
                     {
                         var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
-                        lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
+                        lotCaseTypes = caseTypesForSet
+                            .Where(c => personData.CaseTypes.Contains(c.GvaCaseTypeId))
+                            .Select(c => c.Alias).ToList();
                     }
                     else if (lot.Set.Alias == "Aircraft")
                     {

@@ -75,6 +75,7 @@ namespace Gva.Api.WordTemplates
             dynamic licenceHolder = this.GetLicenceHolder(personData);
             string occupation = this.GetOccupation(includedRatings);
 
+            string countryNameAlt = personData.CountryId.HasValue ? this.nomRepository.GetNomValue("countries", personData.CountryId.Value).NameAlt : null;
             var json = new
             {
                 root = new
@@ -84,7 +85,7 @@ namespace Gva.Api.WordTemplates
                     LICENCE_HOLDER = licenceHolder,
                     COMPANY = personEmploymentOrg,
                     OCCUPATION = occupation,
-                    COUNTRY = personData.Country.NameAlt,
+                    COUNTRY = countryNameAlt,
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     D_LICENCE_NO = Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -95,7 +96,7 @@ namespace Gva.Api.WordTemplates
                     },
                     D_COMPANY = personEmploymentOrg,
                     D_OCCUPATION = occupation,
-                    D_COUNTRY = personData.Country.NameAlt,
+                    D_COUNTRY = countryNameAlt,
                     D_VALID_DATE = lastEdition.DocumentDateValidTo,
                     D_ISSUE_DATE = lastEdition.DocumentDateValidFrom
                 }

@@ -104,7 +104,7 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var documents = this.GetDocuments(licence, licenceType, includedTrainings, includedExams, includedChecks);
-            var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            var nationality = personData.CountryId.HasValue ? this.nomRepository.GetNomValue("countries", personData.CountryId.Value) : null;
 
             string licenceAction = lastEdition.LicenceActionId.HasValue ? this.nomRepository.GetNomValue("licenceActions", lastEdition.LicenceActionId.Value).Name.ToUpper() : null;
 

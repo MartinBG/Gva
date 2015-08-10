@@ -92,15 +92,15 @@ namespace Gva.Api.WordTemplates
             NomValue country = null;
             NomValue nationality = null;
 
-            if (personData.PlaceOfBirth != null)
+            if (personData.PlaceOfBirthId.HasValue)
             {
-                placeOfBirth = this.nomRepository.GetNomValue("cities", personData.PlaceOfBirth.NomValueId);
+                placeOfBirth = this.nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
             }
 
-            if (personData.Country != null)
+            if (personData.CountryId.HasValue)
             {
-                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+                nationality = this.nomRepository.GetNomValue("countries", personData.CountryId.Value);
             }
 
             NomValue settlement = null;

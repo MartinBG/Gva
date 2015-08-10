@@ -55,23 +55,23 @@ namespace Gva.Api.Repositories.IntegrationRepository
 
         public void UpdateLotCaseTypes(string set, GvaCaseType caseType, Lot lot, UserContext userContext)
         {
-            NomValue caseTypeNom = new NomValue()
-            {
-                NomValueId = caseType.GvaCaseTypeId,
-                Name = caseType.Name,
-                Alias = caseType.Alias
-            };
-
             Part updatedPart = null;
             if (set == "Person")
             {
                 PersonDataDO personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
-                personData.CaseTypes.Add(caseTypeNom);
-                this.caseTypeRepository.AddCaseTypes(lot, personData.CaseTypes.Select(ct => ct.NomValueId));
+                personData.CaseTypes.Add(caseType.GvaCaseTypeId);
+                this.caseTypeRepository.AddCaseTypes(lot, personData.CaseTypes);
                 updatedPart = lot.UpdatePart("personData", personData, userContext).Part;
             }
             else if (set == "Organization")
             {
+                NomValue caseTypeNom = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                };
+
                 OrganizationDataDO organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
                 organizationData.CaseTypes.Add(caseTypeNom);
                 this.caseTypeRepository.AddCaseTypes(lot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
@@ -109,8 +109,8 @@ namespace Gva.Api.Repositories.IntegrationRepository
         {
             CorrespondentDO correspondent = this.correspondentRepository.GetNewCorrespondent();
             CorrespondentType correspondentType = null;
-
-            if (personData.Country.Code == "BG")
+            ;
+            if (personData.CountryId == this.nomRepository.GetNomValue("countries", "BG").NomValueId)
             {
                 correspondent.BgCitizenFirstName = personData.FirstName;
                 correspondent.BgCitizenLastName = personData.LastName;
@@ -126,12 +126,16 @@ namespace Gva.Api.Repositories.IntegrationRepository
 
                 correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == "Foreigner".ToLower());
-                
-                Country country = this.unitOfWork.DbContext.Set<Country>()
-                    .Where(s => s.Code == personData.Country.Code)
-                    .FirstOrDefault();
 
-                correspondent.ForeignerCountryId = country != null ? country.CountryId : (int?)null;
+                if (personData.CountryId.HasValue)
+                {
+                    string countryCode = this.nomRepository.GetNomValue("countries", personData.CountryId.Value).Code;
+                    Country country = this.unitOfWork.DbContext.Set<Country>()
+                        .Where(s => s.Code == countryCode)
+                        .FirstOrDefault();
+
+                    correspondent.ForeignerCountryId = country != null ? country.CountryId : (int?)null;
+                }
             }
 
             correspondent.CorrespondentTypeAlias = correspondentType.Alias;
@@ -199,7 +203,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 if (int.TryParse(FlightCrewlData.CAAPersonalIdentificationNumber, out lin))
                 {
                     personData.Lin = lin;
-                    personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
+                    personData.LinTypeId = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single().NomValueId;
                 }
             }
 
@@ -207,12 +211,13 @@ namespace Gva.Api.Repositories.IntegrationRepository
             string countryCode = FlightCrewlData.Citizenship.CountryGRAOCode;
             if (!string.IsNullOrEmpty(countryName))
             {
-                personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
+                NomValue country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
+                personData.CountryId = country != null ? country.NomValueId : (int?)null;
             }
 
             if (countryCode == "BG")
             {
-                personData.Country = this.nomRepository.GetNomValue("countries", "BG");
+                personData.CountryId = this.nomRepository.GetNomValue("countries", "BG").NomValueId;
                 personData.FirstName = FlightCrewlData.BulgarianCitizen.PersonNames.First;
                 personData.MiddleName = FlightCrewlData.BulgarianCitizen.PersonNames.Middle;
                 personData.LastName = FlightCrewlData.BulgarianCitizen.PersonNames.Last;
@@ -231,14 +236,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
 
             personData.Email = FlightCrewlData.ContactData.EmailAddress;
 
-            personData.CaseTypes = new List<NomValue>() {
-                                        new NomValue()
-                                        {
-                                            NomValueId = caseType.GvaCaseTypeId,
-                                            Name = caseType.Name,
-                                            Alias = caseType.Alias
-                                        }
-                                    };
+            personData.CaseTypes = new List<int>() { caseType.GvaCaseTypeId };
 
             return personData;
         }
@@ -258,13 +256,13 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 if (int.TryParse(caaPersonIdentificator, out lin))
                 {
                     personData.Lin = lin;
-                    personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
+                    personData.LinTypeId = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single().NomValueId;
                 }
             }
 
             if (personBasicData != null)
             {
-                personData.Country = this.nomRepository.GetNomValue("countries", "BG");
+                personData.CountryId = this.nomRepository.GetNomValue("countries", "BG").NomValueId;
                 personData.FirstName = personBasicData.Names.First;
                 personData.MiddleName = personBasicData.Names.Middle;
                 personData.LastName = personBasicData.Names.Last;
@@ -282,20 +280,14 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 personData.LastNameAlt = foreignCitizenBasicData.Names.LastLatin;
                 if (!string.IsNullOrEmpty(foreignCitizenBasicData.IdentityDocument.CountryCode))
                 {
-                    personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Code == foreignCitizenBasicData.IdentityDocument.CountryCode).FirstOrDefault();
+                    var country = this.nomRepository.GetNomValues("countries").Where(c => c.Code == foreignCitizenBasicData.IdentityDocument.CountryCode).FirstOrDefault();
+                    personData.CountryId = country != null ? country.NomValueId : (int?)null;
                 }
             }
 
             personData.Email = email;
 
-            personData.CaseTypes = new List<NomValue>() {
-                                        new NomValue()
-                                        {
-                                            NomValueId = caseType.GvaCaseTypeId,
-                                            Name = caseType.Name,
-                                            Alias = caseType.Alias
-                                        }
-                                    };
+            personData.CaseTypes = new List<int>() { caseType.GvaCaseTypeId };
 
             return personData;
         }

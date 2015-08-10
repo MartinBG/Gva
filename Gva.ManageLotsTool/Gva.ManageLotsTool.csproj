@@ -48,9 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OldDOs\AircraftDocumentOtherDO_Old.cs" />
+    <Compile Include="OldDOs\ExaminerDataDO_Old.cs" />
+    <Compile Include="OldDOs\InspectorDataDO_Old.cs" />
     <Compile Include="OldDOs\OrganizationDocumentOtherDO_Old.cs" />
     <Compile Include="OldDOs\PersonAddressDO_Old.cs" />
     <Compile Include="OldDOs\PersonCheckDO_Old.cs" />
+    <Compile Include="OldDOs\PersonDataDO_Old.cs" />
     <Compile Include="OldDOs\PersonDocumentIdDO_Old.cs" />
     <Compile Include="OldDOs\PersonDocumentOtherDO_Old.cs" />
     <Compile Include="OldDOs\PersonEducationDO_Old.cs" />

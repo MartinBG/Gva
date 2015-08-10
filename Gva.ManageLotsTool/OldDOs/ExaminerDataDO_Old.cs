@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class ExaminerDataDO
+    public class ExaminerDataDO_Old
     {
         [Required(ErrorMessage = "ExaminerCode is required.")]
         public string ExaminerCode { get; set; }
@@ -11,6 +11,6 @@ namespace Gva.Api.ModelsDO.Persons
         public string StampNum { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
-        public int? ValidId { get; set; }
+        public NomValue Valid { get; set; }
     }
 }

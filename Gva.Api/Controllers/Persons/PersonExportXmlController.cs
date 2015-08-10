@@ -138,20 +138,24 @@ namespace Gva.Api.Controllers.Persons
             string addrText = personAddress != null ? personAddress.Content.Address : null;
             row.Add(new XElement("ADDR_TEXT", addrText));
 
+            NomValue country = person.CountryId.HasValue ? this.nomRepository.GetNomValue("countries", person.CountryId.Value) : null;
+            NomValue placeOfBirth = person.PlaceOfBirthId.HasValue ? this.nomRepository.GetNomValue("cities", person.PlaceOfBirthId.Value) : null;
+            NomValue gender = person.SexId.HasValue ? this.nomRepository.GetNomValue("gender", person.SexId.Value) : null;
+
             row.Add(new XElement("E_MAIL", person.Email));
             row.Add(new XElement("PHONE_OFFICE", person.Phone1));
             row.Add(new XElement("PHONE_OTHER", person.Phone2));
-            row.Add(new XElement("BIRTH_EKNM", person.PlaceOfBirth.Code));
-            row.Add(new XElement("BIRTH_EKNM_TYPE", person.PlaceOfBirth.Name.Contains(".") ? person.PlaceOfBirth.Name.Split('.')[0] : null));
-            row.Add(new XElement("BIRTH_EKNM_COUNTRY", person.Country.Name));
-            row.Add(new XElement("BIRTH_EKNM_TOWN", person.PlaceOfBirth.Name));
-            row.Add(new XElement("CITIZEN_COUNTRY_ID", person.Country.Code));
-            row.Add(new XElement("CITIZEN_COUNTRY_NAME", person.Country.Name));
+            row.Add(new XElement("BIRTH_EKNM", placeOfBirth != null ? placeOfBirth.Code : null));
+            row.Add(new XElement("BIRTH_EKNM_TYPE", placeOfBirth != null && placeOfBirth.Name.Contains(".") ? placeOfBirth.Name.Split('.')[0] : null));
+            row.Add(new XElement("BIRTH_EKNM_COUNTRY", country != null ? country.Name : null));
+            row.Add(new XElement("BIRTH_EKNM_TOWN", placeOfBirth != null ? placeOfBirth.Name : null));
+            row.Add(new XElement("CITIZEN_COUNTRY_ID", country != null ? country.Code : null));
+            row.Add(new XElement("CITIZEN_COUNTRY_NAME", country != null ? country.Name : null));
             row.Add(new XElement("DATE_OF_BIRTH", person.DateOfBirth.Value.ToString("dd/MM/yyyy")));
-            row.Add(new XElement("SEX_ID", person.Sex.Code));
+            row.Add(new XElement("SEX_ID", gender != null ? gender.Code : null));
 
             NomValue BG = this.nomRepository.GetNomValue("countries", "BG");
-            row.Add(new XElement("FOREIGNER", person.Country.Code == BG.Code ? "N" : "Y"));
+            row.Add(new XElement("FOREIGNER", person.CountryId == BG.NomValueId ? "N" : "Y"));
 
         }
     }

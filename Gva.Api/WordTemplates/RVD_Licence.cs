@@ -125,17 +125,14 @@ namespace Gva.Api.WordTemplates
 
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
-            var placeOfBirth = personData.PlaceOfBirth;
+            NomValue placeOfBirth = null;
             NomValue country = null;
             NomValue nationality = null;
-            if (placeOfBirth != null)
+            if (personData.PlaceOfBirthId.HasValue)
             {
+                placeOfBirth = this.nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-                
-            }
-            if (personData.Country != null)
-            {
-                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+                nationality = this.nomRepository.GetNomValue("countries", personData.CountryId.Value);
             }
 
             NomValue settlement = null;

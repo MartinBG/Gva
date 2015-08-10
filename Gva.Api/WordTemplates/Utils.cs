@@ -54,11 +54,12 @@ namespace Gva.Api.WordTemplates
         {
             string placeOfBirth = null;
             string placeOfBirthAlt = null;
-            if(personData.PlaceOfBirth != null)
+            if(personData.PlaceOfBirthId.HasValue)
             {
-                NomValue country = nomRepository.GetNomValue("countries", personData.PlaceOfBirth.ParentValueId.Value);
-                placeOfBirth = string.Format("{0}, {1}", country.Name, personData.PlaceOfBirth.Name);
-                placeOfBirthAlt = string.Format("{0}, {1}", country.NameAlt, personData.PlaceOfBirth.NameAlt);
+                NomValue city = nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
+                NomValue country = nomRepository.GetNomValue("countries", city.ParentValueId.Value);
+                placeOfBirth = string.Format("{0}, {1}", country.Name, city.Name);
+                placeOfBirthAlt = string.Format("{0}, {1}", country.NameAlt, city.NameAlt);
             }
 
             return new Tuple<string, string>(placeOfBirthAlt, placeOfBirth);
@@ -281,7 +282,8 @@ namespace Gva.Api.WordTemplates
 
         internal static NomValue GetCountry(PersonDataDO personData, INomRepository nomRepository)
         {
-            int? countryId = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.ParentValueId : null;
+            NomValue placeOfBirth = nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
+            int? countryId = placeOfBirth != null ? placeOfBirth.ParentValueId : (int?)null;
             NomValue country = countryId.HasValue ?
                 nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue

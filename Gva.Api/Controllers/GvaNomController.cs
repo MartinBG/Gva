@@ -625,7 +625,7 @@ namespace Gva.Api.Controllers
 
         [Route("caseTypes")]
         [Route("{set:regex(^(?:person|organization)$)}CaseTypes")]
-        public IHttpActionResult GetCaseTypes(string set = null, string term = null)
+        public IHttpActionResult GetCaseTypes(string set = null, string term = null, [FromUri] int[] ids = null)
         {
             IEnumerable<GvaCaseType> caseTypes = null;
             if (!string.IsNullOrEmpty(set))
@@ -635,6 +635,11 @@ namespace Gva.Api.Controllers
             else
             {
                 caseTypes = this.caseTypeRepository.GetAllCaseTypes();
+            }
+
+            if (ids.Count() > 0)
+            {
+                caseTypes = caseTypes.Where(nv => ids.Contains(nv.GvaCaseTypeId));
             }
 
             if (!string.IsNullOrWhiteSpace(term))

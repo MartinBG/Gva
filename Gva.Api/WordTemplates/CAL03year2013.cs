@@ -60,13 +60,14 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceTypeId.Value);
 
             var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository, this.nomRepository);
-            var placeOfBirth = personData.PlaceOfBirth;
+            NomValue placeOfBirth = null;
             NomValue country = null;
             NomValue nationality = null;
-            if (placeOfBirth != null) 
+            if (personData.PlaceOfBirthId.HasValue)
             {
+                placeOfBirth = this.nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+                nationality = this.nomRepository.GetNomValue("countries", personData.CountryId.Value);
             }
 
 

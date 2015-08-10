@@ -1,5 +1,5 @@
-﻿/*global angular, moment*/
-(function (angular, moment) {
+﻿/*global angular, moment, _*/
+(function (angular, moment, _) {
   'use strict';
 
   function PersonDataCtrl(
@@ -12,13 +12,16 @@
     Nomenclatures.query({alias: 'linTypes'})
       .$promise.then(function(linTypes){
         $scope.linTypes = linTypes;
+        $scope.linType = !!$scope.model.linTypeId ?
+          _.where($scope.linTypes, {nomValueId: $scope.model.linTypeId})[0] : null;
       });
 
     $scope.setLin = function (item) {
-      $scope.model.linType = item;
+      $scope.linType = item;
+      $scope.model.linTypeId = item.nomValueId;
       $scope.model.lin = null;
 
-      if ($scope.model.linType.code !== 'none') {
+      if (item.code !== 'none') {
         Persons.getNextLin({
           linTypeId: item.nomValueId
         }).$promise.then(function (result) {
@@ -60,13 +63,13 @@
         if (sexDigit % 2 === 1) {
           Nomenclatures.get({ alias: 'gender', valueAlias: 'Female' })
             .$promise.then(function (sex) {
-              $scope.model.sex = sex;
+              $scope.model.sexId = sex.nomValueId;
             });
         }
         else {
           Nomenclatures.get({ alias: 'gender', valueAlias: 'Male' })
             .$promise.then(function (sex) {
-              $scope.model.sex = sex;
+              $scope.model.sexId = sex.nomValueId;
             });
         }
       }
@@ -108,4 +111,4 @@
   ];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
-}(angular, moment));
+}(angular, moment, _));

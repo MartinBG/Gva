@@ -97,7 +97,7 @@ namespace Gva.Api.Controllers.Persons
                 };
             }
 
-            newPerson.PersonData.Country = this.nomRepository.GetNomValue("countries", "BG");
+            newPerson.PersonData.CountryId = this.nomRepository.GetNomValue("countries", "BG").NomValueId;
 
             return Ok(newPerson);
         }
@@ -151,7 +151,7 @@ namespace Gva.Api.Controllers.Persons
                 var newLot = this.lotRepository.CreateLot("Person");
 
                 var personDataPart = newLot.CreatePart("personData", person.PersonData, this.userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, person.PersonData.CaseTypes.Select(ct => ct.NomValueId));
+                this.caseTypeRepository.AddCaseTypes(newLot, person.PersonData.CaseTypes);
 
                 PartVersion<PersonDocumentIdDO> documentIdPart = null;
                 if (person.PersonDocumentId != null)
@@ -242,7 +242,7 @@ namespace Gva.Api.Controllers.Persons
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                this.caseTypeRepository.AddCaseTypes(lot, personInfo.PersonData.CaseTypes.Select(ct => ct.NomValueId));
+                this.caseTypeRepository.AddCaseTypes(lot, personInfo.PersonData.CaseTypes);
 
                 var personDataPart = lot.UpdatePart("personData", personInfo.PersonData, this.userContext);
 

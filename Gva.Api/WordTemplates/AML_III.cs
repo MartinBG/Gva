@@ -113,7 +113,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DATE = personData.DateOfBirth,
                         PLACE_EN = placeOfBirth.Item1,
-                        PLACE = !isForeigner && personData.PlaceOfBirth != null ? placeOfBirth.Item2 : null,
+                        PLACE = !isForeigner && personData.PlaceOfBirthId.HasValue ? placeOfBirth.Item2 : null,
                         BG_LABEL_PLACE = !isForeigner ? "Дата и място на раждане:" : null
                     },
                     ADDRESS = new

@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 using Common.ValidationAttributes;
 
-namespace Gva.Api.ModelsDO.Persons
+namespace Gva.ManageLotsTool.OldDOs
 {
-    public class PersonDataDO
+    public class PersonDataDO_Old
     {
-        public PersonDataDO()
+        public PersonDataDO_Old()
         {
-            this.CaseTypes = new List<int>();
+            this.CaseTypes = new List<NomValue>();
         }
 
         [Required(ErrorMessage = "FirstName is required.")]
@@ -34,20 +34,20 @@ namespace Gva.Api.ModelsDO.Persons
         public string Uin { get; set; }
 
         [Required(ErrorMessage = "Sex is required.")]
-        public int? SexId { get; set; }
+        public NomValue Sex { get; set; }
 
         [Required(ErrorMessage = "LinType is required.")]
-        public int? LinTypeId { get; set; }
+        public NomValue LinType { get; set; }
 
         public int? Lin { get; set; }
 
         [Required(ErrorMessage = "DateOfBirth is required.")]
         public DateTime? DateOfBirth { get; set; }
 
-        public int? PlaceOfBirthId { get; set; }
+        public NomValue PlaceOfBirth { get; set; }
 
         [Required(ErrorMessage = "Country is required.")]
-        public int? CountryId { get; set; }
+        public NomValue Country { get; set; }
 
         [EmailAddress(ErrorMessage = "Invalid email.")]
         public string Email { get; set; }
@@ -64,6 +64,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Phone5 { get; set; }
 
-        public List<int> CaseTypes { get; set; }
+        public List<NomValue> CaseTypes { get; set; }
     }
 }
