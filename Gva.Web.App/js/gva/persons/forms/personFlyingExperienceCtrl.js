@@ -7,12 +7,12 @@
     $scope.caseTypeId = scFormParams.caseTypeId;
 
     $scope.sum = function () {
-      if ($scope.model.part.sector && $scope.model.part.locationIndicator) {
+      if ($scope.model.part.sector && $scope.model.part.locationIndicatorId) {
         PersonFlyingExperiences.sumAllFlightHours({
           id: scFormParams.lotId,
           partIndex: scFormParams.partIndex,
           sector: $scope.model.part.sector,
-          locationIndicatorId: $scope.model.part.locationIndicator.nomValueId
+          locationIndicatorId: $scope.model.part.locationIndicatorId
         })
           .$promise
           .then(function(result) {
