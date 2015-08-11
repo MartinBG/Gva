@@ -33,7 +33,7 @@
     <sc-ajaxcolumn data="dateValidTo" title="persons.stampedDocumentsView.documentDateValidTo" type="date">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="stampNumber" title="persons.stampedDocumentsView.stampNumber" has-content="true">
-      {{item.hasNoNumber ? noNumberLabel : item.stampNumber}}
+      {{item.hasNoNumber ? noNumberLabel : item.stampNumber.replace('$$', ', ')}}
     </sc-ajaxcolumn>
     <sc-ajaxcolumn title="persons.stampedDocumentsView.application" has-content="true">
       <sc-button btn-sref="{state: 'root.applications.edit.case', params: { id: item.application.applicationId }}" text="{{ item.application.applicationName }}"></sc-button>

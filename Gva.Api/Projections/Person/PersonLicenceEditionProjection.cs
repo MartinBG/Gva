@@ -62,7 +62,7 @@ namespace Gva.Api.Projections.Person
             licenceEdition.PartIndex = edition.Part.Index;
             licenceEdition.LicencePartIndex = edition.Content.LicencePartIndex.Value;
             licenceEdition.Index = edition.Content.Index;
-            licenceEdition.StampNumber = edition.Content.StampNumber;
+            licenceEdition.StampNumber = edition.Content.StampNumber != null ? edition.Content.StampNumber.Replace(",", GvaConstants.ConcatenatingExp).Replace(";", GvaConstants.ConcatenatingExp) : null;
             licenceEdition.PaperId = edition.Content.PaperId.HasValue ? edition.Content.PaperId.Value : (!string.IsNullOrEmpty(edition.Content.StampNumber) ? 1 : (int?)null);
             licenceEdition.DateValidFrom = edition.Content.DocumentDateValidFrom.Value;
             licenceEdition.DateValidTo = edition.Content.DocumentDateValidTo;

@@ -372,35 +372,63 @@ namespace Gva.Api.Repositories.Reports
                     SqlConnection conn,
                     int? paperId)
         {
-            return conn.CreateStoreCommand(@"SELECT
+            List<PersonReportPaperDO> paperResults = new List<PersonReportPaperDO>();
+
+            var issuedPaperData = conn.CreateStoreCommand(@"SELECT
                                     p.GvaPaperId,
                                     p.Name,
                                     p.FirstNumber,
                                     p.FromDate,
                                     p.ToDate,
-                                    count(*) IssuedCount,
-                                    max(ple.StampNumber) LastIssuedNumber,
-                                    max(ple.StampNumber) - (p.FirstNumber + count(*)) + 1 SkippedCount
+                                    ple.StampNumber
                                     FROM GvaViewPersonLicenceEditions ple 
-                                    RIGHT JOIN GvaPapers p on ple.PaperId = p.GvaPaperId
-                                    WHERE 1=1 {0}
-                                    GROUP BY p.GvaPaperId, p.FirstNumber, p.Name, p.FromDate,p.ToDate
-                                    ORDER BY p.FirstNumber DESC",
+                                    RIGHT JOIN GvaPapers p ON ple.PaperId = p.GvaPaperId
+                                    WHERE 1=1 {0}",
                                     new DbClause("and p.GvaPaperId = {0}", paperId)
                         )
                         .Materialize(r =>
-                            new PersonReportPaperDO()
+                            new
                             {
                                 PaperId = r.Field<int>("GvaPaperId"),
                                 PaperName = r.Field<string>("Name"),
                                 FirstNumber = r.Field<int>("FirstNumber"),
-                                IssuedCount = r.Field<int?>("LastIssuedNumber").HasValue ? (r.Field<int?>("IssuedCount") ?? 0) : 0,
-                                SkippedCount = r.Field<int?>("SkippedCount") ?? 0,
-                                LastIssuedNumber = r.Field<int?>("LastIssuedNumber") ?? 0,
                                 FromDate = r.Field<DateTime>("FromDate"),
-                                ToDate = r.Field<DateTime>("ToDate")
-                            })
-                            .ToList();
+                                ToDate = r.Field<DateTime>("ToDate"),
+                                StampNumber = r.Field<string>("StampNumber")
+                            }).ToList();
+
+            foreach (var papers in issuedPaperData.GroupBy(p => p.PaperId))
+            {
+                var allStampNumbersForSplit = papers.Where(p => p.StampNumber != null && p.StampNumber.Contains(GvaConstants.ConcatenatingExp))
+                    .SelectMany(p => p.StampNumber.Split(GvaConstants.ConcatenatingExp.ToArray()))
+                    .Where(sn => !string.IsNullOrEmpty(sn))
+                    .ToList();
+
+                var allOtherStampNumbers = papers.Where(p => p.StampNumber != null && !p.StampNumber.Contains(GvaConstants.ConcatenatingExp))
+                    .Select(p => p.StampNumber)
+                    .ToList();
+
+                var allNumbers = allStampNumbersForSplit.Union(allOtherStampNumbers);
+
+                var paperInfo = papers.First();
+                int? maxNumber = allNumbers.Count() > 0 ? allNumbers.Max(sn => int.Parse(sn.Trim())) : (int?)null;
+                int issuedCount = allNumbers.Count();
+                int skippedCount = maxNumber.HasValue ? maxNumber.Value - (paperInfo.FirstNumber + issuedCount) + 1 : 0;
+
+                paperResults.Add(new PersonReportPaperDO()
+                    {
+                        PaperId = paperInfo.PaperId,
+                        PaperName = paperInfo.PaperName,
+                        FirstNumber = paperInfo.FirstNumber,
+                        IssuedCount = maxNumber != null ? issuedCount : 0,
+                        SkippedCount = skippedCount,
+                        LastIssuedNumber = maxNumber,
+                        FromDate = paperInfo.FromDate,
+                        ToDate = paperInfo.ToDate
+                    });
+            }
+
+            return paperResults;
         }
     }
 }
