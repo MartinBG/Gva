@@ -43,8 +43,14 @@ namespace Gva.Api.WordTemplates
 
             if (personAddress != null)
             {
-                addressDataAlt.Add(personAddress.AddressAlt);
-                addressData.Add(personAddress.Address);
+                if (!string.IsNullOrEmpty(personAddress.AddressAlt))
+                {
+                    addressDataAlt.Add(personAddress.AddressAlt);
+                }
+                if (!string.IsNullOrEmpty(personAddress.Address))
+                {
+                    addressData.Add(personAddress.Address);
+                }
             }
 
             return new Tuple<string, string>(string.Join(", ", addressDataAlt), string.Join(", ", addressData));
