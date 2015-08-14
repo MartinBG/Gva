@@ -13,16 +13,16 @@
     $scope.lotId = $stateParams.id;
 
     $scope.isDeclinedApp = function(item) {
-      if (item.part.stage) {
-        return item.part.stage.alias === 'declined';
+      if (item.stage) {
+        return item.stage.alias === 'declined';
       }
 
       return false;
     };
 
     $scope.isDoneApp = function(item) {
-      if (item.part.stage) {
-        return item.part.stage.alias === 'done';
+      if (item.stage) {
+        return item.stage.alias === 'done';
       }
 
       return false;

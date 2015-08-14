@@ -5,16 +5,16 @@ using Gva.Api.ModelsDO.Applications;
 
 namespace Gva.Api.ModelsDO.Common
 {
-    public class DocumentApplicationDO
+    public class DocumentApplicationViewDO
     {
+        public int ApplicationId { get; set; }
+
         public string OldDocumentNumber { get; set; }
 
         public string DocumentNumber { get; set; }
 
-        [Required(ErrorMessage = "DocumentDate is required.")]
         public DateTime? DocumentDate { get; set; }
 
-        [Required(ErrorMessage = "ApplicationType is required.")]
         public NomValue ApplicationType { get; set; }
 
         public NomValue ApplicationPaymentType { get; set; }
@@ -27,14 +27,8 @@ namespace Gva.Api.ModelsDO.Common
 
         public string Notes { get; set; }
 
-        public AppExaminationSystemDataDO ExaminationSystemData { get; set; }
+        public NomValue Stage { get; set; }
 
-        public App0001AdditionalDataDO App0001AdditionalData { get; set; }
-
-        public App0004AdditionalDataDO App0004AdditionalData { get; set; }
-
-        public App0008AdditionalDataDO App0008AdditionalData { get; set; }
-
-        public FileDataDO ControlCard { get; set; }
+        public CaseDO Case { get; set; }
     }
 }

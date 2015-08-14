@@ -9,10 +9,12 @@
     scMessage,
     Applications,
     application,
-    applicationPart) {
+    applicationPart,
+    appStages) {
     var originalApplicationPart = _.cloneDeep(applicationPart);
 
     $scope.applicationPart = applicationPart;
+    $scope.lastStage = _.last(_.sortBy(appStages, 'ordinal', 'desc'));
     $scope.editMode = null;
     $scope.lotId = application.lotId;
     $scope.set = application.lotSetAlias;
@@ -80,7 +82,8 @@
     'scMessage',
     'Applications',
     'application',
-    'applicationPart'
+    'applicationPart',
+    'appStages'
   ];
 
   AppEditPartCtrl.$resolve = {
@@ -92,6 +95,13 @@
           lotId: application.lotId,
           ind: application.partIndex
         }).$promise;
+      }
+    ],
+    appStages: [
+      'application',
+      'AppStages',
+      function (application, AppStages) {
+        return AppStages.query({ id: application.applicationId }).$promise;
       }
     ]
   };

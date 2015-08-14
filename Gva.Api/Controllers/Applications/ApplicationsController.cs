@@ -355,7 +355,10 @@ namespace Gva.Api.Controllers.Applications
             var lot = this.lotRepository.GetLotIndex(lotId);
             string path = string.Format("{0}DocumentApplications/{1}", lot.Set.Alias.ToLower(), partIndex);
 
-            return Ok(this.applicationRepository.GetApplicationPart(path, lotId));
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
+            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
+
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
         }
 
         [Route(@"appPart/{lotId}/{partIndex}/qualifications")]

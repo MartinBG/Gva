@@ -150,14 +150,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
-
-            this.unitOfWork.DbContext.Set<GvaStage>().Load();
-
             var applicationsJoin =
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Lot.Set)
-                    .Include(a => a.Stages)
+                    .Include(a => a.Stages.Select(s => s.GvaStage))
                     .Include(a => a.GvaViewApplication)
                     .Include(a => a.GvaViewApplication.ApplicationType)
                     .Where(a => a.Lot.Set.Alias == "person" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
@@ -241,13 +238,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
-            this.unitOfWork.DbContext.Set<GvaStage>().Load();
-
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages)
+                        .Include(a => a.Stages.Select(s => s.GvaStage))
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "aircraft" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
@@ -336,13 +331,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
-            this.unitOfWork.DbContext.Set<GvaStage>().Load();
-
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages)
+                        .Include(a => a.Stages.Select(s => s.GvaStage))
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
 
@@ -426,13 +419,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
-            this.unitOfWork.DbContext.Set<GvaStage>().Load();
-
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages)
+                        .Include(a => a.Stages.Select(s => s.GvaStage))
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "equipment" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
@@ -517,13 +508,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
-            this.unitOfWork.DbContext.Set<GvaStage>().Load();
-
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages)
+                        .Include(a => a.Stages.Select(s => s.GvaStage))
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "airport" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
@@ -701,17 +690,17 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .SingleOrDefault(p => p.SetId == lotSetId);
         }
 
-        public List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null)
+        public List<DocumentApplicationViewDO> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<DocumentApplicationDO>(path);
 
-            List<CaseTypePartDO<DocumentApplicationDO>> partVersionDOs = new List<CaseTypePartDO<DocumentApplicationDO>>();
+            List<DocumentApplicationViewDO> applicationViewDOs = new List<DocumentApplicationViewDO>();
             foreach (var partVersion in partVersions)
             {
                 var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Doc.DocStatus)
-                    .Include(a => a.Stages)
+                    .Include(a => a.Stages.Select(s => s.GvaStage))
                     .Where(a => a.GvaAppLotPartId == partVersion.PartId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
                     .FirstOrDefault();
 
@@ -720,27 +709,39 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     continue;
                 }
 
-                partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
-
-                if (gvaApplication.Stages.Count() > 0)
-                {
-                    this.unitOfWork.DbContext.Set<GvaStage>().Load();
-                    var applicationStage = gvaApplication.Stages.OrderByDescending(a => a.GvaAppStageId).First();
-                    partVersion.Content.Stage = new NomValue()
-                    {
-                        Name = applicationStage.GvaStage.Name,
-                        Alias = applicationStage.GvaStage.Alias
-                    };
-                }
-
                 var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
                 if (!caseTypeId.HasValue || lotFile != null)
                 {
-                    partVersionDOs.Add(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
+                    DocumentApplicationViewDO applicationViewDO = new DocumentApplicationViewDO()
+                    {
+                        ApplicationId = gvaApplication.GvaApplicationId,
+                        ApplicationPaymentType = partVersion.Content.ApplicationPaymentType,
+                        Currency = partVersion.Content.Currency,
+                        DocumentDate = partVersion.Content.DocumentDate,
+                        DocumentNumber = partVersion.Content.DocumentNumber,
+                        ApplicationType = partVersion.Content.ApplicationType,
+                        TaxAmount = partVersion.Content.TaxAmount,
+                        TaxNumber = partVersion.Content.TaxNumber,
+                        Notes = partVersion.Content.Notes,
+                        OldDocumentNumber = partVersion.Content.OldDocumentNumber,
+                        Case = lotFile != null ? new CaseDO(lotFile) : null
+                    };
+
+                    if (gvaApplication.Stages.Count() > 0)
+                    {
+                        var applicationStage = gvaApplication.Stages.OrderByDescending(a => a.GvaAppStageId).First();
+                        applicationViewDO.Stage = new NomValue()
+                        {
+                            Name = applicationStage.GvaStage.Name,
+                            Alias = applicationStage.GvaStage.Alias
+                        };
+                    }
+
+                    applicationViewDOs.Add(applicationViewDO);
                 }
             }
 
-            return partVersionDOs;
+            return applicationViewDOs;
         }
 
         public GvaViewApplication GetApplicationById(int applicationId)
@@ -758,34 +759,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .Include(a => a.ApplicationType)
                 .Where(gva => gva.PartId == applicationPartId)
                 .Single();
-        }
-
-        public CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId)
-        {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
-
-            var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
-                    .Include(a => a.GvaAppLotPart)
-                    .Include(a => a.Stages)
-                    .Where(a => a.GvaAppLotPartId == partVersion.PartId)
-                    .Single();
-
-            partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
-
-            if (gvaApplication.Stages.Count() > 0)
-            {
-                this.unitOfWork.DbContext.Set<GvaStage>().Load();
-                var applicationStage = gvaApplication.Stages.OrderByDescending(a => a.GvaAppStageId).First();
-                partVersion.Content.Stage = new NomValue()
-                {
-                    Name = applicationStage.GvaStage.Name,
-                    Alias = applicationStage.GvaStage.Alias
-                };
-            }
-
-            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
-
-            return new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile);
         }
 
         public List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId)

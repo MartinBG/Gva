@@ -20,7 +20,10 @@
       <gva-common-document-application name="documentApplicationForm" ng-model="applicationPart" sc-form-params="{ lotId: lotId, set: set }"></gva-common-document-application>
 
       <div class="row">
-        <sc-field type="text" ng-model="applicationPart.part.stage.name" ng-readonly="true" l10n-text="persons.editPersonDocApplication.stage" class="col-sm-3"></sc-field>
+        <div class="form-group col-sm-3" style="margin-bottom:0px">
+          <label l10n-text="persons.editPersonDocApplication.stage"></label>
+          <sc-text type="text" ng-model="lastStage.stageName" ng-readonly="true"></sc-text>
+        </div>
       </div>
 
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="applicationPart.case"
