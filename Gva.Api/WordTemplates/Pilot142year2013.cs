@@ -136,8 +136,9 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var licenceHolder = this.GetPersonData(personData, personAddress);
-            var countryNameBG = country != null ? country.Name : null;
-            var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
+
+            var countryNom = personData.CountryId.HasValue ? this.nomRepository.GetNomValue("countries", personData.CountryId.Value) : null;
+
             var privileges = this.GetLicencePrivileges();
             var json = new
             {
@@ -147,10 +148,10 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_NO2 = licenceNumber,
                     L_LICENCE_HOLDER = licenceHolder,
                     L_LICENCE_HOLDER2 = licenceHolder,
-                    COUNTRY_NAME_BG = countryNameBG,
-                    COUNTRY_CODE = countryCode,
-                    COUNTRY_NAME_BG2 = countryNameBG,
-                    COUNTRY_CODE2 = countryCode,
+                    COUNTRY_NAME_BG = countryNom != null ? countryNom.Name : null,
+                    COUNTRY_CODE = countryNom != null ? countryNom.Code : null,
+                    COUNTRY_NAME_BG2 = countryNom != null ? countryNom.Name : null,
+                    COUNTRY_CODE2 = countryNom != null ? countryNom.Code : null,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
                     ISSUE_DATE2 = lastEdition.DocumentDateValidFrom.Value,
                     OTHER_LICENCE = otherLicences,
