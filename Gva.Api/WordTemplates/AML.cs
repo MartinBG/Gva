@@ -144,7 +144,7 @@ namespace Gva.Api.WordTemplates
                     AIRCRAFTS = AMLUtils.GetAircrafts(includedRatings, ratingEditions, lot, this.nomRepository),
                     LIC_NO5 = licenceNumber,
                     NA2 = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
-                    LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),
+                    LIMITATIONS = limitations.Count() > 0 ? limitations : new object(),
                     AC_LIMITATIONS = acLimitations.Count() > 0 ? acLimitations : new object(),
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     LIC_NO6 = licenceNumber

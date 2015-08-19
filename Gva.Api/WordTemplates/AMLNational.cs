@@ -120,7 +120,7 @@ namespace Gva.Api.WordTemplates
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
                     CATEGORY = AMLUtils.GetCategory(includedRatings, ratingEditions,validAliases, validCodes, this.nomRepository, lot),
                     NA = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
-                    LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),
+                    LIMITATIONS = limitations.Count() > 0 ? limitations : new object(),
                     AC_LIMITATIONS = acLimitations.Count() > 0 ? acLimitations : new object(),
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     LIC_NO4 = licenceNumber
