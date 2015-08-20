@@ -538,8 +538,8 @@ namespace Gva.Api.WordTemplates
                 {
                     TYPE = string.Format(
                         "{0} {1}",
-                        rating.Content.RatingClassId.HasValue ? string.Empty : this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code,
-                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
+                        rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : string.Empty,
+                        rating.Content.RatingTypes != null && rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", this.nomRepository.GetNomValues("ratingTypes", rating.Content.RatingTypes.ToArray()).Select(rt => rt.Code)) : "").Trim(),
                     AUTH = rating.Content.AuthorizationId.HasValue? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : string.Empty,
                     NOTES = edition.Content.Notes,
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
