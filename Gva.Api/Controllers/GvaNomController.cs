@@ -637,7 +637,7 @@ namespace Gva.Api.Controllers
                 caseTypes = this.caseTypeRepository.GetAllCaseTypes();
             }
 
-            if (ids.Count() > 0)
+            if (ids != null && ids.Count() > 0)
             {
                 caseTypes = caseTypes.Where(nv => ids.Contains(nv.GvaCaseTypeId));
             }
