@@ -255,7 +255,7 @@ namespace Gva.Api.WordTemplates
 
                     classes.Add(new
                     {
-                        LEVEL = rating.Content.PersonRatingLevelId.HasValue ? this.nomRepository.GetNomValue("", rating.Content.PersonRatingLevelId.Value).Code : null,
+                        LEVEL = rating.Content.PersonRatingLevelId.HasValue ? this.nomRepository.GetNomValue("personRatingLevels", rating.Content.PersonRatingLevelId.Value).Code : null,
                         RATING = rating.Content.RatingClassId.HasValue ? this.nomRepository.GetNomValue("ratingClasses", rating.Content.RatingClassId.Value).Code : null,
                         SUBRATING = edition.Content.RatingSubClasses.Count > 0 ? string.Join(",", this.nomRepository.GetNomValues("ratingSubClasses", edition.Content.RatingSubClasses.ToArray()).Select(s => s.Code)) : string.Empty,
                         LICENCE = rating.Content.AuthorizationId.HasValue ? this.nomRepository.GetNomValue("authorizations", rating.Content.AuthorizationId.Value).Code : null,
