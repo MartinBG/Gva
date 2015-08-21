@@ -171,7 +171,7 @@
 
     <!-- chooseLotAircraft -->
     <div ng-if="currentTab === 'chooseLotAircraft'">
-      <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="chooseLotAircraft.search()">
+      <sc-search selected-filters="chooseLotAircraft.filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="chooseLotAircraft.search()">
         <sc-filter type="text" name="mark" class="col-sm-3" removable="false" label="aircrafts.search.mark"></sc-filter>
         <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="aircrafts.search.manSN"></sc-filter>
         <sc-filter type="text" name="modelAlt" class="col-sm-3" removable="false" label="aircrafts.search.modelAlt"></sc-filter>
@@ -214,7 +214,7 @@
 
     <!-- chooseLotOrganization -->
     <div ng-if="currentTab === 'chooseLotOrganization'">
-      <sc-search selected-filters="filters" btn-classes="col-sm-7 col-md-5 col-lg-4" default-action="chooseLotOrganization.search()">
+      <sc-search selected-filters="chooseLotOrganization.filters" btn-classes="col-sm-7 col-md-5 col-lg-4" default-action="chooseLotOrganization.search()">
         <sc-filter type="text" name="organizationName" class="col-sm-2" removable="false" label="organizations.search.name"></sc-filter>
         <sc-filter type="nomenclature" name="caseTypeId" class="col-sm-2" removable="false" alias="organizationCaseTypes" mode="id" label="organizations.search.caseType"></sc-filter>
         <sc-filter type="text" name="uin" class="col-sm-2" removable="false" label="organizations.search.uin"></sc-filter>
@@ -227,7 +227,7 @@
         <sc-search-button action="add"></sc-search-button>
       </sc-search>
 
-      <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-datatable items="chooseLotOrganization.items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
         <sc-column sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="chooseBtn"  btn-click="chooseLot(item.id)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
           </sc-button>
