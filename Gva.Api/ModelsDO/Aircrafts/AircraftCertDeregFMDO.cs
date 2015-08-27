@@ -20,6 +20,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string NotesAlt { get; set; }
 
+        public AircraftInspectorDO Inspector { get; set; }
+
         public AircraftCertDeregExportFMDO Export { get; set; }
     }
 }

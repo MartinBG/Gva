@@ -1259,7 +1259,9 @@
           organization: 'ЮЛ',
           'export': 'Експортно удостоверение за ЛГ',
           aircraftIsNew: 'Ново ВС',
-          aircraftIsUsed: 'Използвано ВС'
+          aircraftIsUsed: 'Използвано ВС',
+          checkedBy: 'Заверил',
+          other: 'Друг'
         },
         debtDirectiveFM: {
           regDate: 'Дата',
