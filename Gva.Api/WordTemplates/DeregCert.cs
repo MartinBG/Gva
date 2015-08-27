@@ -55,31 +55,32 @@ namespace Gva.Api.WordTemplates
             Tuple<string, string, string, string> ownerData = null;
             Tuple<string, string, string, string> operatorData = null;
 
-            if(registration.OwnerOrganization != null)
+            if (registration.OwnerOrganization != null)
             {
                 ownerData = this.GetOrganizationNamesAndAddress(registration.OwnerOrganization.NomValueId);
             }
-            else if(registration.OwnerPerson != null)
+            else if (registration.OwnerPerson != null)
             {
-               ownerData = this.GetPersonNamesAndAddress(registration.OwnerPerson.NomValueId);
+                ownerData = this.GetPersonNamesAndAddress(registration.OwnerPerson.NomValueId);
             }
-           
-            if(registration.OperOrganization != null)
+
+            if (registration.OperOrganization != null)
             {
                 operatorData = this.GetOrganizationNamesAndAddress(registration.OperOrganization.NomValueId);
             }
-            else if(registration.OperPerson != null)
+            else if (registration.OperPerson != null)
             {
                 operatorData = this.GetPersonNamesAndAddress(registration.OperPerson.NomValueId);
             }
-
             var json = new
             {
                 root = new
                 {
-                    DOCUMENT_NUMBER = registration.CertNumber, 
+                    DOCUMENT_NUMBER = registration.CertNumber,
                     PRODUCER_ALT = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt : null,
+                    AIRCRAFT_TYPE = aircraftData.ModelAlt,
                     REG_MARK = registration != null ? registration.RegMark : null,
+                    REG_NUMBER = registration != null ? registration.CertNumber : null,
                     MSN = aircraftData.ManSN,
                     OWNER_ADDRESS = ownerData != null ? ownerData.Item3 : null,
                     OWNER_ADDRESS_ALT = ownerData != null ? ownerData.Item4 : null,
@@ -89,6 +90,12 @@ namespace Gva.Api.WordTemplates
                     OPERATOR_NAME_ALT = operatorData != null ? operatorData.Item2 : null,
                     LAST_REG_DATE = string.Format("{0:dd.MM.yyyy}", registration.CertDate),
                     REMOVAL_DATE = registration.Removal.Date,
+                    REMOVAL_REASON = registration.Removal.Reason.Name,
+                    REMOVAL_REASON_ALT = registration.Removal.Reason.NameAlt,
+                    NOTES = registration.Removal.Notes,
+                    NOTES_ALT = registration.Removal.NotesAlt,
+                    DEBTS = "Нашите записи не показват неотменени тежести върху ВС-то.",
+                    DEBTS_ALT = "Our records show no unreleased liens (mortgages registrations) against aircraft"
                 }
             };
 
