@@ -273,7 +273,10 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
+            List<string> otherEndorsementCodes = new List<string>() { "OJTI", "STDI", "Assessor" };
             var result = includedRatings
+                .Where(r => !r.Content.AuthorizationId.HasValue || 
+                    !otherEndorsementCodes.Any(oe => this.nomRepository.GetNomValue("authorizations", r.Content.AuthorizationId.Value).Code.Contains(oe)))
                 .Where(r => r.Content.RatingClassId.HasValue || r.Content.RatingTypes.Count() > 0)
                 .GroupBy(r => string.Format(
                     "{0} {1}",
