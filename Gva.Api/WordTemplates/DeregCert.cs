@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Aircrafts;
@@ -6,6 +8,7 @@ using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
+using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -51,6 +54,44 @@ namespace Gva.Api.WordTemplates
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             AircraftDataDO aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
             AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(path).Content;
+            IEnumerable<AircraftDocumentDebtFMDO> debts = lot.Index.GetParts<AircraftDocumentDebtFMDO>("aircraftDocumentDebtsFM")
+                .Select(d => d.Content)
+                .OrderBy(d => d.DocumentDate);
+
+            List<object> formatedDebts = new List<object>();
+            List<object> formatedDebtsAlt = new List<object>();
+            
+            if(debts.Count() > 0)
+            {
+                foreach(var debtGroup in debts.GroupBy(d => d.AircraftApplicant.Name).ToList())
+                {
+                    string debtsTitle = string.Format("Нашите записи показват неотменени тежести в полза на {0}:", debtGroup.First().AircraftApplicant.Name);
+                    string debtsTitleAlt = string.Format("Our records show unreleased liens (mortgages registrations) in favour of {0}:", debtGroup.First().AircraftApplicant.NameAlt);
+                    List<object> data = new List<object>();
+                    List<object> dataAlt = new List<object>();
+                    int debtOrder = 1;
+                    foreach (var debt in debtGroup)
+                    {
+                        string regDate = debt.RegDate.HasValue ? debt.RegDate.Value.ToString("dd.MM.yyy") : string.Empty;
+                        string documentDate = debt.DocumentDate.HasValue ? debt.DocumentDate.Value.ToString("dd.MM.yyy") : string.Empty;
+                        data.Add(string.Format("{0}. {1} вписан на {2}, изх ....... , ГВА вх. {3}/{4}, {5}", debtOrder, debt.AircraftDebtType.Name, regDate, debt.DocumentNumber, documentDate, debt.Notes));
+                        dataAlt.Add(string.Format("{0}. {1} entered on {2}, letter #......., CAA#{3}/{4}, {5}", debtOrder, debt.AircraftDebtType.NameAlt, regDate, debt.DocumentNumber, documentDate, debt.Notes));
+                        debtOrder++;
+                    }
+
+                    formatedDebts.Add(new
+                    {
+                        TITLE = debtsTitle,
+                        DATA = data.Select(d => new { INFO = d })
+                    });
+
+                    formatedDebtsAlt.Add(new
+                    {
+                        TITLE = debtsTitleAlt,
+                        DATA = dataAlt.Select(d => new { INFO = d })
+                    });
+                }
+            }
 
             Tuple<string, string, string, string> ownerData = null;
             Tuple<string, string, string, string> operatorData = null;
@@ -72,6 +113,7 @@ namespace Gva.Api.WordTemplates
             {
                 operatorData = this.GetPersonNamesAndAddress(registration.OperPerson.NomValueId);
             }
+
             var json = new
             {
                 root = new
@@ -90,12 +132,14 @@ namespace Gva.Api.WordTemplates
                     OPERATOR_NAME_ALT = operatorData != null ? operatorData.Item2 : null,
                     LAST_REG_DATE = string.Format("{0:dd.MM.yyyy}", registration.CertDate),
                     REMOVAL_DATE = registration.Removal.Date,
-                    REMOVAL_REASON = registration.Removal.Reason.Name,
-                    REMOVAL_REASON_ALT = registration.Removal.Reason.NameAlt,
+                    REMOVAL_REASON = registration.Removal.Reason != null ? registration.Removal.Reason.Name : null,
+                    REMOVAL_REASON_ALT = registration.Removal.Reason != null ? registration.Removal.Reason.NameAlt : null,
                     NOTES = registration.Removal.Notes,
                     NOTES_ALT = registration.Removal.NotesAlt,
-                    DEBTS = "Нашите записи не показват неотменени тежести върху ВС-то.",
-                    DEBTS_ALT = "Our records show no unreleased liens (mortgages registrations) against aircraft"
+                    NO_DEBTS = formatedDebts.Count() == 0 ? "Нашите записи не показват неотменени тежести върху ВС-то." : null,
+                    NO_DEBTS_ALT = formatedDebts.Count() == 0 ? "Our records show no unreleased liens (mortgages registrations) against aircraft" : null,
+                    DEBTS = formatedDebts,
+                    DEBTS_ALT = formatedDebtsAlt
                 }
             };
 
