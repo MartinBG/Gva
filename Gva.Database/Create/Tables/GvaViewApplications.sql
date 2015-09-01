@@ -13,6 +13,6 @@ CREATE TABLE [dbo].[GvaViewApplications] (
     CONSTRAINT [FK_GvaViewApplications_Lots]        FOREIGN KEY ([LotId])                REFERENCES [dbo].[Lots] ([LotId]),
     CONSTRAINT [FK_GvaViewApplications_LotParts]    FOREIGN KEY ([LotPartId])            REFERENCES [dbo].[LotParts] ([LotPartId]),
     CONSTRAINT [FK_GvaViewApplications_NomValues]   FOREIGN KEY ([ApplicationTypeId])    REFERENCES [dbo].[NomValues] ([NomValueId]),
-	CONSTRAINT [FK_GvaViewApplications_GvaFiles]    FOREIGN KEY ([ControlCardKey])       REFERENCES [dbo].[GvaFiles] ([FileContentId])
+    CONSTRAINT [FK_GvaViewApplications_Blobs]       FOREIGN KEY ([ControlCardKey])       REFERENCES [dbo].[Blobs] ([Key]
 )
 GO

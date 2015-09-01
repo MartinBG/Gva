@@ -150,11 +150,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
+
             var applicationsJoin =
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Lot.Set)
-                    .Include(a => a.Stages.Select(s => s.GvaStage))
+                    .Include(a => a.Stages)
                     .Include(a => a.GvaViewApplication)
                     .Include(a => a.GvaViewApplication.ApplicationType)
                     .Where(a => a.Lot.Set.Alias == "person" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
@@ -238,11 +240,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
+
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages.Select(s => s.GvaStage))
+                        .Include(a => a.Stages)
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "aircraft" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
@@ -331,11 +335,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
+
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages.Select(s => s.GvaStage))
+                        .Include(a => a.Stages)
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
 
@@ -419,11 +425,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
+
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages.Select(s => s.GvaStage))
+                        .Include(a => a.Stages)
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "equipment" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
@@ -508,11 +516,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null)
         {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
+
             var applicationsJoin =
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.Stages.Select(s => s.GvaStage))
+                        .Include(a => a.Stages)
                         .Include(a => a.GvaViewApplication)
                         .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "airport" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
