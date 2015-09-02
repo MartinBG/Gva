@@ -74,7 +74,8 @@ namespace Gva.Api.WordTemplates
                     ENGINE_TYPE2 = engineType,
                     CATEGORY2 = category,
                     VALID_DATE2 = ratingEdition.Content.DocumentDateValidTo,
-                    ENDORSEMENT_DATE2 = ratingEdition.Content.DocumentDateValidFrom
+                    ENDORSEMENT_DATE2 = ratingEdition.Content.DocumentDateValidFrom,
+                    AC_LIMITATIONS2 = acLimitations.Count() > 0 ? acLimitations : new object(),
                 }
             };
 
