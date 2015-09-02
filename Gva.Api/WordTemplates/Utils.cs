@@ -288,7 +288,7 @@ namespace Gva.Api.WordTemplates
 
         internal static NomValue GetCountry(PersonDataDO personData, INomRepository nomRepository)
         {
-            NomValue placeOfBirth = nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value);
+            NomValue placeOfBirth = personData.PlaceOfBirthId.HasValue ? nomRepository.GetNomValue("cities", personData.PlaceOfBirthId.Value) : null;
             int? countryId = placeOfBirth != null ? placeOfBirth.ParentValueId : (int?)null;
             NomValue country = countryId.HasValue ?
                 nomRepository.GetNomValue("countries", countryId.Value) :
