@@ -345,14 +345,8 @@ namespace Gva.AppCommunicator
                     serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
                     serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
                     serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
-                    //if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
-                    //{
-                    //    serviceStatus.ServiceURI = new AdministrativeNomenclatureServiceURI();
-                    //    serviceStatus.ServiceURI.SUNAUServiceURI = doc.DocType.ElectronicServiceFileTypeUri;
-                    //}
                     serviceStatus.ServiceURI = new AdministrativeNomenclatureServiceURI();
                     serviceStatus.ServiceURI.SUNAUServiceURI = !String.IsNullOrWhiteSpace(doc.DocType.ApplicationName) ? doc.DocType.ApplicationName : doc.DocType.Name;
-                    
 
                     var allStages = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
                         .Where(e => e.DocTypeId == doc.DocTypeId.Value)
@@ -382,40 +376,9 @@ namespace Gva.AppCommunicator
                                 task.TaskData.ExecutedBy = new AISTaskExecutor();
                                 task.TaskData.ExecutedBy.Names = new AISUserNames();
                                 task.TaskData.ExecutedBy.Names.PersonNames = new PersonNames();
-                                task.TaskData.ExecutedBy.Names.PersonNames.First = doc.DocSourceType.Alias == "Internet" && stage.Alias == "AcceptApplication" ? "Системен потребител" : "Служител ГВА";
+                                task.TaskData.ExecutedBy.Names.PersonNames.First = doc.DocSourceType != null && doc.DocSourceType.Alias == "Internet" && stage.Alias == "AcceptApplication" ? "Системен потребител" : "Служител ГВА";
 
                                 serviceStatus.ExecutedTasks.TaskCollection.Add(task);
-                            }
-                        }
-                    }
-
-                    var unexecutedStages =
-                        allStages.Where(s =>
-                        !doc.DocElectronicServiceStages.Where(ds => ds.EndingDate.HasValue).Select(ds => ds.ElectronicServiceStageId).ToList()
-                        .Contains(s.ElectronicServiceStageId));
-
-                    if (unexecutedStages.Any())
-                    {
-                        serviceStatus.UnexecutedTasks = new UnexecutedTasks();
-                        serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
-
-                        foreach (var unexecutedStage in unexecutedStages)
-                        {
-                            if (unexecutedStage.Alias != "DecreeRefusal")
-                            {
-                                var task = new TaskOrServiceStage();
-                                task.Task = new TaskOrServiceStageTask();
-                                task.Task.TaskData = new AISTask();
-                                task.Task.TaskData.NameAndShortDescription = unexecutedStage.Name;
-                                task.Task.TaskData.ExpandedDescription = unexecutedStage.Description;
-                                task.Task.TaskData.ScheduledStartDate = null;
-                                task.Task.TaskData.ScheduledCompletionDate = null;
-                                task.Task.TaskData.ExecutedBy = new AISTaskExecutor();
-                                task.Task.TaskData.ExecutedBy.Names = new AISUserNames();
-                                task.Task.TaskData.ExecutedBy.Names.PersonNames = new PersonNames();
-                                task.Task.TaskData.ExecutedBy.Names.PersonNames.First = "Служител ГВА";
-
-                                serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);
                             }
                         }
                     }
