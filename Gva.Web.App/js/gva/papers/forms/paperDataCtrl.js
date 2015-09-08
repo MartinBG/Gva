@@ -10,7 +10,6 @@
       if($scope.model.name && $scope.model.firstNumber) {
         return Papers.isValidPaperData({
           paperName: $scope.model.name,
-          firstNumber: $scope.model.firstNumber,
           paperId: $scope.model.paperId
         })
           .$promise

@@ -123,14 +123,13 @@ namespace Gva.Api.Controllers
 
         [Route("isValidPaperData")]
         [HttpGet]
-        public IHttpActionResult IsValidPaperData(string paperName, int firstNumber, int? paperId = null)
+        public IHttpActionResult IsValidPaperData(string paperName, int? paperId = null)
         {
             var existsSimilarEntry = this.unitOfWork.DbContext.Set<GvaPaper>()
-                .Where(p => (p.Name.Trim() == paperName.Trim() || p.FirstNumber >= firstNumber) &&
+                .Where(p => p.Name.Trim() == paperName.Trim() &&
                     (paperId.HasValue? p.PaperId != paperId.Value : true))
                 .Any();
 
-            
             return Ok(new
             {
                 isValid = !existsSimilarEntry
