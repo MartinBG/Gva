@@ -31,13 +31,13 @@
     $scope.showInspData = function () {
       return _.contains(
         $scope.newPerson.personData.caseTypes,
-        $scope.staffExaminerCaseTypeId);
+        $scope.inspectorCaseTypeId);
     };
 
     $scope.showExaminerData = function () {
       return _.contains(
         $scope.newPerson.personData.caseTypes,
-        $scope.inspectorCaseTypeId);
+        $scope.staffExaminerCaseTypeId);
     };
   }
 
