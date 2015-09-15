@@ -8,11 +8,11 @@
     $stateParams,
     PersonsInfo,
     personInfo,
-    personCaseTypes
+    inspectorExaminerNomValueIds
   ) {
     var originalPersonInfo = _.cloneDeep(personInfo);
-    $scope.inspectorCaseType = _.where(personCaseTypes, { alias: 'inspector' })[0];
-    $scope.examinerCaseType = _.where(personCaseTypes, { alias: 'staffExaminer' })[0];
+    $scope.inspectorCaseTypeId = inspectorExaminerNomValueIds.inspectorCaseTypeId;
+    $scope.staffExaminerCaseTypeId = inspectorExaminerNomValueIds.staffExaminerCaseTypeId;
     $scope.personInfo = personInfo;
     $scope.editMode = null;
     $scope.personId = $stateParams.id;
@@ -43,13 +43,13 @@
     $scope.showInspData = function () {
       return _.contains(
         $scope.personInfo.personData.caseTypes,
-        $scope.inspectorCaseType.nomValueId);
+        $scope.inspectorCaseTypeId);
     };
 
     $scope.showExaminerData = function () {
       return _.contains(
         $scope.personInfo.personData.caseTypes,
-        $scope.examinerCaseType.nomValueId);
+        $scope.staffExaminerCaseTypeId);
     };
   }
 
@@ -59,7 +59,7 @@
     '$stateParams',
     'PersonsInfo',
     'personInfo',
-    'personCaseTypes'
+    'inspectorExaminerNomValueIds'
   ];
 
   PersonInfoEditCtrl.$resolve = {
@@ -70,10 +70,21 @@
         return PersonsInfo.get({ id: $stateParams.id }).$promise;
       }
     ],
-    personCaseTypes: [
+    inspectorExaminerNomValueIds: [
       'Nomenclatures',
       function (Nomenclatures) {
-        return Nomenclatures.query({ alias: 'personCaseTypes' }).$promise;
+        return Nomenclatures.query({alias: 'personCaseTypes'})
+          .$promise
+          .then(function(caseTypes){
+            var inspectorCaseTypeId =
+              _.where(caseTypes, {alias: 'inspector'})[0].nomValueId;
+            var staffExaminerCaseTypeId =
+              _.where(caseTypes, {alias: 'staffExaminer'})[0].nomValueId;
+            return {
+              inspectorCaseTypeId: inspectorCaseTypeId,
+              staffExaminerCaseTypeId: staffExaminerCaseTypeId
+            };
+          });
       }
     ]
   };
