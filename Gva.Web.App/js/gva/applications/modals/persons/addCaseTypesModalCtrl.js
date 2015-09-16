@@ -13,17 +13,17 @@
     $scope.selectedCaseTypes = [];
     $scope.personInfo = personInfo;
 
-    var addedCaseTypeNomValueIds = _.pluck($scope.personInfo.personData.caseTypes, 'nomValueId');
+    var addedCaseTypeNomValueIds = $scope.personInfo.personData.caseTypes;
     $scope.caseTypes = _.filter(allCaseTypes, function (caseType) {
       return !_.contains(addedCaseTypeNomValueIds, caseType.nomValueId);
     });
 
     $scope.selectCaseType = function (event, caseType) {
       if ($(event.target).is(':checked')) {
-        $scope.selectedCaseTypes.push(caseType);
+        $scope.selectedCaseTypes.push(caseType.nomValueId);
       }
       else {
-        $scope.selectedCaseTypes = _.without($scope.selectedCaseTypes, caseType);
+        $scope.selectedCaseTypes = _.without($scope.selectedCaseTypes, caseType.nomValueId);
       }
     };
 
